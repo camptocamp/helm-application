@@ -1,0 +1,242 @@
+---
+# Source: custom-pod/templates/pdb.yaml
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: custom-custom-pod
+  labels:
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: main
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: custom-pod
+      app.kubernetes.io/instance: custom
+      app.kubernetes.io/component: main
+---
+# Source: custom-pod/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: custom-custom-pod
+  labels:
+    helm.sh/chart: custom-pod-0.1.0
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: main
+    prometheus: "true"
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: http
+  selector:
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: main
+---
+# Source: custom-pod/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: custom-custom-pod
+  labels:
+    helm.sh/chart: custom-pod-0.1.0
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: main
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: custom-pod
+      app.kubernetes.io/instance: custom
+      app.kubernetes.io/component: main
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: custom-pod
+        app.kubernetes.io/instance: custom
+        app.kubernetes.io/component: main
+    spec:
+      serviceAccountName: default
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 33
+      affinity:
+        {}
+      initContainers:
+        - name:
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 33
+          image: "camptocamp/custom-aa:latest"
+          imagePullPolicy: IfNotPresent
+          env:
+              - name: "TEST"
+                value: "aa"
+          terminationMessagePolicy: FallbackToLogsOnError
+          resources:
+            limits:
+              cpu: 100m
+              memory: 50Mi
+            requests:
+              cpu: 100m
+              memory: 50Mi
+          command:
+            - sleep
+            - "3600"
+        - name:
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 33
+          image: "camptocamp/custom-bb:latest"
+          imagePullPolicy: IfNotPresent
+          terminationMessagePolicy: FallbackToLogsOnError
+          resources:
+            null
+          args:
+            - sleep
+            - "3600"
+          volumeMounts:
+            - mountPath: /tmp/my-volume
+              name: my-volume
+      containers:
+        - name:
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 33
+          image: "camptocamp/custom-aa:latest"
+          imagePullPolicy: IfNotPresent
+          env:
+              - name: "TEST"
+                value: "aa"
+          terminationMessagePolicy: FallbackToLogsOnError
+          resources:
+            limits:
+              cpu: 100m
+              memory: 50Mi
+            requests:
+              cpu: 100m
+              memory: 50Mi
+          command:
+            - sleep
+            - "3600"
+        - name:
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 33
+          image: "camptocamp/custom-bb:latest"
+          imagePullPolicy: IfNotPresent
+          terminationMessagePolicy: FallbackToLogsOnError
+          resources:
+            null
+          args:
+            - sleep
+            - "3600"
+          volumeMounts:
+            - mountPath: /tmp/my-volume
+              name: my-volume
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 20
+            timeoutSeconds: 10
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 20
+            timeoutSeconds: 10
+      volumes:
+        my-volume:
+          emptyDir: {}
+---
+# Source: custom-pod/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: custom-custom-pod-int
+  labels:
+    helm.sh/chart: custom-pod-0.1.0
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: main
+spec:
+  rules:
+    - host: int.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: custom-custom-pod
+                port:
+                  number: 8080
+          - path: /custom
+            pathType: Prefix
+            backend:
+              service:
+                name: custom-custom-pod
+                port:
+                  number: 8080
+---
+# Source: custom-pod/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: custom-custom-pod-prod
+  labels:
+    helm.sh/chart: custom-pod-0.1.0
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: main
+spec:
+  tls:
+    - hosts:
+        - prod.local
+      secretName: prod-custom
+  rules:
+    - host: prod.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: custom-custom-pod
+                port:
+                  number: 8080
+          - path: /custom
+            pathType: Prefix
+            backend:
+              service:
+                name: custom-custom-pod
+                port:
+                  number: 8080

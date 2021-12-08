@@ -1,0 +1,9 @@
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "common.fullname" ( dict "root" . "service" .Values ) }}
+  labels: {{- include "common.selectorLabels" ( dict "root" . "service" .Values ) | nindent 4 }}
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels: {{- include "common.selectorLabels" ( dict "root" . "service" .Values ) | nindent 6 }}
