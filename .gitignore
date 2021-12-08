@@ -1,0 +1,4 @@
+/Chart.lock
+/charts/
+/tests/*actual.yaml
+*/__pycache__/*

@@ -1,0 +1,84 @@
+initContainers:
+  aa: &aa
+    image:
+      repository: camptocamp/custom-aa
+      tag: latest
+      sha:
+    command:
+      - sleep
+      - '3600'
+    resources:
+      limits:
+        cpu: '100m'
+        memory: '50Mi'
+      requests:
+        cpu: '100m'
+        memory: '50Mi'
+    env:
+      TEST:
+        value: 'aa'
+  bb: &bb
+    image:
+      repository: camptocamp/custom-bb
+      tag: latest
+      sha:
+    args:
+      - sleep
+      - '3600'
+    volumeMounts:
+      - name: my-volume
+        mountPath: /tmp/my-volume
+
+containers:
+  cc:
+    <<: *aa
+  dd:
+    <<: *bb
+    livenessProbe:
+      httpGet:
+        path: /
+        port: http
+    readinessProbe:
+      httpGet:
+        path: /
+        port: http
+      initialDelaySeconds: 5
+      timeoutSeconds: 10
+      periodSeconds: 20
+    startupProbe:
+      httpGet:
+        path: /
+        port: http
+    ports:
+      - name: http
+        containerPort: 8080
+        protocol: TCP
+
+volumes:
+  - name: my-volume
+    emptyDir: {}
+
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 33 # www-data
+
+ingress:
+  enabled: true
+  servicePort: 8080
+  paths:
+    - /
+    - /custom
+  hosts:
+    - name: int
+      host: int.local
+    - name: prod
+      host: prod.local
+      tls:
+        secretName: prod-custom
+
+service:
+  ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: http

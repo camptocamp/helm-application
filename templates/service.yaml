@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "common.fullname" ( dict "root" . "service" .Values ) }}
+  labels: {{ include "common.labels" ( dict "root" . "service" .Values ) | nindent 4 }}
+    prometheus: "true"
+spec:
+  type: {{ .Values.service.type }}
+  {{- with .Values.service.ports }}
+  ports:
+    {{- . | toYaml | nindent 4 }}
+  {{- end }}
+  selector: {{- include "common.selectorLabels" ( dict "root" . "service" .Values ) | nindent 4 }}
