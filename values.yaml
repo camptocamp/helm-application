@@ -44,9 +44,11 @@ ingress:
     # kubernetes.io/tls-acme: "true"
   paths: []
   hosts:
-    - host: chart-example.local
-      # tls:
-      #   - secretName: chart-example-tls
+    []
+    #- name: main
+    #  host: chart-example.local
+    #  tls:
+    #    - secretName: main-tls
 
 nodeSelector: {}
 
