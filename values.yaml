@@ -3,6 +3,7 @@ fullnameOverride: ''
 
 imagePullSecrets: []
 replicaCount: 1
+revisionHistoryLimit: 3
 image:
   pullPolicy: IfNotPresent
 
