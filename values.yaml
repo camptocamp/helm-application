@@ -1,13 +1,13 @@
 global:
   image:
     pullPolicy: IfNotPresent
+  revisionHistoryLimit: 3
 
 nameOverride: ''
 fullnameOverride: ''
 
 imagePullSecrets: []
 replicaCount: 1
-revisionHistoryLimit: 3
 
 # ConfigMap or secret from env name override
 configMapNameOverride: {}
