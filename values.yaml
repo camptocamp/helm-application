@@ -10,8 +10,8 @@ image:
 # ConfigMap or secret from env name override
 configMapNameOverride: {}
 
-initContainers: []
-containers: []
+initContainers: {}
+containers: {}
 
 serviceAccount:
   # Specifies whether a service account should be created
