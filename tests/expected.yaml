@@ -22,7 +22,7 @@ kind: Service
 metadata:
   name: custom-custom-pod
   labels:
-    helm.sh/chart: custom-pod-0.1.0
+    helm.sh/chart: custom-pod
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: custom-pod
@@ -47,7 +47,7 @@ kind: Deployment
 metadata:
   name: custom-custom-pod
   labels:
-    helm.sh/chart: custom-pod-0.1.0
+    helm.sh/chart: custom-pod
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: custom-pod
@@ -84,8 +84,8 @@ spec:
           image: "camptocamp/custom-aa:latest"
           imagePullPolicy: IfNotPresent
           env:
-              - name: "TEST"
-                value: "aa"
+            - name: "TEST"
+              value: "aa"
           terminationMessagePolicy: FallbackToLogsOnError
           resources:
             limits:
@@ -120,8 +120,8 @@ spec:
           image: "camptocamp/custom-aa:latest"
           imagePullPolicy: IfNotPresent
           env:
-              - name: "TEST"
-                value: "aa"
+            - name: "TEST"
+              value: "aa"
           terminationMessagePolicy: FallbackToLogsOnError
           resources:
             limits:
@@ -180,7 +180,7 @@ kind: Ingress
 metadata:
   name: custom-custom-pod-int
   labels:
-    helm.sh/chart: custom-pod-0.1.0
+    helm.sh/chart: custom-pod
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: custom-pod
@@ -212,7 +212,7 @@ kind: Ingress
 metadata:
   name: custom-custom-pod-prod
   labels:
-    helm.sh/chart: custom-pod-0.1.0
+    helm.sh/chart: custom-pod
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: custom-pod
