@@ -2,11 +2,10 @@ name: Auto reviews updates
 
 on:
   pull_request:
-  workflow_run:
-    workflows:
-      - None
     types:
-      - completed
+      - opened
+      - reopened
+      - synchronize
 
 jobs:
   auto-merge:
@@ -15,9 +14,6 @@ jobs:
     timeout-minutes: 5
 
     steps:
-      - run: echo ${GITHUB_EVENT}
-        env:
-          GITHUB_EVENT: ${{ toJSON(github) }}
       - name: Auto reviews updates
         uses: golfzaptw/action-auto-reviews-from-branches@master
         with:
