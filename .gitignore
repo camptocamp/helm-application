@@ -2,3 +2,4 @@
 /charts/
 /tests/*actual.yaml
 */__pycache__/*
+/.github/changelog-generator-cache
