@@ -1,5 +1,44 @@
 # Changelog
 
+## [0.3.0](https://github.com/camptocamp/helm-custom-pod/tree/0.3.0) (2022-11-14)
+
+[Full Changelog](https://github.com/camptocamp/helm-custom-pod/compare/0.2.0...0.3.0)
+
+#### :books: Documentation
+
+- Add generated changelog [\#56](https://github.com/camptocamp/helm-custom-pod/pull/56) ([sbrunner](https://github.com/sbrunner))
+
+#### :wrench: Build, CI, Tests, Code style
+
+- Fix repository in workflow used to delete old workflow runs [\#70](https://github.com/camptocamp/helm-custom-pod/pull/70) ([sbrunner](https://github.com/sbrunner))
+- Add workflow to delete old workflow runs [\#69](https://github.com/camptocamp/helm-custom-pod/pull/69) ([sbrunner](https://github.com/sbrunner))
+- Use the standard name for pull request checks workflow [\#68](https://github.com/camptocamp/helm-custom-pod/pull/68) ([sbrunner](https://github.com/sbrunner))
+- Fix the get config in changelog workflow [\#66](https://github.com/camptocamp/helm-custom-pod/pull/66) ([sbrunner](https://github.com/sbrunner))
+- Schedule Renovate on early Saturday [\#63](https://github.com/camptocamp/helm-custom-pod/pull/63) ([sbrunner](https://github.com/sbrunner))
+- Fix the changelog generator workflow [\#62](https://github.com/camptocamp/helm-custom-pod/pull/62) ([sbrunner](https://github.com/sbrunner))
+- Clean all the images already present in the image given by GitHub [\#61](https://github.com/camptocamp/helm-custom-pod/pull/61) ([sbrunner](https://github.com/sbrunner))
+- Update the changelog generation workflow [\#60](https://github.com/camptocamp/helm-custom-pod/pull/60) ([sbrunner](https://github.com/sbrunner))
+- Remove Dependabot configuration [\#59](https://github.com/camptocamp/helm-custom-pod/pull/59) ([sbrunner](https://github.com/sbrunner))
+- Update the changelog [\#57](https://github.com/camptocamp/helm-custom-pod/pull/57) ([github-actions[bot]](https://github.com/apps/github-actions))
+- Remove the black configuration [\#55](https://github.com/camptocamp/helm-custom-pod/pull/55) ([sbrunner](https://github.com/sbrunner))
+- Configure Renovate [\#50](https://github.com/camptocamp/helm-custom-pod/pull/50) ([sbrunner](https://github.com/sbrunner))
+- Test with used Helm version [\#36](https://github.com/camptocamp/helm-custom-pod/pull/36) ([sbrunner](https://github.com/sbrunner))
+
+#### :package: Dependencies update
+
+- Update Helm release common to v0.3.0 [\#72](https://github.com/camptocamp/helm-custom-pod/pull/72) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency c2cciutils to v1.3.11 [\#71](https://github.com/camptocamp/helm-custom-pod/pull/71) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency c2cciutils to v1.3.2 [\#65](https://github.com/camptocamp/helm-custom-pod/pull/65) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency c2cciutils to v1.2.1 [\#58](https://github.com/camptocamp/helm-custom-pod/pull/58) ([renovate[bot]](https://github.com/apps/renovate))
+- Update azure/setup-helm action to v3 [\#54](https://github.com/camptocamp/helm-custom-pod/pull/54) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency c2cciutils to v1.2.0 [\#53](https://github.com/camptocamp/helm-custom-pod/pull/53) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency c2cciutils to v1.2.dev20220617064142 [\#52](https://github.com/camptocamp/helm-custom-pod/pull/52) ([renovate[bot]](https://github.com/apps/renovate))
+- Update all patch versions [\#51](https://github.com/camptocamp/helm-custom-pod/pull/51) ([renovate[bot]](https://github.com/apps/renovate))
+- Bump c2cciutils from 1.2.dev20220506093925 to 1.2.dev20220509122615 in /ci [\#44](https://github.com/camptocamp/helm-custom-pod/pull/44) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump c2cciutils from 1.2.dev20220414132101 to 1.2.dev20220506093925 in /ci [\#42](https://github.com/camptocamp/helm-custom-pod/pull/42) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump c2cciutils from 1.2.dev20220331120018 to 1.2.dev20220414132101 in /ci [\#40](https://github.com/camptocamp/helm-custom-pod/pull/40) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump c2cciutils from 1.2.dev20220317100006 to 1.2.dev20220331120018 in /ci [\#38](https://github.com/camptocamp/helm-custom-pod/pull/38) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [0.2.0](https://github.com/camptocamp/helm-custom-pod/tree/0.2.0) (2022-03-21)
 
 [Full Changelog](https://github.com/camptocamp/helm-custom-pod/compare/0.1.1...0.2.0)
