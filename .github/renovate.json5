@@ -8,6 +8,9 @@
   prHourlyLimit: 0,
   prConcurrentLimit: 0,
   lockFileMaintenance: { enabled: true, automerge: true, schedule: 'on the first day of the month' },
+  kubernetes: {
+    fileMatch: ['templates/.+\\.yaml$', 'tests/.*expected\\.yaml$'],
+  },
   packageRules: [
     /** Automerge the patch, the minor and the dev dependency */
     {
