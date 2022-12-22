@@ -1,13 +1,21 @@
+{{- $root := . -}}
+{{- $values := .Values -}}
+
+{{- range $serviceName, $serviceDefinition := $values.services }}
+{{- if eq $serviceDefinition.enabled true }}
+---
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "common.fullname" ( dict "root" . "service" .Values ) }}
-  labels: {{ include "common.labels" ( dict "root" . "service" .Values ) | nindent 4 }}
+  name: {{ include "common.fullname" ( dict "root" $root "service" $serviceDefinition "serviceName" $serviceName ) }}
+  labels: {{ include "common.labels" ( dict "root" $root "service" $serviceDefinition "serviceName" $serviceName ) | nindent 4 }}
     prometheus: "true"
 spec:
-  type: {{ .Values.service.type }}
-  {{- with .Values.service.ports }}
+  type: {{ $serviceDefinition.service.type }}
+  {{- with $serviceDefinition.service.ports }}
   ports:
     {{- . | toYaml | nindent 4 }}
   {{- end }}
-  selector: {{- include "common.selectorLabels" ( dict "root" . "service" .Values ) | nindent 4 }}
+  selector: {{- include "common.selectorLabels" ( dict "root" $root "service" $serviceDefinition "serviceName" $serviceName ) | nindent 4 }}
+{{- end }}
+{{- end }}

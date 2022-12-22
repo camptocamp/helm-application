@@ -1,33 +1,50 @@
 ---
 # Source: custom-pod/templates/pdb.yaml
-apiVersion: policy/v1
+apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
 metadata:
-  name: custom-custom-pod
+  name: custom-custom-pod-with-serv
   labels:
     app.kubernetes.io/name: custom-pod
     app.kubernetes.io/instance: custom
-    app.kubernetes.io/component: main
+    app.kubernetes.io/component: with-service-name
 spec:
   maxUnavailable: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: custom-pod
       app.kubernetes.io/instance: custom
-      app.kubernetes.io/component: main
+      app.kubernetes.io/component: with-service-name
+---
+# Source: custom-pod/templates/pdb.yaml
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: custom-with-name-override-example2
+  labels:
+    app.kubernetes.io/name: with-name-override
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: example2
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: with-name-override
+      app.kubernetes.io/instance: custom
+      app.kubernetes.io/component: example2
 ---
 # Source: custom-pod/templates/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: custom-custom-pod
+  name: custom-custom-pod-with-serv
   labels:
     helm.sh/chart: custom-pod
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: custom-pod
     app.kubernetes.io/instance: custom
-    app.kubernetes.io/component: main
+    app.kubernetes.io/component: with-service-name
     prometheus: "true"
 spec:
   type: ClusterIP
@@ -39,20 +56,45 @@ spec:
   selector:
     app.kubernetes.io/name: custom-pod
     app.kubernetes.io/instance: custom
-    app.kubernetes.io/component: main
+    app.kubernetes.io/component: with-service-name
+---
+# Source: custom-pod/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: custom-with-name-override-example2
+  labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: with-name-override
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: example2
+    prometheus: "true"
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: http
+  selector:
+    app.kubernetes.io/name: with-name-override
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: example2
 ---
 # Source: custom-pod/templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: custom-custom-pod
+  name: custom-custom-pod-with-serv
   labels:
     helm.sh/chart: custom-pod
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: custom-pod
     app.kubernetes.io/instance: custom
-    app.kubernetes.io/component: main
+    app.kubernetes.io/component: with-service-name
 spec:
   replicas: 1
   revisionHistoryLimit: 3
@@ -62,25 +104,23 @@ spec:
     matchLabels:
       app.kubernetes.io/name: custom-pod
       app.kubernetes.io/instance: custom
-      app.kubernetes.io/component: main
+      app.kubernetes.io/component: with-service-name
   template:
     metadata:
       labels:
         app.kubernetes.io/name: custom-pod
         app.kubernetes.io/instance: custom
-        app.kubernetes.io/component: main
+        app.kubernetes.io/component: with-service-name
     spec:
       serviceAccountName: default
       securityContext:
-        runAsNonRoot: true
-        runAsUser: 33
+        {}
       affinity:
         {}
       initContainers:
         - name: aa
           securityContext:
-            runAsNonRoot: true
-            runAsUser: 33
+            {}
           image: "camptocamp/custom-aa:latest"
           imagePullPolicy: IfNotPresent
           env:
@@ -99,10 +139,17 @@ spec:
             - "3600"
         - name: bb
           securityContext:
-            runAsNonRoot: true
-            runAsUser: 33
+            {}
           image: "camptocamp/custom-bb:latest"
           imagePullPolicy: IfNotPresent
+          env:
+            - name: "JWT_SECRET_KEY"
+              valueFrom:
+                secretKeyRef:
+                  name: "jwt-key-secret"
+                  key: "JWT_SECRET_KEY"
+            - name: "MY_ENV_VAR"
+              value: "some-value"
           terminationMessagePolicy: FallbackToLogsOnError
           resources:
             null
@@ -110,13 +157,18 @@ spec:
             - sleep
             - "3600"
           volumeMounts:
-            - mountPath: /tmp/my-volume
+            - mountPath: /tmp/my-volume/config
               name: my-volume
+              readOnly: true
+              subPath: config
+            - mountPath: /tmp/my-volume/data
+              name: my-volume
+              subPath: data
+
       containers:
         - name: cc
           securityContext:
-            runAsNonRoot: true
-            runAsUser: 33
+            {}
           image: "camptocamp/custom-aa:latest"
           imagePullPolicy: IfNotPresent
           env:
@@ -135,10 +187,17 @@ spec:
             - "3600"
         - name: dd
           securityContext:
-            runAsNonRoot: true
-            runAsUser: 33
+            {}
           image: "camptocamp/custom-bb:latest"
           imagePullPolicy: IfNotPresent
+          env:
+            - name: "JWT_SECRET_KEY"
+              valueFrom:
+                secretKeyRef:
+                  name: "jwt-key-secret"
+                  key: "JWT_SECRET_KEY"
+            - name: "MY_ENV_VAR"
+              value: "some-value"
           terminationMessagePolicy: FallbackToLogsOnError
           resources:
             null
@@ -146,12 +205,19 @@ spec:
             - sleep
             - "3600"
           volumeMounts:
-            - mountPath: /tmp/my-volume
+            - mountPath: /tmp/my-volume/config
               name: my-volume
+              readOnly: true
+              subPath: config
+            - mountPath: /tmp/my-volume/data
+              name: my-volume
+              subPath: data
+
           ports:
-            - containerPort: 8080
-              name: http
+            - name: http
+              containerPort: 8080
               protocol: TCP
+
           livenessProbe:
             httpGet:
               path: /
@@ -171,73 +237,116 @@ spec:
             periodSeconds: 20
             timeoutSeconds: 10
       volumes:
-        - emptyDir: {}
-          name: my-volume
+        - name: my-volume
+          emptyDir: {}
 ---
-# Source: custom-pod/templates/ingress.yaml
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+# Source: custom-pod/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: custom-custom-pod-int
+  name: custom-with-name-override-example2
   labels:
     helm.sh/chart: custom-pod
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/name: with-name-override
     app.kubernetes.io/instance: custom
-    app.kubernetes.io/component: main
+    app.kubernetes.io/component: example2
 spec:
-  rules:
-    - host: int.local
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: custom-custom-pod
-                port:
-                  number: 8080
-          - path: /custom
-            pathType: Prefix
-            backend:
-              service:
-                name: custom-custom-pod
-                port:
-                  number: 8080
----
-# Source: custom-pod/templates/ingress.yaml
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: custom-custom-pod-prod
-  labels:
-    helm.sh/chart: custom-pod
-    app.kubernetes.io/version: "1.0"
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
-    app.kubernetes.io/component: main
-spec:
-  tls:
-    - hosts:
-        - prod.local
-      secretName: prod-custom
-  rules:
-    - host: prod.local
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: custom-custom-pod
-                port:
-                  number: 8080
-          - path: /custom
-            pathType: Prefix
-            backend:
-              service:
-                name: custom-custom-pod
-                port:
-                  number: 8080
+  replicas: 2
+  revisionHistoryLimit: 3
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: with-name-override
+      app.kubernetes.io/instance: custom
+      app.kubernetes.io/component: example2
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: with-name-override
+        app.kubernetes.io/instance: custom
+        app.kubernetes.io/component: example2
+    spec:
+      serviceAccountName: default
+      securityContext:
+        {}
+      affinity:
+        {}
+      containers:
+        - name: cc
+          securityContext:
+            {}
+          image: "camptocamp/custom-aa:latest"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: "TEST"
+              value: "aa"
+          terminationMessagePolicy: FallbackToLogsOnError
+          resources:
+            limits:
+              cpu: 100m
+              memory: 50Mi
+            requests:
+              cpu: 100m
+              memory: 50Mi
+          command:
+            - sleep
+            - "3600"
+        - name: dd
+          securityContext:
+            {}
+          image: "camptocamp/custom-bb:latest"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: "JWT_SECRET_KEY"
+              valueFrom:
+                secretKeyRef:
+                  name: "jwt-key-secret"
+                  key: "JWT_SECRET_KEY"
+            - name: "MY_ENV_VAR"
+              value: "some-value"
+          terminationMessagePolicy: FallbackToLogsOnError
+          resources:
+            null
+          args:
+            - sleep
+            - "3600"
+          volumeMounts:
+            - mountPath: /tmp/my-volume/config
+              name: my-volume
+              readOnly: true
+              subPath: config
+            - mountPath: /tmp/my-volume/data
+              name: my-volume
+              subPath: data
+
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 20
+            timeoutSeconds: 10
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 20
+            timeoutSeconds: 10
+      volumes:
+        - name: my-volume
+          emptyDir: {}
+        - name: my-volume-2
+          emptyDir: {}

@@ -1,84 +1,138 @@
-initContainers:
-  aa: &aa
-    image:
-      repository: camptocamp/custom-aa
-      tag: latest
-      sha:
-    command:
-      - sleep
-      - '3600'
-    resources:
-      limits:
-        cpu: '100m'
-        memory: '50Mi'
-      requests:
-        cpu: '100m'
-        memory: '50Mi'
-    env:
-      TEST:
-        value: 'aa'
-  bb: &bb
-    image:
-      repository: camptocamp/custom-bb
-      tag: latest
-      sha:
-    args:
-      - sleep
-      - '3600'
-    volumeMounts:
-      - name: my-volume
-        mountPath: /tmp/my-volume
-
-containers:
-  cc:
-    <<: *aa
-  dd:
-    <<: *bb
-    livenessProbe:
-      httpGet:
-        path: /
-        port: http
-    readinessProbe:
-      httpGet:
-        path: /
-        port: http
-      initialDelaySeconds: 5
-      timeoutSeconds: 10
-      periodSeconds: 20
-    startupProbe:
-      httpGet:
-        path: /
-        port: http
-    ports:
-      - name: http
-        containerPort: 8080
-        protocol: TCP
-
-volumes:
-  - name: my-volume
-    emptyDir: {}
-
-securityContext:
-  runAsNonRoot: true
-  runAsUser: 33 # www-data
-
-ingress:
-  enabled: true
-  servicePort: 8080
-  paths:
-    - /
-    - /custom
-  hosts:
-    - name: int
-      host: int.local
-    - name: prod
-      host: prod.local
-      tls:
-        secretName: prod-custom
-
-service:
+servicedefinition: &servicedefinition
+  type: ClusterIP
   ports:
     - name: http
       port: 8080
       protocol: TCP
       targetPort: http
+
+affinity: {}
+
+services:
+  example1:
+    enabled: true
+    replicaCount: 1
+    nodeSelector: {}
+    affinity: {}
+    serviceName: 'with-service-name'
+    initContainers:
+      aa: &aa
+        image:
+          repository: camptocamp/custom-aa
+          tag: latest
+          sha:
+        command:
+          - sleep
+          - '3600'
+        resources:
+          limits:
+            cpu: '100m'
+            memory: '50Mi'
+          requests:
+            cpu: '100m'
+            memory: '50Mi'
+        env:
+          TEST:
+            value: 'aa'
+      bb: &bb
+        env:
+          MY_ENV_VAR:
+            value: 'some-value'
+          JWT_SECRET_KEY:
+            type: secret
+            name: jwt-key-secret
+            key: JWT_SECRET_KEY
+        image:
+          repository: camptocamp/custom-bb
+          tag: latest
+          sha:
+        args:
+          - sleep
+          - '3600'
+        volumeMounts:
+          /tmp/my-volume/config:
+            name: my-volume
+            subPath: config
+            readOnly: true
+          /tmp/my-volume/data:
+            name: my-volume
+            subPath: data
+
+    containers:
+      cc:
+        <<: *aa
+      dd:
+        <<: *bb
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http
+          initialDelaySeconds: 5
+          timeoutSeconds: 10
+          periodSeconds: 20
+        startupProbe:
+          httpGet:
+            path: /
+            port: http
+        ports:
+          http:
+            containerPort: 8080
+            protocol: TCP
+
+    volumes:
+      my-volume:
+        emptyDir: {}
+
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 33 # www-data
+
+    service:
+      <<: *servicedefinition
+
+  example2:
+    enabled: true
+    replicaCount: 2
+
+    nameOverride: with-name-override
+
+    containers:
+      cc:
+        <<: *aa
+      dd:
+        <<: *bb
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http
+          initialDelaySeconds: 5
+          timeoutSeconds: 10
+          periodSeconds: 20
+        startupProbe:
+          httpGet:
+            path: /
+            port: http
+        ports:
+          http:
+            containerPort: 8080
+            protocol: TCP
+
+    volumes:
+      my-volume:
+        emptyDir: {}
+      my-volume-2:
+        emptyDir: {}
+
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 33 # www-data
+    service:
+      <<: *servicedefinition
