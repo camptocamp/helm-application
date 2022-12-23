@@ -2,25 +2,9 @@ global:
   image:
     pullPolicy: IfNotPresent
   revisionHistoryLimit: 3
+  configMapNameOverride: {}
 
-nameOverride: ''
-fullnameOverride: ''
-
-imagePullSecrets: []
-replicaCount: 1
-
-# ConfigMap or secret from env name override
-configMapNameOverride: {}
-
-initContainers: {}
-containers: {}
-
-serviceAccount:
-  # Specifies whether a service account should be created
-  create: false
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
-  name: default
+tolerations: []
 
 podSecurityContext:
   {}
@@ -35,26 +19,32 @@ securityContext:
   #   drop:
   #   - ALL
 
-service:
-  type: ClusterIP
-  ports: []
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: default
 
-ingress:
-  enabled: false
-  annotations:
-    {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-  paths: []
-  hosts:
-    []
-    #- name: main
-    #  host: chart-example.local
-    #  tls:
-    #    - secretName: main-tls
+services:
+  example:
+    enabled: false
 
-nodeSelector: {}
+    env: {}
 
-tolerations: []
+    imagePullSecrets: []
+    replicaCount: 1
 
-affinity: {}
+    # ConfigMap or secret from env name override
+    configMapNameOverride: {}
+
+    initContainers: {}
+    containers: {}
+
+    service:
+      type: ClusterIP
+      ports: []
+
+    nodeSelector: {}
+
+    affinity: {}
