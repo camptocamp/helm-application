@@ -352,7 +352,7 @@ spec:
           emptyDir: {}
 ---
 # Source: custom-pod/templates/ingress.yaml
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: custom-custom-pod-host1
@@ -407,7 +407,7 @@ spec:
                   number: 8080
 ---
 # Source: custom-pod/templates/ingress.yaml
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: custom-custom-pod-host2
