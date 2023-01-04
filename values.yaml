@@ -26,9 +26,14 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: default
 
+ingress:
+  enabled: false
+
 services:
   example:
     enabled: false
+    ingress:
+      enabled: false
 
     env: {}
 
