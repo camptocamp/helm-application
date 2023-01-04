@@ -32,6 +32,8 @@ ingress:
 services:
   example:
     enabled: false
+    ingress:
+      enabled: false
 
     env: {}
 

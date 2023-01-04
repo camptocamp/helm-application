@@ -11,7 +11,7 @@ metadata:
   {{- include "common.metadata" ( dict "root" $ "service" $values ) | nindent 2 }}
 spec:
 # Add tls only if ingress.tls.enabled is set to true and the other fields are complete.
-{{- if and ( hasKey $hostGroupDefinition "tls" ) ( eq $hostGroupDefinition.tls.enabled true ) ( hasKey $hostGroupDefinition.tls "secretName" ) }}
+{{- if and ( hasKey $hostGroupDefinition "tls" ) ( eq $hostGroupDefinition.tls.enabled true ) }}
   tls:
     - hosts:
         {{- range $hostGroupDefinition.hosts }}
@@ -29,7 +29,7 @@ spec:
       http:
         paths:
         {{- range $serviceName, $serviceDefinition := $values.services }}
-        {{- if eq $serviceDefinition.enabled true }}
+        {{- if and (eq $serviceDefinition.enabled true) (eq $serviceDefinition.ingress.enabled true) }}
           - path: "{{ $serviceDefinition.ingress.path }}"
             pathType: Prefix
             backend:
