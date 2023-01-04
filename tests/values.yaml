@@ -29,6 +29,7 @@ ingress:
 services:
   example1:
     ingress:
+      enabled: true
       path: /one
     enabled: true
     replicaCount: 1
@@ -116,6 +117,7 @@ services:
 
   example2:
     ingress:
+      enabled: true
       path: /two
     enabled: true
     replicaCount: 2
