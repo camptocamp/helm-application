@@ -1,5 +1,6 @@
 servicedefinition: &servicedefinition
   type: ClusterIP
+  servicePort: 8080
   ports:
     - name: http
       port: 8080
@@ -8,8 +9,27 @@ servicedefinition: &servicedefinition
 
 affinity: {}
 
+ingress:
+  enabled: true
+  hostGroups:
+    host1:
+      tls:
+        enabled: true
+        secretName: 'my-tls-secret'
+      hosts:
+        - test1.example.com
+        - test2.example.com
+    host2:
+      tls:
+        enabled: true
+        secretName: 'my-tls-secret'
+      hosts:
+        - '*.example.com'
+
 services:
   example1:
+    ingress:
+      path: /one
     enabled: true
     replicaCount: 1
     nodeSelector: {}
@@ -95,6 +115,8 @@ services:
       <<: *servicedefinition
 
   example2:
+    ingress:
+      path: /two
     enabled: true
     replicaCount: 2
 

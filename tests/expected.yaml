@@ -350,3 +350,95 @@ spec:
           emptyDir: {}
         - name: my-volume-2
           emptyDir: {}
+---
+# Source: custom-pod/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: custom-custom-pod-host1
+  labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: main
+spec:
+# Add tls only if ingress.tls.enabled is set to true and the other fields are complete.
+  tls:
+    - hosts:
+        - "test1.example.com"
+        - "test2.example.com"
+      secretName: my-tls-secret
+  rules:
+    - host: "test1.example.com"
+      http:
+        paths:
+          - path: "/one"
+            pathType: Prefix
+            backend:
+              service:
+                name: custom-custom-pod-with-serv
+                port:
+                  number: 8080
+          - path: "/two"
+            pathType: Prefix
+            backend:
+              service:
+                name: custom-with-name-override-example2
+                port:
+                  number: 8080
+    - host: "test2.example.com"
+      http:
+        paths:
+          - path: "/one"
+            pathType: Prefix
+            backend:
+              service:
+                name: custom-custom-pod-with-serv
+                port:
+                  number: 8080
+          - path: "/two"
+            pathType: Prefix
+            backend:
+              service:
+                name: custom-with-name-override-example2
+                port:
+                  number: 8080
+---
+# Source: custom-pod/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: custom-custom-pod-host2
+  labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: main
+spec:
+# Add tls only if ingress.tls.enabled is set to true and the other fields are complete.
+  tls:
+    - hosts:
+        - "*.example.com"
+      secretName: my-tls-secret
+  rules:
+    - host: "*.example.com"
+      http:
+        paths:
+          - path: "/one"
+            pathType: Prefix
+            backend:
+              service:
+                name: custom-custom-pod-with-serv
+                port:
+                  number: 8080
+          - path: "/two"
+            pathType: Prefix
+            backend:
+              service:
+                name: custom-with-name-override-example2
+                port:
+                  number: 8080
