@@ -33,6 +33,23 @@ spec:
       app.kubernetes.io/instance: custom
       app.kubernetes.io/component: example2
 ---
+# Source: custom-pod/templates/pdb.yaml
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: custom-with-name-override-example3
+  labels:
+    app.kubernetes.io/name: with-name-override
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: example3
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: with-name-override
+      app.kubernetes.io/instance: custom
+      app.kubernetes.io/component: example3
+---
 # Source: custom-pod/templates/service.yaml
 apiVersion: v1
 kind: Service
@@ -82,6 +99,31 @@ spec:
     app.kubernetes.io/name: with-name-override
     app.kubernetes.io/instance: custom
     app.kubernetes.io/component: example2
+---
+# Source: custom-pod/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: hardcoded-service-name
+  labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: with-name-override
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: example3
+    prometheus: "true"
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: http
+  selector:
+    app.kubernetes.io/name: with-name-override
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: example3
 ---
 # Source: custom-pod/templates/deployment.yaml
 apiVersion: apps/v1
@@ -351,6 +393,117 @@ spec:
         - name: my-volume-2
           emptyDir: {}
 ---
+# Source: custom-pod/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: custom-with-name-override-example3
+  labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: with-name-override
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: example3
+spec:
+  replicas: 2
+  revisionHistoryLimit: 3
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: with-name-override
+      app.kubernetes.io/instance: custom
+      app.kubernetes.io/component: example3
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: with-name-override
+        app.kubernetes.io/instance: custom
+        app.kubernetes.io/component: example3
+    spec:
+      serviceAccountName: default
+      securityContext:
+        {}
+      affinity:
+        {}
+      containers:
+        - name: cc
+          securityContext:
+            {}
+          image: "camptocamp/custom-aa:latest"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: "TEST"
+              value: "aa"
+          terminationMessagePolicy: FallbackToLogsOnError
+          resources:
+            limits:
+              cpu: 100m
+              memory: 50Mi
+            requests:
+              cpu: 100m
+              memory: 50Mi
+          command:
+            - sleep
+            - "3600"
+        - name: dd
+          securityContext:
+            {}
+          image: "camptocamp/custom-bb:latest"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: "JWT_SECRET_KEY"
+              valueFrom:
+                secretKeyRef:
+                  name: "jwt-key-secret"
+                  key: "JWT_SECRET_KEY"
+            - name: "MY_ENV_VAR"
+              value: "some-value"
+          terminationMessagePolicy: FallbackToLogsOnError
+          resources:
+            null
+          args:
+            - sleep
+            - "3600"
+          volumeMounts:
+            - mountPath: /tmp/my-volume/config
+              name: my-volume
+              readOnly: true
+              subPath: config
+            - mountPath: /tmp/my-volume/data
+              name: my-volume
+              subPath: data
+
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 20
+            timeoutSeconds: 10
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 20
+            timeoutSeconds: 10
+      volumes:
+        - name: my-volume
+          emptyDir: {}
+        - name: my-volume-2
+          emptyDir: {}
+---
 # Source: custom-pod/templates/ingress.yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -388,6 +541,13 @@ spec:
                 name: custom-with-name-override-example2
                 port:
                   number: 8080
+          - path: "/three"
+            pathType: Prefix
+            backend:
+              service:
+                name: hardcoded-service-name
+                port:
+                  number: 8080
     - host: "test2.example.com"
       http:
         paths:
@@ -403,6 +563,13 @@ spec:
             backend:
               service:
                 name: custom-with-name-override-example2
+                port:
+                  number: 8080
+          - path: "/three"
+            pathType: Prefix
+            backend:
+              service:
+                name: hardcoded-service-name
                 port:
                   number: 8080
 ---
@@ -440,5 +607,12 @@ spec:
             backend:
               service:
                 name: custom-with-name-override-example2
+                port:
+                  number: 8080
+          - path: "/three"
+            pathType: Prefix
+            backend:
+              service:
+                name: hardcoded-service-name
                 port:
                   number: 8080
