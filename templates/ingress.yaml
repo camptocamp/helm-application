@@ -32,7 +32,11 @@ spec:
             pathType: Prefix
             backend:
               service:
+              {{- if hasKey $serviceDefinition.service "name" }}
+                name: {{ $serviceDefinition.service.name }}
+              {{- else }}
                 name: {{ include "common.fullname" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) }}
+              {{- end }}
                 port:
                   number: {{ $serviceDefinition.service.servicePort | default 80 }}
         {{- end }}
