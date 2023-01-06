@@ -541,7 +541,7 @@ spec:
                 name: custom-with-name-override-example2
                 port:
                   number: 8080
-          - path: "/two"
+          - path: "/three"
             pathType: Prefix
             backend:
               service:
@@ -565,7 +565,7 @@ spec:
                 name: custom-with-name-override-example2
                 port:
                   number: 8080
-          - path: "/two"
+          - path: "/three"
             pathType: Prefix
             backend:
               service:
@@ -609,7 +609,7 @@ spec:
                 name: custom-with-name-override-example2
                 port:
                   number: 8080
-          - path: "/two"
+          - path: "/three"
             pathType: Prefix
             backend:
               service:

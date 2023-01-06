@@ -164,7 +164,7 @@ services:
   example3:
     ingress:
       enabled: true
-      path: /two
+      path: /three
     enabled: true
     replicaCount: 2
 
