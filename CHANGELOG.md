@@ -1,5 +1,53 @@
 # Changelog
 
+## [0.4.3](https://github.com/camptocamp/helm-custom-pod/tree/0.4.3) (2023-01-06)
+
+[Full Changelog](https://github.com/camptocamp/helm-custom-pod/compare/0.4.2...0.4.3)
+
+#### :sparkles: Enhancements
+
+- GEO-6100: allow hardcoded service.name [\#85](https://github.com/camptocamp/helm-custom-pod/pull/85) ([danduk82](https://github.com/danduk82))
+
+## [0.4.2](https://github.com/camptocamp/helm-custom-pod/tree/0.4.2) (2023-01-04)
+
+[Full Changelog](https://github.com/camptocamp/helm-custom-pod/compare/0.4.1...0.4.2)
+
+#### :sparkles: Enhancements
+
+- Add ingress [\#84](https://github.com/camptocamp/helm-custom-pod/pull/84) ([danduk82](https://github.com/danduk82))
+
+#### :wrench: Build, CI, Tests, Code style
+
+- Fix pull requests check workflow, use our CI token [\#83](https://github.com/camptocamp/helm-custom-pod/pull/83) ([sbrunner](https://github.com/sbrunner))
+
+## [0.4.1](https://github.com/camptocamp/helm-custom-pod/tree/0.4.1) (2022-12-23)
+
+[Full Changelog](https://github.com/camptocamp/helm-custom-pod/compare/0.4.0...0.4.1)
+
+#### :package: Dependencies update
+
+- Update to helm-common 0.4.1 [\#81](https://github.com/camptocamp/helm-custom-pod/pull/81) ([danduk82](https://github.com/danduk82))
+
+## [0.4.0](https://github.com/camptocamp/helm-custom-pod/tree/0.4.0) (2022-12-23)
+
+[Full Changelog](https://github.com/camptocamp/helm-custom-pod/compare/0.3.0...0.4.0)
+
+#### :sparkles: Enhancements
+
+- GEO-6100: add logic for range over services [\#80](https://github.com/camptocamp/helm-custom-pod/pull/80) ([danduk82](https://github.com/danduk82))
+
+#### :wrench: Build, CI, Tests, Code style
+
+- Configure Renovate for kubernetes [\#79](https://github.com/camptocamp/helm-custom-pod/pull/79) ([sbrunner](https://github.com/sbrunner))
+- Configure Renovate to run monthly [\#78](https://github.com/camptocamp/helm-custom-pod/pull/78) ([sbrunner](https://github.com/sbrunner))
+- Configure Mend Bolt [\#77](https://github.com/camptocamp/helm-custom-pod/pull/77) ([sbrunner](https://github.com/sbrunner))
+- Update the changelog [\#74](https://github.com/camptocamp/helm-custom-pod/pull/74) ([c2c-bot-gis-ci](https://github.com/c2c-bot-gis-ci))
+- Upgrade deprecated set-output commands [\#73](https://github.com/camptocamp/helm-custom-pod/pull/73) ([sbrunner](https://github.com/sbrunner))
+
+#### :package: Dependencies update
+
+- Update dependency c2cciutils to v1.3.12 [\#75](https://github.com/camptocamp/helm-custom-pod/pull/75) ([renovate[bot]](https://github.com/apps/renovate))
+
 ## [0.3.0](https://github.com/camptocamp/helm-custom-pod/tree/0.3.0) (2022-11-14)
 
 [Full Changelog](https://github.com/camptocamp/helm-custom-pod/compare/0.2.0...0.3.0)
