@@ -15,14 +15,14 @@ ingress:
     host1:
       tls:
         enabled: true
-        secretName: 'my-tls-secret'
+        secretName: my-tls-secret
       hosts:
         - test1.example.com
         - test2.example.com
     host2:
       tls:
         enabled: true
-        secretName: 'my-tls-secret'
+        secretName: my-tls-secret
       hosts:
         - '*.example.com'
 
@@ -35,7 +35,7 @@ services:
     replicaCount: 1
     nodeSelector: {}
     affinity: {}
-    serviceName: 'with-service-name'
+    serviceName: with-service-name
     initContainers:
       aa: &aa
         image:
@@ -47,18 +47,18 @@ services:
           - '3600'
         resources:
           limits:
-            cpu: '100m'
-            memory: '50Mi'
+            cpu: 100m
+            memory: 50Mi
           requests:
-            cpu: '100m'
-            memory: '50Mi'
+            cpu: 100m
+            memory: 50Mi
         env:
           TEST:
-            value: 'aa'
+            value: aa
       bb: &bb
         env:
           MY_ENV_VAR:
-            value: 'some-value'
+            value: some-value
           JWT_SECRET_KEY:
             type: secret
             name: jwt-key-secret
