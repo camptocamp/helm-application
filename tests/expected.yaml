@@ -1,9 +1,9 @@
 ---
 # Source: custom-pod/templates/pdb.yaml
-apiVersion: policy/v1beta1
+apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: custom-custom-pod-with-serv
+  name: custom-custom-pod-with-service-name
   labels:
     app.kubernetes.io/name: custom-pod
     app.kubernetes.io/instance: custom
@@ -17,7 +17,7 @@ spec:
       app.kubernetes.io/component: with-service-name
 ---
 # Source: custom-pod/templates/pdb.yaml
-apiVersion: policy/v1beta1
+apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
   name: custom-with-name-override-example2
@@ -34,7 +34,7 @@ spec:
       app.kubernetes.io/component: example2
 ---
 # Source: custom-pod/templates/pdb.yaml
-apiVersion: policy/v1beta1
+apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
   name: custom-with-name-override-example3
@@ -54,7 +54,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: custom-custom-pod-with-serv
+  name: custom-custom-pod-with-service-name
   labels:
     helm.sh/chart: custom-pod
     app.kubernetes.io/version: "1.0"
@@ -129,7 +129,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: custom-custom-pod-with-serv
+  name: custom-custom-pod-with-service-name
   labels:
     helm.sh/chart: custom-pod
     app.kubernetes.io/version: "1.0"
@@ -167,7 +167,7 @@ spec:
           imagePullPolicy: IfNotPresent
           env:
             - name: "TEST"
-              value: "aa"
+              value: aa
           terminationMessagePolicy: FallbackToLogsOnError
           resources:
             limits:
@@ -191,7 +191,7 @@ spec:
                   name: "jwt-key-secret"
                   key: "JWT_SECRET_KEY"
             - name: "MY_ENV_VAR"
-              value: "some-value"
+              value: some-value
           terminationMessagePolicy: FallbackToLogsOnError
           resources:
             null
@@ -215,7 +215,7 @@ spec:
           imagePullPolicy: IfNotPresent
           env:
             - name: "TEST"
-              value: "aa"
+              value: aa
           terminationMessagePolicy: FallbackToLogsOnError
           resources:
             limits:
@@ -239,7 +239,7 @@ spec:
                   name: "jwt-key-secret"
                   key: "JWT_SECRET_KEY"
             - name: "MY_ENV_VAR"
-              value: "some-value"
+              value: some-value
           terminationMessagePolicy: FallbackToLogsOnError
           resources:
             null
@@ -324,7 +324,7 @@ spec:
           imagePullPolicy: IfNotPresent
           env:
             - name: "TEST"
-              value: "aa"
+              value: aa
           terminationMessagePolicy: FallbackToLogsOnError
           resources:
             limits:
@@ -348,7 +348,7 @@ spec:
                   name: "jwt-key-secret"
                   key: "JWT_SECRET_KEY"
             - name: "MY_ENV_VAR"
-              value: "some-value"
+              value: some-value
           terminationMessagePolicy: FallbackToLogsOnError
           resources:
             null
@@ -435,7 +435,7 @@ spec:
           imagePullPolicy: IfNotPresent
           env:
             - name: "TEST"
-              value: "aa"
+              value: aa
           terminationMessagePolicy: FallbackToLogsOnError
           resources:
             limits:
@@ -459,7 +459,7 @@ spec:
                   name: "jwt-key-secret"
                   key: "JWT_SECRET_KEY"
             - name: "MY_ENV_VAR"
-              value: "some-value"
+              value: some-value
           terminationMessagePolicy: FallbackToLogsOnError
           resources:
             null
@@ -531,7 +531,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: custom-custom-pod-with-serv
+                name: custom-custom-pod-with-service-name
                 port:
                   number: 8080
           - path: "/two"
@@ -555,7 +555,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: custom-custom-pod-with-serv
+                name: custom-custom-pod-with-service-name
                 port:
                   number: 8080
           - path: "/two"
@@ -599,7 +599,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: custom-custom-pod-with-serv
+                name: custom-custom-pod-with-service-name
                 port:
                   number: 8080
           - path: "/two"
