@@ -11,7 +11,7 @@ metadata:
   {{- include "common.metadata" ( dict "root" $root "service" $serviceDefinition "serviceName" $serviceName ) | nindent 2 }}
 spec:
   replicas: {{ $serviceDefinition.replicaCount | default 1 }}
-  revisionHistoryLimit: {{ $values.global.revisionHistoryLimit | default 3 }}
+  revisionHistoryLimit: {{ $values.global.revisionHistoryLimit | default 0 }}
   strategy:
     type: RollingUpdate
   selector:
