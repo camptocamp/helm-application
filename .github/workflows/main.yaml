@@ -62,3 +62,4 @@ jobs:
 
       - name: Publish
         run: c2cciutils-publish
+        if: matrix.helm == 'latest'
