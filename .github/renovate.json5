@@ -15,6 +15,13 @@
   kubernetes: {
     fileMatch: ['templates/.+\\.yaml$', 'tests/.*expected\\.yaml$'],
   },
+  'pre-commit': { enabled: true },
+  regexManagers: [
+    {
+      fileMatch: ['^.pre-commit-config.yaml$'],
+      matchStrings: [" +- '?(?<depName>[^' @=]+)(@|==)(?<currentValue>[^' @=]+)'? # (?<datasource>.+)"],
+    },
+  ],
   packageRules: [
     /** Automerge the patch, the minor and the dev dependency */
     {
