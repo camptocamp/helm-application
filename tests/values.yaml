@@ -78,6 +78,9 @@ services:
           /tmp/my-volume/data:
             name: my-volume
             subPath: data
+        volumeDevices:
+          /dev/xvda:
+            name: my-device-volume
 
     containers:
       cc:
@@ -107,6 +110,9 @@ services:
     volumes:
       my-volume:
         emptyDir: {}
+      my-device-volume:
+        persistentVolumeClaim:
+          claimName: pvc-name
 
     securityContext:
       runAsNonRoot: true
