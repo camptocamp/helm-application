@@ -48,7 +48,7 @@ jobs:
       - run: pre-commit run --all-files
         env:
           SKIP: helm-lock
-      - run: git diff
+      - run: git diff && false
         if: failure()
       - name: Checks
         run: c2cciutils-checks
