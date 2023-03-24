@@ -3,7 +3,7 @@
 {{- range $serviceName, $serviceDefinition := $values.services }}
 {{- if eq $serviceDefinition.enabled true }}
 ---
-{{- if semverCompare ">=1.21.0" ( trimPrefix "v" $.Capabilities.KubeVersion.Version ) }}
+{{- if semverCompare ">=1.21.0-0" ( trimPrefix "v" $.Capabilities.KubeVersion.Version ) }}
 apiVersion: policy/v1
 {{- else -}}
 apiVersion: policy/v1beta1
