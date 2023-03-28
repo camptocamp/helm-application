@@ -86,18 +86,18 @@ services:
         <<: *bb
         livenessProbe:
           httpGet:
-            path: /
+            path: /heals/liveness
             port: http
         readinessProbe:
           httpGet:
-            path: /
+            path: /heals/readiness
             port: http
           initialDelaySeconds: 5
           timeoutSeconds: 10
           periodSeconds: 20
         startupProbe:
           httpGet:
-            path: /
+            path: /heals/startup
             port: http
         ports:
           http:

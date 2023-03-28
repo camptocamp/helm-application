@@ -262,22 +262,19 @@ spec:
 
           livenessProbe:
             httpGet:
-              path: /
+              path: /heals/liveness
               port: http
           readinessProbe:
             httpGet:
-              path: /
+              path: /heals/readiness
               port: http
             initialDelaySeconds: 5
             periodSeconds: 20
             timeoutSeconds: 10
           startupProbe:
             httpGet:
-              path: /
+              path: /heals/startup
               port: http
-            initialDelaySeconds: 5
-            periodSeconds: 20
-            timeoutSeconds: 10
       volumes:
         - name: my-volume
           emptyDir: {}
@@ -384,9 +381,6 @@ spec:
             httpGet:
               path: /
               port: http
-            initialDelaySeconds: 5
-            periodSeconds: 20
-            timeoutSeconds: 10
       volumes:
         - name: my-volume
           emptyDir: {}
@@ -495,9 +489,6 @@ spec:
             httpGet:
               path: /
               port: http
-            initialDelaySeconds: 5
-            periodSeconds: 20
-            timeoutSeconds: 10
       volumes:
         - name: my-volume
           emptyDir: {}
