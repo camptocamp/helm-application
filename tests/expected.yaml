@@ -207,6 +207,10 @@ spec:
               name: my-volume
               subPath: data
 
+          volumeDevices:
+            - devicePath: /dev/xvda
+              name: my-device-volume
+
       containers:
         - name: cc
           securityContext:
@@ -276,6 +280,9 @@ spec:
               path: /heals/startup
               port: http
       volumes:
+        - name: my-device-volume
+          persistentVolumeClaim:
+            claimName: pvc-name
         - name: my-volume
           emptyDir: {}
 ---
