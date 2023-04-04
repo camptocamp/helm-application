@@ -12,7 +12,7 @@ affinity: {}
 ingress:
   enabled: true
   annotations:
-    example-annotation: "coucou"
+    example-annotation: 'coucou'
   hostGroups:
     host1:
       tls:
