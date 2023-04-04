@@ -514,6 +514,8 @@ metadata:
     app.kubernetes.io/name: custom-pod
     app.kubernetes.io/instance: custom
     app.kubernetes.io/component: main
+  annotations:
+    example-annotation: coucou
 spec:
 # Add tls only if ingress.tls.enabled is set to true and the other fields are complete.
   tls:
@@ -583,6 +585,8 @@ metadata:
     app.kubernetes.io/name: custom-pod
     app.kubernetes.io/instance: custom
     app.kubernetes.io/component: main
+  annotations:
+    example-annotation: coucou
 spec:
 # Add tls only if ingress.tls.enabled is set to true and the other fields are complete.
   tls:
