@@ -11,6 +11,8 @@ affinity: {}
 
 ingress:
   enabled: true
+  annotations:
+    example-annotation: "coucou"
   hostGroups:
     host1:
       tls:
