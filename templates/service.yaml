@@ -12,8 +12,9 @@ metadata:
 {{- else }}
   name: {{ include "common.fullname" ( dict "root" $root "service" $serviceDefinition "serviceName" $serviceName ) }}
 {{- end }}
-  labels: {{ include "common.labels" ( dict "root" $root "service" $serviceDefinition "serviceName" $serviceName ) | nindent 4 }}
-    prometheus: "true"
+{{- $svcDict := deepCopy $serviceDefinition -}}
+{{- $svcDict := merge $svcDict (dict "annotations" $serviceDefinition.service.annotations "labels" $serviceDefinition.service.labels) -}}
+{{- include "common.metadata" ( dict "root" $root "service" $svcDict "serviceName" $serviceName ) | nindent 2 }}
 spec:
   type: {{ $serviceDefinition.service.type }}
   {{- with $serviceDefinition.service.ports }}
