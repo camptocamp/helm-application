@@ -122,6 +122,11 @@ services:
 
     service:
       <<: *servicedefinition
+      labels:
+        one-custom-label: 'hello-world'
+      annotations:
+        one-custom-annotation: 'abc'
+        two-custom-annotations: 'xyz'
 
   example2:
     ingress:
