@@ -16,7 +16,7 @@ metadata:
 {{- $svcDict := merge $svcDict (dict "annotations" $serviceDefinition.service.annotations "labels" $serviceDefinition.service.labels) -}}
 {{- include "common.metadata" ( dict "root" $root "service" $svcDict "serviceName" $serviceName ) | nindent 2 }}
 spec:
-  type: {{ $serviceDefinition.service.type }}
+  type: {{ $serviceDefinition.service.type | default "ClusterIP" }}
   {{- with $serviceDefinition.service.ports }}
   ports:
     {{- . | toYaml | nindent 4 }}
