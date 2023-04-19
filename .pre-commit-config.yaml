@@ -5,6 +5,7 @@ ci:
     - helm-lock
     - helmlint
     - ripsecrets
+    - helm-template-gen
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -29,6 +30,22 @@ repos:
       - id: copyright
       - id: workflows-require-timeout
       - id: helm-lock
+  - repo: https://github.com/camptocamp/helm-common
+    rev: 0.6.0
+    hooks:
+      - id: helm-template-gen
+        files: |-
+          (?x)(
+            ^templates/.*$
+            |^values\.yaml$
+            |^Chart\.yaml$
+            |^tests/values\.yaml$
+          )
+        args:
+          - --values=tests/values.yaml
+          - custom
+          - .
+          - tests/expected.yaml
   - repo: https://github.com/codespell-project/codespell
     rev: v2.2.4
     hooks:
