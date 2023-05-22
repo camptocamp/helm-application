@@ -1,0 +1,24 @@
+{{- range $serviceName, $serviceDefinition := .Values.services }}
+{{- if hasKey $serviceDefinition "podMonitor" }}
+{{- if eq $serviceDefinition.podMonitor.enabled true }}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+{{- if hasKey $serviceDefinition.service "name" }}
+  name: {{ $serviceDefinition.service.name }}
+{{- else }}
+  name: {{ include "common.fullname" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) }}
+{{- end }}
+{{- $svcDict := deepCopy $serviceDefinition }}
+{{- $svcDict := merge $svcDict (dict "annotations" $serviceDefinition.service.annotations "labels" $serviceDefinition.service.labels) }}
+{{- include "common.metadata" ( dict "root" $ "service" $svcDict "serviceName" $serviceName ) | nindent 2 }}
+spec:
+  selector: {{- include "common.selectorLabels" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) | nindent 4 }}
+  {{- with $serviceDefinition.podMonitor.endpoint }}
+  podMetricsEndpoints:
+    - {{ . | toYaml | nindent 6 }}
+  {{- end }}
+{{- end }}
+{{- end }}
+{{- end }}

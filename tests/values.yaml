@@ -30,10 +30,16 @@ ingress:
 
 services:
   example1:
+    enabled: true
     ingress:
       enabled: true
       path: /one
-    enabled: true
+    podMonitor:
+      enabled: true
+      endpoint:
+        port: prometheus
+        interval: 10s
+        honorLabels: true
     replicaCount: 1
     nodeSelector: {}
     affinity: {}
