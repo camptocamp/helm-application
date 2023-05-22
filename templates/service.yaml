@@ -1,7 +1,4 @@
-{{- $root := . -}}
-{{- $values := .Values -}}
-
-{{- range $serviceName, $serviceDefinition := $values.services }}
+{{- range $serviceName, $serviceDefinition := .Values.services }}
 {{- if eq $serviceDefinition.enabled true }}
 ---
 apiVersion: v1
@@ -10,17 +7,17 @@ metadata:
 {{- if hasKey $serviceDefinition.service "name" }}
   name: {{ $serviceDefinition.service.name }}
 {{- else }}
-  name: {{ include "common.fullname" ( dict "root" $root "service" $serviceDefinition "serviceName" $serviceName ) }}
+  name: {{ include "common.fullname" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) }}
 {{- end }}
-{{- $svcDict := deepCopy $serviceDefinition -}}
-{{- $svcDict := merge $svcDict (dict "annotations" $serviceDefinition.service.annotations "labels" $serviceDefinition.service.labels) -}}
-{{- include "common.metadata" ( dict "root" $root "service" $svcDict "serviceName" $serviceName ) | nindent 2 }}
+{{- $svcDict := deepCopy $serviceDefinition }}
+{{- $svcDict := merge $svcDict (dict "annotations" $serviceDefinition.service.annotations "labels" $serviceDefinition.service.labels) }}
+{{- include "common.metadata" ( dict "root" $ "service" $svcDict "serviceName" $serviceName ) | nindent 2 }}
 spec:
   type: {{ $serviceDefinition.service.type | default "ClusterIP" }}
   {{- with $serviceDefinition.service.ports }}
   ports:
     {{- . | toYaml | nindent 4 }}
   {{- end }}
-  selector: {{- include "common.selectorLabels" ( dict "root" $root "service" $serviceDefinition "serviceName" $serviceName ) | nindent 4 }}
+  selector: {{- include "common.selectorLabels" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) | nindent 4 }}
 {{- end }}
 {{- end }}

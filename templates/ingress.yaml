@@ -1,5 +1,5 @@
-{{- if eq $.Values.ingress.enabled true -}}
-{{- $fullName := include "common.fullname" ( dict "root" $ "service" $.Values ) -}}
+{{- if eq $.Values.ingress.enabled true }}
+{{- $fullName := include "common.fullname" ( dict "root" $ "service" $.Values ) }}
 {{- range $hostGroupName, $hostGroupDefinition := $.Values.ingress.hostGroups }}
 ---
 apiVersion: networking.k8s.io/v1
