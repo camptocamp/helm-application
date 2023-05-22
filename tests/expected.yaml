@@ -50,6 +50,34 @@ spec:
       app.kubernetes.io/instance: custom
       app.kubernetes.io/component: example3
 ---
+# Source: custom-pod/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: custom-custom-pod
+  labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: main
+data:
+  CHART_NAME: custom-pod
+  RELEASE_NAME: custom
+  RELEASE_NAMESPACE: default
+  SERVICE_EXAMPLE1_NAME: custom-custom-pod-with-service-name
+  SERVICE_EXAMPLE1_CONTAINER_AA_IMAGE_TAG: latest
+  SERVICE_EXAMPLE1_CONTAINER_BB_IMAGE_TAG: latest
+  SERVICE_EXAMPLE1_CONTAINER_CC_IMAGE_TAG: latest
+  SERVICE_EXAMPLE1_CONTAINER_DD_IMAGE_TAG: latest
+  SERVICE_EXAMPLE2_NAME: custom-with-name-override-example2
+  SERVICE_EXAMPLE2_CONTAINER_CC_IMAGE_TAG: latest
+  SERVICE_EXAMPLE2_CONTAINER_DD_IMAGE_TAG: latest
+  SERVICE_EXAMPLE3_NAME: hardcoded-service-name
+  SERVICE_EXAMPLE3_CONTAINER_CC_IMAGE_TAG: latest
+  SERVICE_EXAMPLE3_CONTAINER_DD_IMAGE_TAG: latest
+---
 # Source: custom-pod/templates/service.yaml
 apiVersion: v1
 kind: Service
