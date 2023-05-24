@@ -64,6 +64,11 @@ jobs:
       - name: Setup k3s/k3d
         run: c2cciutils-k8s-install
 
+      - name: Install prometheus CRD
+        run: |
+          curl https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/main/jsonnet/prometheus-operator/podmonitors-crd.json --output /tmp/podmonitors-crd.json
+          kubectl apply -f /tmp/podmonitors-crd.json
+
       - name: Apply
         run: kubectl apply -f tests/expected.yaml
 
