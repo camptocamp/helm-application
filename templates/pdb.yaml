@@ -1,20 +1,18 @@
-{{- $root := . -}}
-{{- $values := .Values -}}
-{{- range $serviceName, $serviceDefinition := $values.services }}
+{{- range $serviceName, $serviceDefinition := $.Values.services }}
 {{- if eq $serviceDefinition.enabled true }}
 ---
 {{- if semverCompare ">=1.21.0-0" ( trimPrefix "v" $.Capabilities.KubeVersion.Version ) }}
 apiVersion: policy/v1
-{{- else -}}
+{{- else }}
 apiVersion: policy/v1beta1
 {{- end }}
 kind: PodDisruptionBudget
 metadata:
-  name: {{ include "common.fullname" ( dict "root" $root "service" $serviceDefinition "serviceName" $serviceName ) }}
-  labels: {{- include "common.selectorLabels" ( dict "root" $root "service" $serviceDefinition "serviceName" $serviceName ) | nindent 4 }}
+  name: {{ include "common.fullname" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) }}
+  labels: {{- include "common.selectorLabels" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) | nindent 4 }}
 spec:
   maxUnavailable: 1
   selector:
-    matchLabels: {{- include "common.selectorLabels" ( dict "root" $root "service" $serviceDefinition "serviceName" $serviceName ) | nindent 6 }}
+    matchLabels: {{- include "common.selectorLabels" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) | nindent 6 }}
 {{- end }}
 {{- end }}
