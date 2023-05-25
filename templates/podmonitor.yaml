@@ -14,7 +14,8 @@ metadata:
 {{- $svcDict := merge $svcDict (dict "annotations" $serviceDefinition.service.annotations "labels" $serviceDefinition.service.labels) }}
 {{- include "common.metadata" ( dict "root" $ "service" $svcDict "serviceName" $serviceName ) | nindent 2 }}
 spec:
-  selector: {{- include "common.selectorLabels" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) | nindent 4 }}
+  selector:
+    matchLabels: {{- include "common.selectorLabels" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) | nindent 6 }}
   {{- with $serviceDefinition.podMonitor.endpoint }}
   podMetricsEndpoints:
     - {{ . | toYaml | nindent 6 }}

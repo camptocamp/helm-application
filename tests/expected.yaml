@@ -638,9 +638,10 @@ metadata:
     two-custom-annotations: xyz
 spec:
   selector:
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
-    app.kubernetes.io/component: with-service-name
+    matchLabels:
+      app.kubernetes.io/name: custom-pod
+      app.kubernetes.io/instance: custom
+      app.kubernetes.io/component: with-service-name
   podMetricsEndpoints:
     -
       honorLabels: true
