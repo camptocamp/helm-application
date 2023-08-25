@@ -1,0 +1,553 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "type": "object",
+  "title": "HELM custom Pod configuration",
+  "definitions": {
+    "nameOverride": {
+      "type": "string",
+      "description": "[helm-common] Override the name"
+    },
+    "fullnameOverride": {
+      "type": "string",
+      "description": "[helm-common] Override the fullname"
+    },
+    "releaseTrunc": {
+      "type": "integer",
+      "description": "[helm-common] The release trunk length",
+      "default": 20
+    },
+    "prefixTrunc": {
+      "type": "integer",
+      "description": "[helm-common] The prefix trunk length (release anf chart name)",
+      "default": 40
+    },
+    "serviceAccount": {
+      "type": "object",
+      "description": "[helm-common] Service account configuration",
+      "additionalProperties": false,
+      "properties": {
+        "create": {
+          "type": "boolean",
+          "description": "Create a service account"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the service account"
+        }
+      }
+    },
+    "podSecurityContext": {
+      "type": "object",
+      "description": "[helm-common] Pod security context"
+    },
+    "securityContext": {
+      "type": "object",
+      "description": "[helm-common] Container security context"
+    },
+    "globalImage": {
+      "type": "object",
+      "description": "[helm-common] global image configuration",
+      "additionalProperties": false,
+      "properties": {
+        "pullPolicy": {
+          "type": "string",
+          "description": "Image pull policy"
+        },
+        "pullSecrets": {
+          "type": "array",
+          "description": "Image pull secrets"
+        }
+      }
+    },
+    "configMapNameOverride": {
+      "type": "object",
+      "description": "[helm-common] global: Used to be able to globally override the name of the config map",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "labels": {
+      "type": "object",
+      "description": "[helm-common] Pod labels",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "annotations": {
+      "type": "object",
+      "description": "[helm-common] Pod annotations",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "podLabels": {
+      "type": "object",
+      "description": "[helm-common] Labels used only in the Pod definition",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "podAnnotations": {
+      "type": "object",
+      "description": "[helm-common] Annotations used only in the Pod definition",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "serviceName": {
+      "type": "string",
+      "description": "[helm-common] The name of the service (not Kubernetes service), this will postfix the name"
+    },
+    "affinity": {
+      "type": "object",
+      "description": "[helm-common] Pod: The used affinity"
+    },
+    "tolerations": {
+      "type": "array",
+      "description": "[helm-common] Pod: Tolerations"
+    },
+    "nodeSelector": {
+      "type": "object",
+      "description": "[helm-common] Pod: Node selector"
+    },
+    "image": {
+      "type": "object",
+      "description": "[helm-common] Container: Image configuration",
+      "additionalProperties": false,
+      "properties": {
+        "repository": {
+          "type": "string",
+          "description": "Image repository"
+        },
+        "tag": {
+          "type": "string",
+          "description": "Image tag, used if the sha is not defined"
+        },
+        "sha": {
+          "type": ["null", "string"],
+          "description": "Image sha"
+        }
+      }
+    },
+    "env": {
+      "type": "object",
+      "description": "[helm-common] Container: Environment variables",
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "Disable the environment variable",
+                "enum": ["none"]
+              }
+            },
+            "required": ["type"]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "Environment variable from a direct value",
+                "enum": ["value"],
+                "default": "value"
+              },
+              "order": {
+                "type": "integer",
+                "description": "Order of the environment variable",
+                "default": 0,
+                "enum": [0, 1]
+              },
+              "value": {
+                "type": "string",
+                "description": "Value of the environment variable"
+              }
+            },
+            "required": ["value"]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "Environment variable from a ConfigMap or a Secret",
+                "enum": ["configMap", "secret"]
+              },
+              "order": {
+                "type": "integer",
+                "description": "Order of the environment variable",
+                "default": 0,
+                "enum": [0, 1]
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the ConfigMap or Secret, if 'self', same name as the service"
+              },
+              "key": {
+                "type": "string",
+                "description": "Key of the ConfigMap or Secret"
+              }
+            },
+            "required": ["type", "name", "key"]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "Free valueFrom for an environment variable",
+                "enum": ["valueFrom"]
+              },
+              "order": {
+                "type": "integer",
+                "description": "Order of the environment variable",
+                "default": 0,
+                "enum": [0, 1]
+              },
+              "valueFrom": {
+                "type": "object"
+              }
+            },
+            "required": ["type", "valueFrom"]
+          }
+        ]
+      }
+    },
+    "resources": {
+      "type": "object",
+      "description": "[helm-common] Container: The container resources"
+    },
+    "command": {
+      "type": "array",
+      "description": "Container: The container command",
+      "items": { "type": "string" }
+    },
+    "args": {
+      "type": "array",
+      "description": "Container: The container args",
+      "items": { "type": "string" }
+    },
+    "volumeMounts": {
+      "type": "object",
+      "description": "Container: Volume mounts"
+    },
+    "volumeDevices": {
+      "type": "object",
+      "description": "Container: Volume devices"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "common": {},
+    "global": {
+      "type": "object",
+      "properties": {
+        "image": {
+          "$ref": "#/definitions/globalImage"
+        },
+        "configMapNameOverride": {
+          "$ref": "#/definitions/configMapNameOverride"
+        },
+        "revisionHistoryLimit": {
+          "type": "integer",
+          "description": "The number of old history to keep to allow rollback"
+        }
+      }
+    },
+    "nameOverride": {
+      "$ref": "#/definitions/nameOverride"
+    },
+    "fullnameOverride": {
+      "$ref": "#/definitions/fullnameOverride"
+    },
+    "serviceName": {
+      "$ref": "#/definitions/serviceName"
+    },
+    "releaseTrunc": {
+      "$ref": "#/definitions/releaseTrunc"
+    },
+    "prefixTrunc": {
+      "$ref": "#/definitions/prefixTrunc"
+    },
+    "metadata": {
+      "type": "boolean",
+      "description": "Create a Config Map to expose some metadata about the chart"
+    },
+    "ingress": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable the Ingress"
+        },
+        "nameOverride": {
+          "$ref": "#/definitions/nameOverride"
+        },
+        "fullnameOverride": {
+          "$ref": "#/definitions/fullnameOverride"
+        },
+        "serviceName": {
+          "$ref": "#/definitions/serviceName"
+        },
+        "releaseTrunc": {
+          "$ref": "#/definitions/releaseTrunc"
+        },
+        "prefixTrunc": {
+          "$ref": "#/definitions/prefixTrunc"
+        },
+        "labels": {
+          "$ref": "#/definitions/labels"
+        },
+        "annotations": {
+          "$ref": "#/definitions/annotations"
+        },
+        "podLabels": {
+          "$ref": "#/definitions/podLabels"
+        },
+        "podAnnotations": {
+          "$ref": "#/definitions/podAnnotations"
+        },
+        "resources": {
+          "$ref": "#/definitions/resources"
+        },
+        "affinity": {
+          "$ref": "#/definitions/affinity"
+        },
+        "nodeSelector": {
+          "$ref": "#/definitions/nodeSelector"
+        },
+        "hostGroups": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "hosts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "tls": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "Enable TLS"
+                  },
+                  "secretName": {
+                    "type": "string",
+                    "description": "The name of the Secret"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "serviceAccount": {
+      "$ref": "#/definitions/serviceAccount"
+    },
+    "securityContext": {
+      "$ref": "#/definitions/securityContext"
+    },
+    "podSecurityContext": {
+      "$ref": "#/definitions/podSecurityContext"
+    },
+    "affinity": {
+      "$ref": "#/definitions/affinity"
+    },
+    "tolerations": {
+      "$ref": "#/definitions/tolerations"
+    },
+    "services": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "description": "Enable this service"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the service"
+          },
+          "nameOverride": {
+            "$ref": "#/definitions/nameOverride"
+          },
+          "labels": {
+            "$ref": "#/definitions/labels"
+          },
+          "annotations": {
+            "$ref": "#/definitions/annotations"
+          },
+          "podLabels": {
+            "$ref": "#/definitions/podLabels"
+          },
+          "podAnnotations": {
+            "$ref": "#/definitions/podAnnotations"
+          },
+          "serviceName": {
+            "$ref": "#/definitions/serviceName"
+          },
+          "resources": {
+            "$ref": "#/definitions/resources"
+          },
+          "affinity": {
+            "$ref": "#/definitions/affinity"
+          },
+          "nodeSelector": {
+            "$ref": "#/definitions/nodeSelector"
+          },
+          "replicaCount": {
+            "type": "integer",
+            "description": "The number of replicas"
+          },
+          "volumes": {
+            "type": "object"
+          },
+          "initContainers": {
+            "type": "object",
+            "description": "The init containers configuration",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "image": {
+                  "$ref": "#/definitions/image"
+                },
+                "env": {
+                  "$ref": "#/definitions/env"
+                },
+                "resources": {
+                  "$ref": "#/definitions/resources"
+                },
+                "command": {
+                  "$ref": "#/definitions/command"
+                },
+                "args": {
+                  "$ref": "#/definitions/args"
+                },
+                "volumeMounts": {
+                  "$ref": "#/definitions/volumeMounts"
+                },
+                "volumeDevices": {
+                  "$ref": "#/definitions/volumeDevices"
+                }
+              }
+            }
+          },
+          "containers": {
+            "type": "object",
+            "description": "The containers configuration",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "image": {
+                  "$ref": "#/definitions/image"
+                },
+                "env": {
+                  "$ref": "#/definitions/env"
+                },
+                "resources": {
+                  "$ref": "#/definitions/resources"
+                },
+                "command": {
+                  "$ref": "#/definitions/command"
+                },
+                "args": {
+                  "$ref": "#/definitions/args"
+                },
+                "volumeMounts": {
+                  "$ref": "#/definitions/volumeMounts"
+                },
+                "volumeDevices": {
+                  "$ref": "#/definitions/volumeDevices"
+                },
+                "ports": {
+                  "type": "object"
+                },
+                "livenessProbe": {
+                  "type": "object"
+                },
+                "readinessProbe": {
+                  "type": "object"
+                },
+                "startupProbe": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "ingress": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "enabled": {
+                "type": "boolean",
+                "description": "Enable the ingress for this service"
+              },
+              "path": {
+                "type": "string",
+                "description": "The path of the ingress"
+              }
+            }
+          },
+          "service": {
+            "type": "object",
+            "description": "The kubernetes service configuration",
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name of the service"
+              },
+              "type": {
+                "type": "string",
+                "description": "The type of the service",
+                "default": "ClusterIP"
+              },
+              "servicePort": {
+                "type": "integer",
+                "description": "The port of the service",
+                "default": 80
+              },
+              "labels": {
+                "$ref": "#/definitions/labels"
+              },
+              "annotations": {
+                "$ref": "#/definitions/annotations"
+              },
+              "ports": {
+                "type": "array"
+              }
+            }
+          },
+          "podMonitor": {
+            "type": "object",
+            "description": "The Prometheus Pod monitor configuration",
+            "additionalProperties": false,
+            "properties": {
+              "enabled": {
+                "type": "boolean",
+                "description": "Enable the pod monitor for this service"
+              },
+              "endpoint": {
+                "type": "object",
+                "description": "The endpoint of the pod monitor"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

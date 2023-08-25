@@ -1,15 +1,8 @@
-servicedefinition: &servicedefinition
-  type: ClusterIP
-  servicePort: 8080
-  ports:
-    - name: http
-      port: 8080
-      protocol: TCP
-      targetPort: http
-
 metadata: true
 
-affinity: {}
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 33 # www-data
 
 ingress:
   enabled: true
@@ -88,9 +81,6 @@ services:
           /tmp/my-volume/data:
             name: my-volume
             subPath: data
-        volumeDevices:
-          /dev/xvda:
-            name: my-device-volume
 
     containers:
       cc:
@@ -124,17 +114,14 @@ services:
         persistentVolumeClaim:
           claimName: pvc-name
 
-    securityContext:
-      runAsNonRoot: true
-      runAsUser: 33 # www-data
-
-    service:
-      <<: *servicedefinition
-      labels:
-        one-custom-label: 'hello-world'
-      annotations:
-        one-custom-annotation: 'abc'
-        two-custom-annotations: 'xyz'
+    service: &servicedefinition
+      type: ClusterIP
+      servicePort: 8080
+      ports:
+        - name: http
+          port: 8080
+          protocol: TCP
+          targetPort: http
 
   example2:
     ingress:
@@ -176,11 +163,13 @@ services:
       my-volume-2:
         emptyDir: {}
 
-    securityContext:
-      runAsNonRoot: true
-      runAsUser: 33 # www-data
     service:
       <<: *servicedefinition
+      labels:
+        one-custom-label: 'hello-world'
+      annotations:
+        one-custom-annotation: 'abc'
+        two-custom-annotations: 'xyz'
 
   example3:
     ingress:
@@ -222,9 +211,6 @@ services:
       my-volume-2:
         emptyDir: {}
 
-    securityContext:
-      runAsNonRoot: true
-      runAsUser: 33 # www-data
     service:
       <<: *servicedefinition
       name: hardcoded-service-name
