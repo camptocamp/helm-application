@@ -23,10 +23,10 @@ spec:
         - name: {{ $name }}
           {{- include "common.containerConfig" ( dict "root" $ "container" $config ) | nindent 10 }}
           {{- with $config.command }}
-          command: {{ $config.command | toYaml | nindent 12 }}
+          command: {{ . | toYaml | nindent 12 }}
           {{- end }}
           {{- with $config.args }}
-          args: {{ $config.args | toYaml | nindent 12 }}
+          args: {{ . | toYaml | nindent 12 }}
           {{- end }}
           {{- with $config.volumeMounts }}
           volumeMounts:
@@ -53,6 +53,10 @@ spec:
           {{- with $config.volumeMounts }}
           volumeMounts:
           {{- include "common.dictToList" ( dict "keyName" "mountPath" "contents" . ) | nindent 12 }}
+          {{- end }}
+          {{- with $config.volumeDevices }}
+          volumeDevices:
+          {{- include "common.dictToList" ( dict "keyName" "devicePath" "contents" . ) | nindent 12 }}
           {{- end }}
           {{- with $config.ports }}
           ports:
