@@ -231,11 +231,11 @@
     },
     "volumeMounts": {
       "type": "object",
-      "description": "Container: Volume mounts"
+      "description": "Container: Volume mounts, the key is the mountPath of the volume"
     },
     "volumeDevices": {
       "type": "object",
-      "description": "Container: Volume devices"
+      "description": "Container: Volume devices, the key is the devicePath of the volume"
     }
   },
   "additionalProperties": false,
@@ -411,7 +411,8 @@
             "description": "The number of replicas"
           },
           "volumes": {
-            "type": "object"
+            "type": "object",
+            "description": "The volumes configuration, the key is the name of the volume"
           },
           "initContainers": {
             "type": "object",
@@ -473,7 +474,8 @@
                   "$ref": "#/definitions/volumeDevices"
                 },
                 "ports": {
-                  "type": "object"
+                  "type": "object",
+                  "description": "The ports, key is the name of the port"
                 },
                 "livenessProbe": {
                   "type": "object"

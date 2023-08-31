@@ -53,7 +53,7 @@
     - **`affinity`**: Refer to _[#/definitions/affinity](#definitions/affinity)_.
     - **`nodeSelector`**: Refer to _[#/definitions/nodeSelector](#definitions/nodeSelector)_.
     - **`replicaCount`** _(integer)_: The number of replicas.
-    - **`volumes`** _(object)_
+    - **`volumes`** _(object)_: The volumes configuration, the key is the name of the volume.
     - **`initContainers`** _(object)_: The init containers configuration. Can contain additional properties.
       - **Additional Properties** _(object)_: Cannot contain additional properties.
         - **`image`**: Refer to _[#/definitions/image](#definitions/image)_.
@@ -72,7 +72,7 @@
         - **`args`**: Refer to _[#/definitions/args](#definitions/args)_.
         - **`volumeMounts`**: Refer to _[#/definitions/volumeMounts](#definitions/volumeMounts)_.
         - **`volumeDevices`**: Refer to _[#/definitions/volumeDevices](#definitions/volumeDevices)_.
-        - **`ports`** _(object)_
+        - **`ports`** _(object)_: The ports, key is the name of the port.
         - **`livenessProbe`** _(object)_
         - **`readinessProbe`** _(object)_
         - **`startupProbe`** _(object)_
@@ -145,5 +145,5 @@
   - **Items** _(string)_
 - <a id="definitions/args"></a>**`args`** _(array)_: Container: The container args.
   - **Items** _(string)_
-- <a id="definitions/volumeMounts"></a>**`volumeMounts`** _(object)_: Container: Volume mounts.
-- <a id="definitions/volumeDevices"></a>**`volumeDevices`** _(object)_: Container: Volume devices.
+- <a id="definitions/volumeMounts"></a>**`volumeMounts`** _(object)_: Container: Volume mounts, the key is the mountPath of the volume.
+- <a id="definitions/volumeDevices"></a>**`volumeDevices`** _(object)_: Container: Volume devices, the key is the devicePath of the volume.
