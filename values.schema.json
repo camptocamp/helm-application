@@ -127,7 +127,9 @@
           "type": ["null", "string"],
           "description": "Image sha"
         }
-      }
+      },
+      "required": ["repository"],
+      "anyOf": [{ "required": ["tag"] }, { "required": ["sha"] }]
     },
     "env": {
       "type": "object",
@@ -442,7 +444,8 @@
                 "volumeDevices": {
                   "$ref": "#/definitions/volumeDevices"
                 }
-              }
+              },
+              "required": ["image"]
             }
           },
           "containers": {
@@ -486,7 +489,8 @@
                 "startupProbe": {
                   "type": "object"
                 }
-              }
+              },
+              "required": ["image"]
             }
           },
           "ingress": {

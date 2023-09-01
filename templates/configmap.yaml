@@ -22,16 +22,16 @@ data:
 {{- end }}
 {{- range $containerName, $containerDefinition := ( default $serviceDefinition.initContainers ( dict ) ) }}
 {{- if $containerDefinition.image.tag }}
-  SERVICE_{{ $serviceName | upper }}_CONTAINER_{{ $containerName | upper }}_IMAGE_TAG: {{ $containerDefinition.image.tag }}
+  SERVICE_{{ $serviceName | upper }}_CONTAINER_{{ $containerName | upper }}_IMAGE_TAG: {{ $containerDefinition.image.tag | quote }}
 {{- else }}
-  SERVICE_{{ $serviceName | upper }}_CONTAINER_{{ $containerName | upper }}_IMAGE_TAG: {{ $containerDefinition.image.sha }}
+  SERVICE_{{ $serviceName | upper }}_CONTAINER_{{ $containerName | upper }}_IMAGE_TAG: {{ $containerDefinition.image.sha | quote }}
 {{- end }}
 {{- end }}
 {{- range $containerName, $containerDefinition := ( default $serviceDefinition.containers ( dict ) ) }}
 {{- if $containerDefinition.image.tag }}
-  SERVICE_{{ $serviceName | upper }}_CONTAINER_{{ $containerName | upper }}_IMAGE_TAG: {{ $containerDefinition.image.tag }}
+  SERVICE_{{ $serviceName | upper }}_CONTAINER_{{ $containerName | upper }}_IMAGE_TAG: {{ $containerDefinition.image.tag | quote }}
 {{- else }}
-  SERVICE_{{ $serviceName | upper }}_CONTAINER_{{ $containerName | upper }}_IMAGE_TAG: {{ $containerDefinition.image.sha }}
+  SERVICE_{{ $serviceName | upper }}_CONTAINER_{{ $containerName | upper }}_IMAGE_TAG: {{ $containerDefinition.image.sha | quote }}
 {{- end }}
 {{- end }}
 {{- end }}
