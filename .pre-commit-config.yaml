@@ -42,7 +42,7 @@ repos:
       - id: workflows-require-timeout
       - id: helm-lock
   - repo: https://github.com/camptocamp/helm-common
-    rev: 0.7.1
+    rev: 0.7.2
     hooks:
       - id: helm-template-gen
         files: |-
@@ -62,11 +62,11 @@ repos:
     hooks:
       - id: codespell
   - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v3.0.2
+    rev: v3.0.3
     hooks:
       - id: prettier
         additional_dependencies:
-          - prettier@3.0.2 # npm
+          - prettier@3.0.3 # npm
           - prettier-plugin-sh@0.13.1 # npm
           - prettier-plugin-toml@0.4.0 # npm
           - '@prettier/plugin-xml@0.12.0' # npm
@@ -95,7 +95,7 @@ repos:
         additional_dependencies:
           - pyjson5==1.6.4 # pypi
   - repo: https://github.com/sirwart/ripsecrets
-    rev: v0.1.5
+    rev: v0.1.6
     hooks:
       - id: ripsecrets
   - repo: https://github.com/gruntwork-io/pre-commit
