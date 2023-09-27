@@ -107,3 +107,11 @@ repos:
     hooks:
       - id: jsonschema-validator
         files: ^ci/config\.yaml$
+  - repo: https://github.com/mheap/json-schema-spell-checker
+    rev: master
+    hooks:
+      - id: json-schema-spell-checker
+        files: ^values\.schema\.json$
+        args:
+          - --fields=description,title
+          - --spelling=.github/spell-ignore-words.txt

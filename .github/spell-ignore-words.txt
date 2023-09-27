@@ -1,0 +1,7 @@
+fullname
+sha
+Kubernetes
+ConfigMap
+valueFrom
+mountPath
+devicePath
