@@ -12,7 +12,7 @@
 - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
 - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
 - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
-- **`metadata`** _(boolean)_: Create a Config Map to expose some metadata about the chart.
+- **`metadata`** _(boolean)_: Create a ConfigMap to expose some metadata about the chart.
 - **`ingress`** _(object)_: Cannot contain additional properties.
   - **`enabled`** _(boolean)_: Enable the Ingress.
   - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
@@ -54,7 +54,7 @@
     - **`nodeSelector`**: Refer to _[#/definitions/nodeSelector](#definitions/nodeSelector)_.
     - **`replicaCount`** _(integer)_: The number of replicas.
     - **`volumes`** _(object)_: The volumes configuration, the key is the name of the volume.
-    - **`initContainers`** _(object)_: The init containers configuration. Can contain additional properties.
+    - **`initContainers`** _(object)_: The initialization containers configuration. Can contain additional properties.
       - **Additional Properties** _(object)_: Cannot contain additional properties.
         - **`image`**: Refer to _[#/definitions/image](#definitions/image)_.
         - **`env`**: Refer to _[#/definitions/env](#definitions/env)_.
@@ -79,7 +79,7 @@
     - **`ingress`** _(object)_: Cannot contain additional properties.
       - **`enabled`** _(boolean)_: Enable the ingress for this service.
       - **`path`** _(string)_: The path of the ingress.
-    - **`service`** _(object)_: The kubernetes service configuration. Cannot contain additional properties.
+    - **`service`** _(object)_: The Kubernetes service configuration. Cannot contain additional properties.
       - **`name`** _(string)_: The name of the service.
       - **`type`** _(string)_: The type of the service. Default: `"ClusterIP"`.
       - **`servicePort`** _(integer)_: The port of the service. Default: `80`.
@@ -95,7 +95,7 @@
 - <a id="definitions/nameOverride"></a>**`nameOverride`** _(string)_: [helm-common] Override the name.
 - <a id="definitions/fullnameOverride"></a>**`fullnameOverride`** _(string)_: [helm-common] Override the fullname.
 - <a id="definitions/releaseTrunc"></a>**`releaseTrunc`** _(integer)_: [helm-common] The release trunk length. Default: `20`.
-- <a id="definitions/prefixTrunc"></a>**`prefixTrunc`** _(integer)_: [helm-common] The prefix trunk length (release anf chart name). Default: `40`.
+- <a id="definitions/prefixTrunc"></a>**`prefixTrunc`** _(integer)_: [helm-common] The prefix trunk length (release and chart name). Default: `40`.
 - <a id="definitions/serviceAccount"></a>**`serviceAccount`** _(object)_: [helm-common] Service account configuration. Cannot contain additional properties.
   - **`create`** _(boolean)_: Create a service account.
   - **`name`** _(string)_: Name of the service account.
@@ -104,7 +104,7 @@
 - <a id="definitions/globalImage"></a>**`globalImage`** _(object)_: [helm-common] global image configuration. Cannot contain additional properties.
   - **`pullPolicy`** _(string)_: Image pull policy.
   - **`pullSecrets`** _(array)_: Image pull secrets.
-- <a id="definitions/configMapNameOverride"></a>**`configMapNameOverride`** _(object)_: [helm-common] global: Used to be able to globally override the name of the config map. Can contain additional properties.
+- <a id="definitions/configMapNameOverride"></a>**`configMapNameOverride`** _(object)_: [helm-common] global: Used to be able to globally override the name of the ConfigMap. Can contain additional properties.
   - **Additional Properties** _(string)_
 - <a id="definitions/labels"></a>**`labels`** _(object)_: [helm-common] Pod labels. Can contain additional properties.
   - **Additional Properties** _(string)_
@@ -145,7 +145,7 @@
 - <a id="definitions/resources"></a>**`resources`** _(object)_: [helm-common] Container: The container resources.
 - <a id="definitions/command"></a>**`command`** _(array)_: Container: The container command.
   - **Items** _(string)_
-- <a id="definitions/args"></a>**`args`** _(array)_: Container: The container args.
+- <a id="definitions/args"></a>**`args`** _(array)_: Container: The container arguments.
   - **Items** _(string)_
 - <a id="definitions/volumeMounts"></a>**`volumeMounts`** _(object)_: Container: Volume mounts, the key is the mountPath of the volume.
 - <a id="definitions/volumeDevices"></a>**`volumeDevices`** _(object)_: Container: Volume devices, the key is the devicePath of the volume.

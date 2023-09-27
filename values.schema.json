@@ -18,7 +18,7 @@
     },
     "prefixTrunc": {
       "type": "integer",
-      "description": "[helm-common] The prefix trunk length (release anf chart name)",
+      "description": "[helm-common] The prefix trunk length (release and chart name)",
       "default": 40
     },
     "serviceAccount": {
@@ -61,7 +61,7 @@
     },
     "configMapNameOverride": {
       "type": "object",
-      "description": "[helm-common] global: Used to be able to globally override the name of the config map",
+      "description": "[helm-common] global: Used to be able to globally override the name of the ConfigMap",
       "additionalProperties": {
         "type": "string"
       }
@@ -228,7 +228,7 @@
     },
     "args": {
       "type": "array",
-      "description": "Container: The container args",
+      "description": "Container: The container arguments",
       "items": { "type": "string" }
     },
     "volumeMounts": {
@@ -275,7 +275,7 @@
     },
     "metadata": {
       "type": "boolean",
-      "description": "Create a Config Map to expose some metadata about the chart"
+      "description": "Create a ConfigMap to expose some metadata about the chart"
     },
     "ingress": {
       "type": "object",
@@ -418,7 +418,7 @@
           },
           "initContainers": {
             "type": "object",
-            "description": "The init containers configuration",
+            "description": "The initialization containers configuration",
             "additionalProperties": {
               "type": "object",
               "additionalProperties": false,
@@ -509,7 +509,7 @@
           },
           "service": {
             "type": "object",
-            "description": "The kubernetes service configuration",
+            "description": "The Kubernetes service configuration",
             "additionalProperties": false,
             "properties": {
               "name": {
