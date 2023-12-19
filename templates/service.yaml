@@ -1,5 +1,5 @@
 {{- range $serviceName, $serviceDefinition := .Values.services }}
-{{- if eq $serviceDefinition.enabled true }}
+{{- if and (eq $serviceDefinition.enabled true) $serviceDefinition.service }}
 ---
 apiVersion: v1
 kind: Service

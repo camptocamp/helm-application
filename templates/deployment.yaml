@@ -2,17 +2,105 @@
 {{- if eq $serviceDefinition.enabled true }}
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: {{ ( default $serviceDefinition.type "Deployment" ) }}
 metadata:
   name: {{ include "common.fullname" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) }}
   {{- include "common.metadata" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) | nindent 2 }}
 spec:
-  replicas: {{ $serviceDefinition.replicaCount | default 1 }}
+  {{- if eq ( default $serviceDefinition.type "Deployment" ) "Deployment" }}
+  {{- if $serviceDefinition.replicaCount }}
+  replicas: {{ $serviceDefinition.replicaCount }}
+  {{- end }}
+  {{- if $serviceDefinition.replicas }}
+  replicas: {{ $serviceDefinition.replicas }}
+  {{- end }}
   revisionHistoryLimit: {{ $.Values.global.revisionHistoryLimit | default 0 }}
   strategy:
-    type: RollingUpdate
+    type: {{ ( default $serviceDefinition.strategy dict ).type | default "RollingUpdate" }}
+    {{- with ( default $serviceDefinition.strategy dict ).rollingUpdate }}
+    rollingUpdate: {{ toYaml . | nindent 8 }}
+    {{- end }}
+  {{- if $serviceDefinition.progressDeadlineSeconds }}
+  progressDeadlineSeconds: {{ $serviceDefinition.progressDeadlineSeconds }}
+  {{- end }}
+  {{- if $serviceDefinition.minReadySeconds }}
+  minReadySeconds: {{ $serviceDefinition.minReadySeconds }}
+  {{- end }}
+  {{- if $serviceDefinition.paused }}
+  paused: {{ $serviceDefinition.paused }}
+  {{- end }}
   selector:
     matchLabels: {{- include "common.selectorLabels" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) | nindent 6 }}
+  {{- end }}
+  {{- if eq ( default $serviceDefinition.type "Deployment" ) "StatefulSet" }}
+  {{- if $serviceDefinition.serviceName }}
+  serviceName: {{ $serviceDefinition.serviceName }}
+  {{- end }}
+  {{- if $serviceDefinition.replicaCount }}
+  replicas: {{ $serviceDefinition.replicaCount }}
+  {{- end }}
+  {{- if $serviceDefinition.replicas }}
+  replicas: {{ $serviceDefinition.replicas }}
+  {{- end }}
+  {{- if $serviceDefinition.minReadySeconds }}
+  minReadySeconds: {{ $serviceDefinition.minReadySeconds }}
+  {{- end }}
+  {{- if $serviceDefinition.podManagementPolicy }}
+  podManagementPolicy: {{ $serviceDefinition.podManagementPolicy }}
+  {{- end }}
+  {{- if $serviceDefinition.ordinals }}
+  ordinals: {{ $serviceDefinition.ordinals }}
+  {{- end }}
+  selector:
+    matchLabels: {{- include "common.selectorLabels" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) | nindent 6 }}
+  {{- with $serviceDefinition.persistentVolumeClaimRetentionPolicy }}
+  persistentVolumeClaimRetentionPolicy: {{ . }}
+  {{- end }}
+  {{- with $serviceDefinition.updateStrategy }}
+  updateStrategy: {{ toYaml . | nindent 6 }}
+  {{- end }}
+  {{- with $serviceDefinition.volumeClaimTemplates }}
+  volumeClaimTemplates: {{ toYaml . | nindent 6 }}
+  {{- end }}
+  {{- end }}
+  {{- if eq ( default $serviceDefinition.type "Deployment" ) "Job" }}
+  {{- if $serviceDefinition.backoffLimit }}
+  backoffLimit: {{ $serviceDefinition.backoffLimit }}
+  {{- end }}
+  {{- if $serviceDefinition.completions }}
+  completions: {{ $serviceDefinition.completions }}
+  {{- end }}
+  {{- if $serviceDefinition.parallelism }}
+  parallelism: {{ $serviceDefinition.parallelism }}
+  {{- end }}
+  {{- if $serviceDefinition.completionMode }}
+  completionMode: {{ $serviceDefinition.completionMode }}
+  {{- end }}
+  {{- if $serviceDefinition.backoffLimitPerIndex }}
+  backoffLimitPerIndex: {{ $serviceDefinition.backoffLimitPerIndex }}
+  {{- end }}
+  {{- if $serviceDefinition.maxFailedIndexes }}
+  maxFailedIndexes: {{ $serviceDefinition.maxFailedIndexes }}
+  {{- end }}
+  {{- if $serviceDefinition.activeDeadlineSeconds }}
+  activeDeadlineSeconds: {{ $serviceDefinition.activeDeadlineSeconds }}
+  {{- end }}
+  {{- if $serviceDefinition.ttlSecondsAfterFinished }}
+  ttlSecondsAfterFinished: {{ $serviceDefinition.ttlSecondsAfterFinished }}
+  {{- end }}
+  {{- if $serviceDefinition.suspend }}
+  suspend: {{ $serviceDefinition.suspend }}
+  {{- end }}
+  {{- if $serviceDefinition.podReplacementPolicy }}
+  podReplacementPolicy: {{ $serviceDefinition.podReplacementPolicy }}
+  {{- end }}
+  {{- with $serviceDefinition.podFailurePolicy }}
+  podFailurePolicy: {{ toYaml . | nindent 6 }}
+  {{- end }}
+  {{- with $serviceDefinition.selector }}
+  selector: {{ toYaml . | nindent 6 }}
+  {{- end }}
+  {{- end }}
   template:
     metadata: {{- include "common.podMetadata" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) | nindent 6 }}
     spec:

@@ -42,6 +42,7 @@
 - **`services`** _(object)_: Can contain additional properties.
   - **Additional Properties** _(object)_: Cannot contain additional properties.
     - **`enabled`** _(boolean)_: Enable this service.
+    - **`type`** _(string)_: The type of the service. Must be one of: `["Deployment", "StatefulSet", "Job"]`. Default: `"Deployment"`.
     - **`name`** _(string)_: The name of the service.
     - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
     - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
@@ -53,6 +54,30 @@
     - **`affinity`**: Refer to _[#/definitions/affinity](#definitions/affinity)_.
     - **`nodeSelector`**: Refer to _[#/definitions/nodeSelector](#definitions/nodeSelector)_.
     - **`replicaCount`** _(integer)_: The number of replicas.
+    - **`maxFailedIndexes`** _(integer)_: The maximum number of failed indexes.
+    - **`parallelism`** _(integer)_: The number of parallel jobs.
+    - **`backoffLimitPerIndex`** _(integer)_: The number of backoff limit per index.
+    - **`completionMode`** _(string)_: The completion mode of the job. Must be one of: `["Indexed", "NonIndexed"]`.
+    - **`completions`** _(integer)_: The number of completions.
+    - **`minReadySeconds`** _(integer)_: The minimum number of seconds for the Pod to be ready.
+    - **`persistentVolumeClaimRetentionPolicy`** _(object)_: The persistent volume claim retention policy.
+    - **`replicas`** _(integer)_: The number of replicas.
+    - **`paused`** _(boolean)_: Pause the deployment.
+    - **`progressDeadlineSeconds`** _(integer)_: The number of seconds for the deployment to be ready.
+    - **`strategy`** _(object)_: The deployment strategy. Cannot contain additional properties.
+      - **`type`** _(string)_: The type of the strategy.
+      - **`rollingUpdate`** _(object)_: The rolling update strategy.
+    - **`selector`** _(object)_: The selector of the job.
+    - **`suspend`** _(boolean)_: Suspend the job.
+    - **`ttlSecondsAfterFinished`** _(integer)_: The number of seconds before the job is deleted.
+    - **`backoffLimit`** _(integer)_: The number of backoff limit.
+    - **`podReplacementPolicy`** _(string)_: The Pod replacement policy.
+    - **`podFailurePolicy`** _(object)_: The Pod failure policy.
+    - **`activeDeadlineSeconds`** _(integer)_: The number of seconds before the job is deleted.
+    - **`ordinals`** _(object)_: The ordinals of the stateful set.
+    - **`podManagementPolicy`** _(string)_: The Pod management policy. Must be one of: `["OrderedReady", "Parallel"]`.
+    - **`updateStrategy`** _(object)_: The update strategy.
+    - **`volumeClaimTemplates`** _(array)_: The volume claim templates, the key is the name of the volume claim template.
     - **`volumes`** _(object)_: The volumes configuration, the key is the name of the volume.
     - **`initContainers`** _(object)_: The initialization containers configuration. Can contain additional properties.
       - **Additional Properties** _(object)_: Cannot contain additional properties.
@@ -87,8 +112,8 @@
       - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
       - **`ports`** _(array)_
     - **`podMonitor`** _(object)_: The Prometheus Pod monitor configuration. Cannot contain additional properties.
-      - **`enabled`** _(boolean)_: Enable the pod monitor for this service.
-      - **`endpoint`** _(object)_: The endpoint of the pod monitor.
+      - **`enabled`** _(boolean)_: Enable the Pod monitor for this service.
+      - **`endpoint`** _(object)_: The endpoint of the Pod monitor.
 
 ## Definitions
 

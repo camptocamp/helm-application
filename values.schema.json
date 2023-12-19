@@ -377,6 +377,12 @@
             "type": "boolean",
             "description": "Enable this service"
           },
+          "type": {
+            "type": "string",
+            "description": "The type of the service",
+            "default": "Deployment",
+            "enum": ["Deployment", "StatefulSet", "Job"]
+          },
           "name": {
             "type": "string",
             "description": "The name of the service"
@@ -411,6 +417,107 @@
           "replicaCount": {
             "type": "integer",
             "description": "The number of replicas"
+          },
+          "maxFailedIndexes": {
+            "type": "integer",
+            "description": "The maximum number of failed indexes"
+          },
+          "parallelism": {
+            "type": "integer",
+            "description": "The number of parallel jobs"
+          },
+          "backoffLimitPerIndex": {
+            "type": "integer",
+            "description": "The number of backoff limit per index"
+          },
+          "completionMode": {
+            "type": "string",
+            "description": "The completion mode of the job",
+            "enum": ["Indexed", "NonIndexed"]
+          },
+          "completions": {
+            "type": "integer",
+            "description": "The number of completions"
+          },
+          "minReadySeconds": {
+            "type": "integer",
+            "description": "The minimum number of seconds for the Pod to be ready"
+          },
+          "persistentVolumeClaimRetentionPolicy": {
+            "type": "object",
+            "description": "The persistent volume claim retention policy"
+          },
+          "replicas": {
+            "type": "integer",
+            "description": "The number of replicas"
+          },
+          "paused": {
+            "type": "boolean",
+            "description": "Pause the deployment"
+          },
+          "progressDeadlineSeconds": {
+            "type": "integer",
+            "description": "The number of seconds for the deployment to be ready"
+          },
+          "strategy": {
+            "type": "object",
+            "description": "The deployment strategy",
+            "additionalProperties": false,
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "The type of the strategy"
+              },
+              "rollingUpdate": {
+                "type": "object",
+                "description": "The rolling update strategy"
+              }
+            }
+          },
+          "selector": {
+            "type": "object",
+            "description": "The selector of the job"
+          },
+          "suspend": {
+            "type": "boolean",
+            "description": "Suspend the job"
+          },
+          "ttlSecondsAfterFinished": {
+            "type": "integer",
+            "description": "The number of seconds before the job is deleted"
+          },
+          "backoffLimit": {
+            "type": "integer",
+            "description": "The number of backoff limit"
+          },
+          "podReplacementPolicy": {
+            "type": "string",
+            "description": "The Pod replacement policy"
+          },
+          "podFailurePolicy": {
+            "type": "object",
+            "description": "The Pod failure policy"
+          },
+          "activeDeadlineSeconds": {
+            "type": "integer",
+            "description": "The number of seconds before the job is deleted"
+          },
+          "ordinals": {
+            "type": "object",
+            "description": "The ordinals of the stateful set"
+          },
+          "podManagementPolicy": {
+            "type": "string",
+            "description": "The Pod management policy",
+            "enum": ["OrderedReady", "Parallel"]
+          },
+          "updateStrategy": {
+            "type": "object",
+            "description": "The update strategy"
+          },
+          "volumeClaimTemplates": {
+            "type": "array",
+            "description": "The volume claim templates, the key is the name of the volume claim template"
           },
           "volumes": {
             "type": "object",
@@ -544,11 +651,11 @@
             "properties": {
               "enabled": {
                 "type": "boolean",
-                "description": "Enable the pod monitor for this service"
+                "description": "Enable the Pod monitor for this service"
               },
               "endpoint": {
                 "type": "object",
-                "description": "The endpoint of the pod monitor"
+                "description": "The endpoint of the Pod monitor"
               }
             }
           }
