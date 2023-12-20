@@ -66,7 +66,9 @@ jobs:
           version: ${{ matrix.helm }}
       - run: helm dependency update .
       - run: helm lint .
+        if: matrix.helm == 'latest'
       - run: helm lint --values=tests/values.yaml .
+        if: matrix.helm == 'latest'
 
       - name: Setup k3s/k3d
         run: c2cciutils-k8s-install

@@ -15,7 +15,7 @@ data:
 {{- end }}
 {{- range $serviceName, $serviceDefinition := .Values.services }}
 {{- if or (eq $serviceDefinition.enabled true) ( and (hasKey $serviceDefinition "template") $serviceDefinition.template) }}
-{{- if and (hasKey $serviceDefinition "service") (hasKey $serviceDefinition.service "name") }}
+{{- if ( default $serviceDefinition.service dict ).name }}
   SERVICE_{{ $serviceName | upper }}_NAME: {{ $serviceDefinition.service.name }}
 {{- else }}
   SERVICE_{{ $serviceName | upper }}_NAME: {{ include "common.fullname" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) }}

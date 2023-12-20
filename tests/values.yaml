@@ -214,3 +214,111 @@ services:
     service:
       <<: *servicedefinition
       name: hardcoded-service-name
+
+  # Minimal configuration of a deployment
+  deployment-min:
+    enabled: true
+    containers:
+      main:
+        image:
+          repository: camptocamp/image
+          tag: latest
+  # Deployment with all the possible options
+  deployment-all:
+    enabled: true
+    replicas: 3
+    strategy:
+      type: RollingUpdate
+      rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 0
+    progressDeadlineSeconds: 600
+    minReadySeconds: 10
+    paused: false
+    containers:
+      main:
+        image:
+          repository: camptocamp/image
+          tag: latest
+  # Minimal configuration of a daemonset
+  statefulset-min:
+    enabled: true
+    type: StatefulSet
+    containers:
+      main:
+        image:
+          repository: camptocamp/image
+          tag: latest
+  # Daemonset with all the possible options
+  statefulset-all:
+    enabled: true
+    type: StatefulSet
+    serviceName: 'nginx'
+    replicas: 3
+    minReadySeconds: 10
+    podManagementPolicy: Parallel
+    ordinals:
+      start: 0
+      end: 2
+    updateStrategy:
+      type: RollingUpdate
+      rollingUpdate:
+        partition: 0
+    containers:
+      main:
+        image:
+          repository: camptocamp/image
+          tag: latest
+    persistentVolumeClaimRetentionPolicy:
+      whenDeleted: Retain
+      whenScaled: Delete
+    volumeClaimTemplates:
+      - metadata:
+          name: www
+        spec:
+          accessModes: ['ReadWriteOnce']
+          storageClassName: 'my-storage-class'
+          resources:
+            requests:
+              storage: 1Gi
+  # Minimal configuration of a job
+  job-min:
+    enabled: true
+    type: Job
+    containers:
+      main:
+        image:
+          repository: camptocamp/image
+          tag: latest
+  # Job with all the possible options
+  job-all:
+    enabled: true
+    type: Job
+    backoffLimit: 5
+    completions: 10
+    parallelism: 3
+    completionMode: Indexed
+    backoffLimitPerIndex: 1
+    maxFailedIndexes: 5
+    activeDeadlineSeconds: 600
+    ttlSecondsAfterFinished: 600
+    podReplacementPolicy: Failed
+    podFailurePolicy:
+      rules:
+        - action: FailJob
+          onExitCodes:
+            containerName: main # optional
+            operator: In # one of: In, NotIn
+            values: [42]
+        - action: Ignore # one of: Ignore, FailJob, Count
+          onPodConditions:
+            - type: DisruptionTarget # indicates Pod disruption
+    suspend: false
+    selector:
+      matchLabels:
+        app: nginx
+    containers:
+      main:
+        image:
+          repository: camptocamp/image
+          tag: latest

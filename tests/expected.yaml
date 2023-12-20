@@ -3,6 +3,40 @@
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
+  name: custom-custom-pod-deployment-all
+  labels:
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: deployment-all
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: custom-pod
+      app.kubernetes.io/instance: custom
+      app.kubernetes.io/component: deployment-all
+---
+# Source: custom-pod/templates/pdb.yaml
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: custom-custom-pod-deployment-min
+  labels:
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: deployment-min
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: custom-pod
+      app.kubernetes.io/instance: custom
+      app.kubernetes.io/component: deployment-min
+---
+# Source: custom-pod/templates/pdb.yaml
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
   name: custom-custom-pod-with-service-name
   labels:
     app.kubernetes.io/name: custom-pod
@@ -50,6 +84,74 @@ spec:
       app.kubernetes.io/instance: custom
       app.kubernetes.io/component: example3
 ---
+# Source: custom-pod/templates/pdb.yaml
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: custom-custom-pod-job-all
+  labels:
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: job-all
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: custom-pod
+      app.kubernetes.io/instance: custom
+      app.kubernetes.io/component: job-all
+---
+# Source: custom-pod/templates/pdb.yaml
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: custom-custom-pod-job-min
+  labels:
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: job-min
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: custom-pod
+      app.kubernetes.io/instance: custom
+      app.kubernetes.io/component: job-min
+---
+# Source: custom-pod/templates/pdb.yaml
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: custom-custom-pod-nginx
+  labels:
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: nginx
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: custom-pod
+      app.kubernetes.io/instance: custom
+      app.kubernetes.io/component: nginx
+---
+# Source: custom-pod/templates/pdb.yaml
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: custom-custom-pod-statefulset-min
+  labels:
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: statefulset-min
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: custom-pod
+      app.kubernetes.io/instance: custom
+      app.kubernetes.io/component: statefulset-min
+---
 # Source: custom-pod/templates/configmap.yaml
 apiVersion: v1
 kind: ConfigMap
@@ -66,6 +168,10 @@ data:
   CHART_NAME: custom-pod
   RELEASE_NAME: custom
   RELEASE_NAMESPACE: default
+  SERVICE_DEPLOYMENT-ALL_NAME: custom-custom-pod-deployment-all
+  SERVICE_DEPLOYMENT-ALL_CONTAINER_MAIN_IMAGE_TAG: "latest"
+  SERVICE_DEPLOYMENT-MIN_NAME: custom-custom-pod-deployment-min
+  SERVICE_DEPLOYMENT-MIN_CONTAINER_MAIN_IMAGE_TAG: "latest"
   SERVICE_EXAMPLE1_NAME: custom-custom-pod-with-service-name
   SERVICE_EXAMPLE1_CONTAINER_AA_IMAGE_TAG: "latest"
   SERVICE_EXAMPLE1_CONTAINER_BB_IMAGE_TAG: "latest"
@@ -77,6 +183,14 @@ data:
   SERVICE_EXAMPLE3_NAME: hardcoded-service-name
   SERVICE_EXAMPLE3_CONTAINER_CC_IMAGE_TAG: "latest"
   SERVICE_EXAMPLE3_CONTAINER_DD_IMAGE_TAG: "latest"
+  SERVICE_JOB-ALL_NAME: custom-custom-pod-job-all
+  SERVICE_JOB-ALL_CONTAINER_MAIN_IMAGE_TAG: "latest"
+  SERVICE_JOB-MIN_NAME: custom-custom-pod-job-min
+  SERVICE_JOB-MIN_CONTAINER_MAIN_IMAGE_TAG: "latest"
+  SERVICE_STATEFULSET-ALL_NAME: custom-custom-pod-nginx
+  SERVICE_STATEFULSET-ALL_CONTAINER_MAIN_IMAGE_TAG: "latest"
+  SERVICE_STATEFULSET-MIN_NAME: custom-custom-pod-statefulset-min
+  SERVICE_STATEFULSET-MIN_CONTAINER_MAIN_IMAGE_TAG: "latest"
 ---
 # Source: custom-pod/templates/service.yaml
 apiVersion: v1
@@ -153,6 +267,100 @@ spec:
     app.kubernetes.io/name: with-name-override
     app.kubernetes.io/instance: custom
     app.kubernetes.io/component: example3
+---
+# Source: custom-pod/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: custom-custom-pod-deployment-all
+  labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: deployment-all
+spec:
+  replicas: 3
+  revisionHistoryLimit: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 0
+  progressDeadlineSeconds: 600
+  minReadySeconds: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: custom-pod
+      app.kubernetes.io/instance: custom
+      app.kubernetes.io/component: deployment-all
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: custom-pod
+        app.kubernetes.io/instance: custom
+        app.kubernetes.io/component: deployment-all
+    spec:
+      serviceAccountName: default
+      securityContext:
+        {}
+      affinity:
+        null
+      containers:
+        - name: main
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 33
+          image: "camptocamp/image:latest"
+          imagePullPolicy: IfNotPresent
+          terminationMessagePolicy: FallbackToLogsOnError
+          resources:
+            null
+---
+# Source: custom-pod/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: custom-custom-pod-deployment-min
+  labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: deployment-min
+spec:
+  revisionHistoryLimit: 3
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: custom-pod
+      app.kubernetes.io/instance: custom
+      app.kubernetes.io/component: deployment-min
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: custom-pod
+        app.kubernetes.io/instance: custom
+        app.kubernetes.io/component: deployment-min
+    spec:
+      serviceAccountName: default
+      securityContext:
+        {}
+      affinity:
+        null
+      containers:
+        - name: main
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 33
+          image: "camptocamp/image:latest"
+          imagePullPolicy: IfNotPresent
+          terminationMessagePolicy: FallbackToLogsOnError
+          resources:
+            null
 ---
 # Source: custom-pod/templates/deployment.yaml
 apiVersion: apps/v1
@@ -534,6 +742,184 @@ spec:
           emptyDir: {}
         - name: my-volume-2
           emptyDir: {}
+---
+# Source: custom-pod/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: custom-custom-pod-job-all
+  labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: job-all
+spec:
+  revisionHistoryLimit: 3
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: custom-pod
+      app.kubernetes.io/instance: custom
+      app.kubernetes.io/component: job-all
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: custom-pod
+        app.kubernetes.io/instance: custom
+        app.kubernetes.io/component: job-all
+    spec:
+      serviceAccountName: default
+      securityContext:
+        {}
+      affinity:
+        null
+      containers:
+        - name: main
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 33
+          image: "camptocamp/image:latest"
+          imagePullPolicy: IfNotPresent
+          terminationMessagePolicy: FallbackToLogsOnError
+          resources:
+            null
+---
+# Source: custom-pod/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: custom-custom-pod-job-min
+  labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: job-min
+spec:
+  revisionHistoryLimit: 3
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: custom-pod
+      app.kubernetes.io/instance: custom
+      app.kubernetes.io/component: job-min
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: custom-pod
+        app.kubernetes.io/instance: custom
+        app.kubernetes.io/component: job-min
+    spec:
+      serviceAccountName: default
+      securityContext:
+        {}
+      affinity:
+        null
+      containers:
+        - name: main
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 33
+          image: "camptocamp/image:latest"
+          imagePullPolicy: IfNotPresent
+          terminationMessagePolicy: FallbackToLogsOnError
+          resources:
+            null
+---
+# Source: custom-pod/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: custom-custom-pod-nginx
+  labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: nginx
+spec:
+  replicas: 3
+  revisionHistoryLimit: 3
+  strategy:
+    type: RollingUpdate
+  minReadySeconds: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: custom-pod
+      app.kubernetes.io/instance: custom
+      app.kubernetes.io/component: nginx
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: custom-pod
+        app.kubernetes.io/instance: custom
+        app.kubernetes.io/component: nginx
+    spec:
+      serviceAccountName: default
+      securityContext:
+        {}
+      affinity:
+        null
+      containers:
+        - name: main
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 33
+          image: "camptocamp/image:latest"
+          imagePullPolicy: IfNotPresent
+          terminationMessagePolicy: FallbackToLogsOnError
+          resources:
+            null
+---
+# Source: custom-pod/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: custom-custom-pod-statefulset-min
+  labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: statefulset-min
+spec:
+  revisionHistoryLimit: 3
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: custom-pod
+      app.kubernetes.io/instance: custom
+      app.kubernetes.io/component: statefulset-min
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: custom-pod
+        app.kubernetes.io/instance: custom
+        app.kubernetes.io/component: statefulset-min
+    spec:
+      serviceAccountName: default
+      securityContext:
+        {}
+      affinity:
+        null
+      containers:
+        - name: main
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 33
+          image: "camptocamp/image:latest"
+          imagePullPolicy: IfNotPresent
+          terminationMessagePolicy: FallbackToLogsOnError
+          resources:
+            null
 ---
 # Source: custom-pod/templates/ingress.yaml
 apiVersion: networking.k8s.io/v1
