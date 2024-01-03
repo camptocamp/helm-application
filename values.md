@@ -67,12 +67,12 @@
     - **`strategy`** _(object)_: The deployment strategy. Cannot contain additional properties.
       - **`type`** _(string)_: The type of the strategy.
       - **`rollingUpdate`** _(object)_: The rolling update strategy.
-    - **`selector`** _(object)_: The selector of the job.
     - **`suspend`** _(boolean)_: Suspend the job.
-    - **`template`** _(boolean)_: Create the service keys in the self object.
+    - **`template`** _(boolean)_: Create the service keys in the self ConfigMap even if the service is disabled.
     - **`ttlSecondsAfterFinished`** _(integer)_: The number of seconds before the job is deleted.
     - **`backoffLimit`** _(integer)_: The number of backoff limit.
     - **`podReplacementPolicy`** _(string)_: The Pod replacement policy.
+    - **`restartPolicy`** _(string)_: The Pod restart policy.
     - **`podFailurePolicy`** _(object)_: The Pod failure policy.
     - **`activeDeadlineSeconds`** _(integer)_: The number of seconds before the job is deleted.
     - **`ordinals`** _(object)_: The ordinals of the stateful set.

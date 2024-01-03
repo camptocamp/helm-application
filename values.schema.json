@@ -473,17 +473,13 @@
               }
             }
           },
-          "selector": {
-            "type": "object",
-            "description": "The selector of the job"
-          },
           "suspend": {
             "type": "boolean",
             "description": "Suspend the job"
           },
           "template": {
             "type": "boolean",
-            "description": "Create the service keys in the self object"
+            "description": "Create the service keys in the self ConfigMap even if the service is disabled"
           },
           "ttlSecondsAfterFinished": {
             "type": "integer",
@@ -496,6 +492,10 @@
           "podReplacementPolicy": {
             "type": "string",
             "description": "The Pod replacement policy"
+          },
+          "restartPolicy": {
+            "type": "string",
+            "description": "The Pod restart policy"
           },
           "podFailurePolicy": {
             "type": "object",

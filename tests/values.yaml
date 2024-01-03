@@ -259,7 +259,6 @@ services:
     podManagementPolicy: Parallel
     ordinals:
       start: 0
-      end: 2
     updateStrategy:
       type: RollingUpdate
       rollingUpdate:
@@ -285,6 +284,9 @@ services:
   job-min:
     enabled: true
     type: Job
+    # not available in k8s <= 1.27
+    # podReplacementPolicy: OnFailure
+    restartPolicy: Never
     containers:
       main:
         image:
@@ -298,11 +300,14 @@ services:
     completions: 10
     parallelism: 3
     completionMode: Indexed
-    backoffLimitPerIndex: 1
-    maxFailedIndexes: 5
+    # not available in k8s <= 1.27
+    # backoffLimitPerIndex: 1
+    # maxFailedIndexes: 5
     activeDeadlineSeconds: 600
     ttlSecondsAfterFinished: 600
-    podReplacementPolicy: Failed
+    # not available in k8s <= 1.27
+    # podReplacementPolicy: OnFailure
+    restartPolicy: Never
     podFailurePolicy:
       rules:
         - action: FailJob
@@ -314,9 +319,6 @@ services:
           onPodConditions:
             - type: DisruptionTarget # indicates Pod disruption
     suspend: false
-    selector:
-      matchLabels:
-        app: nginx
     containers:
       main:
         image:
