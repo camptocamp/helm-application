@@ -199,8 +199,7 @@
             "properties": {
               "type": {
                 "type": "string",
-                "description": "Free valueFrom for an environment variable",
-                "enum": ["valueFrom"]
+                "description": "Free field type for an environment variable"
               },
               "order": {
                 "type": "integer",
@@ -481,6 +480,10 @@
           "suspend": {
             "type": "boolean",
             "description": "Suspend the job"
+          },
+          "template": {
+            "type": "boolean",
+            "description": "Create the service keys in the self object"
           },
           "ttlSecondsAfterFinished": {
             "type": "integer",

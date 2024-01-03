@@ -69,6 +69,7 @@
       - **`rollingUpdate`** _(object)_: The rolling update strategy.
     - **`selector`** _(object)_: The selector of the job.
     - **`suspend`** _(boolean)_: Suspend the job.
+    - **`template`** _(boolean)_: Create the service keys in the self object.
     - **`ttlSecondsAfterFinished`** _(integer)_: The number of seconds before the job is deleted.
     - **`backoffLimit`** _(integer)_: The number of backoff limit.
     - **`podReplacementPolicy`** _(string)_: The Pod replacement policy.
@@ -164,7 +165,7 @@
         - **`name`** _(string, required)_: Name of the ConfigMap or Secret, if 'self', same name as the service.
         - **`key`** _(string, required)_: Key of the ConfigMap or Secret.
       - _object_
-        - **`type`** _(string, required)_: Free valueFrom for an environment variable. Must be one of: `["valueFrom"]`.
+        - **`type`** _(string, required)_: Free field type for an environment variable.
         - **`order`** _(integer)_: Order of the environment variable. Must be one of: `[0, 1]`. Default: `0`.
         - **`valueFrom`** _(object, required)_
 - <a id="definitions/resources"></a>**`resources`** _(object)_: [helm-common] Container: The container resources.
