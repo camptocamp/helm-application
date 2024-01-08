@@ -3,6 +3,19 @@ entries:
   custom-pod:
   - apiVersion: v2
     appVersion: "1.0"
+    created: "2024-01-08T13:35:03.901601033Z"
+    dependencies:
+    - name: common
+      repository: https://camptocamp.github.io/helm-common
+      version: 1.0.1
+    description: A custom pod with everything needed
+    digest: 07dd76dfc2ac63c9a0402aa88528637edf32d767c553476c67e218d91a362dce
+    name: custom-pod
+    urls:
+    - https://github.com/camptocamp/helm-custom-pod/releases/download/1.1.2/custom-pod-1.1.2.tgz
+    version: 1.1.2
+  - apiVersion: v2
+    appVersion: "1.0"
     created: "2024-01-03T11:01:08.013913109Z"
     dependencies:
     - name: common
@@ -274,4 +287,4 @@ entries:
     urls:
     - https://github.com/camptocamp/helm-custom-pod/releases/download/0.1.0/custom-pod-0.1.0.tgz
     version: 0.1.0
-generated: "2024-01-03T11:01:08.014071604Z"
+generated: "2024-01-08T13:35:03.90196061Z"
