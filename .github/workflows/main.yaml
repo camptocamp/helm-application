@@ -95,7 +95,7 @@ jobs:
                 console.log('Trigger changelog');
                 await github.rest.repos.createDispatchEvent({
                     owner: 'camptocamp',
-                    repo: 'helm-mutualize',
+                    repo: 'helm-custom-pod',
                     event_type: 'changelog',
                 });
             }

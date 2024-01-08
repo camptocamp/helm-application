@@ -59,5 +59,10 @@
       matchDatasources: ['github-actions', 'pre-commit'],
       automerge: true,
     },
+    /** Auto merge updates on CI files */
+    {
+      matchPaths: ['^\\.pre-commit-config\\.yaml$', '^\\.github/.*', '^ci/.*'],
+      automerge: true,
+    },
   ],
 }
