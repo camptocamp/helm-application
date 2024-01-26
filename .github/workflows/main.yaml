@@ -56,7 +56,6 @@ jobs:
         if: failure()
       - name: Print environment information
         run: c2cciutils-env
-
         env:
           GITHUB_EVENT: ${{ toJson(github) }}
 
@@ -86,8 +85,6 @@ jobs:
         if: matrix.helm == 'latest'
 
       - name: Trigger changelog workflow
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         uses: actions/github-script@v7
         with:
           script: |-
@@ -99,3 +96,5 @@ jobs:
                     event_type: 'changelog',
                 });
             }
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
