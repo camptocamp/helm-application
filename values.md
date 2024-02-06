@@ -28,7 +28,7 @@
   - **`affinity`**: Refer to _[#/definitions/affinity](#definitions/affinity)_.
   - **`nodeSelector`**: Refer to _[#/definitions/nodeSelector](#definitions/nodeSelector)_.
   - **`hostGroups`** _(object)_: Can contain additional properties.
-    - **Additional Properties** _(object)_: Cannot contain additional properties.
+    - **Additional properties** _(object)_: Cannot contain additional properties.
       - **`hosts`** _(array)_
         - **Items** _(string)_
       - **`tls`** _(object)_: Cannot contain additional properties.
@@ -40,7 +40,7 @@
 - **`affinity`**: Refer to _[#/definitions/affinity](#definitions/affinity)_.
 - **`tolerations`**: Refer to _[#/definitions/tolerations](#definitions/tolerations)_.
 - **`services`** _(object)_: Can contain additional properties.
-  - **Additional Properties** _(object)_: Cannot contain additional properties.
+  - **Additional properties** _(object)_: Cannot contain additional properties.
     - **`enabled`** _(boolean)_: Enable this service.
     - **`type`** _(string)_: The type of the service. Must be one of: `["Deployment", "StatefulSet", "Job"]`. Default: `"Deployment"`.
     - **`name`** _(string)_: The name of the service.
@@ -81,7 +81,7 @@
     - **`volumeClaimTemplates`** _(array)_: The volume claim templates, the key is the name of the volume claim template.
     - **`volumes`** _(object)_: The volumes configuration, the key is the name of the volume.
     - **`initContainers`** _(object)_: The initialization containers configuration. Can contain additional properties.
-      - **Additional Properties** _(object)_: Cannot contain additional properties.
+      - **Additional properties** _(object)_: Cannot contain additional properties.
         - **`image`**: Refer to _[#/definitions/image](#definitions/image)_.
         - **`env`**: Refer to _[#/definitions/env](#definitions/env)_.
         - **`resources`**: Refer to _[#/definitions/resources](#definitions/resources)_.
@@ -90,7 +90,7 @@
         - **`volumeMounts`**: Refer to _[#/definitions/volumeMounts](#definitions/volumeMounts)_.
         - **`volumeDevices`**: Refer to _[#/definitions/volumeDevices](#definitions/volumeDevices)_.
     - **`containers`** _(object)_: The containers configuration. Can contain additional properties.
-      - **Additional Properties** _(object)_: Cannot contain additional properties.
+      - **Additional properties** _(object)_: Cannot contain additional properties.
         - **`image`**: Refer to _[#/definitions/image](#definitions/image)_.
         - **`env`**: Refer to _[#/definitions/env](#definitions/env)_.
         - **`resources`**: Refer to _[#/definitions/resources](#definitions/resources)_.
@@ -131,15 +131,15 @@
   - **`pullPolicy`** _(string)_: Image pull policy.
   - **`pullSecrets`** _(array)_: Image pull secrets.
 - <a id="definitions/configMapNameOverride"></a>**`configMapNameOverride`** _(object)_: [helm-common] global: Used to be able to globally override the name of the ConfigMap. Can contain additional properties.
-  - **Additional Properties** _(string)_
+  - **Additional properties** _(string)_
 - <a id="definitions/labels"></a>**`labels`** _(object)_: [helm-common] Pod labels. Can contain additional properties.
-  - **Additional Properties** _(string)_
+  - **Additional properties** _(string)_
 - <a id="definitions/annotations"></a>**`annotations`** _(object)_: [helm-common] Pod annotations. Can contain additional properties.
-  - **Additional Properties** _(string)_
+  - **Additional properties** _(string)_
 - <a id="definitions/podLabels"></a>**`podLabels`** _(object)_: [helm-common] Labels used only in the Pod definition. Can contain additional properties.
-  - **Additional Properties** _(string)_
+  - **Additional properties** _(string)_
 - <a id="definitions/podAnnotations"></a>**`podAnnotations`** _(object)_: [helm-common] Annotations used only in the Pod definition. Can contain additional properties.
-  - **Additional Properties** _(string)_
+  - **Additional properties** _(string)_
 - <a id="definitions/serviceName"></a>**`serviceName`** _(string)_: [helm-common] The name of the service (not Kubernetes service), this will postfix the name.
 - <a id="definitions/affinity"></a>**`affinity`** _(object)_: [helm-common] Pod: The used affinity.
 - <a id="definitions/tolerations"></a>**`tolerations`** _(array)_: [helm-common] Pod: Tolerations.
@@ -151,7 +151,7 @@
   - **`tag`** _(string)_: Image tag, used if the sha is not defined.
   - **`sha`** _(['null', 'string'])_: Image sha.
 - <a id="definitions/env"></a>**`env`** _(object)_: [helm-common] Container: Environment variables. Can contain additional properties.
-  - **Additional Properties**
+  - **Additional properties**
     - **One of**
       - _object_
         - **`type`** _(string, required)_: Disable the environment variable. Must be one of: `["none"]`.
