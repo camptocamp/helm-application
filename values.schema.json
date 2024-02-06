@@ -113,7 +113,6 @@
     "image": {
       "type": "object",
       "description": "[helm-common] Container: Image configuration",
-      "additionalProperties": false,
       "properties": {
         "repository": {
           "type": "string",

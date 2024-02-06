@@ -144,7 +144,7 @@
 - <a id="definitions/affinity"></a>**`affinity`** _(object)_: [helm-common] Pod: The used affinity.
 - <a id="definitions/tolerations"></a>**`tolerations`** _(array)_: [helm-common] Pod: Tolerations.
 - <a id="definitions/nodeSelector"></a>**`nodeSelector`** _(object)_: [helm-common] Pod: Node selector.
-- <a id="definitions/image"></a>**`image`** _(object)_: [helm-common] Container: Image configuration. Cannot contain additional properties.
+- <a id="definitions/image"></a>**`image`** _(object)_: [helm-common] Container: Image configuration.
   - ## **Any of**
     -
   - **`repository`** _(string, required)_: Image repository.
