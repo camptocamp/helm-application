@@ -10,16 +10,12 @@
 - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
 - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
 - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
-- **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
-- **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
 - **`metadata`** _(boolean)_: Create a ConfigMap to expose some metadata about the chart.
 - **`ingress`** _(object)_: Cannot contain additional properties.
   - **`enabled`** _(boolean)_: Enable the Ingress.
   - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
   - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
   - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
-  - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
-  - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
   - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
   - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
   - **`podLabels`**: Refer to _[#/definitions/podLabels](#definitions/podLabels)_.
@@ -51,6 +47,8 @@
     - **`podAnnotations`**: Refer to _[#/definitions/podAnnotations](#definitions/podAnnotations)_.
     - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
     - **`resources`**: Refer to _[#/definitions/resources](#definitions/resources)_.
+    - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+    - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
     - **`affinity`**: Refer to _[#/definitions/affinity](#definitions/affinity)_.
     - **`nodeSelector`**: Refer to _[#/definitions/nodeSelector](#definitions/nodeSelector)_.
     - **`replicaCount`** _(integer)_: The number of replicas.

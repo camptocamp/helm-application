@@ -54,7 +54,7 @@ spec:
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: custom-with-name-override-example2
+  name: cus-example2
   labels:
     app.kubernetes.io/name: with-name-override
     app.kubernetes.io/instance: custom
@@ -177,7 +177,7 @@ data:
   SERVICE_EXAMPLE1_CONTAINER_BB_IMAGE_TAG: "latest"
   SERVICE_EXAMPLE1_CONTAINER_CC_IMAGE_TAG: "latest"
   SERVICE_EXAMPLE1_CONTAINER_DD_IMAGE_TAG: "latest"
-  SERVICE_EXAMPLE2_NAME: custom-with-name-override-example2
+  SERVICE_EXAMPLE2_NAME: cus-example2
   SERVICE_EXAMPLE2_CONTAINER_CC_IMAGE_TAG: "latest"
   SERVICE_EXAMPLE2_CONTAINER_DD_IMAGE_TAG: "latest"
   SERVICE_EXAMPLE3_NAME: hardcoded-service-name
@@ -220,7 +220,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: custom-with-name-override-example2
+  name: cus-example2
   labels:
     helm.sh/chart: custom-pod
     app.kubernetes.io/version: "1.0"
@@ -527,7 +527,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: custom-with-name-override-example2
+  name: cus-example2
   labels:
     helm.sh/chart: custom-pod
     app.kubernetes.io/version: "1.0"
@@ -975,7 +975,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: custom-with-name-override-example2
+                name: cus-example2
                 port:
                   number: 8080
           - path: "/three"
@@ -999,7 +999,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: custom-with-name-override-example2
+                name: cus-example2
                 port:
                   number: 8080
           - path: "/three"
@@ -1045,7 +1045,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: custom-with-name-override-example2
+                name: cus-example2
                 port:
                   number: 8080
           - path: "/three"
