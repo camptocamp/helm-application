@@ -124,6 +124,9 @@ services:
           targetPort: http
 
   example2:
+    releaseTrunc: 15
+    prefixTrunc: 3
+
     ingress:
       enabled: true
       path: /two
