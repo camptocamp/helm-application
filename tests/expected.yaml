@@ -156,7 +156,7 @@ spec:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: custom-custom-pod
+  name: cus-custom-pod
   labels:
     helm.sh/chart: custom-pod
     app.kubernetes.io/version: "1.0"
@@ -943,7 +943,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: custom-custom-pod-host1
+  name: cus-custom-pod-host1
   labels:
     helm.sh/chart: custom-pod
     app.kubernetes.io/version: "1.0"
@@ -1014,7 +1014,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: custom-custom-pod-host2
+  name: cus-custom-pod-host2
   labels:
     helm.sh/chart: custom-pod
     app.kubernetes.io/version: "1.0"
