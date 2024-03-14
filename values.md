@@ -10,6 +10,8 @@
 - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
 - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
 - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
+- **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+- **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
 - **`metadata`** _(boolean)_: Create a ConfigMap to expose some metadata about the chart.
 - **`ingress`** _(object)_: Cannot contain additional properties.
   - **`enabled`** _(boolean)_: Enable the Ingress.

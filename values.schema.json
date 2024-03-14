@@ -265,6 +265,12 @@
     "serviceName": {
       "$ref": "#/definitions/serviceName"
     },
+    "releaseTrunc": {
+      "$ref": "#/definitions/releaseTrunc"
+    },
+    "prefixTrunc": {
+      "$ref": "#/definitions/prefixTrunc"
+    },
     "metadata": {
       "type": "boolean",
       "description": "Create a ConfigMap to expose some metadata about the chart"
