@@ -3,6 +3,23 @@
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
+  name: custom-custom-pod-cronjob-all
+  labels:
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: cronjob-all
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: custom-pod
+      app.kubernetes.io/instance: custom
+      app.kubernetes.io/component: cronjob-all
+---
+# Source: custom-pod/templates/pdb.yaml
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
   name: custom-custom-pod-deployment-all
   labels:
     app.kubernetes.io/name: custom-pod
@@ -152,7 +169,60 @@ spec:
       app.kubernetes.io/instance: custom
       app.kubernetes.io/component: statefulset-min
 ---
-# Source: custom-pod/templates/configmap.yaml
+# Source: custom-pod/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: example3-service-account
+  labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: main
+  annotations:
+    example-annotation: coucou
+---
+# Source: custom-pod/templates/secret-docker-registry.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: custom-custom-pod-dockerregistry
+  labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: main
+  annotations:
+    testAnnotation: annotation value
+type: kubernetes.io/dockerconfigjson
+data:
+  .dockerconfigjson: ewogICJhdXRocyI6IHsKICAgICJkb2NrZXIuaW8iOiB7CiAgICAgICJhdXRoIjogIll6SmpaMmx6WW05ME9qRXlNelE9IiwKICAgICAgInVzZXJuYW1lIjogImMyY2dpc2JvdCIsCiAgICAgICJwYXNzd29yZCI6ICIxMjM0IiwKICAgICAgImVtYWlsIjogImRvY2tlci1odWJAY2FtcHRvY2FtcC5jb20iCiAgICB9LAogICAgImdoY3IuaW8iOiB7CiAgICAgICJhdXRoIjogIll6SmpMV0p2ZEMxbmFYTXRZMms2TVRJek5BPT0iLAogICAgICAidXNlcm5hbWUiOiAiYzJjLWJvdC1naXMtY2kiLAogICAgICAicGFzc3dvcmQiOiAiMTIzNCIsCiAgICAgICJlbWFpbCI6ICJnZW9zcGF0aWFsLWJvdEBjYW1wdG9jYW1wLmNvbSIKICAgIH0sCiAgICAiaHR0cHM6Ly9pbmRleC5kb2NrZXIuaW8vdjEvIjogewogICAgICAiYXV0aCI6ICJZekpqWjJselltOTBPakV5TXpRPSIsCiAgICAgICJ1c2VybmFtZSI6ICJjMmNnaXNib3QiLAogICAgICAicGFzc3dvcmQiOiAiMTIzNCIsCiAgICAgICJlbWFpbCI6ICJkb2NrZXItaHViQGNhbXB0b2NhbXAuY29tIgogICAgfSwKICAgICJmaXgtZW5kLWNvbW1hIjogeyJhdXRoIjogIiJ9CiAgfQp9
+---
+# Source: custom-pod/templates/secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: custom-custom-pod
+  labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: main
+  annotations:
+    testAnnotation: annotation value for secrets
+type: generic
+data:
+  test: dG90bw==
+  test2: dG90bzI=
+  test3: "UW1GemFXTWdkRzkwYnpwMGIzUnY="
+---
+# Source: custom-pod/templates/cm_metadata.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -168,6 +238,8 @@ data:
   CHART_NAME: custom-pod
   RELEASE_NAME: custom
   RELEASE_NAMESPACE: default
+  SERVICE_CRONJOB-ALL_NAME: custom-custom-pod-cronjob-all
+  SERVICE_CRONJOB-ALL_CONTAINER_MAIN_IMAGE_TAG: "latest"
   SERVICE_DEPLOYMENT-ALL_NAME: custom-custom-pod-deployment-all
   SERVICE_DEPLOYMENT-ALL_CONTAINER_MAIN_IMAGE_TAG: "latest"
   SERVICE_DEPLOYMENT-MIN_NAME: custom-custom-pod-deployment-min
@@ -191,6 +263,34 @@ data:
   SERVICE_STATEFULSET-ALL_CONTAINER_MAIN_IMAGE_TAG: "latest"
   SERVICE_STATEFULSET-MIN_NAME: custom-custom-pod-statefulset-min
   SERVICE_STATEFULSET-MIN_CONTAINER_MAIN_IMAGE_TAG: "latest"
+---
+# Source: custom-pod/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: custom-custom-pod
+  labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: main
+  annotations:
+    testAnnotation: annotation value for configmaps
+data:
+  testJson: |-
+    {"titi":"titi","toto":"toto","tutu":"tutu"}
+  testMultiLine: |-
+    toto2
+    titi
+    tutu
+  testSingleLine: |-
+    toto
+  testYaml: |-
+    titi: titi
+    toto: toto
+    tutu: tutu
 ---
 # Source: custom-pod/templates/service.yaml
 apiVersion: v1
@@ -302,7 +402,7 @@ spec:
         app.kubernetes.io/instance: custom
         app.kubernetes.io/component: deployment-all
     spec:
-      serviceAccountName: default
+      serviceAccountName: example3-service-account
       securityContext:
         {}
       affinity:
@@ -346,7 +446,7 @@ spec:
         app.kubernetes.io/instance: custom
         app.kubernetes.io/component: deployment-min
     spec:
-      serviceAccountName: default
+      serviceAccountName: example3-service-account
       securityContext:
         {}
       affinity:
@@ -391,7 +491,7 @@ spec:
         app.kubernetes.io/instance: custom
         app.kubernetes.io/component: with-service-name
     spec:
-      serviceAccountName: default
+      serviceAccountName: example3-service-account
       securityContext:
         {}
       affinity:
@@ -552,7 +652,7 @@ spec:
         app.kubernetes.io/instance: custom
         app.kubernetes.io/component: example2
     spec:
-      serviceAccountName: default
+      serviceAccountName: example3-service-account
       securityContext:
         {}
       affinity:
@@ -662,7 +762,7 @@ spec:
         app.kubernetes.io/instance: custom
         app.kubernetes.io/component: example3
     spec:
-      serviceAccountName: default
+      serviceAccountName: example3-service-account
       securityContext:
         {}
       affinity:
@@ -743,7 +843,7 @@ spec:
         - name: my-volume-2
           emptyDir: {}
 ---
-# Source: custom-pod/templates/deployment.yaml
+# Source: custom-pod/templates/statefulset.yaml
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -791,7 +891,7 @@ spec:
         app.kubernetes.io/instance: custom
         app.kubernetes.io/component: nginx
     spec:
-      serviceAccountName: default
+      serviceAccountName: example3-service-account
       securityContext:
         {}
       affinity:
@@ -807,7 +907,7 @@ spec:
           resources:
             null
 ---
-# Source: custom-pod/templates/deployment.yaml
+# Source: custom-pod/templates/statefulset.yaml
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -832,7 +932,7 @@ spec:
         app.kubernetes.io/instance: custom
         app.kubernetes.io/component: statefulset-min
     spec:
-      serviceAccountName: default
+      serviceAccountName: example3-service-account
       securityContext:
         {}
       affinity:
@@ -848,7 +948,7 @@ spec:
           resources:
             null
 ---
-# Source: custom-pod/templates/deployment.yaml
+# Source: custom-pod/templates/job.yaml
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -885,7 +985,7 @@ spec:
         app.kubernetes.io/instance: custom
         app.kubernetes.io/component: job-all
     spec:
-      serviceAccountName: default
+      serviceAccountName: example3-service-account
       securityContext:
         {}
       affinity:
@@ -902,7 +1002,7 @@ spec:
           resources:
             null
 ---
-# Source: custom-pod/templates/deployment.yaml
+# Source: custom-pod/templates/job.yaml
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -922,7 +1022,7 @@ spec:
         app.kubernetes.io/instance: custom
         app.kubernetes.io/component: job-min
     spec:
-      serviceAccountName: default
+      serviceAccountName: example3-service-account
       securityContext:
         {}
       affinity:
@@ -938,6 +1038,67 @@ spec:
           terminationMessagePolicy: FallbackToLogsOnError
           resources:
             null
+---
+# Source: custom-pod/templates/cronjob.yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: custom-custom-pod-cronjob-all
+  labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: cronjob-all
+spec:
+  schedule: "*/1 * * * *"
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 2
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      backoffLimit: 5
+      completions: 10
+      parallelism: 3
+      completionMode: Indexed
+      activeDeadlineSeconds: 600
+      ttlSecondsAfterFinished: 600
+      podFailurePolicy:
+        rules:
+        - action: FailJob
+          onExitCodes:
+            containerName: main
+            operator: In
+            values:
+            - 42
+        - action: Ignore
+          onPodConditions:
+          - status: "True"
+            type: DisruptionTarget
+      template:
+        metadata:
+          labels:
+            app.kubernetes.io/name: custom-pod
+            app.kubernetes.io/instance: custom
+            app.kubernetes.io/component: cronjob-all
+        spec:
+          serviceAccountName: example3-service-account
+          securityContext:
+            {}
+          affinity:
+            null
+          restartPolicy: Never
+          containers:
+            - name: main
+              securityContext:
+                runAsNonRoot: true
+                runAsUser: 33
+              image: "camptocamp/image:latest"
+              imagePullPolicy: IfNotPresent
+              terminationMessagePolicy: FallbackToLogsOnError
+              resources:
+                null
 ---
 # Source: custom-pod/templates/ingress.yaml
 apiVersion: networking.k8s.io/v1

@@ -37,10 +37,43 @@
 - **`podSecurityContext`**: Refer to _[#/definitions/podSecurityContext](#definitions/podSecurityContext)_.
 - **`affinity`**: Refer to _[#/definitions/affinity](#definitions/affinity)_.
 - **`tolerations`**: Refer to _[#/definitions/tolerations](#definitions/tolerations)_.
+- **`dockerregistry`** _(object)_: Cannot contain additional properties.
+  - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
+  - **`content`** _(object, required)_: Docker registries authentication. Can contain additional properties.
+    - **Additional properties** _(object)_: Cannot contain additional properties.
+      - **`username`** _(string, required)_: Username.
+      - **`password`** _(string, required)_: Password.
+      - **`email`** _(string)_: Email.
+- **`secrets`** _(object)_: Cannot contain additional properties.
+  - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
+  - **`content`** _(object, required)_: Secrets configuration. Can contain additional properties.
+    - **Additional properties**
+      - **One of**
+        - _object_: Secret from a direct value. Cannot contain additional properties.
+          - **`type`** _(string)_: Type of the secret. Must be one of: `["value"]`. Default: `"value"`.
+          - **`value`** _(string)_: Value of the secret.
+        - _object_: Secret for a basic authentication. Cannot contain additional properties.
+          - **`type`** _(string)_: Type of the secret. Must be one of: `["basicAuth"]`.
+          - **`user`** _(string)_: Username.
+          - **`password`** _(string)_: Password.
+- **`configMaps`** _(object)_: Cannot contain additional properties.
+  - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
+  - **`content`** _(object, required)_: ConfigMap configuration. Can contain additional properties.
+    - **Additional properties**
+      - **One of**
+        - _object_: ConfigMap value. Cannot contain additional properties.
+          - **`type`** _(string)_: Type of the ConfigMap. Must be one of: `["string"]`. Default: `"string"`.
+          - **`value`** _(string)_: Value of the ConfigMap value.
+        - _object_: ConfigMap YAML value. Cannot contain additional properties.
+          - **`type`** _(string)_: Type of the ConfigMap. Must be one of: `["yaml"]`.
+          - **`value`** _(object)_: Value of the ConfigMap value as YAML.
+        - _object_: ConfigMap JSON value. Cannot contain additional properties.
+          - **`type`** _(string)_: Type of the ConfigMap. Must be one of: `["json"]`.
+          - **`value`** _(object)_: Value of the ConfigMap value as JSON.
 - **`services`** _(object)_: Can contain additional properties.
   - **Additional properties** _(object)_: Cannot contain additional properties.
     - **`enabled`** _(boolean)_: Enable this service.
-    - **`type`** _(string)_: The type of the service. Must be one of: `["Deployment", "StatefulSet", "Job"]`. Default: `"Deployment"`.
+    - **`type`** _(string)_: The type of the service. Must be one of: `["Deployment", "StatefulSet", "Job", "CronJob"]`. Default: `"Deployment"`.
     - **`name`** _(string)_: The name of the service.
     - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
     - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
@@ -78,6 +111,10 @@
     - **`ordinals`** _(object)_: The ordinals of the stateful set.
     - **`podManagementPolicy`** _(string)_: The Pod management policy. Must be one of: `["OrderedReady", "Parallel"]`.
     - **`updateStrategy`** _(object)_: The update strategy.
+    - **`schedule`** _(string)_: CronJob - The cron schedule in crontab notation.
+    - **`successfulJobsHistoryLimit`** _(integer)_: CronJob - successfulJobsHistoryLimit.
+    - **`failedJobsHistoryLimit`** _(integer)_: CronJob - failedJobsHistoryLimit.
+    - **`concurrencyPolicy`** _(string)_: CronJob - concurrencyPolicy. Must be one of: `["Allow", "Forbid", "Replace"]`.
     - **`volumeClaimTemplates`** _(array)_: The volume claim templates, the key is the name of the volume claim template.
     - **`volumes`** _(object)_: The volumes configuration, the key is the name of the volume.
     - **`initContainers`** _(object)_: The initialization containers configuration. Can contain additional properties.
@@ -122,11 +159,12 @@
 - <a id="definitions/fullnameOverride"></a>**`fullnameOverride`** _(string)_: [helm-common] Override the fullname.
 - <a id="definitions/releaseTrunc"></a>**`releaseTrunc`** _(integer)_: [helm-common] The release trunk length. Default: `20`.
 - <a id="definitions/prefixTrunc"></a>**`prefixTrunc`** _(integer)_: [helm-common] The prefix trunk length (release and chart name). Default: `40`.
-- <a id="definitions/serviceAccount"></a>**`serviceAccount`** _(object)_: [helm-common] Service account configuration. Cannot contain additional properties.
+- <a id="definitions/serviceAccount"></a>**`serviceAccount`** _(object)_: Service account configuration. Cannot contain additional properties.
   - **`create`** _(boolean)_: Create a service account.
   - **`name`** _(string)_: Name of the service account.
-- <a id="definitions/podSecurityContext"></a>**`podSecurityContext`** _(object)_: [helm-common] Pod security context.
-- <a id="definitions/securityContext"></a>**`securityContext`** _(object)_: [helm-common] Container security context.
+  - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
+- <a id="definitions/podSecurityContext"></a>**`podSecurityContext`** _(object)_: Pod security context.
+- <a id="definitions/securityContext"></a>**`securityContext`** _(object)_: Container security context.
 - <a id="definitions/globalImage"></a>**`globalImage`** _(object)_: [helm-common] global image configuration. Cannot contain additional properties.
   - **`pullPolicy`** _(string)_: Image pull policy.
   - **`pullSecrets`** _(array)_: Image pull secrets.
@@ -136,15 +174,15 @@
   - **Additional properties** _(string)_
 - <a id="definitions/annotations"></a>**`annotations`** _(object)_: [helm-common] Pod annotations. Can contain additional properties.
   - **Additional properties** _(string)_
-- <a id="definitions/podLabels"></a>**`podLabels`** _(object)_: [helm-common] Labels used only in the Pod definition. Can contain additional properties.
+- <a id="definitions/podLabels"></a>**`podLabels`** _(object)_: Labels used only in the Pod definition. Can contain additional properties.
   - **Additional properties** _(string)_
-- <a id="definitions/podAnnotations"></a>**`podAnnotations`** _(object)_: [helm-common] Annotations used only in the Pod definition. Can contain additional properties.
+- <a id="definitions/podAnnotations"></a>**`podAnnotations`** _(object)_: Annotations used only in the Pod definition. Can contain additional properties.
   - **Additional properties** _(string)_
 - <a id="definitions/serviceName"></a>**`serviceName`** _(string)_: [helm-common] The name of the service (not Kubernetes service), this will postfix the name.
-- <a id="definitions/affinity"></a>**`affinity`** _(object)_: [helm-common] Pod: The used affinity.
-- <a id="definitions/tolerations"></a>**`tolerations`** _(array)_: [helm-common] Pod: Tolerations.
-- <a id="definitions/nodeSelector"></a>**`nodeSelector`** _(object)_: [helm-common] Pod: Node selector.
-- <a id="definitions/image"></a>**`image`** _(object)_: [helm-common] Container: Image configuration.
+- <a id="definitions/affinity"></a>**`affinity`** _(object)_: Pod: The used affinity.
+- <a id="definitions/tolerations"></a>**`tolerations`** _(array)_: Pod: Tolerations.
+- <a id="definitions/nodeSelector"></a>**`nodeSelector`** _(object)_: Pod: Node selector.
+- <a id="definitions/image"></a>**`image`** _(object)_: Container: Image configuration.
   - ## **Any of**
     -
   - **`repository`** _(string, required)_: Image repository.
@@ -165,10 +203,10 @@
         - **`name`** _(string, required)_: Name of the ConfigMap or Secret, if 'self', same name as the service.
         - **`key`** _(string, required)_: Key of the ConfigMap or Secret.
       - _object_
-        - **`type`** _(string, required)_: Free field type for an environment variable.
+        - **`type`** _(string, required)_: Free valueFrom for an environment variable. Must be one of: `["valueFrom"]`.
         - **`order`** _(integer)_: Order of the environment variable. Must be one of: `[0, 1]`. Default: `0`.
         - **`valueFrom`** _(object, required)_
-- <a id="definitions/resources"></a>**`resources`** _(object)_: [helm-common] Container: The container resources.
+- <a id="definitions/resources"></a>**`resources`** _(object)_: Container: The container resources.
 - <a id="definitions/command"></a>**`command`** _(array)_: Container: The container command.
   - **Items** _(string)_
 - <a id="definitions/args"></a>**`args`** _(array)_: Container: The container arguments.

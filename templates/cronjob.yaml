@@ -1,0 +1,116 @@
+{{- range $serviceName, $serviceDefinition := .Values.services }}
+{{- if eq $serviceDefinition.enabled true }}
+{{- if eq ( default "Deployment" $serviceDefinition.type ) "CronJob" }}
+---
+{{- if semverCompare ">=1.21.0" ( trimPrefix "v" $.Capabilities.KubeVersion.Version ) }}
+apiVersion: batch/v1
+{{- else -}}
+apiVersion: batch/v1beta1
+{{- end }}
+kind: CronJob
+metadata:
+  name: {{ include "common.fullname" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) }}
+  {{- include "common.metadata" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) | nindent 2 }}
+spec:
+  schedule: {{ $serviceDefinition.schedule | quote }}
+  successfulJobsHistoryLimit: {{ default 1 $serviceDefinition.successfulJobsHistoryLimit }}
+  failedJobsHistoryLimit: {{ default 3 $serviceDefinition.failedJobsHistoryLimit }}
+  concurrencyPolicy: {{ $serviceDefinition.concurrencyPolicy }}
+  jobTemplate:
+    spec:
+      {{- if $serviceDefinition.backoffLimit }}
+      backoffLimit: {{ $serviceDefinition.backoffLimit }}
+      {{- end }}
+      {{- if $serviceDefinition.completions }}
+      completions: {{ $serviceDefinition.completions }}
+      {{- end }}
+      {{- if $serviceDefinition.parallelism }}
+      parallelism: {{ $serviceDefinition.parallelism }}
+      {{- end }}
+      {{- if $serviceDefinition.completionMode }}
+      completionMode: {{ $serviceDefinition.completionMode }}
+      {{- end }}
+      {{- if $serviceDefinition.backoffLimitPerIndex }}
+      backoffLimitPerIndex: {{ $serviceDefinition.backoffLimitPerIndex }}
+      {{- end }}
+      {{- if $serviceDefinition.maxFailedIndexes }}
+      maxFailedIndexes: {{ $serviceDefinition.maxFailedIndexes }}
+      {{- end }}
+      {{- if $serviceDefinition.activeDeadlineSeconds }}
+      activeDeadlineSeconds: {{ $serviceDefinition.activeDeadlineSeconds }}
+      {{- end }}
+      {{- if $serviceDefinition.ttlSecondsAfterFinished }}
+      ttlSecondsAfterFinished: {{ $serviceDefinition.ttlSecondsAfterFinished }}
+      {{- end }}
+      {{- if $serviceDefinition.suspend }}
+      suspend: {{ $serviceDefinition.suspend }}
+      {{- end }}
+      {{- if $serviceDefinition.podReplacementPolicy }}
+      podReplacementPolicy: {{ $serviceDefinition.podReplacementPolicy }}
+      {{- end }}
+      {{- with $serviceDefinition.podFailurePolicy }}
+      podFailurePolicy: {{ toYaml . | nindent 8 }}
+      {{- end }}
+      template:
+        metadata: {{- include "application.podMetadata" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) | nindent 10 }}
+        spec:
+          {{- include "application.podConfig" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) | nindent 10 }}
+          {{- with $serviceDefinition.restartPolicy }}
+          restartPolicy: {{ . }}
+          {{- end }}
+          {{- if and (hasKey $serviceDefinition "initContainers") ($serviceDefinition.initContainers) }}
+          initContainers:
+          {{- range $name, $config := $serviceDefinition.initContainers }}
+            - name: {{ $name }}
+              {{- include "application.containerConfig" ( dict "root" $ "container" $config ) | nindent 14 }}
+              {{- with $config.command }}
+              command: {{ . | toYaml | nindent 14 }}
+              {{- end }}
+              {{- with $config.args }}
+              args: {{ . | toYaml | nindent 14 }}
+              {{- end }}
+              {{- with $config.volumeMounts }}
+              volumeMounts:
+              {{- include "common.dictToList" ( dict "keyName" "mountPath" "contents" . ) | nindent 16 }}
+              {{- end }}
+              {{- with $config.volumeDevices }}
+              volumeDevices:
+              {{- include "common.dictToList" ( dict "keyName" "devicePath" "contents" . ) | nindent 16 }}
+              {{- end }}
+          {{- end }}
+          {{- end }}
+          containers:
+          {{- range $name, $config := $serviceDefinition.containers }}
+            - name: {{ $name }}
+              {{- include "application.containerConfig" ( dict "root" $ "container" $config ) | nindent 14 }}
+              {{- with $config.command }}
+              command:
+                {{- . | toYaml | nindent 16 }}
+              {{- end }}
+              {{- with $config.args }}
+              args:
+                {{- . | toYaml | nindent 16 }}
+              {{- end }}
+              {{- with $config.volumeMounts }}
+              volumeMounts:
+              {{- include "common.dictToList" ( dict "keyName" "mountPath" "contents" . ) | nindent 16 }}
+              {{- end }}
+              {{- with $config.volumeDevices }}
+              volumeDevices:
+              {{- include "common.dictToList" ( dict "keyName" "devicePath" "contents" . ) | nindent 16 }}
+              {{- end }}
+              {{- with $config.ports }}
+              ports:
+              {{- include "common.dictToList" ( dict "contents" . ) | nindent 16 }}
+              {{- end }}
+              {{- with $config.workingDir }}
+              workingDir: {{ . }}
+              {{- end }}
+          {{- end }}
+          {{- with $serviceDefinition.volumes }}
+          volumes:
+          {{- include "common.dictToList" ( dict "contents" . ) | nindent 12 }}
+          {{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
