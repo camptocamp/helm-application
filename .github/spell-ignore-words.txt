@@ -2,7 +2,14 @@ fullname
 sha
 Kubernetes
 ConfigMap
+configmaps
 valueFrom
 mountPath
 devicePath
 backoff
+CronJob
+crontab
+successfulJobsHistoryLimit
+failedJobsHistoryLimit
+concurrencyPolicy
+YAML

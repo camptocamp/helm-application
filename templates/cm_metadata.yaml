@@ -1,0 +1,39 @@
+{{- if .Values.metadata }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "common.fullname" ( dict "root" $ "service" $.Values ) }}
+  {{- include "common.metadata" ( dict "root" $ "service" $.Values ) | nindent 2 }}
+data:
+  CHART_NAME: {{ .Chart.Name }}
+  RELEASE_NAME: {{ .Release.Name }}
+  RELEASE_NAMESPACE: {{ .Release.Namespace }}
+{{- if .Values.ingress.enabled }}
+{{- if .Values.ingress.hostsGroups }}
+  WEB_HOST: {{ ( index ( index .Values.ingress.hostsGroups 0 ).hosts 0 ) }}
+{{- end }}
+{{- end }}
+{{- range $serviceName, $serviceDefinition := .Values.services }}
+{{- if or (eq $serviceDefinition.enabled true) ( and (hasKey $serviceDefinition "template") $serviceDefinition.template) }}
+{{- if ( default $serviceDefinition.service dict ).name }}
+  SERVICE_{{ $serviceName | upper }}_NAME: {{ $serviceDefinition.service.name }}
+{{- else }}
+  SERVICE_{{ $serviceName | upper }}_NAME: {{ include "common.fullname" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) }}
+{{- end }}
+{{- range $containerName, $containerDefinition := ( default $serviceDefinition.initContainers ( dict ) ) }}
+{{- if $containerDefinition.image.tag }}
+  SERVICE_{{ $serviceName | upper }}_CONTAINER_{{ $containerName | upper }}_IMAGE_TAG: {{ $containerDefinition.image.tag | quote }}
+{{- else }}
+  SERVICE_{{ $serviceName | upper }}_CONTAINER_{{ $containerName | upper }}_IMAGE_TAG: {{ $containerDefinition.image.sha | quote }}
+{{- end }}
+{{- end }}
+{{- range $containerName, $containerDefinition := ( default $serviceDefinition.containers ( dict ) ) }}
+{{- if $containerDefinition.image.tag }}
+  SERVICE_{{ $serviceName | upper }}_CONTAINER_{{ $containerName | upper }}_IMAGE_TAG: {{ $containerDefinition.image.tag | quote }}
+{{- else }}
+  SERVICE_{{ $serviceName | upper }}_CONTAINER_{{ $containerName | upper }}_IMAGE_TAG: {{ $containerDefinition.image.sha | quote }}
+{{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
+{{- end }}

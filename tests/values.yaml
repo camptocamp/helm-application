@@ -24,6 +24,66 @@ ingress:
       hosts:
         - '*.example.com'
 
+dockerregistry:
+  annotations:
+    testAnnotation: annotation value
+  content:
+    https://index.docker.io/v1/:
+      email: docker-hub@camptocamp.com
+      username: c2cgisbot
+      password: '1234'
+    docker.io:
+      email: docker-hub@camptocamp.com
+      username: c2cgisbot
+      password: '1234'
+    ghcr.io:
+      email: geospatial-bot@camptocamp.com
+      username: c2c-bot-gis-ci
+      password: '1234'
+
+secrets:
+  annotations:
+    testAnnotation: annotation value for secrets
+  content:
+    test:
+      value: toto
+    test2:
+      value: toto2
+    test3:
+      type: basicAuth
+      user: toto
+      password: toto
+
+configMaps:
+  annotations:
+    testAnnotation: annotation value for configmaps
+  content:
+    testSingleLine:
+      value: toto
+    testMultiLine:
+      value: |-
+        toto2
+        titi
+        tutu
+    testYaml:
+      type: yaml
+      value:
+        toto: toto
+        titi: titi
+        tutu: tutu
+    testJson:
+      type: json
+      value:
+        toto: toto
+        titi: titi
+        tutu: tutu
+
+serviceAccount:
+  create: true
+  name: example3-service-account
+  annotations:
+    example-annotation: 'coucou'
+
 services:
   example1:
     enabled: true
@@ -322,6 +382,43 @@ services:
         - action: Ignore # one of: Ignore, FailJob, Count
           onPodConditions:
             - type: DisruptionTarget # indicates Pod disruption
+    suspend: false
+    containers:
+      main:
+        image:
+          repository: camptocamp/image
+          tag: latest
+
+  cronjob-all:
+    schedule: '*/1 * * * *'
+    concurrencyPolicy: Forbid
+    successfulJobsHistoryLimit: 2
+    failedJobsHistoryLimit: 2
+    enabled: true
+    type: CronJob
+    backoffLimit: 5
+    completions: 10
+    parallelism: 3
+    completionMode: Indexed
+    # not available in k8s <= 1.27
+    # backoffLimitPerIndex: 1
+    # maxFailedIndexes: 5
+    activeDeadlineSeconds: 600
+    ttlSecondsAfterFinished: 600
+    # not available in k8s <= 1.27
+    # podReplacementPolicy: OnFailure
+    restartPolicy: Never
+    podFailurePolicy:
+      rules:
+        - action: FailJob
+          onExitCodes:
+            containerName: main # optional
+            operator: In # one of: In, NotIn
+            values: [42]
+        - action: Ignore # one of: Ignore, FailJob, Count
+          onPodConditions:
+            - type: DisruptionTarget # indicates Pod disruption
+              status: 'True'
     suspend: false
     containers:
       main:

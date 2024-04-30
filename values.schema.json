@@ -23,7 +23,7 @@
     },
     "serviceAccount": {
       "type": "object",
-      "description": "[helm-common] Service account configuration",
+      "description": "Service account configuration",
       "additionalProperties": false,
       "properties": {
         "create": {
@@ -33,16 +33,19 @@
         "name": {
           "type": "string",
           "description": "Name of the service account"
+        },
+        "annotations": {
+          "$ref": "#/definitions/annotations"
         }
       }
     },
     "podSecurityContext": {
       "type": "object",
-      "description": "[helm-common] Pod security context"
+      "description": "Pod security context"
     },
     "securityContext": {
       "type": "object",
-      "description": "[helm-common] Container security context"
+      "description": "Container security context"
     },
     "globalImage": {
       "type": "object",
@@ -82,14 +85,14 @@
     },
     "podLabels": {
       "type": "object",
-      "description": "[helm-common] Labels used only in the Pod definition",
+      "description": "Labels used only in the Pod definition",
       "additionalProperties": {
         "type": "string"
       }
     },
     "podAnnotations": {
       "type": "object",
-      "description": "[helm-common] Annotations used only in the Pod definition",
+      "description": "Annotations used only in the Pod definition",
       "additionalProperties": {
         "type": "string"
       }
@@ -100,19 +103,19 @@
     },
     "affinity": {
       "type": "object",
-      "description": "[helm-common] Pod: The used affinity"
+      "description": "Pod: The used affinity"
     },
     "tolerations": {
       "type": "array",
-      "description": "[helm-common] Pod: Tolerations"
+      "description": "Pod: Tolerations"
     },
     "nodeSelector": {
       "type": "object",
-      "description": "[helm-common] Pod: Node selector"
+      "description": "Pod: Node selector"
     },
     "image": {
       "type": "object",
-      "description": "[helm-common] Container: Image configuration",
+      "description": "Container: Image configuration",
       "properties": {
         "repository": {
           "type": "string",
@@ -198,7 +201,8 @@
             "properties": {
               "type": {
                 "type": "string",
-                "description": "Free field type for an environment variable"
+                "description": "Free valueFrom for an environment variable",
+                "enum": ["valueFrom"]
               },
               "order": {
                 "type": "integer",
@@ -217,7 +221,7 @@
     },
     "resources": {
       "type": "object",
-      "description": "[helm-common] Container: The container resources"
+      "description": "Container: The container resources"
     },
     "command": {
       "type": "array",
@@ -359,6 +363,161 @@
     "tolerations": {
       "$ref": "#/definitions/tolerations"
     },
+    "dockerregistry": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "annotations": {
+          "$ref": "#/definitions/annotations"
+        },
+        "content": {
+          "type": "object",
+          "description": "Docker registries authentication",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "username": {
+                "type": "string",
+                "description": "Username"
+              },
+              "password": {
+                "type": "string",
+                "description": "Password"
+              },
+              "email": {
+                "type": "string",
+                "description": "Email"
+              }
+            },
+            "required": ["username", "password"]
+          }
+        }
+      },
+      "required": ["content"]
+    },
+    "secrets": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "annotations": {
+          "$ref": "#/definitions/annotations"
+        },
+        "content": {
+          "type": "object",
+          "description": "Secrets configuration",
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "type": "object",
+                "description": "Secret from a direct value",
+                "additionalProperties": false,
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "description": "Type of the secret",
+                    "enum": ["value"],
+                    "default": "value"
+                  },
+                  "value": {
+                    "type": "string",
+                    "description": "Value of the secret"
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "description": "Secret for a basic authentication",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "description": "Type of the secret",
+                    "enum": ["basicAuth"]
+                  },
+                  "user": {
+                    "type": "string",
+                    "description": "Username"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "Password"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "required": ["content"]
+    },
+    "configMaps": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "annotations": {
+          "$ref": "#/definitions/annotations"
+        },
+        "content": {
+          "type": "object",
+          "description": "ConfigMap configuration",
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "type": "object",
+                "description": "ConfigMap value",
+                "additionalProperties": false,
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "description": "Type of the ConfigMap",
+                    "enum": ["string"],
+                    "default": "string"
+                  },
+                  "value": {
+                    "type": "string",
+                    "description": "Value of the ConfigMap value"
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "description": "ConfigMap YAML value",
+                "additionalProperties": false,
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "description": "Type of the ConfigMap",
+                    "enum": ["yaml"]
+                  },
+                  "value": {
+                    "type": "object",
+                    "description": "Value of the ConfigMap value as YAML"
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "description": "ConfigMap JSON value",
+                "additionalProperties": false,
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "description": "Type of the ConfigMap",
+                    "enum": ["json"]
+                  },
+                  "value": {
+                    "type": "object",
+                    "description": "Value of the ConfigMap value as JSON"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "required": ["content"]
+    },
     "services": {
       "type": "object",
       "additionalProperties": {
@@ -373,7 +532,7 @@
             "type": "string",
             "description": "The type of the service",
             "default": "Deployment",
-            "enum": ["Deployment", "StatefulSet", "Job"]
+            "enum": ["Deployment", "StatefulSet", "Job", "CronJob"]
           },
           "name": {
             "type": "string",
@@ -516,6 +675,23 @@
           "updateStrategy": {
             "type": "object",
             "description": "The update strategy"
+          },
+          "schedule": {
+            "type": "string",
+            "description": "CronJob - The cron schedule in crontab notation"
+          },
+          "successfulJobsHistoryLimit": {
+            "type": "integer",
+            "description": "CronJob - successfulJobsHistoryLimit"
+          },
+          "failedJobsHistoryLimit": {
+            "type": "integer",
+            "description": "CronJob - failedJobsHistoryLimit"
+          },
+          "concurrencyPolicy": {
+            "type": "string",
+            "description": "CronJob - concurrencyPolicy",
+            "enum": ["Allow", "Forbid", "Replace"]
           },
           "volumeClaimTemplates": {
             "type": "array",
