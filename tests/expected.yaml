@@ -105,6 +105,23 @@ spec:
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
+  name: custom-custom-pod-internal
+  labels:
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: internal
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: custom-pod
+      app.kubernetes.io/instance: custom
+      app.kubernetes.io/component: internal
+---
+# Source: custom-pod/templates/pdb.yaml
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
   name: custom-custom-pod-job-all
   labels:
     app.kubernetes.io/name: custom-pod
@@ -255,6 +272,8 @@ data:
   SERVICE_EXAMPLE3_NAME: hardcoded-service-name
   SERVICE_EXAMPLE3_CONTAINER_CC_IMAGE_TAG: "latest"
   SERVICE_EXAMPLE3_CONTAINER_DD_IMAGE_TAG: "latest"
+  SERVICE_INTERNAL_NAME: custom-custom-pod-internal
+  SERVICE_INTERNAL_CONTAINER_MAIN_IMAGE_TAG: "latest"
   SERVICE_JOB-ALL_NAME: custom-custom-pod-job-all
   SERVICE_JOB-ALL_CONTAINER_MAIN_IMAGE_TAG: "latest"
   SERVICE_JOB-MIN_NAME: custom-custom-pod-job-min
@@ -405,8 +424,6 @@ spec:
       serviceAccountName: example3-service-account
       securityContext:
         {}
-      affinity:
-        null
       containers:
         - name: main
           securityContext:
@@ -415,8 +432,6 @@ spec:
           image: "camptocamp/image:latest"
           imagePullPolicy: IfNotPresent
           terminationMessagePolicy: FallbackToLogsOnError
-          resources:
-            null
 ---
 # Source: custom-pod/templates/deployment.yaml
 apiVersion: apps/v1
@@ -449,8 +464,6 @@ spec:
       serviceAccountName: example3-service-account
       securityContext:
         {}
-      affinity:
-        null
       containers:
         - name: main
           securityContext:
@@ -459,8 +472,6 @@ spec:
           image: "camptocamp/image:latest"
           imagePullPolicy: IfNotPresent
           terminationMessagePolicy: FallbackToLogsOnError
-          resources:
-            null
 ---
 # Source: custom-pod/templates/deployment.yaml
 apiVersion: apps/v1
@@ -494,8 +505,6 @@ spec:
       serviceAccountName: example3-service-account
       securityContext:
         {}
-      affinity:
-        null
       initContainers:
         - name: aa
           securityContext:
@@ -532,8 +541,6 @@ spec:
             - name: "MY_ENV_VAR"
               value: some-value
           terminationMessagePolicy: FallbackToLogsOnError
-          resources:
-            null
           args:
             - sleep
             - "3600"
@@ -582,8 +589,6 @@ spec:
             - name: "MY_ENV_VAR"
               value: some-value
           terminationMessagePolicy: FallbackToLogsOnError
-          resources:
-            null
           args:
             - sleep
             - "3600"
@@ -655,8 +660,6 @@ spec:
       serviceAccountName: example3-service-account
       securityContext:
         {}
-      affinity:
-        null
       containers:
         - name: cc
           securityContext:
@@ -693,8 +696,6 @@ spec:
             - name: "MY_ENV_VAR"
               value: some-value
           terminationMessagePolicy: FallbackToLogsOnError
-          resources:
-            null
           args:
             - sleep
             - "3600"
@@ -765,8 +766,6 @@ spec:
       serviceAccountName: example3-service-account
       securityContext:
         {}
-      affinity:
-        null
       containers:
         - name: cc
           securityContext:
@@ -803,8 +802,6 @@ spec:
             - name: "MY_ENV_VAR"
               value: some-value
           terminationMessagePolicy: FallbackToLogsOnError
-          resources:
-            null
           args:
             - sleep
             - "3600"
@@ -842,6 +839,62 @@ spec:
           emptyDir: {}
         - name: my-volume-2
           emptyDir: {}
+---
+# Source: custom-pod/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: custom-custom-pod-internal
+  labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: internal
+spec:
+  revisionHistoryLimit: 3
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: custom-pod
+      app.kubernetes.io/instance: custom
+      app.kubernetes.io/component: internal
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: custom-pod
+        app.kubernetes.io/instance: custom
+        app.kubernetes.io/component: internal
+    spec:
+      serviceAccountName: example3-service-account
+      securityContext:
+        {}
+      containers:
+        - name: main
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 33
+          image: "camptocamp/image:latest"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: "SELF_CONFIGMAP"
+              valueFrom:
+                configMapKeyRef:
+                  name: custom-custom-pod
+                  key: "testSingleLine"
+            - name: "SELF_METADATA"
+              valueFrom:
+                configMapKeyRef:
+                  name: cus-custom-pod
+                  key: "CHART_NAME"
+            - name: "SELF_SECRET"
+              valueFrom:
+                secretKeyRef:
+                  name: custom-custom-pod
+                  key: "test"
+          terminationMessagePolicy: FallbackToLogsOnError
 ---
 # Source: custom-pod/templates/statefulset.yaml
 apiVersion: apps/v1
@@ -894,8 +947,6 @@ spec:
       serviceAccountName: example3-service-account
       securityContext:
         {}
-      affinity:
-        null
       containers:
         - name: main
           securityContext:
@@ -904,8 +955,6 @@ spec:
           image: "camptocamp/image:latest"
           imagePullPolicy: IfNotPresent
           terminationMessagePolicy: FallbackToLogsOnError
-          resources:
-            null
 ---
 # Source: custom-pod/templates/statefulset.yaml
 apiVersion: apps/v1
@@ -935,8 +984,6 @@ spec:
       serviceAccountName: example3-service-account
       securityContext:
         {}
-      affinity:
-        null
       containers:
         - name: main
           securityContext:
@@ -945,8 +992,6 @@ spec:
           image: "camptocamp/image:latest"
           imagePullPolicy: IfNotPresent
           terminationMessagePolicy: FallbackToLogsOnError
-          resources:
-            null
 ---
 # Source: custom-pod/templates/job.yaml
 apiVersion: batch/v1
@@ -988,8 +1033,6 @@ spec:
       serviceAccountName: example3-service-account
       securityContext:
         {}
-      affinity:
-        null
       restartPolicy: Never
       containers:
         - name: main
@@ -999,8 +1042,6 @@ spec:
           image: "camptocamp/image:latest"
           imagePullPolicy: IfNotPresent
           terminationMessagePolicy: FallbackToLogsOnError
-          resources:
-            null
 ---
 # Source: custom-pod/templates/job.yaml
 apiVersion: batch/v1
@@ -1025,8 +1066,6 @@ spec:
       serviceAccountName: example3-service-account
       securityContext:
         {}
-      affinity:
-        null
       restartPolicy: Never
       containers:
         - name: main
@@ -1036,8 +1075,6 @@ spec:
           image: "camptocamp/image:latest"
           imagePullPolicy: IfNotPresent
           terminationMessagePolicy: FallbackToLogsOnError
-          resources:
-            null
 ---
 # Source: custom-pod/templates/cronjob.yaml
 apiVersion: batch/v1
@@ -1086,8 +1123,6 @@ spec:
           serviceAccountName: example3-service-account
           securityContext:
             {}
-          affinity:
-            null
           restartPolicy: Never
           containers:
             - name: main
@@ -1097,8 +1132,6 @@ spec:
               image: "camptocamp/image:latest"
               imagePullPolicy: IfNotPresent
               terminationMessagePolicy: FallbackToLogsOnError
-              resources:
-                null
 ---
 # Source: custom-pod/templates/ingress.yaml
 apiVersion: networking.k8s.io/v1

@@ -390,11 +390,11 @@ services:
           tag: latest
 
   cronjob-all:
+    enabled: true
     schedule: '*/1 * * * *'
     concurrencyPolicy: Forbid
     successfulJobsHistoryLimit: 2
     failedJobsHistoryLimit: 2
-    enabled: true
     type: CronJob
     backoffLimit: 5
     completions: 10
@@ -425,3 +425,25 @@ services:
         image:
           repository: camptocamp/image
           tag: latest
+
+  # Test internal env
+  internal:
+    enabled: true
+    containers:
+      main:
+        image:
+          repository: camptocamp/image
+          tag: latest
+        env:
+          SELF_CONFIGMAP:
+            type: configMap
+            name: self
+            key: testSingleLine
+          SELF_SECRET:
+            type: secret
+            name: self
+            key: test
+          SELF_METADATA:
+            type: configMap
+            name: self-metadata
+            key: CHART_NAME

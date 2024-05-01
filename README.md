@@ -150,6 +150,24 @@ env:
     key: key-in-configmap
 ```
 
+We can also easily linked the internal `ConfigMap` or `Secret` with the `self[-metadata]` name, example:
+
+```yaml
+env:
+  SELF_CONFIGMAP:
+    type: configMap
+    name: self
+    key: <key>
+  SELF_SECRET:
+    type: secret
+    name: self
+    key: <key>
+  SELF_METADATA:
+    type: configMap
+    name: self-metadata
+    key: CHART_NAME # or anythings else
+```
+
 We also have an attribute `order` to be able to use the `$(env)` syntax, example:
 
 ```yaml

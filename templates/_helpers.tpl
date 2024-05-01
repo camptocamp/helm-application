@@ -18,7 +18,13 @@ Create the name of the service account to use
   valueFrom:
     {{ .value.type }}KeyRef:
       {{ if and (hasKey .value "name" ) ( eq .value.name "self" ) -}}
-      name: {{ include "common.fullname" ( dict "root" .root "service" .root.Values ) }}
+      {{ if .value.type | eq "configMap" -}}
+      name: {{ include "common.fullname" ( dict "root" .root "service" .root.Values.configMaps ) }}
+      {{ else -}}
+        name: {{ include "common.fullname" ( dict "root" .root "service" .root.Values.secrets ) }}
+      {{ end -}}
+      {{ else if and (hasKey .value "name" ) ( eq .value.name "self-metadata" ) -}}
+        name: {{ include "common.fullname" ( dict "root" .root "service" .root.Values ) }}
       {{ else -}}
       name: {{ default .value.name ( get .configMapNameOverride .value.name ) | quote }}
       {{ end -}}
@@ -43,6 +49,7 @@ securityContext: {{- toYaml .root.Values.podSecurityContext | nindent 2 }}
 nodeSelector:
   {{- toYaml . | nindent 2 }}
 {{- end }}
+{{- if or (and (hasKey .service "affinity") (.service.affinity)) .affinitySelector (hasKey .root.Values "affinity") -}}
 affinity:
   {{- if and (hasKey .service "affinity") (.service.affinity) -}}
     {{ toYaml .service.affinity | nindent 2 }}
@@ -61,6 +68,7 @@ affinity:
   {{- else -}}
     {{ toYaml .root.Values.affinity | nindent 2 }}
   {{- end }}
+{{- end }}
 {{- with .root.Values.tolerations }}
 tolerations:
   {{- toYaml . | nindent 2 }}
@@ -93,7 +101,9 @@ env:
   {{- end }}
 {{- end }}
 terminationMessagePolicy: FallbackToLogsOnError
-resources: {{- toYaml .container.resources | nindent 2 }}
+{{- with .container.resources }}
+resources: {{- toYaml . | nindent 2 }}
+{{- end }}
 {{- end }}
 
 {{- define "application.podMetadata" -}}
