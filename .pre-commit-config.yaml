@@ -42,7 +42,7 @@ repos:
       - id: workflows-require-timeout
       - id: helm-lock
   - repo: https://github.com/camptocamp/helm-common
-    rev: 1.0.1
+    rev: 2.0.0
     hooks:
       - id: helm-template-gen
         files: |-
