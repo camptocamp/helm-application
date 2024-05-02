@@ -506,6 +506,10 @@ spec:
           image: "camptocamp/custom-bb:latest"
           imagePullPolicy: IfNotPresent
           env:
+            - name: "APP_KUBERNETES_IO_COMPONENT"
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['app.kubernetes.io/component']
             - name: "JWT_SECRET_KEY"
               valueFrom:
                 secretKeyRef:
@@ -554,6 +558,10 @@ spec:
           image: "camptocamp/custom-bb:latest"
           imagePullPolicy: IfNotPresent
           env:
+            - name: "APP_KUBERNETES_IO_COMPONENT"
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['app.kubernetes.io/component']
             - name: "JWT_SECRET_KEY"
               valueFrom:
                 secretKeyRef:
@@ -661,6 +669,10 @@ spec:
           image: "camptocamp/custom-bb:latest"
           imagePullPolicy: IfNotPresent
           env:
+            - name: "APP_KUBERNETES_IO_COMPONENT"
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['app.kubernetes.io/component']
             - name: "JWT_SECRET_KEY"
               valueFrom:
                 secretKeyRef:
@@ -767,6 +779,10 @@ spec:
           image: "camptocamp/custom-bb:latest"
           imagePullPolicy: IfNotPresent
           env:
+            - name: "APP_KUBERNETES_IO_COMPONENT"
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['app.kubernetes.io/component']
             - name: "JWT_SECRET_KEY"
               valueFrom:
                 secretKeyRef:
