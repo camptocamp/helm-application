@@ -127,6 +127,11 @@ services:
             type: secret
             name: jwt-key-secret
             key: JWT_SECRET_KEY
+          APP_KUBERNETES_IO_COMPONENT:
+            type: 'downwardAPI'
+            valueFrom:
+              fieldRef:
+                fieldPath: "metadata.labels['app.kubernetes.io/component']"
         image:
           repository: camptocamp/custom-bb
           tag: latest
