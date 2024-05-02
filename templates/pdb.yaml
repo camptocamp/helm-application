@@ -1,5 +1,6 @@
 {{- range $serviceName, $serviceDefinition := $.Values.services }}
 {{- if eq $serviceDefinition.enabled true }}
+{{- if and ( not ( eq ( default "Deployment" $serviceDefinition.type ) "Job" ) ) ( not ( eq ( default "Deployment" $serviceDefinition.type ) "CronJob" ) ) }}
 ---
 {{- if semverCompare ">=1.21.0-0" ( trimPrefix "v" $.Capabilities.KubeVersion.Version ) }}
 apiVersion: policy/v1
@@ -9,10 +10,11 @@ apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
 metadata:
   name: {{ include "common.fullname" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) }}
-  labels: {{- include "common.selectorLabels" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) | nindent 4 }}
+  {{- include "common.metadata" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) | nindent 2 }}
 spec:
   maxUnavailable: 1
   selector:
     matchLabels: {{- include "common.selectorLabels" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) | nindent 6 }}
+{{- end }}
 {{- end }}
 {{- end }}
