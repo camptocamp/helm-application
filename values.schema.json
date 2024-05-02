@@ -201,7 +201,8 @@
             "properties": {
               "type": {
                 "type": "string",
-                "description": "Free valueFrom for an environment variable"
+                "description": "Free valueFrom for an environment variable",
+                "enum": ["valueFrom"]
               },
               "order": {
                 "type": "integer",
