@@ -34,6 +34,24 @@
           "type": "string",
           "description": "Name of the service account"
         },
+        "nameOverride": {
+          "$ref": "#/definitions/nameOverride"
+        },
+        "fullnameOverride": {
+          "$ref": "#/definitions/fullnameOverride"
+        },
+        "serviceName": {
+          "$ref": "#/definitions/serviceName"
+        },
+        "releaseTrunc": {
+          "$ref": "#/definitions/releaseTrunc"
+        },
+        "prefixTrunc": {
+          "$ref": "#/definitions/prefixTrunc"
+        },
+        "labels": {
+          "$ref": "#/definitions/labels"
+        },
         "annotations": {
           "$ref": "#/definitions/annotations"
         }
@@ -260,24 +278,37 @@
         }
       }
     },
-    "nameOverride": {
-      "$ref": "#/definitions/nameOverride"
-    },
-    "fullnameOverride": {
-      "$ref": "#/definitions/fullnameOverride"
-    },
-    "serviceName": {
-      "$ref": "#/definitions/serviceName"
-    },
-    "releaseTrunc": {
-      "$ref": "#/definitions/releaseTrunc"
-    },
-    "prefixTrunc": {
-      "$ref": "#/definitions/prefixTrunc"
-    },
     "metadata": {
-      "type": "boolean",
-      "description": "Create a ConfigMap to expose some metadata about the chart"
+      "type": "object",
+      "description": "Create a ConfigMap to expose some metadata about the chart",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable the metadata ConfigMap"
+        },
+        "nameOverride": {
+          "$ref": "#/definitions/nameOverride"
+        },
+        "fullnameOverride": {
+          "$ref": "#/definitions/fullnameOverride"
+        },
+        "serviceName": {
+          "$ref": "#/definitions/serviceName"
+        },
+        "releaseTrunc": {
+          "$ref": "#/definitions/releaseTrunc"
+        },
+        "prefixTrunc": {
+          "$ref": "#/definitions/prefixTrunc"
+        },
+        "labels": {
+          "$ref": "#/definitions/labels"
+        },
+        "annotations": {
+          "$ref": "#/definitions/annotations"
+        }
+      }
     },
     "ingress": {
       "type": "object",
@@ -296,26 +327,17 @@
         "serviceName": {
           "$ref": "#/definitions/serviceName"
         },
+        "releaseTrunc": {
+          "$ref": "#/definitions/releaseTrunc"
+        },
+        "prefixTrunc": {
+          "$ref": "#/definitions/prefixTrunc"
+        },
         "labels": {
           "$ref": "#/definitions/labels"
         },
         "annotations": {
           "$ref": "#/definitions/annotations"
-        },
-        "podLabels": {
-          "$ref": "#/definitions/podLabels"
-        },
-        "podAnnotations": {
-          "$ref": "#/definitions/podAnnotations"
-        },
-        "resources": {
-          "$ref": "#/definitions/resources"
-        },
-        "affinity": {
-          "$ref": "#/definitions/affinity"
-        },
-        "nodeSelector": {
-          "$ref": "#/definitions/nodeSelector"
         },
         "hostGroups": {
           "type": "object",
@@ -367,6 +389,24 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
+        "nameOverride": {
+          "$ref": "#/definitions/nameOverride"
+        },
+        "fullnameOverride": {
+          "$ref": "#/definitions/fullnameOverride"
+        },
+        "serviceName": {
+          "$ref": "#/definitions/serviceName"
+        },
+        "releaseTrunc": {
+          "$ref": "#/definitions/releaseTrunc"
+        },
+        "prefixTrunc": {
+          "$ref": "#/definitions/prefixTrunc"
+        },
+        "labels": {
+          "$ref": "#/definitions/labels"
+        },
         "annotations": {
           "$ref": "#/definitions/annotations"
         },
@@ -400,6 +440,24 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
+        "nameOverride": {
+          "$ref": "#/definitions/nameOverride"
+        },
+        "fullnameOverride": {
+          "$ref": "#/definitions/fullnameOverride"
+        },
+        "serviceName": {
+          "$ref": "#/definitions/serviceName"
+        },
+        "releaseTrunc": {
+          "$ref": "#/definitions/releaseTrunc"
+        },
+        "prefixTrunc": {
+          "$ref": "#/definitions/prefixTrunc"
+        },
+        "labels": {
+          "$ref": "#/definitions/labels"
+        },
         "annotations": {
           "$ref": "#/definitions/annotations"
         },
@@ -455,6 +513,24 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
+        "nameOverride": {
+          "$ref": "#/definitions/nameOverride"
+        },
+        "fullnameOverride": {
+          "$ref": "#/definitions/fullnameOverride"
+        },
+        "serviceName": {
+          "$ref": "#/definitions/serviceName"
+        },
+        "releaseTrunc": {
+          "$ref": "#/definitions/releaseTrunc"
+        },
+        "prefixTrunc": {
+          "$ref": "#/definitions/prefixTrunc"
+        },
+        "labels": {
+          "$ref": "#/definitions/labels"
+        },
         "annotations": {
           "$ref": "#/definitions/annotations"
         },
@@ -785,6 +861,27 @@
               "enabled": {
                 "type": "boolean",
                 "description": "Enable the ingress for this service"
+              },
+              "nameOverride": {
+                "$ref": "#/definitions/nameOverride"
+              },
+              "fullnameOverride": {
+                "$ref": "#/definitions/fullnameOverride"
+              },
+              "serviceName": {
+                "$ref": "#/definitions/serviceName"
+              },
+              "releaseTrunc": {
+                "$ref": "#/definitions/releaseTrunc"
+              },
+              "prefixTrunc": {
+                "$ref": "#/definitions/prefixTrunc"
+              },
+              "labels": {
+                "$ref": "#/definitions/labels"
+              },
+              "annotations": {
+                "$ref": "#/definitions/annotations"
               },
               "path": {
                 "type": "string",

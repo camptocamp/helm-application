@@ -1,5 +1,5 @@
-metadata: true
-releaseTrunc: 3
+metadata:
+  enabled: true
 
 securityContext:
   runAsNonRoot: true
@@ -81,8 +81,9 @@ configMaps:
 serviceAccount:
   create: true
   name: example3-service-account
+  serviceName: myserviceaccount
   annotations:
-    example-annotation: 'coucou'
+    example-annotation: coucou
 
 services:
   example1:

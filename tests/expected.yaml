@@ -3,25 +3,11 @@
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: custom-custom-pod-cronjob-all
-  labels:
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
-    app.kubernetes.io/component: cronjob-all
-spec:
-  maxUnavailable: 1
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: custom-pod
-      app.kubernetes.io/instance: custom
-      app.kubernetes.io/component: cronjob-all
----
-# Source: custom-pod/templates/pdb.yaml
-apiVersion: policy/v1
-kind: PodDisruptionBudget
-metadata:
   name: custom-custom-pod-deployment-all
   labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: custom-pod
     app.kubernetes.io/instance: custom
     app.kubernetes.io/component: deployment-all
@@ -39,6 +25,9 @@ kind: PodDisruptionBudget
 metadata:
   name: custom-custom-pod-deployment-min
   labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: custom-pod
     app.kubernetes.io/instance: custom
     app.kubernetes.io/component: deployment-min
@@ -56,6 +45,9 @@ kind: PodDisruptionBudget
 metadata:
   name: custom-custom-pod-with-service-name
   labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: custom-pod
     app.kubernetes.io/instance: custom
     app.kubernetes.io/component: with-service-name
@@ -73,6 +65,9 @@ kind: PodDisruptionBudget
 metadata:
   name: cus-example2
   labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: with-name-override
     app.kubernetes.io/instance: custom
     app.kubernetes.io/component: example2
@@ -90,6 +85,9 @@ kind: PodDisruptionBudget
 metadata:
   name: custom-with-name-override-example3
   labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: with-name-override
     app.kubernetes.io/instance: custom
     app.kubernetes.io/component: example3
@@ -107,6 +105,9 @@ kind: PodDisruptionBudget
 metadata:
   name: custom-custom-pod-internal
   labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: custom-pod
     app.kubernetes.io/instance: custom
     app.kubernetes.io/component: internal
@@ -122,42 +123,11 @@ spec:
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: custom-custom-pod-job-all
-  labels:
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
-    app.kubernetes.io/component: job-all
-spec:
-  maxUnavailable: 1
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: custom-pod
-      app.kubernetes.io/instance: custom
-      app.kubernetes.io/component: job-all
----
-# Source: custom-pod/templates/pdb.yaml
-apiVersion: policy/v1
-kind: PodDisruptionBudget
-metadata:
-  name: custom-custom-pod-job-min
-  labels:
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
-    app.kubernetes.io/component: job-min
-spec:
-  maxUnavailable: 1
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: custom-pod
-      app.kubernetes.io/instance: custom
-      app.kubernetes.io/component: job-min
----
-# Source: custom-pod/templates/pdb.yaml
-apiVersion: policy/v1
-kind: PodDisruptionBudget
-metadata:
   name: custom-custom-pod-nginx
   labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: custom-pod
     app.kubernetes.io/instance: custom
     app.kubernetes.io/component: nginx
@@ -175,6 +145,9 @@ kind: PodDisruptionBudget
 metadata:
   name: custom-custom-pod-statefulset-min
   labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: custom-pod
     app.kubernetes.io/instance: custom
     app.kubernetes.io/component: statefulset-min
@@ -190,14 +163,14 @@ spec:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: example3-service-account
+  name: custom-custom-pod-myserviceaccount
   labels:
     helm.sh/chart: custom-pod
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: custom-pod
     app.kubernetes.io/instance: custom
-    app.kubernetes.io/component: main
+    app.kubernetes.io/component: myserviceaccount
   annotations:
     example-annotation: coucou
 ---
@@ -212,7 +185,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: custom-pod
     app.kubernetes.io/instance: custom
-    app.kubernetes.io/component: main
+    app.kubernetes.io/component: dockerregistry
   annotations:
     testAnnotation: annotation value
 type: kubernetes.io/dockerconfigjson
@@ -243,7 +216,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: cus-custom-pod
+  name: custom-custom-pod-metadata
   labels:
     helm.sh/chart: custom-pod
     app.kubernetes.io/version: "1.0"
@@ -421,7 +394,7 @@ spec:
         app.kubernetes.io/instance: custom
         app.kubernetes.io/component: deployment-all
     spec:
-      serviceAccountName: example3-service-account
+      serviceAccountName: custom-custom-pod-myserviceaccount
       securityContext:
         {}
       containers:
@@ -461,7 +434,7 @@ spec:
         app.kubernetes.io/instance: custom
         app.kubernetes.io/component: deployment-min
     spec:
-      serviceAccountName: example3-service-account
+      serviceAccountName: custom-custom-pod-myserviceaccount
       securityContext:
         {}
       containers:
@@ -502,7 +475,7 @@ spec:
         app.kubernetes.io/instance: custom
         app.kubernetes.io/component: with-service-name
     spec:
-      serviceAccountName: example3-service-account
+      serviceAccountName: custom-custom-pod-myserviceaccount
       securityContext:
         {}
       initContainers:
@@ -657,7 +630,7 @@ spec:
         app.kubernetes.io/instance: custom
         app.kubernetes.io/component: example2
     spec:
-      serviceAccountName: example3-service-account
+      serviceAccountName: custom-custom-pod-myserviceaccount
       securityContext:
         {}
       containers:
@@ -763,7 +736,7 @@ spec:
         app.kubernetes.io/instance: custom
         app.kubernetes.io/component: example3
     spec:
-      serviceAccountName: example3-service-account
+      serviceAccountName: custom-custom-pod-myserviceaccount
       securityContext:
         {}
       containers:
@@ -868,7 +841,7 @@ spec:
         app.kubernetes.io/instance: custom
         app.kubernetes.io/component: internal
     spec:
-      serviceAccountName: example3-service-account
+      serviceAccountName: custom-custom-pod-myserviceaccount
       securityContext:
         {}
       containers:
@@ -887,7 +860,7 @@ spec:
             - name: "SELF_METADATA"
               valueFrom:
                 configMapKeyRef:
-                  name: cus-custom-pod
+                  name: custom-custom-pod-metadata
                   key: "CHART_NAME"
             - name: "SELF_SECRET"
               valueFrom:
@@ -944,7 +917,7 @@ spec:
         app.kubernetes.io/instance: custom
         app.kubernetes.io/component: nginx
     spec:
-      serviceAccountName: example3-service-account
+      serviceAccountName: custom-custom-pod-myserviceaccount
       securityContext:
         {}
       containers:
@@ -981,7 +954,7 @@ spec:
         app.kubernetes.io/instance: custom
         app.kubernetes.io/component: statefulset-min
     spec:
-      serviceAccountName: example3-service-account
+      serviceAccountName: custom-custom-pod-myserviceaccount
       securityContext:
         {}
       containers:
@@ -1030,7 +1003,7 @@ spec:
         app.kubernetes.io/instance: custom
         app.kubernetes.io/component: job-all
     spec:
-      serviceAccountName: example3-service-account
+      serviceAccountName: custom-custom-pod-myserviceaccount
       securityContext:
         {}
       restartPolicy: Never
@@ -1063,7 +1036,7 @@ spec:
         app.kubernetes.io/instance: custom
         app.kubernetes.io/component: job-min
     spec:
-      serviceAccountName: example3-service-account
+      serviceAccountName: custom-custom-pod-myserviceaccount
       securityContext:
         {}
       restartPolicy: Never
@@ -1120,7 +1093,7 @@ spec:
             app.kubernetes.io/instance: custom
             app.kubernetes.io/component: cronjob-all
         spec:
-          serviceAccountName: example3-service-account
+          serviceAccountName: custom-custom-pod-myserviceaccount
           securityContext:
             {}
           restartPolicy: Never
@@ -1137,14 +1110,14 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: cus-custom-pod-host1
+  name: custom-custom-pod-host1
   labels:
     helm.sh/chart: custom-pod
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: custom-pod
     app.kubernetes.io/instance: custom
-    app.kubernetes.io/component: main
+    app.kubernetes.io/component: host1
   annotations:
     example-annotation: coucou
 spec:
@@ -1208,14 +1181,14 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: cus-custom-pod-host2
+  name: custom-custom-pod-host2
   labels:
     helm.sh/chart: custom-pod
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: custom-pod
     app.kubernetes.io/instance: custom
-    app.kubernetes.io/component: main
+    app.kubernetes.io/component: host2
   annotations:
     example-annotation: coucou
 spec:

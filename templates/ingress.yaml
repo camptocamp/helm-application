@@ -5,8 +5,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ $fullName }}-{{ $hostGroupName }}
-  {{- include "common.metadata" ( dict "root" $ "service" $.Values.ingress ) | nindent 2 }}
+  name: {{ include "common.fullname" ( dict "root" $ "service" $.Values.ingress "serviceName" $hostGroupName ) }}
+  {{- include "common.metadata" ( dict "root" $ "service" $.Values.ingress "serviceName" $hostGroupName ) | nindent 2 }}
 spec:
 # Add tls only if ingress.tls.enabled is set to true and the other fields are complete.
 {{- if and ( hasKey $hostGroupDefinition "tls" ) ( eq $hostGroupDefinition.tls.enabled true ) }}

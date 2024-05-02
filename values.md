@@ -7,24 +7,24 @@
   - **`image`**: Refer to _[#/definitions/globalImage](#definitions/globalImage)_.
   - **`configMapNameOverride`**: Refer to _[#/definitions/configMapNameOverride](#definitions/configMapNameOverride)_.
   - **`revisionHistoryLimit`** _(integer)_: The number of old history to keep to allow rollback.
-- **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
-- **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
-- **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
-- **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
-- **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
-- **`metadata`** _(boolean)_: Create a ConfigMap to expose some metadata about the chart.
+- **`metadata`** _(object)_: Create a ConfigMap to expose some metadata about the chart. Cannot contain additional properties.
+  - **`enabled`** _(boolean)_: Enable the metadata ConfigMap.
+  - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
+  - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
+  - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
+  - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+  - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
+  - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
+  - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
 - **`ingress`** _(object)_: Cannot contain additional properties.
   - **`enabled`** _(boolean)_: Enable the Ingress.
   - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
   - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
   - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
+  - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+  - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
   - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
   - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
-  - **`podLabels`**: Refer to _[#/definitions/podLabels](#definitions/podLabels)_.
-  - **`podAnnotations`**: Refer to _[#/definitions/podAnnotations](#definitions/podAnnotations)_.
-  - **`resources`**: Refer to _[#/definitions/resources](#definitions/resources)_.
-  - **`affinity`**: Refer to _[#/definitions/affinity](#definitions/affinity)_.
-  - **`nodeSelector`**: Refer to _[#/definitions/nodeSelector](#definitions/nodeSelector)_.
   - **`hostGroups`** _(object)_: Can contain additional properties.
     - **Additional properties** _(object)_: Cannot contain additional properties.
       - **`hosts`** _(array)_
@@ -38,6 +38,12 @@
 - **`affinity`**: Refer to _[#/definitions/affinity](#definitions/affinity)_.
 - **`tolerations`**: Refer to _[#/definitions/tolerations](#definitions/tolerations)_.
 - **`dockerregistry`** _(object)_: Cannot contain additional properties.
+  - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
+  - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
+  - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
+  - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+  - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
+  - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
   - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
   - **`content`** _(object, required)_: Docker registries authentication. Can contain additional properties.
     - **Additional properties** _(object)_: Cannot contain additional properties.
@@ -45,6 +51,12 @@
       - **`password`** _(string, required)_: Password.
       - **`email`** _(string)_: Email.
 - **`secrets`** _(object)_: Cannot contain additional properties.
+  - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
+  - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
+  - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
+  - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+  - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
+  - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
   - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
   - **`content`** _(object, required)_: Secrets configuration. Can contain additional properties.
     - **Additional properties**
@@ -57,6 +69,12 @@
           - **`user`** _(string)_: Username.
           - **`password`** _(string)_: Password.
 - **`configMaps`** _(object)_: Cannot contain additional properties.
+  - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
+  - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
+  - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
+  - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+  - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
+  - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
   - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
   - **`content`** _(object, required)_: ConfigMap configuration. Can contain additional properties.
     - **Additional properties**
@@ -141,6 +159,13 @@
         - **`startupProbe`** _(object)_
     - **`ingress`** _(object)_: Cannot contain additional properties.
       - **`enabled`** _(boolean)_: Enable the ingress for this service.
+      - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
+      - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
+      - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
+      - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+      - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
+      - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
+      - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
       - **`path`** _(string)_: The path of the ingress.
     - **`service`** _(object)_: The Kubernetes service configuration. Cannot contain additional properties.
       - **`name`** _(string)_: The name of the service.
@@ -162,6 +187,12 @@
 - <a id="definitions/serviceAccount"></a>**`serviceAccount`** _(object)_: Service account configuration. Cannot contain additional properties.
   - **`create`** _(boolean)_: Create a service account.
   - **`name`** _(string)_: Name of the service account.
+  - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
+  - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
+  - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
+  - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+  - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
+  - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
   - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
 - <a id="definitions/podSecurityContext"></a>**`podSecurityContext`** _(object)_: Pod security context.
 - <a id="definitions/securityContext"></a>**`securityContext`** _(object)_: Container security context.

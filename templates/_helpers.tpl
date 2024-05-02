@@ -2,10 +2,10 @@
 Create the name of the service account to use
 */}}
 {{- define "application.serviceAccountName" -}}
-{{- if .root.Values.serviceAccount.create }}
-{{- default ( include "common.fullname" . ) .root.Values.serviceAccount.name }}
+{{- if .Values.serviceAccount.create }}
+{{- include "common.fullname" ( dict "root" . "service" .Values.serviceAccount ) }}
 {{- else }}
-{{- default "default" .root.Values.serviceAccount.name }}
+{{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
 
@@ -24,7 +24,7 @@ Create the name of the service account to use
         name: {{ include "common.fullname" ( dict "root" .root "service" .root.Values.secrets ) }}
       {{ end -}}
       {{ else if and (hasKey .value "name" ) ( eq .value.name "self-metadata" ) -}}
-        name: {{ include "common.fullname" ( dict "root" .root "service" .root.Values ) }}
+        name: {{ include "common.fullname" ( dict "root" .root "service" .root.Values "serviceName" "metadata" ) }}
       {{ else -}}
       name: {{ default .value.name ( get .configMapNameOverride .value.name ) | quote }}
       {{ end -}}
@@ -43,7 +43,7 @@ Create the name of the service account to use
 imagePullSecrets:
 {{- toYaml . | nindent 2 }}
 {{ end -}}
-serviceAccountName: {{ include "application.serviceAccountName" . }}
+serviceAccountName: {{ include "application.serviceAccountName" ( .root ) }}
 securityContext: {{- toYaml .root.Values.podSecurityContext | nindent 2 }}
 {{- with .service.nodeSelector }}
 nodeSelector:
