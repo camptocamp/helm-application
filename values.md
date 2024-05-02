@@ -203,7 +203,7 @@
         - **`name`** _(string, required)_: Name of the ConfigMap or Secret, if 'self', same name as the service.
         - **`key`** _(string, required)_: Key of the ConfigMap or Secret.
       - _object_
-        - **`type`** _(string, required)_: Free valueFrom for an environment variable. Must be one of: `["valueFrom"]`.
+        - **`type`** _(string, required)_: Free valueFrom for an environment variable.
         - **`order`** _(integer)_: Order of the environment variable. Must be one of: `[0, 1]`. Default: `0`.
         - **`valueFrom`** _(object, required)_
 - <a id="definitions/resources"></a>**`resources`** _(object)_: Container: The container resources.
