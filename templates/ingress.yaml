@@ -8,6 +8,9 @@ metadata:
   name: {{ include "common.fullname" ( dict "root" $ "service" $.Values.ingress "serviceName" $hostGroupName ) }}
   {{- include "common.metadata" ( dict "root" $ "service" $.Values.ingress "serviceName" $hostGroupName ) | nindent 2 }}
 spec:
+{{- with $.Values.ingress.ingressClassName }}
+  ingressClassName: {{ . }}
+{{- end }}
 # Add tls only if ingress.tls.enabled is set to true and the other fields are complete.
 {{- if and ( hasKey $hostGroupDefinition "tls" ) ( eq $hostGroupDefinition.tls.enabled true ) }}
   tls:
@@ -17,8 +20,6 @@ spec:
         {{- end }}
       {{- if $hostGroupDefinition.tls.secretName }}
       secretName: {{ $hostGroupDefinition.tls.secretName }}
-      {{- else }}
-      secretName: {{ $fullName }}-{{ $hostGroupName }}
       {{- end }}
 {{- end }}
   rules:

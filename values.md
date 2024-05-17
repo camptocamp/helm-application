@@ -25,6 +25,7 @@
   - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
   - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
   - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
+  - **`ingressClassName`** _(string)_: Ingress class name. Will be omitted if not specified.
   - **`hostGroups`** _(object)_: Can contain additional properties.
     - **Additional properties** _(object)_: Cannot contain additional properties.
       - **`hosts`** _(array)_

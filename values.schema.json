@@ -339,6 +339,10 @@
         "annotations": {
           "$ref": "#/definitions/annotations"
         },
+        "ingressClassName": {
+          "type": "string",
+          "description": "Ingress class name. Will be omitted if not specified."
+        },
         "hostGroups": {
           "type": "object",
           "additionalProperties": {
