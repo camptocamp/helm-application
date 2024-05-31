@@ -779,7 +779,7 @@
           },
           "volumes": {
             "type": "object",
-            "description": "The volumes configuration, the key is the name of the volume"
+            "description": "The volumes configuration, the key is the name of the volume, if `secret.secretName` or `configMap.name` is not defined, or defined to 'self' the internal one will be used, use 'self-metadata' for the metadata ConfigMap"
           },
           "initContainers": {
             "type": "object",

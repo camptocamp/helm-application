@@ -107,10 +107,7 @@ spec:
               workingDir: {{ . }}
               {{- end }}
           {{- end }}
-          {{- with $serviceDefinition.volumes }}
-          volumes:
-          {{- include "common.dictToList" ( dict "contents" . ) | nindent 12 }}
-          {{- end }}
+          {{- include "application.volumes" ( dict "root" $ "service" $serviceDefinition ) | nindent 10 }}
 {{- end }}
 {{- end }}
 {{- end }}
