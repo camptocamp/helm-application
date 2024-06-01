@@ -5,7 +5,7 @@
 {{- if semverCompare ">=1.21.0" ( trimPrefix "v" $.Capabilities.KubeVersion.Version ) }}
 apiVersion: batch/v1
 {{- else -}}
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 {{- end }}
 kind: CronJob
 metadata:
