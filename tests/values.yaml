@@ -88,6 +88,8 @@ serviceAccount:
 services:
   example1:
     enabled: true
+    pdb:
+      enabled: false
     ingress:
       enabled: true
       path: /one
@@ -209,6 +211,9 @@ services:
 
     nameOverride: with-name-override
 
+    pdb:
+      minAvailable: 2
+
     containers:
       cc:
         <<: *aa
@@ -256,6 +261,9 @@ services:
     replicaCount: 2
 
     nameOverride: with-name-override
+
+    pdb:
+      maxUnavailable: 3
 
     containers:
       cc:

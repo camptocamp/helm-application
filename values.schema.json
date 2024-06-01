@@ -781,6 +781,30 @@
             "type": "object",
             "description": "The volumes configuration, the key is the name of the volume, if `secret.secretName` or `configMap.name` is not defined, or defined to 'self' the internal one will be used, use 'self-metadata' for the metadata ConfigMap"
           },
+          "pdb": {
+            "type": "object",
+            "description": "The Pod disruption budget configuration",
+            "additionalProperties": false,
+            "default": {
+              "enabled": true,
+              "maxUnavailable": 1
+            },
+            "properties": {
+              "enabled": {
+                "type": "boolean",
+                "description": "Enable the Pod disruption budget",
+                "default": true
+              },
+              "minAvailable": {
+                "type": "integer",
+                "description": "The minimum number of Pods available"
+              },
+              "maxUnavailable": {
+                "type": "integer",
+                "description": "The maximum number of Pods unavailable"
+              }
+            }
+          },
           "initContainers": {
             "type": "object",
             "description": "The initialization containers configuration",
