@@ -39,10 +39,15 @@ Create the name of the service account to use
 {{- end }}
 
 {{- define "application.podConfig" -}}
-{{- with .root.Values.global.image.pullSecrets -}}
+{{- if .root.Values.global.image.pullSecrets }}
 imagePullSecrets:
-{{- toYaml . | nindent 2 }}
-{{ end -}}
+{{- toYaml .root.Values.global.image.pullSecrets | nindent 2 }}
+{{- else }}
+{{- if .root.Values.dockerregistry -}}
+imagePullSecrets:
+  - name: {{ include "common.fullname" ( dict "root" .root "service" .root.Values "serviceName" "dockerregistry" ) }}
+{{- end }}
+{{- end }}
 serviceAccountName: {{ include "application.serviceAccountName" ( .root ) }}
 securityContext: {{- toYaml .root.Values.podSecurityContext | nindent 2 }}
 {{- with .service.nodeSelector }}

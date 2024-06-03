@@ -394,6 +394,8 @@ spec:
         app.kubernetes.io/instance: custom
         app.kubernetes.io/component: deployment-all
     spec:
+      imagePullSecrets:
+        - name: custom-custom-pod-dockerregistry
       serviceAccountName: custom-custom-pod-myserviceaccount
       securityContext:
         {}
@@ -434,6 +436,8 @@ spec:
         app.kubernetes.io/instance: custom
         app.kubernetes.io/component: deployment-min
     spec:
+      imagePullSecrets:
+        - name: custom-custom-pod-dockerregistry
       serviceAccountName: custom-custom-pod-myserviceaccount
       securityContext:
         {}
@@ -475,6 +479,8 @@ spec:
         app.kubernetes.io/instance: custom
         app.kubernetes.io/component: with-service-name
     spec:
+      imagePullSecrets:
+        - name: custom-custom-pod-dockerregistry
       serviceAccountName: custom-custom-pod-myserviceaccount
       securityContext:
         {}
@@ -638,6 +644,8 @@ spec:
         app.kubernetes.io/instance: custom
         app.kubernetes.io/component: example2
     spec:
+      imagePullSecrets:
+        - name: custom-custom-pod-dockerregistry
       serviceAccountName: custom-custom-pod-myserviceaccount
       securityContext:
         {}
@@ -748,6 +756,8 @@ spec:
         app.kubernetes.io/instance: custom
         app.kubernetes.io/component: example3
     spec:
+      imagePullSecrets:
+        - name: custom-custom-pod-dockerregistry
       serviceAccountName: custom-custom-pod-myserviceaccount
       securityContext:
         {}
@@ -857,6 +867,8 @@ spec:
         app.kubernetes.io/instance: custom
         app.kubernetes.io/component: internal
     spec:
+      imagePullSecrets:
+        - name: custom-custom-pod-dockerregistry
       serviceAccountName: custom-custom-pod-myserviceaccount
       securityContext:
         {}
@@ -933,6 +945,8 @@ spec:
         app.kubernetes.io/instance: custom
         app.kubernetes.io/component: nginx
     spec:
+      imagePullSecrets:
+        - name: custom-custom-pod-dockerregistry
       serviceAccountName: custom-custom-pod-myserviceaccount
       securityContext:
         {}
@@ -970,6 +984,8 @@ spec:
         app.kubernetes.io/instance: custom
         app.kubernetes.io/component: statefulset-min
     spec:
+      imagePullSecrets:
+        - name: custom-custom-pod-dockerregistry
       serviceAccountName: custom-custom-pod-myserviceaccount
       securityContext:
         {}
@@ -1019,6 +1035,8 @@ spec:
         app.kubernetes.io/instance: custom
         app.kubernetes.io/component: job-all
     spec:
+      imagePullSecrets:
+        - name: custom-custom-pod-dockerregistry
       serviceAccountName: custom-custom-pod-myserviceaccount
       securityContext:
         {}
@@ -1052,6 +1070,8 @@ spec:
         app.kubernetes.io/instance: custom
         app.kubernetes.io/component: job-min
     spec:
+      imagePullSecrets:
+        - name: custom-custom-pod-dockerregistry
       serviceAccountName: custom-custom-pod-myserviceaccount
       securityContext:
         {}
@@ -1109,6 +1129,8 @@ spec:
             app.kubernetes.io/instance: custom
             app.kubernetes.io/component: cronjob-all
         spec:
+          imagePullSecrets:
+            - name: custom-custom-pod-dockerregistry
           serviceAccountName: custom-custom-pod-myserviceaccount
           securityContext:
             {}
