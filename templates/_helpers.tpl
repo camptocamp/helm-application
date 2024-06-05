@@ -137,3 +137,42 @@ annotations:
   }
 }
 {{- end }}
+
+{{- define "application.volumes" -}}
+{{- $root := .root }}
+{{- with .service.volumes }}
+volumes:
+{{- range $key, $value := . }}
+  - name: {{ $key }}
+    {{- if hasKey $value "secret" }}
+    secret:
+      {{- if eq ( default "self" $value.secret.secretName ) "self" }}
+      secretName: {{ include "common.fullname" ( dict "root" $root "service" $root.Values.secrets ) }}
+      {{- else }}
+      {{- if eq ( default "self" $value.secret.secretName ) "self-metadata" }}
+      secretName: {{ include "common.fullname" ( dict "root" $root "service" $root.Values "serviceName" "metadata" ) }}
+      {{- else }}
+      secretName: {{ $value.secret.secretName }}
+      {{- end }}
+      {{- end }}
+      {{- with $value.secret.items }}
+      items: {{- . | toYaml | nindent 6 }}
+      {{- end }}
+    {{- else }}
+    {{- if hasKey $value "configMap" }}
+    configMap:
+      {{- if eq ( default "self" $value.configMap.name ) "self" }}
+      name: {{ include "common.fullname" ( dict "root" $root "service" $root.Values.configMaps ) }}
+      {{- else }}
+      name: {{ $value.configMap.name }}
+      {{- end }}
+      {{- with $value.configMap.items }}
+      items: {{- . | toYaml | nindent 6 }}
+      {{- end }}
+    {{- else }}
+    {{- $value | toYaml | nindent 4 }}
+    {{- end }}
+    {{- end }}
+{{- end }}
+{{- end }}
+{{- end }}

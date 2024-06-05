@@ -13,3 +13,5 @@ successfulJobsHistoryLimit
 failedJobsHistoryLimit
 concurrencyPolicy
 YAML
+secret.secretName
+configMap.name

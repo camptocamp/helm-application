@@ -135,7 +135,7 @@
     - **`failedJobsHistoryLimit`** _(integer)_: CronJob - failedJobsHistoryLimit.
     - **`concurrencyPolicy`** _(string)_: CronJob - concurrencyPolicy. Must be one of: `["Allow", "Forbid", "Replace"]`.
     - **`volumeClaimTemplates`** _(array)_: The volume claim templates, the key is the name of the volume claim template.
-    - **`volumes`** _(object)_: The volumes configuration, the key is the name of the volume.
+    - **`volumes`** _(object)_: The volumes configuration, the key is the name of the volume, if `secret.secretName` or `configMap.name` is not defined, or defined to 'self' the internal one will be used, use 'self-metadata' for the metadata ConfigMap.
     - **`initContainers`** _(object)_: The initialization containers configuration. Can contain additional properties.
       - **Additional properties** _(object)_: Cannot contain additional properties.
         - **`image`**: Refer to _[#/definitions/image](#definitions/image)_.

@@ -180,6 +180,13 @@ services:
       my-device-volume:
         persistentVolumeClaim:
           claimName: pvc-name
+      self-configmap:
+        configMap:
+          items:
+            - key: testYaml
+              path: test.yaml
+      self-secret:
+        secret: {}
 
     service: &servicedefinition
       type: ClusterIP

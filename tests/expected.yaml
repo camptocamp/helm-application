@@ -608,12 +608,22 @@ spec:
             httpGet:
               path: /heals/startup
               port: http
+
       volumes:
         - name: my-device-volume
           persistentVolumeClaim:
             claimName: pvc-name
         - name: my-volume
           emptyDir: {}
+        - name: self-configmap
+          configMap:
+            name: custom-custom-pod
+            items:
+            - key: testYaml
+              path: test.yaml
+        - name: self-secret
+          secret:
+            secretName: custom-custom-pod
 ---
 # Source: custom-pod/templates/deployment.yaml
 apiVersion: apps/v1
@@ -721,6 +731,7 @@ spec:
             httpGet:
               path: /
               port: http
+
       volumes:
         - name: my-volume
           emptyDir: {}
@@ -833,6 +844,7 @@ spec:
             httpGet:
               path: /
               port: http
+
       volumes:
         - name: my-volume
           emptyDir: {}
