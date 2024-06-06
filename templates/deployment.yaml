@@ -16,8 +16,8 @@ spec:
   {{- end }}
   revisionHistoryLimit: {{ $.Values.global.revisionHistoryLimit | default 0 }}
   strategy:
-    type: {{ ( default $serviceDefinition.strategy dict ).type | default "RollingUpdate" }}
-    {{- with ( default $serviceDefinition.strategy dict ).rollingUpdate }}
+    type: {{ ( default ( dict ) $serviceDefinition.strategy ).type | default "RollingUpdate" }}
+    {{- with ( default ( dict ) $serviceDefinition.strategy ).rollingUpdate }}
     rollingUpdate: {{ toYaml . | nindent 8 }}
     {{- end }}
   {{- if $serviceDefinition.progressDeadlineSeconds }}

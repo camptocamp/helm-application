@@ -20,6 +20,11 @@ spec:
         {{- end }}
       {{- if $hostGroupDefinition.tls.secretName }}
       secretName: {{ $hostGroupDefinition.tls.secretName }}
+      {{- else }}
+
+      {{- if eq ( default false ( default ( dict ) $.Values.global.ingress ).noSecretName ) false }}
+      secretName: {{ include "common.fullname" ( dict "root" $ "service" $.Values.ingress "serviceName" $hostGroupName ) }}
+      {{- end }}
       {{- end }}
 {{- end }}
   rules:
@@ -28,7 +33,7 @@ spec:
       http:
         paths:
         {{- range $serviceName, $serviceDefinition := $.Values.services }}
-        {{- if and ( eq $serviceDefinition.enabled true ) ( eq ( default ( default $serviceDefinition.ingress dict ).enabled false ) true ) }}
+        {{- if and ( eq $serviceDefinition.enabled true ) ( eq ( default false ( default ( dict ) $serviceDefinition.ingress ).enabled ) true ) }}
           - path: "{{ $serviceDefinition.ingress.path }}"
             pathType: Prefix
             backend:

@@ -1226,7 +1226,7 @@ spec:
   tls:
     - hosts:
         - "*.example.com"
-      secretName: my-tls-secret
+      secretName: custom-custom-pod-host2
   rules:
     - host: "*.example.com"
       http:
