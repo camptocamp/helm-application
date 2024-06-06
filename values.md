@@ -7,6 +7,8 @@
   - **`image`**: Refer to _[#/definitions/globalImage](#definitions/globalImage)_.
   - **`configMapNameOverride`**: Refer to _[#/definitions/configMapNameOverride](#definitions/configMapNameOverride)_.
   - **`revisionHistoryLimit`** _(integer)_: The number of old history to keep to allow rollback.
+  - **`ingress`** _(object)_
+    - **`noSecretName`** _(boolean)_: Don't add a secret name to the Ingress TLS host, useful when the certification is configured in the Ingress controller.
 - **`metadata`** _(object)_: Create a ConfigMap to expose some metadata about the chart. Cannot contain additional properties.
   - **`enabled`** _(boolean)_: Enable the metadata ConfigMap.
   - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.

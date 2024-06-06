@@ -275,6 +275,15 @@
         "revisionHistoryLimit": {
           "type": "integer",
           "description": "The number of old history to keep to allow rollback"
+        },
+        "ingress": {
+          "type": "object",
+          "properties": {
+            "noSecretName": {
+              "type": "boolean",
+              "description": "Don't add a secret name to the Ingress TLS host, useful when the certification is configured in the Ingress controller."
+            }
+          }
         }
       }
     },

@@ -20,7 +20,6 @@ ingress:
     host2:
       tls:
         enabled: true
-        secretName: my-tls-secret
       hosts:
         - '*.example.com'
 

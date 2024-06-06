@@ -15,19 +15,19 @@ data:
 {{- end }}
 {{- range $serviceName, $serviceDefinition := .Values.services }}
 {{- if or (eq $serviceDefinition.enabled true) ( and (hasKey $serviceDefinition "template") $serviceDefinition.template) }}
-{{- if ( default $serviceDefinition.service dict ).name }}
+{{- if ( default ( dict ) $serviceDefinition.service ).name }}
   SERVICE_{{ $serviceName | upper }}_NAME: {{ $serviceDefinition.service.name }}
 {{- else }}
   SERVICE_{{ $serviceName | upper }}_NAME: {{ include "common.fullname" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) }}
 {{- end }}
-{{- range $containerName, $containerDefinition := ( default $serviceDefinition.initContainers ( dict ) ) }}
+{{- range $containerName, $containerDefinition := ( default ( dict ) $serviceDefinition.initContainers ) }}
 {{- if $containerDefinition.image.tag }}
   SERVICE_{{ $serviceName | upper }}_CONTAINER_{{ $containerName | upper }}_IMAGE_TAG: {{ $containerDefinition.image.tag | quote }}
 {{- else }}
   SERVICE_{{ $serviceName | upper }}_CONTAINER_{{ $containerName | upper }}_IMAGE_TAG: {{ $containerDefinition.image.sha | quote }}
 {{- end }}
 {{- end }}
-{{- range $containerName, $containerDefinition := ( default $serviceDefinition.containers ( dict ) ) }}
+{{- range $containerName, $containerDefinition := ( default ( dict ) $serviceDefinition.containers ) }}
 {{- if $containerDefinition.image.tag }}
   SERVICE_{{ $serviceName | upper }}_CONTAINER_{{ $containerName | upper }}_IMAGE_TAG: {{ $containerDefinition.image.tag | quote }}
 {{- else }}
