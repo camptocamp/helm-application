@@ -57,6 +57,19 @@ repos:
           - custom
           - .
           - tests/expected.yaml
+      - id: helm-template-gen
+        files: |-
+          (?x)(
+            ^templates/.*$
+            |^values\.yaml$
+            |^Chart\.yaml$
+            |^tests/print\.yaml$
+          )
+        args:
+          - --values=tests/print.yaml
+          - print
+          - .
+          - tests/print-expected.yaml
   - repo: https://github.com/codespell-project/codespell
     rev: v2.2.6
     hooks:

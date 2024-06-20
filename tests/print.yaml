@@ -1,0 +1,235 @@
+metadata:
+  enabled: true
+
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 33 # www-data
+
+ingress:
+  enabled: true
+  hostGroups:
+    test:
+      tls:
+        enabled: true
+      hosts:
+        - my-technical-url.example.com
+    main:
+      tls:
+        enabled: true
+      hosts:
+        - print.example.com
+
+configMaps:
+  content:
+    jmxExporterYaml:
+      type: yaml
+      value:
+        startDelaySeconds: 30
+        username:
+        password:
+        ssl: false
+        lowercaseOutputLabelNames: true
+        lowercaseOutputName: true
+
+services:
+  print:
+    enabled: true
+    replicaCount: 2
+
+    pdb:
+      enabled: true
+
+    ingress:
+      enabled: true
+      path: /
+
+    service:
+      type: ClusterIP
+      servicePort: 80
+      ports:
+        - name: http
+          port: 8080
+          protocol: TCP
+          targetPort: http
+
+    podMonitor:
+      enabled: true
+      endpoint:
+        port: prometheus
+        interval: 10s
+        honorLabels: true
+
+    volumes:
+      jmx-exporter-jar:
+        emptyDir: {}
+      jmx-exporter-config:
+        configMap:
+          name: self
+          items:
+            - key: jmxExporterYaml
+              path: jmx-exporter.yaml
+
+    initContainers:
+      jmx-exporter:
+        image:
+          repository: bitnami/jmx-exporter
+          tag: 0.18.0
+        command:
+          - /bin/bash
+          - -c
+        args:
+          - cp /opt/bitnami/jmx-exporter/jmx_prometheus_javaagent.jar /jmx-exporter-jar/
+        resources:
+          requests:
+            ephemeral-storage: 16Mi
+            memory: 8Mi
+            cpu: 0.1
+          limits:
+            ephemeral-storage: 32Mi
+            memory: 16Mi
+            cpu: 0.2
+        volumeMounts:
+          /jmx-exporter-jar/:
+            name: jmx-exporter-jar
+
+    containers:
+      print:
+        image:
+          repository: camptocamp/mapfish_print
+          tag: '3.30'
+        env:
+          LOG_LEVEL:
+            value: INFO
+          TOMCAT_LOG_TYPE:
+            value: json
+          PGHOST:
+            type: secret
+            name: database
+            key: hostname
+          PGPORT:
+            type: secret
+            name: database
+            key: port
+          PGDATABASE:
+            type: secret
+            name: database
+            key: database
+          PGUSER:
+            type: secret
+            name: database
+            key: username
+          PGPASSWORD:
+            type: secret
+            name: database
+            key: password
+          PGOPTIONS:
+            value: -c statement_timeout=30000
+          PGSCHEMA:
+            value: print
+          PRINT_YAML_MAX_ALIASES:
+            value: '200'
+          PRINT_POLL_INTERVAL:
+            value: '1'
+          PRINT_MAXCONTENT_LENGTH:
+            value: '100000000' # 100 MB
+          PRINT_MAXNUMBEROFRUNNINGPRINTJOBS:
+            value: '2'
+          EXTRA_JARS:
+            value: /usr/local/tomcat/webapps/ROOT/print-apps/mfp-extras/jars
+          EXTRA_JAVA_OPTS:
+            value: ' '
+          EXTRA_CATALINA_OPTS:
+            value: ' '
+          # [ms]
+          HTTP_CONNECTIONREQUESTTIMEOUT:
+            value: '30000'
+          HTTP_CONNECTTIMEOUT:
+            value: '30000'
+          HTTP_SOCKETTIMEOUT:
+            value: '30000'
+          CATALINA_CACHEDURATION:
+            value: '60'
+          # <Non heap percentage> = 800Mo / <limit.memory> * 100 = 9.8
+          # => good value: 90 - <Non heap percentage>
+          JAVA_MAXRAMPERCENTAGE:
+            value: '80'
+          JAVA_INETADDR_TTL:
+            value: '30'
+          JAVA_MINRAMPERCENTAGE:
+            value: '50'
+          JAVA_MAMRAMPERCENTAGE:
+            value: '50'
+          JAVA_INITIALRAMPERCENTAGE:
+            value: '50'
+          JAVA_GCTIMELIMIT:
+            value: '70'
+          JAVA_GCHEAPFREELIMIT:
+            value: '10'
+          # useful:
+          # kubectl -n gmf-mutualize-int exec deployments/mutualize-mutualize-print -c print -- bash -c 'java ${JAVA_OPTS} -XshowSettings:vm  -version'
+          # kubectl -n gmf-mutualize-int exec deployments/mutualize-mutualize-print -c print -- bash -c 'java ${JAVA_OPTS} -XX:+PrintFlagsFinal -version'
+          JAVA_OPTS:
+            value: >-
+              -XX:MinRAMPercentage=$(JAVA_MINRAMPERCENTAGE)
+              -XX:MaxRAMPercentage=$(JAVA_MAXRAMPERCENTAGE)
+              -XX:InitialRAMPercentage=$(JAVA_INITIALRAMPERCENTAGE)
+              -XX:GCTimeLimit=$(JAVA_GCTIMELIMIT)
+              -XX:GCHeapFreeLimit=$(JAVA_GCHEAPFREELIMIT)
+              -XX:+ExitOnOutOfMemoryError
+              $(EXTRA_JAVA_OPTS)
+            order: 1
+          CATALINA_OPTS:
+            value: >-
+              -Dmapfish.maxContentLength=$(PRINT_MAXCONTENT_LENGTH)
+              -DmaxNumberOfRunningPrintJobs=$(PRINT_MAXNUMBEROFRUNNINGPRINTJOBS)
+              -Dsentry.dsn=$(SENTRY_DSN)
+              -Dsentry.release=$(SENTRY_RELEASE)
+              -Dsentry.environment=$(SENTRY_ENVIRONMENT)
+              -Dsentry.tags=$(SENTRY_TAGS)
+              -Ddb.host=$(PGHOST)
+              -Ddb.port=$(PGPORT)
+              -Ddb.username=$(PGUSER)
+              -Ddb.password=$(PGPASSWORD)
+              -Ddb.name=$(PGDATABASE)
+              -Ddb.schema=$(PGSCHEMA)
+              -DcacheDuration=$(CATALINA_CACHEDURATION)
+              -Dsun.net.inetaddr.ttl=$(JAVA_INETADDR_TTL)
+              -Dhttp.connectionRequestTimeout=$(HTTP_CONNECTIONREQUESTTIMEOUT)
+              -Dhttp.connectTimeout=$(HTTP_CONNECTTIMEOUT)
+              -Dhttp.socketTimeout=$(HTTP_SOCKETTIMEOUT)
+              -javaagent:/usr/local/tomcat/jmx-lib/jmx_prometheus_javaagent.jar=9110:/usr/local/tomcat/jmx-exporter.yaml
+              $(EXTRA_CATALINA_OPTS)
+            order: 1
+          SENTRY_DSN:
+            value: https://...@....ingest.sentry.io/...
+          SENTRY_TAGS:
+            value: service:print
+          SENTRY_RELEASE:
+            type: configMap
+            name: self-metadata
+            key: SERVICE_PRINT_CONTAINER_PRINT_IMAGE_TAG
+          SENTRY_ENVIRONMENT:
+            value: prod
+
+        ports:
+          prometheus:
+            containerPort: 9111
+            protocol: TCP
+          http:
+            containerPort: 8080
+            protocol: TCP
+
+        volumeMounts:
+          /usr/local/tomcat/jmx-exporter.yaml:
+            name: jmx-exporter-config
+            subPath: jmx-exporter.yaml
+          /usr/local/tomcat/jmx-lib:
+            name: jmx-exporter-jar
+
+        resources:
+          requests:
+            memory: 1Gi
+          limits:
+            memory: 2Gi
+            cpu: '2'
+            ephemeral-storage: 256Mi

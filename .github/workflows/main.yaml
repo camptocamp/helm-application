@@ -85,6 +85,8 @@ jobs:
 
       - name: Apply
         run: kubectl apply -f tests/expected.yaml
+      - name: Apply
+        run: kubectl apply -f tests/print-expected.yaml
 
       - name: Publish
         run: c2cciutils-publish

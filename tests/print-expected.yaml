@@ -1,0 +1,363 @@
+---
+# Source: custom-pod/templates/pdb.yaml
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: print-custom-pod-print
+  labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: print
+    app.kubernetes.io/component: print
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: custom-pod
+      app.kubernetes.io/instance: print
+      app.kubernetes.io/component: print
+---
+# Source: custom-pod/templates/cm_metadata.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: print-custom-pod-metadata
+  labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: print
+    app.kubernetes.io/component: main
+data:
+  CHART_NAME: custom-pod
+  RELEASE_NAME: print
+  RELEASE_NAMESPACE: default
+  SERVICE_PRINT_NAME: print-custom-pod-print
+  SERVICE_PRINT_CONTAINER_JMX-EXPORTER_IMAGE_TAG: "0.18.0"
+  SERVICE_PRINT_CONTAINER_PRINT_IMAGE_TAG: "3.30"
+---
+# Source: custom-pod/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: print-custom-pod
+  labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: print
+    app.kubernetes.io/component: main
+data:
+  jmxExporterYaml: |-
+    lowercaseOutputLabelNames: true
+    lowercaseOutputName: true
+    password: null
+    ssl: false
+    startDelaySeconds: 30
+    username: null
+---
+# Source: custom-pod/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: print-custom-pod-print
+  labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: print
+    app.kubernetes.io/component: print
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: http
+  selector:
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: print
+    app.kubernetes.io/component: print
+---
+# Source: custom-pod/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: print-custom-pod-print
+  labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: print
+    app.kubernetes.io/component: print
+spec:
+  replicas: 2
+  revisionHistoryLimit: 3
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: custom-pod
+      app.kubernetes.io/instance: print
+      app.kubernetes.io/component: print
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: custom-pod
+        app.kubernetes.io/instance: print
+        app.kubernetes.io/component: print
+    spec:
+
+      serviceAccountName: default
+      securityContext:
+        {}
+      initContainers:
+        - name: jmx-exporter
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 33
+          image: "bitnami/jmx-exporter:0.18.0"
+          imagePullPolicy: IfNotPresent
+          terminationMessagePolicy: FallbackToLogsOnError
+          resources:
+            limits:
+              cpu: 0.2
+              ephemeral-storage: 32Mi
+              memory: 16Mi
+            requests:
+              cpu: 0.1
+              ephemeral-storage: 16Mi
+              memory: 8Mi
+          command:
+            - /bin/bash
+            - -c
+          args:
+            - cp /opt/bitnami/jmx-exporter/jmx_prometheus_javaagent.jar /jmx-exporter-jar/
+          volumeMounts:
+            - mountPath: /jmx-exporter-jar/
+              name: jmx-exporter-jar
+
+      containers:
+        - name: print
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 33
+          image: "camptocamp/mapfish_print:3.30"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: "CATALINA_CACHEDURATION"
+              value: "60"
+            - name: "EXTRA_CATALINA_OPTS"
+              value: ' '
+            - name: "EXTRA_JARS"
+              value: /usr/local/tomcat/webapps/ROOT/print-apps/mfp-extras/jars
+            - name: "EXTRA_JAVA_OPTS"
+              value: ' '
+            - name: "HTTP_CONNECTIONREQUESTTIMEOUT"
+              value: "30000"
+            - name: "HTTP_CONNECTTIMEOUT"
+              value: "30000"
+            - name: "HTTP_SOCKETTIMEOUT"
+              value: "30000"
+            - name: "JAVA_GCHEAPFREELIMIT"
+              value: "10"
+            - name: "JAVA_GCTIMELIMIT"
+              value: "70"
+            - name: "JAVA_INETADDR_TTL"
+              value: "30"
+            - name: "JAVA_INITIALRAMPERCENTAGE"
+              value: "50"
+            - name: "JAVA_MAMRAMPERCENTAGE"
+              value: "50"
+            - name: "JAVA_MAXRAMPERCENTAGE"
+              value: "80"
+            - name: "JAVA_MINRAMPERCENTAGE"
+              value: "50"
+            - name: "LOG_LEVEL"
+              value: INFO
+            - name: "PGDATABASE"
+              valueFrom:
+                secretKeyRef:
+                  name: "database"
+                  key: "database"
+            - name: "PGHOST"
+              valueFrom:
+                secretKeyRef:
+                  name: "database"
+                  key: "hostname"
+            - name: "PGOPTIONS"
+              value: -c statement_timeout=30000
+            - name: "PGPASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: "database"
+                  key: "password"
+            - name: "PGPORT"
+              valueFrom:
+                secretKeyRef:
+                  name: "database"
+                  key: "port"
+            - name: "PGSCHEMA"
+              value: print
+            - name: "PGUSER"
+              valueFrom:
+                secretKeyRef:
+                  name: "database"
+                  key: "username"
+            - name: "PRINT_MAXCONTENT_LENGTH"
+              value: "100000000"
+            - name: "PRINT_MAXNUMBEROFRUNNINGPRINTJOBS"
+              value: "2"
+            - name: "PRINT_POLL_INTERVAL"
+              value: "1"
+            - name: "PRINT_YAML_MAX_ALIASES"
+              value: "200"
+            - name: "SENTRY_DSN"
+              value: https://...@....ingest.sentry.io/...
+            - name: "SENTRY_ENVIRONMENT"
+              value: prod
+            - name: "SENTRY_RELEASE"
+              valueFrom:
+                configMapKeyRef:
+                  name: print-custom-pod-metadata
+                  key: "SERVICE_PRINT_CONTAINER_PRINT_IMAGE_TAG"
+            - name: "SENTRY_TAGS"
+              value: service:print
+            - name: "TOMCAT_LOG_TYPE"
+              value: json
+            - name: "CATALINA_OPTS"
+              value: -Dmapfish.maxContentLength=$(PRINT_MAXCONTENT_LENGTH) -DmaxNumberOfRunningPrintJobs=$(PRINT_MAXNUMBEROFRUNNINGPRINTJOBS)
+                -Dsentry.dsn=$(SENTRY_DSN) -Dsentry.release=$(SENTRY_RELEASE) -Dsentry.environment=$(SENTRY_ENVIRONMENT)
+                -Dsentry.tags=$(SENTRY_TAGS) -Ddb.host=$(PGHOST) -Ddb.port=$(PGPORT) -Ddb.username=$(PGUSER)
+                -Ddb.password=$(PGPASSWORD) -Ddb.name=$(PGDATABASE) -Ddb.schema=$(PGSCHEMA) -DcacheDuration=$(CATALINA_CACHEDURATION)
+                -Dsun.net.inetaddr.ttl=$(JAVA_INETADDR_TTL) -Dhttp.connectionRequestTimeout=$(HTTP_CONNECTIONREQUESTTIMEOUT)
+                -Dhttp.connectTimeout=$(HTTP_CONNECTTIMEOUT) -Dhttp.socketTimeout=$(HTTP_SOCKETTIMEOUT)
+                -javaagent:/usr/local/tomcat/jmx-lib/jmx_prometheus_javaagent.jar=9110:/usr/local/tomcat/jmx-exporter.yaml
+                $(EXTRA_CATALINA_OPTS)
+            - name: "JAVA_OPTS"
+              value: -XX:MinRAMPercentage=$(JAVA_MINRAMPERCENTAGE) -XX:MaxRAMPercentage=$(JAVA_MAXRAMPERCENTAGE)
+                -XX:InitialRAMPercentage=$(JAVA_INITIALRAMPERCENTAGE) -XX:GCTimeLimit=$(JAVA_GCTIMELIMIT)
+                -XX:GCHeapFreeLimit=$(JAVA_GCHEAPFREELIMIT) -XX:+ExitOnOutOfMemoryError $(EXTRA_JAVA_OPTS)
+          terminationMessagePolicy: FallbackToLogsOnError
+          resources:
+            limits:
+              cpu: "2"
+              ephemeral-storage: 256Mi
+              memory: 2Gi
+            requests:
+              memory: 1Gi
+          volumeMounts:
+            - mountPath: /usr/local/tomcat/jmx-exporter.yaml
+              name: jmx-exporter-config
+              subPath: jmx-exporter.yaml
+            - mountPath: /usr/local/tomcat/jmx-lib
+              name: jmx-exporter-jar
+
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+            - name: prometheus
+              containerPort: 9111
+              protocol: TCP
+
+
+      volumes:
+        - name: jmx-exporter-config
+          configMap:
+            name: print-custom-pod
+            items:
+            - key: jmxExporterYaml
+              path: jmx-exporter.yaml
+        - name: jmx-exporter-jar
+          emptyDir: {}
+---
+# Source: custom-pod/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: print-custom-pod-main
+  labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: print
+    app.kubernetes.io/component: main
+spec:
+# Add tls only if ingress.tls.enabled is set to true and the other fields are complete.
+  tls:
+    - hosts:
+        - "print.example.com"
+      secretName: print-custom-pod-main
+  rules:
+    - host: "print.example.com"
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: print-custom-pod-print
+                port:
+                  number: 80
+---
+# Source: custom-pod/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: print-custom-pod-test
+  labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: print
+    app.kubernetes.io/component: test
+spec:
+# Add tls only if ingress.tls.enabled is set to true and the other fields are complete.
+  tls:
+    - hosts:
+        - "my-technical-url.example.com"
+      secretName: print-custom-pod-test
+  rules:
+    - host: "my-technical-url.example.com"
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: print-custom-pod-print
+                port:
+                  number: 80
+---
+# Source: custom-pod/templates/podmonitor.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: print-custom-pod-print
+  labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: print
+    app.kubernetes.io/component: print
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: custom-pod
+      app.kubernetes.io/instance: print
+      app.kubernetes.io/component: print
+  podMetricsEndpoints:
+    -
+      honorLabels: true
+      interval: 10s
+      port: prometheus
