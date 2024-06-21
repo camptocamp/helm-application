@@ -30,6 +30,7 @@ jobs:
           - 3.5.1
 
     steps:
+      - run: free -m
       - run: docker system prune --all --force
       - uses: actions/checkout@v4
         with:
