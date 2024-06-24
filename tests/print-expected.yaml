@@ -56,6 +56,19 @@ data:
     lowercaseOutputLabelNames: true
     lowercaseOutputName: true
     password: null
+    rules:
+    - help: Read time or WMS requests
+      labels:
+        host: $1
+      name: metrics_org_mapfish_print_map_image_wms_wmslayer_read_$2
+      pattern: metrics_org_mapfish_print_map_image_wms_wmslayer_read_(.*)_([a-z]+)
+      type: GAUGE
+    - help: Read time or HTTP requests
+      labels:
+        host: $1
+      name: metrics_org_mapfish_print_http_httprequestfetcher_read_$2
+      pattern: metrics_org_mapfish_print_http_httprequestfetcher_read_(.*)_([a-z]+)
+      type: GAUGE
     ssl: false
     startDelaySeconds: 30
     username: null
@@ -267,6 +280,24 @@ spec:
               containerPort: 9111
               protocol: TCP
 
+          livenessProbe:
+            failureThreshold: 50
+            httpGet:
+              path: /metrics/healthcheck
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 120
+          readinessProbe:
+            httpGet:
+              path: /metrics/healthcheck
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 30
+          startupProbe:
+            httpGet:
+              path: /metrics/healthcheck
+              port: http
+            initialDelaySeconds: 15
 
       volumes:
         - name: jmx-exporter-config

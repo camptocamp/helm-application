@@ -30,6 +30,19 @@ configMaps:
         ssl: false
         lowercaseOutputLabelNames: true
         lowercaseOutputName: true
+        rules:
+          - pattern: metrics_org_mapfish_print_map_image_wms_wmslayer_read_(.*)_([a-z]+)
+            name: metrics_org_mapfish_print_map_image_wms_wmslayer_read_$2
+            labels:
+              host: '$1'
+            help: Read time or WMS requests
+            type: GAUGE
+          - pattern: metrics_org_mapfish_print_http_httprequestfetcher_read_(.*)_([a-z]+)
+            name: metrics_org_mapfish_print_http_httprequestfetcher_read_$2
+            labels:
+              host: '$1'
+            help: Read time or HTTP requests
+            type: GAUGE
 
 services:
   print:
@@ -218,6 +231,25 @@ services:
           http:
             containerPort: 8080
             protocol: TCP
+
+        livenessProbe:
+          httpGet:
+            path: /metrics/healthcheck
+            port: http
+          initialDelaySeconds: 15
+          failureThreshold: 50
+          periodSeconds: 120
+        readinessProbe:
+          httpGet:
+            path: /metrics/healthcheck
+            port: http
+          initialDelaySeconds: 15
+          periodSeconds: 30
+        startupProbe:
+          httpGet:
+            path: /metrics/healthcheck
+            port: http
+          initialDelaySeconds: 15
 
         volumeMounts:
           /usr/local/tomcat/jmx-exporter.yaml:
