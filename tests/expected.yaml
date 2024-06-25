@@ -48,14 +48,14 @@ metadata:
     helm.sh/chart: custom-pod
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: with-name-override
+    app.kubernetes.io/name: custom-pod
     app.kubernetes.io/instance: custom
     app.kubernetes.io/component: example2
 spec:
   minAvailable: 2
   selector:
     matchLabels:
-      app.kubernetes.io/name: with-name-override
+      app.kubernetes.io/name: custom-pod
       app.kubernetes.io/instance: custom
       app.kubernetes.io/component: example2
 ---
@@ -297,7 +297,7 @@ metadata:
     helm.sh/chart: custom-pod
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: with-name-override
+    app.kubernetes.io/name: custom-pod
     app.kubernetes.io/instance: custom
     app.kubernetes.io/component: example2
     one-custom-label: hello-world
@@ -312,7 +312,7 @@ spec:
       protocol: TCP
       targetPort: http
   selector:
-    app.kubernetes.io/name: with-name-override
+    app.kubernetes.io/name: custom-pod
     app.kubernetes.io/instance: custom
     app.kubernetes.io/component: example2
 ---
@@ -379,6 +379,16 @@ spec:
       serviceAccountName: custom-custom-pod-myserviceaccount
       securityContext:
         {}
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - preference:
+              matchExpressions:
+              - key: disktype
+                operator: In
+                values:
+                - ssd
+            weight: 1
       containers:
         - name: main
           securityContext:
@@ -464,6 +474,24 @@ spec:
       serviceAccountName: custom-custom-pod-myserviceaccount
       securityContext:
         {}
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                      - custom-pod
+                  - key: app.kubernetes.io/instance
+                    operator: In
+                    values:
+                      - custom
+                  - key: app.kubernetes.io/component
+                    operator: In
+                    values:
+                      - with-service-name
+              topologyKey: "kubernetes.io/hostname"
       initContainers:
         - name: aa
           securityContext:
@@ -614,7 +642,7 @@ metadata:
     helm.sh/chart: custom-pod
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: with-name-override
+    app.kubernetes.io/name: custom-pod
     app.kubernetes.io/instance: custom
     app.kubernetes.io/component: example2
 spec:
@@ -624,13 +652,13 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      app.kubernetes.io/name: with-name-override
+      app.kubernetes.io/name: custom-pod
       app.kubernetes.io/instance: custom
       app.kubernetes.io/component: example2
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: with-name-override
+        app.kubernetes.io/name: custom-pod
         app.kubernetes.io/instance: custom
         app.kubernetes.io/component: example2
     spec:
@@ -640,15 +668,23 @@ spec:
       securityContext:
         {}
       affinity:
-        nodeAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - preference:
-              matchExpressions:
-              - key: disktype
-                operator: In
-                values:
-                - ssd
-            weight: 1
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                      - custom-pod
+                  - key: app.kubernetes.io/instance
+                    operator: In
+                    values:
+                      - custom
+                  - key: app.kubernetes.io/component
+                    operator: In
+                    values:
+                      - example2
+              topologyKey: "kubernetes.io/hostname"
       containers:
         - name: cc
           securityContext:
@@ -762,6 +798,24 @@ spec:
       serviceAccountName: custom-custom-pod-myserviceaccount
       securityContext:
         {}
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                      - with-name-override
+                  - key: app.kubernetes.io/instance
+                    operator: In
+                    values:
+                      - custom
+                  - key: app.kubernetes.io/component
+                    operator: In
+                    values:
+                      - example3
+              topologyKey: "kubernetes.io/hostname"
       containers:
         - name: cc
           securityContext:

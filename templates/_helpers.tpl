@@ -54,6 +54,32 @@ securityContext: {{- toYaml .root.Values.podSecurityContext | nindent 2 }}
 nodeSelector:
   {{- toYaml . | nindent 2 }}
 {{- end }}
+{{- if ( .service.hostAntiAffinity | default false ) }}
+affinity:
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+            - key: app.kubernetes.io/name
+              operator: In
+              values:
+                - {{ include "common.name" . }}
+            - key: app.kubernetes.io/instance
+              operator: In
+              values:
+                - {{ .root.Release.Name }}
+            - key: app.kubernetes.io/component
+              operator: In
+              values:
+{{- if hasKey .service "serviceName" }}
+                - {{ printf "%s" .service.serviceName }}
+{{- else if hasKey . "serviceName" }}
+                - {{ printf "%s" .serviceName }}
+{{- else }}
+                - main
+{{- end }}
+        topologyKey: "kubernetes.io/hostname"
+{{- else }}
 {{- if or (and (hasKey .service "affinity") (.service.affinity)) .affinitySelector (hasKey .root.Values "affinity") }}
 affinity:
   {{- if and (hasKey .service "affinity") (.service.affinity) -}}
@@ -73,6 +99,7 @@ affinity:
   {{- else -}}
     {{ toYaml .root.Values.affinity | nindent 2 }}
   {{- end }}
+{{- end }}
 {{- end }}
 {{- with .root.Values.tolerations }}
 tolerations:
