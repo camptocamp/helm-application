@@ -639,6 +639,16 @@ spec:
       serviceAccountName: custom-custom-pod-myserviceaccount
       securityContext:
         {}
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - preference:
+              matchExpressions:
+              - key: disktype
+                operator: In
+                values:
+                - ssd
+            weight: 1
       containers:
         - name: cc
           securityContext:

@@ -201,6 +201,16 @@ services:
   example2:
     releaseTrunc: 15
     prefixTrunc: 3
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+                - key: disktype
+                  operator: In
+                  values:
+                    - ssd
 
     ingress:
       enabled: true
