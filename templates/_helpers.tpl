@@ -54,7 +54,7 @@ securityContext: {{- toYaml .root.Values.podSecurityContext | nindent 2 }}
 nodeSelector:
   {{- toYaml . | nindent 2 }}
 {{- end }}
-{{- if or (and (hasKey .service "affinity") (.service.affinity)) .affinitySelector (hasKey .root.Values "affinity") -}}
+{{- if or (and (hasKey .service "affinity") (.service.affinity)) .affinitySelector (hasKey .root.Values "affinity") }}
 affinity:
   {{- if and (hasKey .service "affinity") (.service.affinity) -}}
     {{ toYaml .service.affinity | nindent 2 }}
