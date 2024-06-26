@@ -886,6 +886,10 @@
                 },
                 "startupProbe": {
                   "type": "object"
+                },
+                "lifecycle": {
+                  "type": "object",
+                  "description": "Lifecycle Events configuration - https://kubernetes.io/docs/tasks/configure-pod-container/attach-handler-lifecycle-event/"
                 }
               },
               "required": ["image"]

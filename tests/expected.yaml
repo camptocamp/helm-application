@@ -534,6 +534,13 @@ spec:
             requests:
               cpu: 100m
               memory: 50Mi
+          lifecycle:
+            preStop:
+              exec:
+                command:
+                - /bin/bash
+                - -c
+                - "true"
           command:
             - sleep
             - "3600"

@@ -164,6 +164,7 @@
         - **`livenessProbe`** _(object)_
         - **`readinessProbe`** _(object)_
         - **`startupProbe`** _(object)_
+        - **`lifecycle`** _(object)_: Lifecycle Events configuration - https://kubernetes.io/docs/tasks/configure-pod-container/attach-handler-lifecycle-event/.
     - **`ingress`** _(object)_: Cannot contain additional properties.
       - **`enabled`** _(boolean)_: Enable the ingress for this service.
       - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
