@@ -106,7 +106,6 @@
     - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
     - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
     - **`affinity`**: Refer to _[#/definitions/affinity](#definitions/affinity)_.
-    - **`hostAntiAffinity`** _(boolean)_: Enable the host anti-affinity (only one pod of the deployment per node). Default: `false`.
     - **`nodeSelector`**: Refer to _[#/definitions/nodeSelector](#definitions/nodeSelector)_.
     - **`replicaCount`** _(integer)_: The number of replicas.
     - **`maxFailedIndexes`** _(integer)_: The maximum number of failed indexes.
@@ -218,7 +217,10 @@
 - <a id="definitions/podAnnotations"></a>**`podAnnotations`** _(object)_: Annotations used only in the Pod definition. Can contain additional properties.
   - **Additional properties** _(string)_
 - <a id="definitions/serviceName"></a>**`serviceName`** _(string)_: [helm-common] The name of the service (not Kubernetes service), this will postfix the name.
-- <a id="definitions/affinity"></a>**`affinity`** _(object)_: Pod: The used affinity.
+- <a id="definitions/affinity"></a>**`affinity`** _(object)_: Pod: The used affinity. Cannot contain additional properties.
+  - **`podAntiAffinity`** _(object)_: The used pod anti-affinity, see: https://github.com/camptocamp/helm-custom-pod/wiki/Affinity.
+  - **`podAffinity`** _(object)_: The standard pod affinity.
+  - **`nodeAffinity`** _(object)_: The standard node affinity.
 - <a id="definitions/tolerations"></a>**`tolerations`** _(array)_: Pod: Tolerations.
 - <a id="definitions/nodeSelector"></a>**`nodeSelector`** _(object)_: Pod: Node selector.
 - <a id="definitions/image"></a>**`image`** _(object)_: Container: Image configuration.

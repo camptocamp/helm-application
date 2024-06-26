@@ -39,6 +39,8 @@ Create the name of the service account to use
 {{- end }}
 
 {{- define "application.podConfig" -}}
+{{- $args := . }}
+
 {{- if .root.Values.global.image.pullSecrets }}
 imagePullSecrets:
 {{- toYaml .root.Values.global.image.pullSecrets | nindent 2 }}
@@ -54,53 +56,55 @@ securityContext: {{- toYaml .root.Values.podSecurityContext | nindent 2 }}
 nodeSelector:
   {{- toYaml . | nindent 2 }}
 {{- end }}
-{{- if ( .service.hostAntiAffinity | default false ) }}
+
+{{- with .service.affinity }}
 affinity:
+{{- with .podAntiAffinity }}
+{{- if hasKey . "topologyKey" }}
   podAntiAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
       - labelSelector:
           matchExpressions:
+{{- if hasKey . "labelSelector" }}
+            {{- range $key, $value := .labelSelector }}
+            - key: {{ $key }}
+              operator: In
+              values:
+                - {{ $value | quote}}
+            {{- end }}
+{{- else }}
             - key: app.kubernetes.io/name
               operator: In
               values:
-                - {{ include "common.name" . }}
+                - {{ include "common.name" $args }}
             - key: app.kubernetes.io/instance
               operator: In
               values:
-                - {{ .root.Release.Name }}
+                - {{ $args.root.Release.Name }}
             - key: app.kubernetes.io/component
               operator: In
               values:
-{{- if hasKey .service "serviceName" }}
-                - {{ printf "%s" .service.serviceName }}
-{{- else if hasKey . "serviceName" }}
-                - {{ printf "%s" .serviceName }}
+{{- if hasKey $args.service "serviceName" }}
+                - {{ printf "%s" $args.service.serviceName }}
+{{- else if hasKey $args "serviceName" }}
+                - {{ printf "%s" $args.serviceName }}
 {{- else }}
                 - main
 {{- end }}
-        topologyKey: "kubernetes.io/hostname"
+{{- end }}  {{/*  if hasKey . "labelSelector" */}}
+        topologyKey: {{ .topologyKey | quote }}
 {{- else }}
-{{- if or (and (hasKey .service "affinity") (.service.affinity)) .affinitySelector (hasKey .root.Values "affinity") }}
-affinity:
-  {{- if and (hasKey .service "affinity") (.service.affinity) -}}
-    {{ toYaml .service.affinity | nindent 2 }}
-  {{- else if .affinitySelector }}
-  podAntiAffinity:
-    requiredDuringSchedulingIgnoredDuringExecution:
-    - labelSelector:
-        matchExpressions:
-        {{- range $key, $value := .affinitySelector }}
-        - key: {{ $key }}
-          operator: In
-          values:
-          - {{ $value }}
-        {{- end }}
-      topologyKey: "kubernetes.io/hostname"
-  {{- else -}}
-    {{ toYaml .root.Values.affinity | nindent 2 }}
-  {{- end }}
+podAntiAffinity: {{ toYaml . | nindent 4 }}
+{{- end }}  {{/*  if hasKey . "topologyKey" */}}
+{{- end }}  {{/*  with .podAntiAffinity */}}
+{{- with .podAffinity }}
+  podAffinity: {{ toYaml . | nindent 4 }}
 {{- end }}
+{{- with .nodeAffinity }}
+  nodeAffinity: {{ toYaml . | nindent 4 }}
 {{- end }}
+{{- end }}  {{/*  with .service.affinity */}}
+
 {{- with .root.Values.tolerations }}
 tolerations:
   {{- toYaml . | nindent 2 }}

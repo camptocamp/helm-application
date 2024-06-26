@@ -100,7 +100,9 @@ services:
         honorLabels: true
     replicaCount: 1
     nodeSelector: {}
-    hostAntiAffinity: true
+    affinity:
+      podAntiAffinity:
+        topologyKey: kubernetes.io/hostname
     serviceName: with-service-name
     initContainers:
       aa: &aa
@@ -201,7 +203,10 @@ services:
   example2:
     releaseTrunc: 15
     prefixTrunc: 3
-    hostAntiAffinity: true
+
+    affinity:
+      podAntiAffinity:
+        topologyKey: kubernetes.io/hostname
 
     ingress:
       enabled: true
@@ -260,7 +265,9 @@ services:
 
     nameOverride: with-name-override
 
-    hostAntiAffinity: true
+    affinity:
+      podAntiAffinity:
+        topologyKey: kubernetes.io/hostname
 
     pdb:
       maxUnavailable: 3
@@ -299,6 +306,20 @@ services:
     service:
       <<: *servicedefinition
       name: hardcoded-service-name
+
+  # Eyample with labelSelector in affinity
+  example4:
+    enabled: true
+    affinity:
+      podAntiAffinity:
+        labelSelector:
+          k1: v1
+        topologyKey: kubernetes.io/hostname
+    containers:
+      main:
+        image:
+          repository: camptocamp/image
+          tag: latest
 
   # Minimal configuration of a deployment
   deployment-min:
