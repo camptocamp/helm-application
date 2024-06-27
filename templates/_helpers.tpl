@@ -109,6 +109,9 @@ terminationMessagePolicy: FallbackToLogsOnError
 {{- with .container.resources }}
 resources: {{- toYaml . | nindent 2 }}
 {{- end }}
+{{- with .container.lifecycle }}
+lifecycle: {{- toYaml . | nindent 2 }}
+{{- end }}
 {{- end }}
 
 {{- define "application.podMetadata" -}}

@@ -153,6 +153,14 @@ services:
     containers:
       cc:
         <<: *aa
+        lifecycle:
+          preStop:
+            exec:
+              command:
+                - /bin/bash
+                - -c
+                - 'true'
+
       dd:
         <<: *bb
         livenessProbe:
