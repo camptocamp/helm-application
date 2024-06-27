@@ -121,7 +121,22 @@
     },
     "affinity": {
       "type": "object",
-      "description": "Pod: The used affinity"
+      "description": "Pod: The used affinity",
+      "additionalProperties": false,
+      "properties": {
+        "podAntiAffinity": {
+          "type": "object",
+          "description": "The used pod anti-affinity, see: https://github.com/camptocamp/helm-custom-pod/wiki/Affinity"
+        },
+        "podAffinity": {
+          "type": "object",
+          "description": "The standard pod affinity"
+        },
+        "nodeAffinity": {
+          "type": "object",
+          "description": "The standard node affinity"
+        }
+      }
     },
     "tolerations": {
       "type": "array",

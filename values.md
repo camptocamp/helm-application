@@ -218,7 +218,10 @@
 - <a id="definitions/podAnnotations"></a>**`podAnnotations`** _(object)_: Annotations used only in the Pod definition. Can contain additional properties.
   - **Additional properties** _(string)_
 - <a id="definitions/serviceName"></a>**`serviceName`** _(string)_: [helm-common] The name of the service (not Kubernetes service), this will postfix the name.
-- <a id="definitions/affinity"></a>**`affinity`** _(object)_: Pod: The used affinity.
+- <a id="definitions/affinity"></a>**`affinity`** _(object)_: Pod: The used affinity. Cannot contain additional properties.
+  - **`podAntiAffinity`** _(object)_: The used pod anti-affinity, see: https://github.com/camptocamp/helm-custom-pod/wiki/Affinity.
+  - **`podAffinity`** _(object)_: The standard pod affinity.
+  - **`nodeAffinity`** _(object)_: The standard node affinity.
 - <a id="definitions/tolerations"></a>**`tolerations`** _(array)_: Pod: Tolerations.
 - <a id="definitions/nodeSelector"></a>**`nodeSelector`** _(object)_: Pod: Node selector.
 - <a id="definitions/image"></a>**`image`** _(object)_: Container: Image configuration.

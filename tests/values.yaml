@@ -100,7 +100,9 @@ services:
         honorLabels: true
     replicaCount: 1
     nodeSelector: {}
-    affinity: {}
+    affinity:
+      podAntiAffinity:
+        topologyKey: kubernetes.io/hostname
     serviceName: with-service-name
     initContainers:
       aa: &aa
@@ -209,24 +211,16 @@ services:
   example2:
     releaseTrunc: 15
     prefixTrunc: 3
+
     affinity:
-      nodeAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 1
-            preference:
-              matchExpressions:
-                - key: disktype
-                  operator: In
-                  values:
-                    - ssd
+      podAntiAffinity:
+        topologyKey: kubernetes.io/hostname
 
     ingress:
       enabled: true
       path: /two
     enabled: true
     replicaCount: 2
-
-    nameOverride: with-name-override
 
     pdb:
       minAvailable: 2
@@ -279,6 +273,10 @@ services:
 
     nameOverride: with-name-override
 
+    affinity:
+      podAntiAffinity:
+        topologyKey: kubernetes.io/hostname
+
     pdb:
       maxUnavailable: 3
 
@@ -317,6 +315,20 @@ services:
       <<: *servicedefinition
       name: hardcoded-service-name
 
+  # Eyample with labelSelector in affinity
+  example4:
+    enabled: true
+    affinity:
+      podAntiAffinity:
+        labelSelector:
+          k1: v1
+        topologyKey: kubernetes.io/hostname
+    containers:
+      main:
+        image:
+          repository: camptocamp/image
+          tag: latest
+
   # Minimal configuration of a deployment
   deployment-min:
     enabled: true
@@ -334,6 +346,17 @@ services:
       rollingUpdate:
         maxSurge: 1
         maxUnavailable: 0
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+                - key: disktype
+                  operator: In
+                  values:
+                    - ssd
+
     progressDeadlineSeconds: 600
     minReadySeconds: 10
     paused: false

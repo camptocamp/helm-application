@@ -48,14 +48,14 @@ metadata:
     helm.sh/chart: custom-pod
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: with-name-override
+    app.kubernetes.io/name: custom-pod
     app.kubernetes.io/instance: custom
     app.kubernetes.io/component: example2
 spec:
   minAvailable: 2
   selector:
     matchLabels:
-      app.kubernetes.io/name: with-name-override
+      app.kubernetes.io/name: custom-pod
       app.kubernetes.io/instance: custom
       app.kubernetes.io/component: example2
 ---
@@ -78,6 +78,26 @@ spec:
       app.kubernetes.io/name: with-name-override
       app.kubernetes.io/instance: custom
       app.kubernetes.io/component: example3
+---
+# Source: custom-pod/templates/pdb.yaml
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: custom-custom-pod-example4
+  labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: example4
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: custom-pod
+      app.kubernetes.io/instance: custom
+      app.kubernetes.io/component: example4
 ---
 # Source: custom-pod/templates/pdb.yaml
 apiVersion: policy/v1
@@ -225,6 +245,8 @@ data:
   SERVICE_EXAMPLE3_NAME: hardcoded-service-name
   SERVICE_EXAMPLE3_CONTAINER_CC_IMAGE_TAG: "latest"
   SERVICE_EXAMPLE3_CONTAINER_DD_IMAGE_TAG: "latest"
+  SERVICE_EXAMPLE4_NAME: custom-custom-pod-example4
+  SERVICE_EXAMPLE4_CONTAINER_MAIN_IMAGE_TAG: "latest"
   SERVICE_INTERNAL_NAME: custom-custom-pod-internal
   SERVICE_INTERNAL_CONTAINER_MAIN_IMAGE_TAG: "latest"
   SERVICE_JOB-ALL_NAME: custom-custom-pod-job-all
@@ -297,7 +319,7 @@ metadata:
     helm.sh/chart: custom-pod
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: with-name-override
+    app.kubernetes.io/name: custom-pod
     app.kubernetes.io/instance: custom
     app.kubernetes.io/component: example2
     one-custom-label: hello-world
@@ -312,7 +334,7 @@ spec:
       protocol: TCP
       targetPort: http
   selector:
-    app.kubernetes.io/name: with-name-override
+    app.kubernetes.io/name: custom-pod
     app.kubernetes.io/instance: custom
     app.kubernetes.io/component: example2
 ---
@@ -379,6 +401,16 @@ spec:
       serviceAccountName: custom-custom-pod-myserviceaccount
       securityContext:
         {}
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - preference:
+              matchExpressions:
+              - key: disktype
+                operator: In
+                values:
+                - ssd
+            weight: 1
       containers:
         - name: main
           securityContext:
@@ -464,6 +496,24 @@ spec:
       serviceAccountName: custom-custom-pod-myserviceaccount
       securityContext:
         {}
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                      - custom-pod
+                  - key: app.kubernetes.io/instance
+                    operator: In
+                    values:
+                      - custom
+                  - key: app.kubernetes.io/component
+                    operator: In
+                    values:
+                      - with-service-name
+              topologyKey: "kubernetes.io/hostname"
       initContainers:
         - name: aa
           securityContext:
@@ -621,7 +671,7 @@ metadata:
     helm.sh/chart: custom-pod
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: with-name-override
+    app.kubernetes.io/name: custom-pod
     app.kubernetes.io/instance: custom
     app.kubernetes.io/component: example2
 spec:
@@ -631,13 +681,13 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      app.kubernetes.io/name: with-name-override
+      app.kubernetes.io/name: custom-pod
       app.kubernetes.io/instance: custom
       app.kubernetes.io/component: example2
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: with-name-override
+        app.kubernetes.io/name: custom-pod
         app.kubernetes.io/instance: custom
         app.kubernetes.io/component: example2
     spec:
@@ -647,15 +697,23 @@ spec:
       securityContext:
         {}
       affinity:
-        nodeAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - preference:
-              matchExpressions:
-              - key: disktype
-                operator: In
-                values:
-                - ssd
-            weight: 1
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                      - custom-pod
+                  - key: app.kubernetes.io/instance
+                    operator: In
+                    values:
+                      - custom
+                  - key: app.kubernetes.io/component
+                    operator: In
+                    values:
+                      - example2
+              topologyKey: "kubernetes.io/hostname"
       containers:
         - name: cc
           securityContext:
@@ -769,6 +827,24 @@ spec:
       serviceAccountName: custom-custom-pod-myserviceaccount
       securityContext:
         {}
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                      - with-name-override
+                  - key: app.kubernetes.io/instance
+                    operator: In
+                    values:
+                      - custom
+                  - key: app.kubernetes.io/component
+                    operator: In
+                    values:
+                      - example3
+              topologyKey: "kubernetes.io/hostname"
       containers:
         - name: cc
           securityContext:
@@ -847,6 +923,58 @@ spec:
           emptyDir: {}
         - name: my-volume-2
           emptyDir: {}
+---
+# Source: custom-pod/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: custom-custom-pod-example4
+  labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: example4
+spec:
+  revisionHistoryLimit: 3
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: custom-pod
+      app.kubernetes.io/instance: custom
+      app.kubernetes.io/component: example4
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: custom-pod
+        app.kubernetes.io/instance: custom
+        app.kubernetes.io/component: example4
+    spec:
+      imagePullSecrets:
+        - name: custom-custom-pod-dockerregistry
+      serviceAccountName: custom-custom-pod-myserviceaccount
+      securityContext:
+        {}
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: k1
+                    operator: In
+                    values:
+                      - "v1"
+              topologyKey: "kubernetes.io/hostname"
+      containers:
+        - name: main
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 33
+          image: "camptocamp/image:latest"
+          imagePullPolicy: IfNotPresent
+          terminationMessagePolicy: FallbackToLogsOnError
 ---
 # Source: custom-pod/templates/deployment.yaml
 apiVersion: apps/v1
