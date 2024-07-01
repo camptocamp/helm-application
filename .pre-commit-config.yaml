@@ -42,7 +42,7 @@ repos:
       - id: workflows-require-timeout
       - id: helm-lock
   - repo: https://github.com/camptocamp/helm-common
-    rev: 2.0.0
+    rev: 2.0.1
     hooks:
       - id: helm-template-gen
         files: |-
@@ -79,7 +79,7 @@ repos:
     hooks:
       - id: git-check
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.28.4
+    rev: 0.28.6
     hooks:
       - id: check-github-actions
       - id: check-github-workflows
