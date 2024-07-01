@@ -16,3 +16,9 @@ YAML
 secret.secretName
 configMap.name
 Lifecycle
+SecretStore
+ExternalSecret
+secretKey
+1h
+1m
+1s

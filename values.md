@@ -54,6 +54,7 @@
       - **`password`** _(string, required)_: Password.
       - **`email`** _(string)_: Email.
 - **`secrets`** _(object)_: Cannot contain additional properties.
+  - **`enabled`** _(boolean)_: Enable the Secret. Default: `true`.
   - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
   - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
   - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
@@ -61,7 +62,7 @@
   - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
   - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
   - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
-  - **`content`** _(object, required)_: Secrets configuration. Can contain additional properties.
+  - **`content`** _(object)_: Secrets configuration. Can contain additional properties.
     - **Additional properties**
       - **One of**
         - _object_: Secret from a direct value. Cannot contain additional properties.
@@ -71,6 +72,22 @@
           - **`type`** _(string)_: Type of the secret. Must be one of: `["basicAuth"]`.
           - **`user`** _(string)_: Username.
           - **`password`** _(string)_: Password.
+- **`externalSecrets`** _(object)_: Can contain additional properties.
+  - **Additional properties** _(object)_: Cannot contain additional properties.
+    - **`enabled`** _(boolean)_: Enable the ExternalSecret. Default: `true`.
+    - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
+    - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
+    - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
+    - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+    - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
+    - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
+    - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
+    - **`refreshInterval`** _(string)_: The refresh interval like 1h, 1m, 1s.
+    - **`secretStoreRef`** _(object)_: defines which SecretStore to fetch the ExternalSecret data.
+    - **`target`** _(object)_: defines the Kubernetes Secret to be created.
+    - **`dataFrom`** _(array)_: used to fetch all properties from a specific Provider data.
+    - **`data`** _(object)_: Data defines the connection between the Kubernetes Secret keys and the Provider data. Can contain additional properties.
+      - **Additional properties** _(object)_: defines the connection between the Kubernetes Secret key and the Provider data. The map key became the secretKey.
 - **`configMaps`** _(object)_: Cannot contain additional properties.
   - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
   - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
@@ -137,7 +154,7 @@
     - **`failedJobsHistoryLimit`** _(integer)_: CronJob - failedJobsHistoryLimit.
     - **`concurrencyPolicy`** _(string)_: CronJob - concurrencyPolicy. Must be one of: `["Allow", "Forbid", "Replace"]`.
     - **`volumeClaimTemplates`** _(array)_: The volume claim templates, the key is the name of the volume claim template.
-    - **`volumes`** _(object)_: The volumes configuration, the key is the name of the volume, if `secret.secretName` or `configMap.name` is not defined, or defined to 'self' the internal one will be used, use 'self-metadata' for the metadata ConfigMap.
+    - **`volumes`** _(object)_: The volumes configuration, the key is the name of the volume, if `secret.secretName` or `configMap.name` is not defined, or defined to 'self' the internal one will be used, use 'self-metadata' for the metadata ConfigMap, 'self-external-secret' for the external secret.
     - **`pdb`** _(object)_: The Pod disruption budget configuration. Cannot contain additional properties. Default: `{"enabled": true, "maxUnavailable": 1}`.
       - **`enabled`** _(boolean)_: Enable the Pod disruption budget. Default: `true`.
       - **`minAvailable`** _(integer)_: The minimum number of Pods available.
