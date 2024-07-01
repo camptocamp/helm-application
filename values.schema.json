@@ -468,6 +468,11 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable the Secret",
+          "default": true
+        },
         "nameOverride": {
           "$ref": "#/definitions/nameOverride"
         },
@@ -534,8 +539,63 @@
             ]
           }
         }
-      },
-      "required": ["content"]
+      }
+    },
+    "externalSecret": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable the ExternalSecret",
+          "default": true
+        },
+        "nameOverride": {
+          "$ref": "#/definitions/nameOverride"
+        },
+        "fullnameOverride": {
+          "$ref": "#/definitions/fullnameOverride"
+        },
+        "serviceName": {
+          "$ref": "#/definitions/serviceName"
+        },
+        "releaseTrunc": {
+          "$ref": "#/definitions/releaseTrunc"
+        },
+        "prefixTrunc": {
+          "$ref": "#/definitions/prefixTrunc"
+        },
+        "labels": {
+          "$ref": "#/definitions/labels"
+        },
+        "annotations": {
+          "$ref": "#/definitions/annotations"
+        },
+        "refreshInterval": {
+          "type": "string",
+          "description": "The refresh interval like 1h, 1m, 1s"
+        },
+        "secretStoreRef": {
+          "type": "object",
+          "description": "defines which SecretStore to fetch the ExternalSecret data."
+        },
+        "target": {
+          "type": "object",
+          "description": "defines the Kubernetes Secret to be created."
+        },
+        "dataFrom": {
+          "type": "array",
+          "description": "used to fetch all properties from a specific Provider data."
+        },
+        "data": {
+          "type": "object",
+          "description": "Data defines the connection between the Kubernetes Secret keys and the Provider data.",
+          "additionalProperties": {
+            "type": "object",
+            "description": "defines the connection between the Kubernetes Secret key and the Provider data. The map key became the secretKey"
+          }
+        }
+      }
     },
     "configMaps": {
       "type": "object",
@@ -803,7 +863,7 @@
           },
           "volumes": {
             "type": "object",
-            "description": "The volumes configuration, the key is the name of the volume, if `secret.secretName` or `configMap.name` is not defined, or defined to 'self' the internal one will be used, use 'self-metadata' for the metadata ConfigMap"
+            "description": "The volumes configuration, the key is the name of the volume, if `secret.secretName` or `configMap.name` is not defined, or defined to 'self' the internal one will be used, use 'self-metadata' for the metadata ConfigMap, 'self-external-secret' for the external secret"
           },
           "pdb": {
             "type": "object",

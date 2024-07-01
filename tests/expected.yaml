@@ -658,6 +658,18 @@ spec:
             items:
             - key: testYaml
               path: test.yaml
+        - name: self-configmap-metadata
+          configMap:
+            name: custom-custom-pod-metadata
+            items:
+            - key: testYaml
+              path: test.yaml
+        - name: self-external-secret
+          secret:
+            secretName: custom-custom-pod-external-secret
+            items:
+            - key: hostname
+              path: hostname.txt
         - name: self-secret
           secret:
             secretName: custom-custom-pod
@@ -1032,6 +1044,11 @@ spec:
                 secretKeyRef:
                   name: custom-custom-pod
                   key: "test"
+            - name: "SELF_VAULT"
+              valueFrom:
+                secretKeyRef:
+                  name: custom-custom-pod-external-secret
+                  key: "hostname"
           terminationMessagePolicy: FallbackToLogsOnError
 ---
 # Source: custom-pod/templates/statefulset.yaml
@@ -1397,6 +1414,30 @@ spec:
                 name: hardcoded-service-name
                 port:
                   number: 8080
+---
+# Source: custom-pod/templates/external-secret.yaml
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: custom-custom-pod
+  labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: main
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: SecretStore
+    name: my-secret-store
+  target:
+    name: custom-custom-pod-external-secret
+  data:
+    - secretKey: hostname
+      remoteRef:
+        key: hostname
 ---
 # Source: custom-pod/templates/podmonitor.yaml
 apiVersion: monitoring.coreos.com/v1
