@@ -113,6 +113,7 @@ services:
         command:
           - sleep
           - '3600'
+        workingDir: /tmp
         resources:
           limits:
             cpu: 100m
