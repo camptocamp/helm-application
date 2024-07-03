@@ -148,6 +148,7 @@
         - **`env`**: Refer to _[#/definitions/env](#definitions/env)_.
         - **`resources`**: Refer to _[#/definitions/resources](#definitions/resources)_.
         - **`command`**: Refer to _[#/definitions/command](#definitions/command)_.
+        - **`workingDir`**: Refer to _[#/definitions/workingDir](#definitions/workingDir)_.
         - **`args`**: Refer to _[#/definitions/args](#definitions/args)_.
         - **`volumeMounts`**: Refer to _[#/definitions/volumeMounts](#definitions/volumeMounts)_.
         - **`volumeDevices`**: Refer to _[#/definitions/volumeDevices](#definitions/volumeDevices)_.
@@ -157,6 +158,7 @@
         - **`env`**: Refer to _[#/definitions/env](#definitions/env)_.
         - **`resources`**: Refer to _[#/definitions/resources](#definitions/resources)_.
         - **`command`**: Refer to _[#/definitions/command](#definitions/command)_.
+        - **`workingDir`**: Refer to _[#/definitions/workingDir](#definitions/workingDir)_.
         - **`args`**: Refer to _[#/definitions/args](#definitions/args)_.
         - **`volumeMounts`**: Refer to _[#/definitions/volumeMounts](#definitions/volumeMounts)_.
         - **`volumeDevices`**: Refer to _[#/definitions/volumeDevices](#definitions/volumeDevices)_.
@@ -251,6 +253,7 @@
 - <a id="definitions/resources"></a>**`resources`** _(object)_: Container: The container resources.
 - <a id="definitions/command"></a>**`command`** _(array)_: Container: The container command.
   - **Items** _(string)_
+- <a id="definitions/workingDir"></a>**`workingDir`** _(string)_: Container: The container working directory.
 - <a id="definitions/args"></a>**`args`** _(array)_: Container: The container arguments.
   - **Items** _(string)_
 - <a id="definitions/volumeMounts"></a>**`volumeMounts`** _(object)_: Container: Volume mounts, the key is the mountPath of the volume.

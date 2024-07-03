@@ -594,6 +594,7 @@ spec:
           command:
             - sleep
             - "3600"
+          workingDir: /tmp
         - name: dd
           securityContext:
             runAsNonRoot: true
@@ -735,6 +736,7 @@ spec:
           command:
             - sleep
             - "3600"
+          workingDir: /tmp
         - name: dd
           securityContext:
             runAsNonRoot: true
@@ -866,6 +868,7 @@ spec:
           command:
             - sleep
             - "3600"
+          workingDir: /tmp
         - name: dd
           securityContext:
             runAsNonRoot: true
