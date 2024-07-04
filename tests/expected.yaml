@@ -174,24 +174,6 @@ metadata:
   annotations:
     example-annotation: coucou
 ---
-# Source: custom-pod/templates/secret-docker-registry.yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: custom-custom-pod-dockerregistry
-  labels:
-    helm.sh/chart: custom-pod
-    app.kubernetes.io/version: "1.0"
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
-    app.kubernetes.io/component: dockerregistry
-  annotations:
-    testAnnotation: annotation value
-type: kubernetes.io/dockerconfigjson
-data:
-  .dockerconfigjson: ewogICJhdXRocyI6IHsKICAgICJkb2NrZXIuaW8iOiB7CiAgICAgICJhdXRoIjogIll6SmpaMmx6WW05ME9qRXlNelE9IiwKICAgICAgInVzZXJuYW1lIjogImMyY2dpc2JvdCIsCiAgICAgICJwYXNzd29yZCI6ICIxMjM0IiwKICAgICAgImVtYWlsIjogImRvY2tlci1odWJAY2FtcHRvY2FtcC5jb20iCiAgICB9LAogICAgImdoY3IuaW8iOiB7CiAgICAgICJhdXRoIjogIll6SmpMV0p2ZEMxbmFYTXRZMms2TVRJek5BPT0iLAogICAgICAidXNlcm5hbWUiOiAiYzJjLWJvdC1naXMtY2kiLAogICAgICAicGFzc3dvcmQiOiAiMTIzNCIsCiAgICAgICJlbWFpbCI6ICJnZW9zcGF0aWFsLWJvdEBjYW1wdG9jYW1wLmNvbSIKICAgIH0sCiAgICAiaHR0cHM6Ly9pbmRleC5kb2NrZXIuaW8vdjEvIjogewogICAgICAiYXV0aCI6ICJZekpqWjJselltOTBPakV5TXpRPSIsCiAgICAgICJ1c2VybmFtZSI6ICJjMmNnaXNib3QiLAogICAgICAicGFzc3dvcmQiOiAiMTIzNCIsCiAgICAgICJlbWFpbCI6ICJkb2NrZXItaHViQGNhbXB0b2NhbXAuY29tIgogICAgfSwKICAgICJmaXgtZW5kLWNvbW1hIjogeyJhdXRoIjogIiJ9CiAgfQp9
----
 # Source: custom-pod/templates/secret.yaml
 apiVersion: v1
 kind: Secret
@@ -1418,6 +1400,82 @@ spec:
                 name: hardcoded-service-name
                 port:
                   number: 8080
+---
+# Source: custom-pod/templates/external-secret-docker-registry.yaml
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: custom-custom-pod
+  labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: main
+  annotations:
+    testAnnotation: annotation value
+spec:
+  target:
+    name: custom-custom-pod-external-secret
+    template:
+      type: kubernetes.io/dockerconfigjson
+      data:
+        .dockerconfigjson: |-
+          {
+            "auths": {
+              "https://index.docker.io/v1/": {
+                "auth": "YzJjZ2lzYm90OjEyMzQ=",
+                "username": "c2cgisbot",
+                "password": "1234",
+                "email": "docker-hub@camptocamp.com"
+              },
+              "docker.io": {
+                "auth": "YzJjZ2lzYm90OjEyMzQ=",
+                "username": "c2cgisbot",
+                "password": "1234",
+                "email": "docker-hub@camptocamp.com"
+              },
+              "{{ .ghcr.io-url }}": {
+                "auth": {{ ( printf "%s:%s" .ghcr.io-username .ghcr.io-password ) | b64enc | quote }},
+                "username": "{{ .ghcr.io-username }}",
+                "password": "{{ .ghcr.io-password }}",
+                "email": "{{ .ghcr.io-email }}"
+              },
+              "ghcr.io": {
+                "auth": {{ ( printf "%s:my-password" .password-username ) | b64enc | quote }},
+                "username": "{{ .password-username }}",
+                "password": "my-password",
+                "email": "geospatial-bot@camptocamp.com"
+              },
+              "ghcr.io": {
+                "auth": {{ ( printf "my-username:%s" .user-password ) | b64enc | quote }},
+                "username": "my-username",
+                "password": "{{ .user-password }}",
+                "email": "geospatial-bot@camptocamp.com"
+              },
+              "fix-end-comma": {"auth": ""}
+            }
+          }
+  data:
+    - secretKey: ghcr.io-username
+      remoteRef:
+        key: ghcr-username
+    - secretKey: ghcr.io-password
+      remoteRef:
+        key: ghcr-password
+    - secretKey: ghcr.io-email
+      remoteRef:
+        key: ghcr-email
+    - secretKey: ghcr.io-url
+      remoteRef:
+        key: ghcr-url
+    - secretKey: password-username
+      remoteRef:
+        key: ghcr-username
+    - secretKey: user-password
+      remoteRef:
+        key: ghcr-password
 ---
 # Source: custom-pod/templates/external-secret.yaml
 apiVersion: external-secrets.io/v1beta1
