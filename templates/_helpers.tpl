@@ -17,12 +17,16 @@ Create the name of the service account to use
 - name: {{ .name | quote }}
   valueFrom:
     {{ .value.type }}KeyRef:
-      {{ if and (hasKey .value "name" ) ( eq .value.name "self" ) -}}
+      {{ if and ( hasKey .value "name" ) ( eq .value.name "self" ) -}}
       {{ if .value.type | eq "configMap" -}}
       name: {{ include "common.fullname" ( dict "root" .root "service" .root.Values.configMaps ) }}
       {{ else -}}
       name: {{ include "common.fullname" ( dict "root" .root "service" .root.Values.secrets ) }}
       {{ end -}}
+      {{ else if hasPrefix "self-external-secret-" .value.name -}}
+      {{- $name := substr 21 -1 .value.name }}
+      {{- $definition := get .root.Values.externalSecrets $name }}
+      name: {{ include "common.fullname" ( dict "root" .root "service" $definition "serviceName" $name ) }}
       {{ else if and (hasKey .value "name" ) ( eq .value.name "self-metadata" ) -}}
       name: {{ include "common.fullname" ( dict "root" .root "service" .root.Values "serviceName" "metadata" ) }}
       {{ else -}}
@@ -182,12 +186,12 @@ volumes:
     secret:
       {{- if eq ( default "self" $value.secret.secretName ) "self" }}
       secretName: {{ include "common.fullname" ( dict "root" $root "service" $root.Values.secrets ) }}
-      {{- else }}
-      {{- if eq ( default "self" $value.secret.secretName ) "self-metadata" }}
-      secretName: {{ include "common.fullname" ( dict "root" $root "service" $root.Values "serviceName" "metadata" ) }}
+      {{- else if hasPrefix "self-external-secret-" $value.secret.secretName }}
+      {{- $name := substr 21 -1 $value.secret.secretName }}
+      {{- $definition := get $root.Values.externalSecrets $name }}
+      secretName: {{ include "common.fullname" ( dict "root" $root "service" $definition "serviceName" $name ) }}
       {{- else }}
       secretName: {{ $value.secret.secretName }}
-      {{- end }}
       {{- end }}
       {{- with $value.secret.items }}
       items: {{- . | toYaml | nindent 6 }}
@@ -197,6 +201,8 @@ volumes:
     configMap:
       {{- if eq ( default "self" $value.configMap.name ) "self" }}
       name: {{ include "common.fullname" ( dict "root" $root "service" $root.Values.configMaps ) }}
+      {{- else if eq ( default "self" $value.configMap.name ) "self-metadata" }}
+      name: {{ include "common.fullname" ( dict "root" $root "service" $root.Values "serviceName" "metadata" ) }}
       {{- else }}
       name: {{ $value.configMap.name }}
       {{- end }}

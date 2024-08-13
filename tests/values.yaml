@@ -41,6 +41,7 @@ dockerregistry:
       password: '1234'
 
 secrets:
+  enabled: true
   annotations:
     testAnnotation: annotation value for secrets
   content:
@@ -52,6 +53,28 @@ secrets:
       type: basicAuth
       user: toto
       password: toto
+
+externalSecrets:
+  app:
+    enabled: true
+    refreshInterval: 1h
+    secretStoreRef:
+      name: my-secret-store
+      kind: SecretStore
+    data:
+      hostname:
+        remoteRef:
+          key: hostname
+  global:
+    enabled: true
+    refreshInterval: 1h
+    secretStoreRef:
+      name: my-global-secret-store
+      kind: SecretStore
+    data:
+      pass:
+        remoteRef:
+          key: pass
 
 configMaps:
   annotations:
@@ -199,6 +222,18 @@ services:
               path: test.yaml
       self-secret:
         secret: {}
+      self-configmap-metadata:
+        configMap:
+          name: self-metadata
+          items:
+            - key: testYaml
+              path: test.yaml
+      self-external-secret:
+        secret:
+          secretName: self-external-secret-app
+          items:
+            - key: hostname
+              path: hostname.txt
 
     service: &servicedefinition
       type: ClusterIP
@@ -509,3 +544,7 @@ services:
             type: configMap
             name: self-metadata
             key: CHART_NAME
+          SELF_VAULT:
+            type: secret
+            name: self-external-secret-app
+            key: hostname
