@@ -1083,9 +1083,13 @@
                 "type": "boolean",
                 "description": "Enable the Pod monitor for this service"
               },
-              "endpoint": {
+              "podMetricsEndpoints": {
                 "type": "object",
-                "description": "The endpoint of the Pod monitor"
+                "description": "The endpoints of the Pod monitor by port",
+                "additionalProperties": {
+                  "type": "object",
+                  "description": "The endpoint of the Pod monitor"
+                }
               }
             }
           }

@@ -1544,7 +1544,9 @@ spec:
       app.kubernetes.io/instance: custom
       app.kubernetes.io/component: with-service-name
   podMetricsEndpoints:
-    -
+    - port: config-prometheus
       honorLabels: true
       interval: 10s
-      port: prometheus
+    - port: prometheus
+      honorLabels: true
+      interval: 10s

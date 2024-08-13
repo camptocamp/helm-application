@@ -131,10 +131,13 @@ services:
       path: /one
     podMonitor:
       enabled: true
-      endpoint:
-        port: prometheus
-        interval: 10s
-        honorLabels: true
+      podMetricsEndpoints:
+        prometheus:
+          interval: 10s
+          honorLabels: true
+        config-prometheus:
+          interval: 10s
+          honorLabels: true
     replicaCount: 1
     nodeSelector: {}
     affinity:
