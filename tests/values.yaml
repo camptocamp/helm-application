@@ -24,21 +24,35 @@ ingress:
         - '*.example.com'
 
 dockerregistry:
+  external: true
   annotations:
     testAnnotation: annotation value
   content:
-    https://index.docker.io/v1/:
+    docker-hub-1:
       email: docker-hub@camptocamp.com
       username: c2cgisbot
       password: '1234'
+      url: https://index.docker.io/v1/
     docker.io:
       email: docker-hub@camptocamp.com
       username: c2cgisbot
       password: '1234'
+      url: docker.io
     ghcr.io:
+      externalEmail: ghcr-email
+      externalUsername: ghcr-username
+      externalPassword: ghcr-password
+      externalUrl: ghcr-url
+    user:
       email: geospatial-bot@camptocamp.com
-      username: c2c-bot-gis-ci
-      password: '1234'
+      username: my-username
+      externalPassword: ghcr-password
+      url: ghcr.io
+    password:
+      email: geospatial-bot@camptocamp.com
+      externalUsername: ghcr-username
+      password: my-password
+      url: ghcr.io
 
 secrets:
   enabled: true

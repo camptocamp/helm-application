@@ -442,6 +442,14 @@
         "annotations": {
           "$ref": "#/definitions/annotations"
         },
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable the Docker registry"
+        },
+        "external": {
+          "type": "boolean",
+          "description": "Use an external secret to the Docker registries username, password and email"
+        },
         "content": {
           "type": "object",
           "description": "Docker registries authentication",
@@ -460,13 +468,31 @@
               "email": {
                 "type": "string",
                 "description": "Email"
+              },
+              "url": {
+                "type": "string",
+                "description": "URL, used only for external secret"
+              },
+              "externalUsername": {
+                "type": "string",
+                "description": "Key of the external secret for the username"
+              },
+              "externalPassword": {
+                "type": "string",
+                "description": "Key of the external secret for the password"
+              },
+              "externalEmail": {
+                "type": "string",
+                "description": "Key of the external secret for the email"
+              },
+              "externalUrl": {
+                "type": "string",
+                "description": "Key of the external secret for the URL"
               }
-            },
-            "required": ["username", "password"]
+            }
           }
         }
-      },
-      "required": ["content"]
+      }
     },
     "secrets": {
       "type": "object",

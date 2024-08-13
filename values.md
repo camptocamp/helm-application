@@ -48,11 +48,18 @@
   - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
   - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
   - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
-  - **`content`** _(object, required)_: Docker registries authentication. Can contain additional properties.
+  - **`enabled`** _(boolean)_: Enable the Docker registry.
+  - **`external`** _(boolean)_: Use an external secret to the Docker registries username, password and email.
+  - **`content`** _(object)_: Docker registries authentication. Can contain additional properties.
     - **Additional properties** _(object)_: Cannot contain additional properties.
-      - **`username`** _(string, required)_: Username.
-      - **`password`** _(string, required)_: Password.
+      - **`username`** _(string)_: Username.
+      - **`password`** _(string)_: Password.
       - **`email`** _(string)_: Email.
+      - **`url`** _(string)_: URL, used only for external secret.
+      - **`externalUsername`** _(string)_: Key of the external secret for the username.
+      - **`externalPassword`** _(string)_: Key of the external secret for the password.
+      - **`externalEmail`** _(string)_: Key of the external secret for the email.
+      - **`externalUrl`** _(string)_: Key of the external secret for the URL.
 - **`secrets`** _(object)_: Cannot contain additional properties.
   - **`enabled`** _(boolean)_: Enable the Secret. Default: `true`.
   - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
