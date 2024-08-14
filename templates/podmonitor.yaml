@@ -16,9 +16,9 @@ metadata:
 spec:
   selector:
     matchLabels: {{- include "common.selectorLabels" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) | nindent 6 }}
-  {{- with $serviceDefinition.podMonitor.endpoint }}
+  {{- with $serviceDefinition.podMonitor.podMetricsEndpoints }}
   podMetricsEndpoints:
-    - {{ . | toYaml | nindent 6 }}
+    {{- include "common.dictToList" ( dict "keyName" "port" "contents" . ) | nindent 4 }}
   {{- end }}
 {{- end }}
 {{- end }}

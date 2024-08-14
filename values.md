@@ -210,7 +210,8 @@
       - **`ports`** _(array)_
     - **`podMonitor`** _(object)_: The Prometheus Pod monitor configuration. Cannot contain additional properties.
       - **`enabled`** _(boolean)_: Enable the Pod monitor for this service.
-      - **`endpoint`** _(object)_: The endpoint of the Pod monitor.
+      - **`podMetricsEndpoints`** _(object)_: The endpoints of the Pod monitor by port. Can contain additional properties.
+        - **Additional properties** _(object)_: The endpoint of the Pod monitor.
 
 ## Definitions
 
