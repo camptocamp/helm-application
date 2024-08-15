@@ -211,7 +211,10 @@
       - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
       - **`ports`** _(array)_
     - **`podMonitor`** _(object)_: The Prometheus Pod monitor configuration. Cannot contain additional properties.
-      - **`enabled`** _(boolean)_: Enable the Pod monitor for this service.
+      - **`enabled`** _(boolean)_: Enable the Pod monitor for this service (Pod).
+      - **`name`** _(string)_: The name of the Pod monitor.
+      - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
+      - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
       - **`podMetricsEndpoints`** _(object)_: The endpoints of the Pod monitor by port. Can contain additional properties.
         - **Additional properties** _(object)_: The endpoint of the Pod monitor.
 
