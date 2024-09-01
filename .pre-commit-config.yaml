@@ -11,7 +11,7 @@ ci:
 
 repos:
   - repo: https://github.com/sbrunner/jsonschema2md
-    rev: 1.2.0
+    rev: 1.2.3
     hooks:
       - id: jsonschema2md
         files: values.schema.json
