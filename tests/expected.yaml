@@ -1405,7 +1405,7 @@ spec:
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
-  name: custom-custom-pod
+  name: custom-custom-pod-docker-registry
   labels:
     helm.sh/chart: custom-pod
     app.kubernetes.io/version: "1.0"
@@ -1417,7 +1417,7 @@ metadata:
     testAnnotation: annotation value
 spec:
   target:
-    name: custom-custom-pod-external-secret
+    name: custom-custom-pod-docker-registry
     template:
       type: kubernetes.io/dockerconfigjson
       data:
@@ -1495,7 +1495,7 @@ spec:
     kind: SecretStore
     name: my-secret-store
   target:
-    name: custom-custom-pod-external-secret
+    name: custom-custom-pod-app
   data:
     - secretKey: hostname
       remoteRef:
@@ -1519,7 +1519,7 @@ spec:
     kind: SecretStore
     name: my-global-secret-store
   target:
-    name: custom-custom-pod-external-secret
+    name: custom-custom-pod-global
   data:
     - secretKey: pass
       remoteRef:
