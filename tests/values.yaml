@@ -139,7 +139,6 @@ services:
           interval: 10s
           honorLabels: true
     replicaCount: 1
-    nodeSelector: {}
     affinity:
       podAntiAffinity:
         topologyKey: kubernetes.io/hostname
@@ -368,7 +367,7 @@ services:
       <<: *servicedefinition
       name: hardcoded-service-name
 
-  # Eyample with labelSelector in affinity
+  # Example with labelSelector in affinity
   example4:
     enabled: true
     affinity:
@@ -381,6 +380,13 @@ services:
         image:
           repository: camptocamp/image
           tag: latest
+
+    podMonitor:
+      enabled: true
+      podMetricsEndpoints:
+        prometheus:
+          interval: 10s
+          honorLabels: true
 
   # Minimal configuration of a deployment
   deployment-min:

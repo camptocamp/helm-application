@@ -1089,7 +1089,17 @@
             "properties": {
               "enabled": {
                 "type": "boolean",
-                "description": "Enable the Pod monitor for this service"
+                "description": "Enable the Pod monitor for this service (Pod)"
+              },
+              "name": {
+                "type": "string",
+                "description": "The name of the Pod monitor"
+              },
+              "labels": {
+                "$ref": "#/definitions/labels"
+              },
+              "annotations": {
+                "$ref": "#/definitions/annotations"
               },
               "podMetricsEndpoints": {
                 "type": "object",

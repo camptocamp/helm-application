@@ -1550,3 +1550,26 @@ spec:
     - port: prometheus
       honorLabels: true
       interval: 10s
+---
+# Source: custom-pod/templates/podmonitor.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: custom-custom-pod-example4
+  labels:
+    helm.sh/chart: custom-pod
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-pod
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: example4
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: custom-pod
+      app.kubernetes.io/instance: custom
+      app.kubernetes.io/component: example4
+  podMetricsEndpoints:
+    - port: prometheus
+      honorLabels: true
+      interval: 10s
