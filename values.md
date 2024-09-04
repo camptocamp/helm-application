@@ -50,6 +50,8 @@
   - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
   - **`enabled`** _(boolean)_: Enable the Docker registry.
   - **`external`** _(boolean)_: Use an external secret to the Docker registries username, password and email.
+  - **`refreshInterval`** _(string)_: The refresh interval like 1h, 1m, 1s.
+  - **`secretStoreRef`** _(object)_: defines which SecretStore to fetch the ExternalSecret data.
   - **`content`** _(object)_: Docker registries authentication. Can contain additional properties.
     - **Additional properties** _(object)_: Cannot contain additional properties.
       - **`username`** _(string)_: Username.
