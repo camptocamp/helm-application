@@ -461,41 +461,44 @@
         "content": {
           "type": "object",
           "description": "Docker registries authentication",
-          "additionalProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "username": {
-                "type": "string",
-                "description": "Username"
-              },
-              "password": {
-                "type": "string",
-                "description": "Password"
-              },
-              "email": {
-                "type": "string",
-                "description": "Email"
-              },
-              "url": {
-                "type": "string",
-                "description": "URL, used only for external secret"
-              },
-              "externalUsername": {
-                "type": "string",
-                "description": "Key of the external secret for the username"
-              },
-              "externalPassword": {
-                "type": "string",
-                "description": "Key of the external secret for the password"
-              },
-              "externalEmail": {
-                "type": "string",
-                "description": "Key of the external secret for the email"
-              },
-              "externalUrl": {
-                "type": "string",
-                "description": "Key of the external secret for the URL"
+          "additionalProperties": false,
+          "patternProperties": {
+            "^[a-zA-Z0-9_]*$": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "description": "Username"
+                },
+                "password": {
+                  "type": "string",
+                  "description": "Password"
+                },
+                "email": {
+                  "type": "string",
+                  "description": "Email"
+                },
+                "url": {
+                  "type": "string",
+                  "description": "URL, used only for external secret"
+                },
+                "externalUsername": {
+                  "type": "string",
+                  "description": "Key of the external secret for the username"
+                },
+                "externalPassword": {
+                  "type": "string",
+                  "description": "Key of the external secret for the password"
+                },
+                "externalEmail": {
+                  "type": "string",
+                  "description": "Key of the external secret for the email"
+                },
+                "externalUrl": {
+                  "type": "string",
+                  "description": "Key of the external secret for the URL"
+                }
               }
             }
           }
