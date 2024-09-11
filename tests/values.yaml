@@ -28,17 +28,17 @@ dockerregistry:
   annotations:
     testAnnotation: annotation value
   content:
-    docker-hub-1:
+    docker_hub_1:
       email: docker-hub@camptocamp.com
       username: c2cgisbot
       password: '1234'
       url: https://index.docker.io/v1/
-    docker.io:
+    docker_io:
       email: docker-hub@camptocamp.com
       username: c2cgisbot
       password: '1234'
       url: docker.io
-    ghcr.io:
+    ghcr_io:
       externalEmail: ghcr-email
       externalUsername: ghcr-username
       externalPassword: ghcr-password

@@ -1436,44 +1436,44 @@ spec:
                 "password": "1234",
                 "email": "docker-hub@camptocamp.com"
               },
-              "{{ .ghcr.io-url }}": {
-                "auth": {{ ( printf "%s:%s" .ghcr.io-username .ghcr.io-password ) | b64enc | quote }},
-                "username": "{{ .ghcr.io-username }}",
-                "password": "{{ .ghcr.io-password }}",
-                "email": "{{ .ghcr.io-email }}"
+              "{{ .ghcr_io_url }}": {
+                "auth": {{ ( printf "%s:%s" .ghcr_io_username .ghcr_io_password ) | b64enc | quote }},
+                "username": "{{ .ghcr_io_username }}",
+                "password": "{{ .ghcr_io_password }}",
+                "email": "{{ .ghcr_io_email }}"
               },
               "ghcr.io": {
-                "auth": {{ ( printf "%s:my-password" .password-username ) | b64enc | quote }},
-                "username": "{{ .password-username }}",
+                "auth": {{ ( printf "%s:my-password" .password_username ) | b64enc | quote }},
+                "username": "{{ .password_username }}",
                 "password": "my-password",
                 "email": "geospatial-bot@camptocamp.com"
               },
               "ghcr.io": {
-                "auth": {{ ( printf "my-username:%s" .user-password ) | b64enc | quote }},
+                "auth": {{ ( printf "my-username:%s" .user_password ) | b64enc | quote }},
                 "username": "my-username",
-                "password": "{{ .user-password }}",
+                "password": "{{ .user_password }}",
                 "email": "geospatial-bot@camptocamp.com"
               },
               "fix-end-comma": {"auth": ""}
             }
           }
   data:
-    - secretKey: ghcr.io-username
+    - secretKey: ghcr_io_username
       remoteRef:
         key: ghcr-username
-    - secretKey: ghcr.io-password
+    - secretKey: ghcr_io_password
       remoteRef:
         key: ghcr-password
-    - secretKey: ghcr.io-email
+    - secretKey: ghcr_io_email
       remoteRef:
         key: ghcr-email
-    - secretKey: ghcr.io-url
+    - secretKey: ghcr_io_url
       remoteRef:
         key: ghcr-url
-    - secretKey: password-username
+    - secretKey: password_username
       remoteRef:
         key: ghcr-username
-    - secretKey: user-password
+    - secretKey: user_password
       remoteRef:
         key: ghcr-password
 ---
