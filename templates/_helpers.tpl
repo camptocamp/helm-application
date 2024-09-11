@@ -166,7 +166,7 @@ annotations:
 {
   "auths": {
     {{- range $registry, $conf := . }}
-    {{ $registry | quote }}: {
+    {{ $conf.url | quote }}: {
       "auth": {{ (printf "%s:%s" $conf.username $conf.password) | b64enc | quote}},
       "username": {{ $conf.username | quote }},
       "password": {{ $conf.password | quote }},
