@@ -234,7 +234,7 @@ volumes:
       {{- else if eq ( default "self" $value.configMap.name ) "self-metadata" }}
       name: {{ include "common.fullname" ( dict "root" $root "service" $root.Values "serviceName" "metadata" ) }}
       {{- else }}
-      name: {{ $value.configMap.name }}
+      name: {{ default $value.configMap.name ( get $root.Values.global.configMapNameOverride $value.configMap.name ) | quote }}
       {{- end }}
       {{- with $value.configMap.items }}
       items: {{- . | toYaml | nindent 6 }}

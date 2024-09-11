@@ -630,6 +630,9 @@ spec:
               port: http
 
       volumes:
+        - name: config-map-override
+          configMap:
+            name: "test-overridden"
         - name: my-device-volume
           persistentVolumeClaim:
             claimName: pvc-name
@@ -1014,6 +1017,11 @@ spec:
           image: "camptocamp/image:latest"
           imagePullPolicy: IfNotPresent
           env:
+            - name: "CONFIG_MAP_OVERRIDE"
+              valueFrom:
+                configMapKeyRef:
+                  name: "test-overridden"
+                  key: "testSingleLine"
             - name: "SELF_CONFIGMAP"
               valueFrom:
                 configMapKeyRef:
