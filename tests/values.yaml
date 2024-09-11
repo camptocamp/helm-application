@@ -1,3 +1,7 @@
+global:
+  configMapNameOverride:
+    test-override: test-overridden
+
 metadata:
   enabled: true
 
@@ -250,6 +254,9 @@ services:
           items:
             - key: hostname
               path: hostname.txt
+      config-map-override:
+        configMap:
+          name: test-override
 
     service: &servicedefinition
       type: ClusterIP
@@ -571,3 +578,7 @@ services:
             type: secret
             name: self-external-secret-app
             key: hostname
+          CONFIG_MAP_OVERRIDE:
+            type: configMap
+            name: test-override
+            key: testSingleLine
