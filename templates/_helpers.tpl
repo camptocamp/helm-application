@@ -52,7 +52,7 @@ imagePullSecrets:
 {{- if .root.Values.dockerregistry -}}
 {{- if .root.Values.dockerregistry.enabled -}}
 imagePullSecrets:
-  - name: {{ include "common.fullname" ( dict "root" .root "service" .root.Values "serviceName" "dockerregistry" ) }}
+  - name: {{ include "common.fullname" ( dict "root" .root "service" .root.Values "serviceName" "docker-registry" ) }}
 {{- end }}
 {{- end }}
 {{- end }}
