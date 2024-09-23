@@ -1,6 +1,6 @@
-# [Kubernetes](https://kubernetes.io/) [HELM chart](https://helm.sh/) for a simple custom application
+# [Kubernetes](https://kubernetes.io/) [HELM chart](https://helm.sh/) for a simple application
 
-With this chart you can easily deploy a simple custom application on Kubernetes, with only configuration.
+With this chart you can easily deploy a simple application on Kubernetes, with only configuration.
 
 This will create a Deployment, a Service, a Pod Disruption Budget, optionally an Ingress, optionally a Service Account,
 optionally a Pod Monitor (for Prometheus).
@@ -16,7 +16,7 @@ and production.
 ## Documentation
 
 Documentation based on the schema defined in [values.md](./values.md).
-The documentation is on the [Wiki](https://github.com/camptocamp/helm-custom-pod/wiki).
+The documentation is on the [Wiki](https://github.com/camptocamp/helm-application/wiki).
 
 ## Contributing
 

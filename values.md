@@ -1,4 +1,4 @@
-# HELM custom Pod configuration
+# HELM application configuration
 
 ## Properties
 
@@ -251,7 +251,7 @@
   - **Additional properties** _(string)_
 - <a id="definitions/serviceName"></a>**`serviceName`** _(string)_: [helm-common] The name of the service (not Kubernetes service), this will postfix the name.
 - <a id="definitions/affinity"></a>**`affinity`** _(object)_: Pod: The used affinity. Cannot contain additional properties.
-  - **`podAntiAffinity`** _(object)_: The used pod anti-affinity, see: https://github.com/camptocamp/helm-custom-pod/wiki/Affinity.
+  - **`podAntiAffinity`** _(object)_: The used pod anti-affinity, see: https://github.com/camptocamp/helm-application/wiki/Affinity.
   - **`podAffinity`** _(object)_: The standard pod affinity.
   - **`nodeAffinity`** _(object)_: The standard node affinity.
 - <a id="definitions/tolerations"></a>**`tolerations`** _(array)_: Pod: Tolerations.

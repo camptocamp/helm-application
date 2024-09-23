@@ -1,7 +1,7 @@
 apiVersion: v2
 appVersion: '1.0'
-description: A custom pod with everything needed
-name: custom-pod
+description: HELM chart that provide everything needed to create a multi pod application.
+name: application
 version: 0.1.0
 dependencies:
   - name: common

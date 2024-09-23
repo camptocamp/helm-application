@@ -1,190 +1,190 @@
 ---
-# Source: custom-pod/templates/pdb.yaml
+# Source: application/templates/pdb.yaml
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: custom-custom-pod-deployment-all
+  name: example-application-deployment-all
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: deployment-all
 spec:
   maxUnavailable: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: custom-pod
-      app.kubernetes.io/instance: custom
+      app.kubernetes.io/name: application
+      app.kubernetes.io/instance: example
       app.kubernetes.io/component: deployment-all
 ---
-# Source: custom-pod/templates/pdb.yaml
+# Source: application/templates/pdb.yaml
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: custom-custom-pod-deployment-min
+  name: example-application-deployment-min
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: deployment-min
 spec:
   maxUnavailable: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: custom-pod
-      app.kubernetes.io/instance: custom
+      app.kubernetes.io/name: application
+      app.kubernetes.io/instance: example
       app.kubernetes.io/component: deployment-min
 ---
-# Source: custom-pod/templates/pdb.yaml
+# Source: application/templates/pdb.yaml
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: cus-example2
+  name: exa-example2
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: example2
 spec:
   minAvailable: 2
   selector:
     matchLabels:
-      app.kubernetes.io/name: custom-pod
-      app.kubernetes.io/instance: custom
+      app.kubernetes.io/name: application
+      app.kubernetes.io/instance: example
       app.kubernetes.io/component: example2
 ---
-# Source: custom-pod/templates/pdb.yaml
+# Source: application/templates/pdb.yaml
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: custom-with-name-override-example3
+  name: example-with-name-override-example3
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: with-name-override
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: example3
 spec:
   maxUnavailable: 3
   selector:
     matchLabels:
       app.kubernetes.io/name: with-name-override
-      app.kubernetes.io/instance: custom
+      app.kubernetes.io/instance: example
       app.kubernetes.io/component: example3
 ---
-# Source: custom-pod/templates/pdb.yaml
+# Source: application/templates/pdb.yaml
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: custom-custom-pod-example4
+  name: example-application-example4
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: example4
 spec:
   maxUnavailable: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: custom-pod
-      app.kubernetes.io/instance: custom
+      app.kubernetes.io/name: application
+      app.kubernetes.io/instance: example
       app.kubernetes.io/component: example4
 ---
-# Source: custom-pod/templates/pdb.yaml
+# Source: application/templates/pdb.yaml
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: custom-custom-pod-internal
+  name: example-application-internal
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: internal
 spec:
   maxUnavailable: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: custom-pod
-      app.kubernetes.io/instance: custom
+      app.kubernetes.io/name: application
+      app.kubernetes.io/instance: example
       app.kubernetes.io/component: internal
 ---
-# Source: custom-pod/templates/pdb.yaml
+# Source: application/templates/pdb.yaml
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: custom-custom-pod-nginx
+  name: example-application-nginx
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: nginx
 spec:
   maxUnavailable: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: custom-pod
-      app.kubernetes.io/instance: custom
+      app.kubernetes.io/name: application
+      app.kubernetes.io/instance: example
       app.kubernetes.io/component: nginx
 ---
-# Source: custom-pod/templates/pdb.yaml
+# Source: application/templates/pdb.yaml
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: custom-custom-pod-statefulset-min
+  name: example-application-statefulset-min
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: statefulset-min
 spec:
   maxUnavailable: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: custom-pod
-      app.kubernetes.io/instance: custom
+      app.kubernetes.io/name: application
+      app.kubernetes.io/instance: example
       app.kubernetes.io/component: statefulset-min
 ---
-# Source: custom-pod/templates/serviceaccount.yaml
+# Source: application/templates/serviceaccount.yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: custom-custom-pod-myserviceaccount
+  name: example-application-myserviceaccount
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: myserviceaccount
   annotations:
     example-annotation: coucou
 ---
-# Source: custom-pod/templates/secret.yaml
+# Source: application/templates/secret.yaml
 apiVersion: v1
 kind: Secret
 metadata:
-  name: custom-custom-pod
+  name: example-application
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: main
   annotations:
     testAnnotation: annotation value for secrets
@@ -194,63 +194,63 @@ data:
   test2: dG90bzI=
   test3: "UW1GemFXTWdkRzkwYnpwMGIzUnY="
 ---
-# Source: custom-pod/templates/cm_metadata.yaml
+# Source: application/templates/cm_metadata.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: custom-custom-pod-metadata
+  name: example-application-metadata
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: main
 data:
-  CHART_NAME: custom-pod
-  RELEASE_NAME: custom
+  CHART_NAME: application
+  RELEASE_NAME: example
   RELEASE_NAMESPACE: default
-  SERVICE_CRONJOB-ALL_NAME: custom-custom-pod-cronjob-all
+  SERVICE_CRONJOB-ALL_NAME: example-application-cronjob-all
   SERVICE_CRONJOB-ALL_CONTAINER_MAIN_IMAGE_TAG: "latest"
-  SERVICE_DEPLOYMENT-ALL_NAME: custom-custom-pod-deployment-all
+  SERVICE_DEPLOYMENT-ALL_NAME: example-application-deployment-all
   SERVICE_DEPLOYMENT-ALL_CONTAINER_MAIN_IMAGE_TAG: "latest"
-  SERVICE_DEPLOYMENT-MIN_NAME: custom-custom-pod-deployment-min
+  SERVICE_DEPLOYMENT-MIN_NAME: example-application-deployment-min
   SERVICE_DEPLOYMENT-MIN_CONTAINER_MAIN_IMAGE_TAG: "latest"
-  SERVICE_EXAMPLE1_NAME: custom-custom-pod-with-service-name
+  SERVICE_EXAMPLE1_NAME: example-application-with-service-name
   SERVICE_EXAMPLE1_CONTAINER_AA_IMAGE_TAG: "latest"
   SERVICE_EXAMPLE1_CONTAINER_BB_IMAGE_TAG: "latest"
   SERVICE_EXAMPLE1_CONTAINER_CC_IMAGE_TAG: "latest"
   SERVICE_EXAMPLE1_CONTAINER_DD_IMAGE_TAG: "latest"
-  SERVICE_EXAMPLE2_NAME: cus-example2
+  SERVICE_EXAMPLE2_NAME: exa-example2
   SERVICE_EXAMPLE2_CONTAINER_CC_IMAGE_TAG: "latest"
   SERVICE_EXAMPLE2_CONTAINER_DD_IMAGE_TAG: "latest"
   SERVICE_EXAMPLE3_NAME: hardcoded-service-name
   SERVICE_EXAMPLE3_CONTAINER_CC_IMAGE_TAG: "latest"
   SERVICE_EXAMPLE3_CONTAINER_DD_IMAGE_TAG: "latest"
-  SERVICE_EXAMPLE4_NAME: custom-custom-pod-example4
+  SERVICE_EXAMPLE4_NAME: example-application-example4
   SERVICE_EXAMPLE4_CONTAINER_MAIN_IMAGE_TAG: "latest"
-  SERVICE_INTERNAL_NAME: custom-custom-pod-internal
+  SERVICE_INTERNAL_NAME: example-application-internal
   SERVICE_INTERNAL_CONTAINER_MAIN_IMAGE_TAG: "latest"
-  SERVICE_JOB-ALL_NAME: custom-custom-pod-job-all
+  SERVICE_JOB-ALL_NAME: example-application-job-all
   SERVICE_JOB-ALL_CONTAINER_MAIN_IMAGE_TAG: "latest"
-  SERVICE_JOB-MIN_NAME: custom-custom-pod-job-min
+  SERVICE_JOB-MIN_NAME: example-application-job-min
   SERVICE_JOB-MIN_CONTAINER_MAIN_IMAGE_TAG: "latest"
-  SERVICE_STATEFULSET-ALL_NAME: custom-custom-pod-nginx
+  SERVICE_STATEFULSET-ALL_NAME: example-application-nginx
   SERVICE_STATEFULSET-ALL_CONTAINER_MAIN_IMAGE_TAG: "latest"
-  SERVICE_STATEFULSET-MIN_NAME: custom-custom-pod-statefulset-min
+  SERVICE_STATEFULSET-MIN_NAME: example-application-statefulset-min
   SERVICE_STATEFULSET-MIN_CONTAINER_MAIN_IMAGE_TAG: "latest"
 ---
-# Source: custom-pod/templates/configmap.yaml
+# Source: application/templates/configmap.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: custom-custom-pod
+  name: example-application
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: main
   annotations:
     testAnnotation: annotation value for configmaps
@@ -268,17 +268,17 @@ data:
     toto: toto
     tutu: tutu
 ---
-# Source: custom-pod/templates/service.yaml
+# Source: application/templates/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: custom-custom-pod-with-service-name
+  name: example-application-with-service-name
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: with-service-name
 spec:
   type: ClusterIP
@@ -288,21 +288,21 @@ spec:
       protocol: TCP
       targetPort: http
   selector:
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: with-service-name
 ---
-# Source: custom-pod/templates/service.yaml
+# Source: application/templates/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: cus-example2
+  name: exa-example2
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: example2
     one-custom-label: hello-world
   annotations:
@@ -316,21 +316,21 @@ spec:
       protocol: TCP
       targetPort: http
   selector:
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: example2
 ---
-# Source: custom-pod/templates/service.yaml
+# Source: application/templates/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
   name: hardcoded-service-name
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: with-name-override
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: example3
 spec:
   type: ClusterIP
@@ -341,20 +341,20 @@ spec:
       targetPort: http
   selector:
     app.kubernetes.io/name: with-name-override
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: example3
 ---
-# Source: custom-pod/templates/deployment.yaml
+# Source: application/templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: custom-custom-pod-deployment-all
+  name: example-application-deployment-all
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: deployment-all
 spec:
   replicas: 3
@@ -368,19 +368,19 @@ spec:
   minReadySeconds: 10
   selector:
     matchLabels:
-      app.kubernetes.io/name: custom-pod
-      app.kubernetes.io/instance: custom
+      app.kubernetes.io/name: application
+      app.kubernetes.io/instance: example
       app.kubernetes.io/component: deployment-all
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: custom-pod
-        app.kubernetes.io/instance: custom
+        app.kubernetes.io/name: application
+        app.kubernetes.io/instance: example
         app.kubernetes.io/component: deployment-all
     spec:
       imagePullSecrets:
-        - name: custom-custom-pod-docker-registry
-      serviceAccountName: custom-custom-pod-myserviceaccount
+        - name: example-application-docker-registry
+      serviceAccountName: example-application-myserviceaccount
       securityContext:
         {}
       affinity:
@@ -402,17 +402,17 @@ spec:
           imagePullPolicy: IfNotPresent
           terminationMessagePolicy: FallbackToLogsOnError
 ---
-# Source: custom-pod/templates/deployment.yaml
+# Source: application/templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: custom-custom-pod-deployment-min
+  name: example-application-deployment-min
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: deployment-min
 spec:
   revisionHistoryLimit: 3
@@ -420,19 +420,19 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      app.kubernetes.io/name: custom-pod
-      app.kubernetes.io/instance: custom
+      app.kubernetes.io/name: application
+      app.kubernetes.io/instance: example
       app.kubernetes.io/component: deployment-min
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: custom-pod
-        app.kubernetes.io/instance: custom
+        app.kubernetes.io/name: application
+        app.kubernetes.io/instance: example
         app.kubernetes.io/component: deployment-min
     spec:
       imagePullSecrets:
-        - name: custom-custom-pod-docker-registry
-      serviceAccountName: custom-custom-pod-myserviceaccount
+        - name: example-application-docker-registry
+      serviceAccountName: example-application-myserviceaccount
       securityContext:
         {}
       containers:
@@ -444,17 +444,17 @@ spec:
           imagePullPolicy: IfNotPresent
           terminationMessagePolicy: FallbackToLogsOnError
 ---
-# Source: custom-pod/templates/deployment.yaml
+# Source: application/templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: custom-custom-pod-with-service-name
+  name: example-application-with-service-name
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: with-service-name
 spec:
   replicas: 1
@@ -463,19 +463,19 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      app.kubernetes.io/name: custom-pod
-      app.kubernetes.io/instance: custom
+      app.kubernetes.io/name: application
+      app.kubernetes.io/instance: example
       app.kubernetes.io/component: with-service-name
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: custom-pod
-        app.kubernetes.io/instance: custom
+        app.kubernetes.io/name: application
+        app.kubernetes.io/instance: example
         app.kubernetes.io/component: with-service-name
     spec:
       imagePullSecrets:
-        - name: custom-custom-pod-docker-registry
-      serviceAccountName: custom-custom-pod-myserviceaccount
+        - name: example-application-docker-registry
+      serviceAccountName: example-application-myserviceaccount
       securityContext:
         {}
       affinity:
@@ -486,11 +486,11 @@ spec:
                   - key: app.kubernetes.io/name
                     operator: In
                     values:
-                      - custom-pod
+                      - application
                   - key: app.kubernetes.io/instance
                     operator: In
                     values:
-                      - custom
+                      - example
                   - key: app.kubernetes.io/component
                     operator: In
                     values:
@@ -640,37 +640,37 @@ spec:
           emptyDir: {}
         - name: self-configmap
           configMap:
-            name: custom-custom-pod
+            name: example-application
             items:
             - key: testYaml
               path: test.yaml
         - name: self-configmap-metadata
           configMap:
-            name: custom-custom-pod-metadata
+            name: example-application-metadata
             items:
             - key: testYaml
               path: test.yaml
         - name: self-external-secret
           secret:
-            secretName: custom-custom-pod-app
+            secretName: example-application-app
             items:
             - key: hostname
               path: hostname.txt
         - name: self-secret
           secret:
-            secretName: custom-custom-pod
+            secretName: example-application
 ---
-# Source: custom-pod/templates/deployment.yaml
+# Source: application/templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cus-example2
+  name: exa-example2
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: example2
 spec:
   replicas: 2
@@ -679,19 +679,19 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      app.kubernetes.io/name: custom-pod
-      app.kubernetes.io/instance: custom
+      app.kubernetes.io/name: application
+      app.kubernetes.io/instance: example
       app.kubernetes.io/component: example2
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: custom-pod
-        app.kubernetes.io/instance: custom
+        app.kubernetes.io/name: application
+        app.kubernetes.io/instance: example
         app.kubernetes.io/component: example2
     spec:
       imagePullSecrets:
-        - name: custom-custom-pod-docker-registry
-      serviceAccountName: custom-custom-pod-myserviceaccount
+        - name: example-application-docker-registry
+      serviceAccountName: example-application-myserviceaccount
       securityContext:
         {}
       affinity:
@@ -702,11 +702,11 @@ spec:
                   - key: app.kubernetes.io/name
                     operator: In
                     values:
-                      - custom-pod
+                      - application
                   - key: app.kubernetes.io/instance
                     operator: In
                     values:
-                      - custom
+                      - example
                   - key: app.kubernetes.io/component
                     operator: In
                     values:
@@ -792,17 +792,17 @@ spec:
         - name: my-volume-2
           emptyDir: {}
 ---
-# Source: custom-pod/templates/deployment.yaml
+# Source: application/templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: custom-with-name-override-example3
+  name: example-with-name-override-example3
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: with-name-override
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: example3
 spec:
   replicas: 2
@@ -812,18 +812,18 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: with-name-override
-      app.kubernetes.io/instance: custom
+      app.kubernetes.io/instance: example
       app.kubernetes.io/component: example3
   template:
     metadata:
       labels:
         app.kubernetes.io/name: with-name-override
-        app.kubernetes.io/instance: custom
+        app.kubernetes.io/instance: example
         app.kubernetes.io/component: example3
     spec:
       imagePullSecrets:
-        - name: custom-custom-pod-docker-registry
-      serviceAccountName: custom-custom-pod-myserviceaccount
+        - name: example-application-docker-registry
+      serviceAccountName: example-application-myserviceaccount
       securityContext:
         {}
       affinity:
@@ -838,7 +838,7 @@ spec:
                   - key: app.kubernetes.io/instance
                     operator: In
                     values:
-                      - custom
+                      - example
                   - key: app.kubernetes.io/component
                     operator: In
                     values:
@@ -924,17 +924,17 @@ spec:
         - name: my-volume-2
           emptyDir: {}
 ---
-# Source: custom-pod/templates/deployment.yaml
+# Source: application/templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: custom-custom-pod-example4
+  name: example-application-example4
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: example4
 spec:
   revisionHistoryLimit: 3
@@ -942,19 +942,19 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      app.kubernetes.io/name: custom-pod
-      app.kubernetes.io/instance: custom
+      app.kubernetes.io/name: application
+      app.kubernetes.io/instance: example
       app.kubernetes.io/component: example4
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: custom-pod
-        app.kubernetes.io/instance: custom
+        app.kubernetes.io/name: application
+        app.kubernetes.io/instance: example
         app.kubernetes.io/component: example4
     spec:
       imagePullSecrets:
-        - name: custom-custom-pod-docker-registry
-      serviceAccountName: custom-custom-pod-myserviceaccount
+        - name: example-application-docker-registry
+      serviceAccountName: example-application-myserviceaccount
       securityContext:
         {}
       affinity:
@@ -976,17 +976,17 @@ spec:
           imagePullPolicy: IfNotPresent
           terminationMessagePolicy: FallbackToLogsOnError
 ---
-# Source: custom-pod/templates/deployment.yaml
+# Source: application/templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: custom-custom-pod-internal
+  name: example-application-internal
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: internal
 spec:
   revisionHistoryLimit: 3
@@ -994,19 +994,19 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      app.kubernetes.io/name: custom-pod
-      app.kubernetes.io/instance: custom
+      app.kubernetes.io/name: application
+      app.kubernetes.io/instance: example
       app.kubernetes.io/component: internal
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: custom-pod
-        app.kubernetes.io/instance: custom
+        app.kubernetes.io/name: application
+        app.kubernetes.io/instance: example
         app.kubernetes.io/component: internal
     spec:
       imagePullSecrets:
-        - name: custom-custom-pod-docker-registry
-      serviceAccountName: custom-custom-pod-myserviceaccount
+        - name: example-application-docker-registry
+      serviceAccountName: example-application-myserviceaccount
       securityContext:
         {}
       containers:
@@ -1025,37 +1025,37 @@ spec:
             - name: "SELF_CONFIGMAP"
               valueFrom:
                 configMapKeyRef:
-                  name: custom-custom-pod
+                  name: example-application
                   key: "testSingleLine"
             - name: "SELF_METADATA"
               valueFrom:
                 configMapKeyRef:
-                  name: custom-custom-pod-metadata
+                  name: example-application-metadata
                   key: "CHART_NAME"
             - name: "SELF_SECRET"
               valueFrom:
                 secretKeyRef:
-                  name: custom-custom-pod
+                  name: example-application
                   key: "test"
             - name: "SELF_VAULT"
               valueFrom:
                 secretKeyRef:
 
-                  name: custom-custom-pod-app
+                  name: example-application-app
                   key: "hostname"
           terminationMessagePolicy: FallbackToLogsOnError
 ---
-# Source: custom-pod/templates/statefulset.yaml
+# Source: application/templates/statefulset.yaml
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: custom-custom-pod-nginx
+  name: example-application-nginx
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: nginx
 spec:
   serviceName: nginx
@@ -1066,8 +1066,8 @@ spec:
       start: 0
   selector:
     matchLabels:
-      app.kubernetes.io/name: custom-pod
-      app.kubernetes.io/instance: custom
+      app.kubernetes.io/name: application
+      app.kubernetes.io/instance: example
       app.kubernetes.io/component: nginx
   persistentVolumeClaimRetentionPolicy:
       whenDeleted: Retain
@@ -1089,13 +1089,13 @@ spec:
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: custom-pod
-        app.kubernetes.io/instance: custom
+        app.kubernetes.io/name: application
+        app.kubernetes.io/instance: example
         app.kubernetes.io/component: nginx
     spec:
       imagePullSecrets:
-        - name: custom-custom-pod-docker-registry
-      serviceAccountName: custom-custom-pod-myserviceaccount
+        - name: example-application-docker-registry
+      serviceAccountName: example-application-myserviceaccount
       securityContext:
         {}
       containers:
@@ -1107,34 +1107,34 @@ spec:
           imagePullPolicy: IfNotPresent
           terminationMessagePolicy: FallbackToLogsOnError
 ---
-# Source: custom-pod/templates/statefulset.yaml
+# Source: application/templates/statefulset.yaml
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: custom-custom-pod-statefulset-min
+  name: example-application-statefulset-min
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: statefulset-min
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/name: custom-pod
-      app.kubernetes.io/instance: custom
+      app.kubernetes.io/name: application
+      app.kubernetes.io/instance: example
       app.kubernetes.io/component: statefulset-min
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: custom-pod
-        app.kubernetes.io/instance: custom
+        app.kubernetes.io/name: application
+        app.kubernetes.io/instance: example
         app.kubernetes.io/component: statefulset-min
     spec:
       imagePullSecrets:
-        - name: custom-custom-pod-docker-registry
-      serviceAccountName: custom-custom-pod-myserviceaccount
+        - name: example-application-docker-registry
+      serviceAccountName: example-application-myserviceaccount
       securityContext:
         {}
       containers:
@@ -1146,17 +1146,17 @@ spec:
           imagePullPolicy: IfNotPresent
           terminationMessagePolicy: FallbackToLogsOnError
 ---
-# Source: custom-pod/templates/job.yaml
+# Source: application/templates/job.yaml
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: custom-custom-pod-job-all
+  name: example-application-job-all
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: job-all
 spec:
   backoffLimit: 5
@@ -1179,13 +1179,13 @@ spec:
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: custom-pod
-        app.kubernetes.io/instance: custom
+        app.kubernetes.io/name: application
+        app.kubernetes.io/instance: example
         app.kubernetes.io/component: job-all
     spec:
       imagePullSecrets:
-        - name: custom-custom-pod-docker-registry
-      serviceAccountName: custom-custom-pod-myserviceaccount
+        - name: example-application-docker-registry
+      serviceAccountName: example-application-myserviceaccount
       securityContext:
         {}
       restartPolicy: Never
@@ -1198,29 +1198,29 @@ spec:
           imagePullPolicy: IfNotPresent
           terminationMessagePolicy: FallbackToLogsOnError
 ---
-# Source: custom-pod/templates/job.yaml
+# Source: application/templates/job.yaml
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: custom-custom-pod-job-min
+  name: example-application-job-min
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: job-min
 spec:
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: custom-pod
-        app.kubernetes.io/instance: custom
+        app.kubernetes.io/name: application
+        app.kubernetes.io/instance: example
         app.kubernetes.io/component: job-min
     spec:
       imagePullSecrets:
-        - name: custom-custom-pod-docker-registry
-      serviceAccountName: custom-custom-pod-myserviceaccount
+        - name: example-application-docker-registry
+      serviceAccountName: example-application-myserviceaccount
       securityContext:
         {}
       restartPolicy: Never
@@ -1233,17 +1233,17 @@ spec:
           imagePullPolicy: IfNotPresent
           terminationMessagePolicy: FallbackToLogsOnError
 ---
-# Source: custom-pod/templates/cronjob.yaml
+# Source: application/templates/cronjob.yaml
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: custom-custom-pod-cronjob-all
+  name: example-application-cronjob-all
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: cronjob-all
 spec:
   schedule: "*/1 * * * *"
@@ -1273,13 +1273,13 @@ spec:
       template:
         metadata:
           labels:
-            app.kubernetes.io/name: custom-pod
-            app.kubernetes.io/instance: custom
+            app.kubernetes.io/name: application
+            app.kubernetes.io/instance: example
             app.kubernetes.io/component: cronjob-all
         spec:
           imagePullSecrets:
-            - name: custom-custom-pod-docker-registry
-          serviceAccountName: custom-custom-pod-myserviceaccount
+            - name: example-application-docker-registry
+          serviceAccountName: example-application-myserviceaccount
           securityContext:
             {}
           restartPolicy: Never
@@ -1292,17 +1292,17 @@ spec:
               imagePullPolicy: IfNotPresent
               terminationMessagePolicy: FallbackToLogsOnError
 ---
-# Source: custom-pod/templates/ingress.yaml
+# Source: application/templates/ingress.yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: custom-custom-pod-host1
+  name: example-application-host1
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: host1
   annotations:
     example-annotation: coucou
@@ -1321,14 +1321,14 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: custom-custom-pod-with-service-name
+                name: example-application-with-service-name
                 port:
                   number: 8080
           - path: "/two"
             pathType: Prefix
             backend:
               service:
-                name: cus-example2
+                name: exa-example2
                 port:
                   number: 8080
           - path: "/three"
@@ -1345,14 +1345,14 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: custom-custom-pod-with-service-name
+                name: example-application-with-service-name
                 port:
                   number: 8080
           - path: "/two"
             pathType: Prefix
             backend:
               service:
-                name: cus-example2
+                name: exa-example2
                 port:
                   number: 8080
           - path: "/three"
@@ -1363,17 +1363,17 @@ spec:
                 port:
                   number: 8080
 ---
-# Source: custom-pod/templates/ingress.yaml
+# Source: application/templates/ingress.yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: custom-custom-pod-host2
+  name: example-application-host2
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: host2
   annotations:
     example-annotation: coucou
@@ -1382,7 +1382,7 @@ spec:
   tls:
     - hosts:
         - "*.example.com"
-      secretName: custom-custom-pod-host2
+      secretName: example-application-host2
   rules:
     - host: "*.example.com"
       http:
@@ -1391,14 +1391,14 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: custom-custom-pod-with-service-name
+                name: example-application-with-service-name
                 port:
                   number: 8080
           - path: "/two"
             pathType: Prefix
             backend:
               service:
-                name: cus-example2
+                name: exa-example2
                 port:
                   number: 8080
           - path: "/three"
@@ -1409,23 +1409,23 @@ spec:
                 port:
                   number: 8080
 ---
-# Source: custom-pod/templates/external-secret-docker-registry.yaml
+# Source: application/templates/external-secret-docker-registry.yaml
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
-  name: custom-custom-pod-docker-registry
+  name: example-application-docker-registry
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: main
   annotations:
     testAnnotation: annotation value
 spec:
   target:
-    name: custom-custom-pod-docker-registry
+    name: example-application-docker-registry
     template:
       type: kubernetes.io/dockerconfigjson
       data:
@@ -1485,17 +1485,17 @@ spec:
       remoteRef:
         key: ghcr-password
 ---
-# Source: custom-pod/templates/external-secret.yaml
+# Source: application/templates/external-secret.yaml
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
-  name: custom-custom-pod-app
+  name: example-application-app
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: app
 spec:
   refreshInterval: 1h
@@ -1503,23 +1503,23 @@ spec:
     kind: SecretStore
     name: my-secret-store
   target:
-    name: custom-custom-pod-app
+    name: example-application-app
   data:
     - secretKey: hostname
       remoteRef:
         key: hostname
 ---
-# Source: custom-pod/templates/external-secret.yaml
+# Source: application/templates/external-secret.yaml
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
-  name: custom-custom-pod-global
+  name: example-application-global
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: global
 spec:
   refreshInterval: 1h
@@ -1527,29 +1527,29 @@ spec:
     kind: SecretStore
     name: my-global-secret-store
   target:
-    name: custom-custom-pod-global
+    name: example-application-global
   data:
     - secretKey: pass
       remoteRef:
         key: pass
 ---
-# Source: custom-pod/templates/podmonitor.yaml
+# Source: application/templates/podmonitor.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
-  name: custom-custom-pod-with-service-name
+  name: example-application-with-service-name
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: with-service-name
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/name: custom-pod
-      app.kubernetes.io/instance: custom
+      app.kubernetes.io/name: application
+      app.kubernetes.io/instance: example
       app.kubernetes.io/component: with-service-name
   podMetricsEndpoints:
     - port: config-prometheus
@@ -1559,23 +1559,23 @@ spec:
       honorLabels: true
       interval: 10s
 ---
-# Source: custom-pod/templates/podmonitor.yaml
+# Source: application/templates/podmonitor.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
-  name: custom-custom-pod-example4
+  name: example-application-example4
   labels:
-    helm.sh/chart: custom-pod
+    helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: custom-pod
-    app.kubernetes.io/instance: custom
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
     app.kubernetes.io/component: example4
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/name: custom-pod
-      app.kubernetes.io/instance: custom
+      app.kubernetes.io/name: application
+      app.kubernetes.io/instance: example
       app.kubernetes.io/component: example4
   podMetricsEndpoints:
     - port: prometheus
