@@ -26,7 +26,7 @@ entries:
     digest: c22f25158d74d3186169266663f9508d7aedffc6f1d335da05f5f241889bbfc3
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/2.7.1/custom-pod-2.7.1.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/2.7.1/custom-pod-2.7.1.tgz
     version: 2.7.1
   - apiVersion: v2
     appVersion: "1.0"
@@ -39,7 +39,7 @@ entries:
     digest: ee7c7a1f08b737b426e0962ba36ff8b62cc0a6ad7ba48fe4930e677acc86843b
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/2.7.0/custom-pod-2.7.0.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/2.7.0/custom-pod-2.7.0.tgz
     version: 2.7.0
   - apiVersion: v2
     appVersion: "1.0"
@@ -52,7 +52,7 @@ entries:
     digest: 688b9491132df4363b1170803a207761712933a68ae1e193a54e9e81a97c389b
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/2.6.1/custom-pod-2.6.1.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/2.6.1/custom-pod-2.6.1.tgz
     version: 2.6.1
   - apiVersion: v2
     appVersion: "1.0"
@@ -65,7 +65,7 @@ entries:
     digest: 1b178c50274aaa4201e4823ce1c3f5a2d756ddae2044f4411b836e2ced8723ea
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/2.6.0/custom-pod-2.6.0.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/2.6.0/custom-pod-2.6.0.tgz
     version: 2.6.0
   - apiVersion: v2
     appVersion: "1.0"
@@ -78,7 +78,7 @@ entries:
     digest: 99fc17126d585af6cd10e0c46c29a39ecf24e958d564b0e27be2b1790f6f92ba
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/2.5.0/custom-pod-2.5.0.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/2.5.0/custom-pod-2.5.0.tgz
     version: 2.5.0
   - apiVersion: v2
     appVersion: "1.0"
@@ -91,7 +91,7 @@ entries:
     digest: 5fadb3e61181ab144095fd1df046a73bbccf755b8b7ef6cf1a37f3bca838dec9
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/2.4.0/custom-pod-2.4.0.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/2.4.0/custom-pod-2.4.0.tgz
     version: 2.4.0
   - apiVersion: v2
     appVersion: "1.0"
@@ -104,7 +104,7 @@ entries:
     digest: f5d643937c6cd7b473178e772a9df9fc24ba30baad3725c2112530907d1ddbb2
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/2.3.1/custom-pod-2.3.1.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/2.3.1/custom-pod-2.3.1.tgz
     version: 2.3.1
   - apiVersion: v2
     appVersion: "1.0"
@@ -117,7 +117,7 @@ entries:
     digest: 8e385203328e61c3e2726ce9862045098c1e1f05f60ffb1d62c82de9e20698db
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/2.3.0/custom-pod-2.3.0.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/2.3.0/custom-pod-2.3.0.tgz
     version: 2.3.0
   - apiVersion: v2
     appVersion: "1.0"
@@ -130,7 +130,7 @@ entries:
     digest: 3aa9557faf55f051782d0061d9434777ca5773566429c8d769f582b372d013bc
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/2.2.0/custom-pod-2.2.0.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/2.2.0/custom-pod-2.2.0.tgz
     version: 2.2.0
   - apiVersion: v2
     appVersion: "1.0"
@@ -143,7 +143,7 @@ entries:
     digest: 9fad36cfb63bb41764cf03c61c6ac9a4636c59c0c9471b22c5b6fef679deadab
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/2.1.0/custom-pod-2.1.0.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/2.1.0/custom-pod-2.1.0.tgz
     version: 2.1.0
   - apiVersion: v2
     appVersion: "1.0"
@@ -156,7 +156,7 @@ entries:
     digest: 1620450000804f80564ff270a1d508748d73d3222ee7fd6fc2645fea95228131
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/2.0.2/custom-pod-2.0.2.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/2.0.2/custom-pod-2.0.2.tgz
     version: 2.0.2
   - apiVersion: v2
     appVersion: "1.0"
@@ -169,7 +169,7 @@ entries:
     digest: b69715912417e092f86324183e3cdf8bea859777c4078e79fc9fe6843e8ff265
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/2.0.1/custom-pod-2.0.1.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/2.0.1/custom-pod-2.0.1.tgz
     version: 2.0.1
   - apiVersion: v2
     appVersion: "1.0"
@@ -182,7 +182,7 @@ entries:
     digest: 732ac7ff48d5f3379e082336a6aaf0ac56ac4bc81ce3a1c297e1585e69cc536b
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/2.0.0/custom-pod-2.0.0.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/2.0.0/custom-pod-2.0.0.tgz
     version: 2.0.0
   - apiVersion: v2
     appVersion: "1.0"
@@ -195,7 +195,7 @@ entries:
     digest: 8dcd91499693460b84de5a21865c78bcb91c306d9fed8877b3e2e2333ded2423
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/1.1.5/custom-pod-1.1.5.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/1.1.5/custom-pod-1.1.5.tgz
     version: 1.1.5
   - apiVersion: v2
     appVersion: "1.0"
@@ -208,7 +208,7 @@ entries:
     digest: 5da84cff49ff36d2440e473e08878033c85a2458fc8a3faa07b8b7ceb80a1d8a
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/1.1.4/custom-pod-1.1.4.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/1.1.4/custom-pod-1.1.4.tgz
     version: 1.1.4
   - apiVersion: v2
     appVersion: "1.0"
@@ -221,7 +221,7 @@ entries:
     digest: 238a2c6d19821901fdb460ff75611e041315eae29d1bfa2f7d451d46164582c2
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/1.1.3/custom-pod-1.1.3.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/1.1.3/custom-pod-1.1.3.tgz
     version: 1.1.3
   - apiVersion: v2
     appVersion: "1.0"
@@ -234,7 +234,7 @@ entries:
     digest: 07dd76dfc2ac63c9a0402aa88528637edf32d767c553476c67e218d91a362dce
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/1.1.2/custom-pod-1.1.2.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/1.1.2/custom-pod-1.1.2.tgz
     version: 1.1.2
   - apiVersion: v2
     appVersion: "1.0"
@@ -247,7 +247,7 @@ entries:
     digest: 2146561a11bc97449bc396b7564865d59cc8fe96c9c902f849474e772a276836
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/1.1.1/custom-pod-1.1.1.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/1.1.1/custom-pod-1.1.1.tgz
     version: 1.1.1
   - apiVersion: v2
     appVersion: "1.0"
@@ -260,7 +260,7 @@ entries:
     digest: 209d00720bd32aafec619e53ee28b0764e2dd070264680b4f46740a55fd51c71
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/1.1.0/custom-pod-1.1.0.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/1.1.0/custom-pod-1.1.0.tgz
     version: 1.1.0
   - apiVersion: v2
     appVersion: "1.0"
@@ -273,7 +273,7 @@ entries:
     digest: dc4515daf95f8b1e4350cdb0923867a09c0e1b9b5c2fb824f195cb0b293845e9
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/1.0.0/custom-pod-1.0.0.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/1.0.0/custom-pod-1.0.0.tgz
     version: 1.0.0
   - apiVersion: v2
     appVersion: "1.0"
@@ -286,7 +286,7 @@ entries:
     digest: f0896d09899b4b9a1578ae42c351e3542a5d67fc69a427e3b7b14836d4dec580
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/0.6.2/custom-pod-0.6.2.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/0.6.2/custom-pod-0.6.2.tgz
     version: 0.6.2
   - apiVersion: v2
     appVersion: "1.0"
@@ -299,7 +299,7 @@ entries:
     digest: 24b034b5a8de14db460cea65fbfebcf86c90fa1cc5ecdfe5413a4021a2629f8d
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/0.6.1/custom-pod-0.6.1.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/0.6.1/custom-pod-0.6.1.tgz
     version: 0.6.1
   - apiVersion: v2
     appVersion: "1.0"
@@ -312,7 +312,7 @@ entries:
     digest: 3be741f066c565bf6ad5c5f7743232f90c27ed1858198dccf3856d60d7f7b541
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/0.6.0/custom-pod-0.6.0.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/0.6.0/custom-pod-0.6.0.tgz
     version: 0.6.0
   - apiVersion: v2
     appVersion: "1.0"
@@ -325,7 +325,7 @@ entries:
     digest: c7b9a949913b657ea8ae71099656d6b96309c3388fac45d3f9222c39578b280d
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/0.5.3/custom-pod-0.5.3.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/0.5.3/custom-pod-0.5.3.tgz
     version: 0.5.3
   - apiVersion: v2
     appVersion: "1.0"
@@ -338,7 +338,7 @@ entries:
     digest: 3a847830bc4ad9deb3ee3fab2da4796479a74f2628a5f7843e749a9e710bb9de
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/0.5.2/custom-pod-0.5.2.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/0.5.2/custom-pod-0.5.2.tgz
     version: 0.5.2
   - apiVersion: v2
     appVersion: "1.0"
@@ -351,7 +351,7 @@ entries:
     digest: 53c87d933d918eb546968a98c50bce32c5ebc605f4275578c0013b9ea63e8ad8
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/0.5.1/custom-pod-0.5.1.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/0.5.1/custom-pod-0.5.1.tgz
     version: 0.5.1
   - apiVersion: v2
     appVersion: "1.0"
@@ -364,7 +364,7 @@ entries:
     digest: 207a50a6f331a0494cc0ab223ba0553265d43a244e74a94d208f404b0fb11a1e
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/0.5.0/custom-pod-0.5.0.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/0.5.0/custom-pod-0.5.0.tgz
     version: 0.5.0
   - apiVersion: v2
     appVersion: "1.0"
@@ -377,7 +377,7 @@ entries:
     digest: a41f01ae4b0fa5d3b5d043452be6600fe9afedcdfff947d8bcdf197d7330ea79
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/0.4.6/custom-pod-0.4.6.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/0.4.6/custom-pod-0.4.6.tgz
     version: 0.4.6
   - apiVersion: v2
     appVersion: "1.0"
@@ -390,7 +390,7 @@ entries:
     digest: f214151ec7504ad6bc3bfa664acd3a88609b2362b34c6420179aadb27df91297
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/0.4.5/custom-pod-0.4.5.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/0.4.5/custom-pod-0.4.5.tgz
     version: 0.4.5
   - apiVersion: v2
     appVersion: "1.0"
@@ -403,7 +403,7 @@ entries:
     digest: 258bc80453b94e308acbe172aa8c7bc13eaeb4ab93e4b5e35dd91e5f61cdb233
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/0.4.4/custom-pod-0.4.4.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/0.4.4/custom-pod-0.4.4.tgz
     version: 0.4.4
   - apiVersion: v2
     appVersion: "1.0"
@@ -416,7 +416,7 @@ entries:
     digest: 93d05f111ace7799f44072920a483b1df290708188276bedb2c4666c21cfcecc
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/0.4.3/custom-pod-0.4.3.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/0.4.3/custom-pod-0.4.3.tgz
     version: 0.4.3
   - apiVersion: v2
     appVersion: "1.0"
@@ -429,7 +429,7 @@ entries:
     digest: 4069fb3f5934367b3bf681824fbef49331ff165486fadc3923aebcf008e119da
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/0.4.2/custom-pod-0.4.2.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/0.4.2/custom-pod-0.4.2.tgz
     version: 0.4.2
   - apiVersion: v2
     appVersion: "1.0"
@@ -442,7 +442,7 @@ entries:
     digest: f5e2163fa735e1195261669c511656f562a7548bb44b9c7ebb04fb0ba164a932
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/0.4.1/custom-pod-0.4.1.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/0.4.1/custom-pod-0.4.1.tgz
     version: 0.4.1
   - apiVersion: v2
     appVersion: "1.0"
@@ -455,7 +455,7 @@ entries:
     digest: afb7355fa3dcf6656e12400102d408347201f58a2ce06f9a6705a748b68c9b98
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/0.4.0/custom-pod-0.4.0.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/0.4.0/custom-pod-0.4.0.tgz
     version: 0.4.0
   - apiVersion: v2
     appVersion: "1.0"
@@ -468,7 +468,7 @@ entries:
     digest: 770a3ee4cf1b79112a0db25d019b021dfd1ba2511e2f75cb9bef724fb602e6b8
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/0.3.0/custom-pod-0.3.0.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/0.3.0/custom-pod-0.3.0.tgz
     version: 0.3.0
   - apiVersion: v2
     appVersion: "1.0"
@@ -481,7 +481,7 @@ entries:
     digest: 522a25670e8f54484ce3d003df0399c8c08f22d8b5f717a2d432609f2ac8e16b
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/0.2.0/custom-pod-0.2.0.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/0.2.0/custom-pod-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v2
     appVersion: "1.0"
@@ -494,7 +494,7 @@ entries:
     digest: dc3996690e5b7e89869f515788c2e8fe27a383c363482cfff925b8d7a6a7bfa3
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/0.1.1/custom-pod-0.1.1.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/0.1.1/custom-pod-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v2
     appVersion: "1.0"
@@ -507,6 +507,6 @@ entries:
     digest: 376e960fc2091a27b596435d82785990891676aa29272d9a9c3a9c4d0231e026
     name: custom-pod
     urls:
-    - https://github.com/camptocamp/helm-custom-pod/releases/download/0.1.0/custom-pod-0.1.0.tgz
+    - https://github.com/camptocamp/helm-application/releases/download/0.1.0/custom-pod-0.1.0.tgz
     version: 0.1.0
 generated: "2024-09-23T08:57:54.68928058Z"
