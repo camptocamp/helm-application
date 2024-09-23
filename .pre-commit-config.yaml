@@ -54,7 +54,7 @@ repos:
           )
         args:
           - --values=tests/values.yaml
-          - custom
+          - example
           - .
           - tests/expected.yaml
   - repo: https://github.com/codespell-project/codespell
