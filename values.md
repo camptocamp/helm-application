@@ -210,6 +210,18 @@
       - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
       - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
       - **`ports`** _(array)_
+    - **`hpa`** _(object)_
+      - **`enabled`** _(boolean, required)_: Enable or disable HPA for the service.
+      - **`minReplicas`** _(integer, required)_: Minimal number of replicas. Minimum: `1`.
+      - **`maxReplicas`** _(integer, required)_: Max number of replicas. Minimum: `1`.
+      - **`metrics`** _(array)_: Metrics definition.
+        - **Items** _(object)_
+          - **`type`** _(string, required)_: Metric types (Resource, Pods, External). Must be one of: `["Resource", "Pods", "External"]`.
+          - **`resource`** _(object)_
+            - **`name`** _(string, required)_: CPU or memory value. Must be one of: `["cpu", "memory"]`.
+            - **`target`** _(object, required)_
+              - **`type`** _(string, required)_: Metric target. Must be one of: `["Utilization", "Value", "AverageValue"]`.
+              - **`averageUtilization`** _(integer)_: % average use.
     - **`podMonitor`** _(object)_: The Prometheus Pod monitor configuration. Cannot contain additional properties.
       - **`enabled`** _(boolean)_: Enable the Pod monitor for this service (Pod).
       - **`name`** _(string)_: The name of the Pod monitor.

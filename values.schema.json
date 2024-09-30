@@ -1085,6 +1085,67 @@
               }
             }
           },
+          "hpa": {
+            "type": "object",
+            "properties": {
+              "enabled": {
+                "type": "boolean",
+                "description": "Enable or disable HPA for the service."
+              },
+              "minReplicas": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "Minimal number of replicas."
+              },
+              "maxReplicas": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "Max number of replicas."
+              },
+              "metrics": {
+                "type": "array",
+                "description": "Metrics definition.",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "enum": ["Resource", "Pods", "External"],
+                      "description": "Metric types (Resource, Pods, External)."
+                    },
+                    "resource": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "enum": ["cpu", "memory"],
+                          "description": "CPU or memory value."
+                        },
+                        "target": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": ["Utilization", "Value", "AverageValue"],
+                              "description": "Metric target."
+                            },
+                            "averageUtilization": {
+                              "type": "integer",
+                              "description": "% average use."
+                            }
+                          },
+                          "required": ["type"]
+                        }
+                      },
+                      "required": ["name", "target"]
+                    }
+                  },
+                  "required": ["type"]
+                }
+              }
+            },
+            "required": ["enabled", "minReplicas", "maxReplicas"]
+          },
           "podMonitor": {
             "type": "object",
             "description": "The Prometheus Pod monitor configuration",

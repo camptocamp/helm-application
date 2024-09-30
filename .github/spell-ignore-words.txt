@@ -22,3 +22,7 @@ secretKey
 1h
 1m
 1s
+NotIn
+HPA
+cpu
+Resource
