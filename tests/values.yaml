@@ -4,7 +4,6 @@ global:
 
 metadata:
   enabled: true
-  releaseTrunc: 2
 
 securityContext:
   runAsNonRoot: true
