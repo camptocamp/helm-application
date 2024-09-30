@@ -2,6 +2,10 @@
 
 ## Properties
 
+- **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
+- **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
+- **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+- **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
 - **`common`**
 - **`global`** _(object)_
   - **`image`**: Refer to _[#/definitions/globalImage](#definitions/globalImage)_.
