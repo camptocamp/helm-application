@@ -1142,7 +1142,7 @@ spec:
           terminationMessagePolicy: FallbackToLogsOnError
 ---
 # Source: application/templates/hpa.yaml
-apiVersion: autoscaling/v2beta2
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: example-application-example5-hpa

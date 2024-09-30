@@ -1,7 +1,7 @@
 {{- range $serviceName, $serviceDefinition := .Values.services }}
 {{- if and (eq $serviceDefinition.enabled true) (hasKey $serviceDefinition "hpa") (eq $serviceDefinition.hpa.enabled true) }}
 ---
-apiVersion: autoscaling/v2beta2
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   {{- if hasKey $serviceDefinition.hpa "name" }}
