@@ -395,6 +395,43 @@ services:
           interval: 10s
           honorLabels: true
 
+  # Example with HPA and labelSelector in affinity
+  example5:
+    enabled: true
+    affinity:
+      podAntiAffinity:
+        labelSelector:
+          k1: v1
+        topologyKey: kubernetes.io/hostname
+    containers:
+      main:
+        image:
+          repository: camptocamp/image
+          tag: latest
+    podMonitor:
+      enabled: true
+      podMetricsEndpoints:
+        prometheus:
+          interval: 10s
+          honorLabels: true
+    service:
+      name: service-autoscaled
+      type: ClusterIP
+      ports:
+        - port: 80
+          targetPort: 80
+    hpa:
+      enabled: true
+      minReplicas: 2
+      maxReplicas: 5
+      metrics:
+        - type: Resource
+          resource:
+            name: cpu
+            target:
+              type: Utilization
+              averageUtilization: 50
+
   # Minimal configuration of a deployment
   deployment-min:
     enabled: true

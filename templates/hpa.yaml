@@ -1,0 +1,27 @@
+{{- range $serviceName, $serviceDefinition := .Values.services }}
+{{- if and (eq $serviceDefinition.enabled true) (hasKey $serviceDefinition "hpa") (eq $serviceDefinition.hpa.enabled true) }}
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  {{- if hasKey $serviceDefinition.hpa "name" }}
+  name: {{ $serviceDefinition.hpa.name }}
+  {{- else }}
+  name: {{ include "common.fullname" (dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) }}-hpa
+  {{- end }}
+  {{- $hpaDict := deepCopy $serviceDefinition }}
+  {{- $hpaDict := merge $hpaDict (dict "annotations" $serviceDefinition.hpa.annotations "labels" $serviceDefinition.hpa.labels) }}
+  {{- include "common.metadata" (dict "root" $ "service" $hpaDict "serviceName" $serviceName) | nindent 2 }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ include "common.fullname" (dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) }}
+  minReplicas: {{ $serviceDefinition.hpa.minReplicas | default 1 }}
+  maxReplicas: {{ $serviceDefinition.hpa.maxReplicas | default 10 }}
+  metrics:
+  {{- with $serviceDefinition.hpa.metrics }}
+  {{- . | toYaml | nindent 4 }}
+  {{- end }}
+{{- end }}
+{{- end }}
