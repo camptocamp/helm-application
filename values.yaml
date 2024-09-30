@@ -24,6 +24,9 @@ securityContext:
   #   drop:
   #     - ALL
 
+metadata:
+  enabled: true
+
 ingress:
   enabled: false
 
