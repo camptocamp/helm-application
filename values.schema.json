@@ -1071,7 +1071,7 @@
               },
               "servicePort": {
                 "type": "integer",
-                "description": "The port of the service",
+                "description": "The port of the service (used by Ingress)",
                 "default": 80
               },
               "labels": {
