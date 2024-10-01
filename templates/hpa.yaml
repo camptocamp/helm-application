@@ -4,7 +4,7 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "common.fullname" (dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) }}-hpa
+  name: {{ include "common.fullname" (dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) }}
   {{- include "common.metadata" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) | nindent 2 }}
 spec:
   scaleTargetRef:
