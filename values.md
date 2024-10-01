@@ -212,8 +212,8 @@
       - **`ports`** _(array)_
     - **`hpa`** _(object)_
       - **`enabled`** _(boolean, required)_: Enable or disable HPA for the service.
-      - **`minReplicas`** _(integer, required)_: Minimal number of replicas. Minimum: `1`.
-      - **`maxReplicas`** _(integer, required)_: Max number of replicas. Minimum: `1`.
+      - **`minReplicas`** _(integer, required)_: Minimal number of replicas. Minimum: `1`. Default: `1`.
+      - **`maxReplicas`** _(integer, required)_: Max number of replicas. Minimum: `1`. Default: `10`.
       - **`metrics`** _(array)_: Metrics definition.
         - **Items** _(object)_
           - **`type`** _(string, required)_: Metric types (Resource, Pods, External). Must be one of: `["Resource", "Pods", "External"]`.

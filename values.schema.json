@@ -1095,12 +1095,14 @@
               "minReplicas": {
                 "type": "integer",
                 "minimum": 1,
-                "description": "Minimal number of replicas."
+                "description": "Minimal number of replicas.",
+                "default": 1
               },
               "maxReplicas": {
                 "type": "integer",
                 "minimum": 1,
-                "description": "Max number of replicas."
+                "description": "Max number of replicas.",
+                "default": 10
               },
               "metrics": {
                 "type": "array",
