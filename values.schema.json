@@ -313,7 +313,8 @@
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "Enable the metadata ConfigMap"
+          "description": "Enable the metadata ConfigMap",
+          "default": true
         },
         "nameOverride": {
           "$ref": "#/definitions/nameOverride"

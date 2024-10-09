@@ -10,7 +10,7 @@
   - **`ingress`** _(object)_
     - **`noSecretName`** _(boolean)_: Don't add a secret name to the Ingress TLS host, useful when the certification is configured in the Ingress controller.
 - **`metadata`** _(object)_: Create a ConfigMap to expose some metadata about the chart. Cannot contain additional properties.
-  - **`enabled`** _(boolean)_: Enable the metadata ConfigMap.
+  - **`enabled`** _(boolean)_: Enable the metadata ConfigMap. Default: `true`.
   - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
   - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
   - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
