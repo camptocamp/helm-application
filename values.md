@@ -206,7 +206,7 @@
     - **`service`** _(object)_: The Kubernetes service configuration. Cannot contain additional properties.
       - **`name`** _(string)_: The name of the service.
       - **`type`** _(string)_: The type of the service. Default: `"ClusterIP"`.
-      - **`servicePort`** _(integer)_: The port of the service. Default: `80`.
+      - **`servicePort`** _(integer)_: The port of the service (used by Ingress). Default: `80`.
       - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
       - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
       - **`ports`** _(array)_
