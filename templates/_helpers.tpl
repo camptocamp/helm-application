@@ -28,7 +28,7 @@ Create the name of the service account to use
       {{- $definition := get .root.Values.externalSecrets $name }}
       name: {{ include "common.fullname" ( dict "root" .root "service" $definition "serviceName" $name ) }}
       {{ else if and (hasKey .value "name" ) ( eq .value.name "self-metadata" ) -}}
-      name: {{ include "common.fullname" ( dict "root" .root "service" .root.Values "serviceName" "metadata" ) }}
+      name: {{ include "common.fullname" ( dict "root" .root "service" .root.Values.metadata "serviceName" "metadata" ) }}
       {{ else -}}
       name: {{ default .value.name ( get .configMapNameOverride .value.name ) | quote }}
       {{ end -}}
@@ -52,7 +52,7 @@ imagePullSecrets:
 {{- if .root.Values.dockerregistry -}}
 {{- if .root.Values.dockerregistry.enabled -}}
 imagePullSecrets:
-  - name: {{ include "common.fullname" ( dict "root" .root "service" .root.Values "serviceName" "docker-registry" ) }}
+  - name: {{ include "common.fullname" ( dict "root" .root "service" .root.Values.dockerregistry "serviceName" "docker-registry" ) }}
 {{- end }}
 {{- end }}
 {{- end }}
@@ -232,7 +232,7 @@ volumes:
       {{- if eq ( default "self" $value.configMap.name ) "self" }}
       name: {{ include "common.fullname" ( dict "root" $root "service" $root.Values.configMaps ) }}
       {{- else if eq ( default "self" $value.configMap.name ) "self-metadata" }}
-      name: {{ include "common.fullname" ( dict "root" $root "service" $root.Values "serviceName" "metadata" ) }}
+      name: {{ include "common.fullname" ( dict "root" $root "service" $root.Values.metadata "serviceName" "metadata" ) }}
       {{- else }}
       name: {{ default $value.configMap.name ( get $root.Values.global.configMapNameOverride $value.configMap.name ) | quote }}
       {{- end }}

@@ -3,7 +3,7 @@
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: example-application-deployment-all
+  name: example-app-deployment-all
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -23,7 +23,7 @@ spec:
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: example-application-deployment-min
+  name: example-app-deployment-min
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -63,7 +63,7 @@ spec:
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: example-with-name-override-example3
+  name: example-app-example3
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -83,7 +83,7 @@ spec:
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: example-application-example4
+  name: example-app-example4
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -103,7 +103,7 @@ spec:
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: example-application-example5
+  name: example-app-example5
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -123,7 +123,7 @@ spec:
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: example-application-internal
+  name: example-app-internal
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -143,7 +143,7 @@ spec:
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: example-application-nginx
+  name: example-app-nginx
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -163,7 +163,7 @@ spec:
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: example-application-statefulset-min
+  name: example-app-statefulset-min
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -183,7 +183,7 @@ spec:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: example-application-myserviceaccount
+  name: example-app-service-account-myserviceaccount
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -198,7 +198,7 @@ metadata:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: example-application
+  name: example-app-secrets
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -218,7 +218,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: example-application-metadata
+  name: example-app-metadata-metadata
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -230,13 +230,13 @@ data:
   CHART_NAME: application
   RELEASE_NAME: example
   RELEASE_NAMESPACE: default
-  SERVICE_CRONJOB-ALL_NAME: example-application-cronjob-all
+  SERVICE_CRONJOB-ALL_NAME: example-app-cronjob-all
   SERVICE_CRONJOB-ALL_CONTAINER_MAIN_IMAGE_TAG: "latest"
-  SERVICE_DEPLOYMENT-ALL_NAME: example-application-deployment-all
+  SERVICE_DEPLOYMENT-ALL_NAME: example-app-deployment-all
   SERVICE_DEPLOYMENT-ALL_CONTAINER_MAIN_IMAGE_TAG: "latest"
-  SERVICE_DEPLOYMENT-MIN_NAME: example-application-deployment-min
+  SERVICE_DEPLOYMENT-MIN_NAME: example-app-deployment-min
   SERVICE_DEPLOYMENT-MIN_CONTAINER_MAIN_IMAGE_TAG: "latest"
-  SERVICE_EXAMPLE1_NAME: example-application-with-service-name
+  SERVICE_EXAMPLE1_NAME: example-app-example1-with-service-name
   SERVICE_EXAMPLE1_CONTAINER_AA_IMAGE_TAG: "latest"
   SERVICE_EXAMPLE1_CONTAINER_BB_IMAGE_TAG: "latest"
   SERVICE_EXAMPLE1_CONTAINER_CC_IMAGE_TAG: "latest"
@@ -247,26 +247,26 @@ data:
   SERVICE_EXAMPLE3_NAME: hardcoded-service-name
   SERVICE_EXAMPLE3_CONTAINER_CC_IMAGE_TAG: "latest"
   SERVICE_EXAMPLE3_CONTAINER_DD_IMAGE_TAG: "latest"
-  SERVICE_EXAMPLE4_NAME: example-application-example4
+  SERVICE_EXAMPLE4_NAME: example-app-example4
   SERVICE_EXAMPLE4_CONTAINER_MAIN_IMAGE_TAG: "latest"
   SERVICE_EXAMPLE5_NAME: service-autoscaled
   SERVICE_EXAMPLE5_CONTAINER_MAIN_IMAGE_TAG: "latest"
-  SERVICE_INTERNAL_NAME: example-application-internal
+  SERVICE_INTERNAL_NAME: example-app-internal
   SERVICE_INTERNAL_CONTAINER_MAIN_IMAGE_TAG: "latest"
-  SERVICE_JOB-ALL_NAME: example-application-job-all
+  SERVICE_JOB-ALL_NAME: example-app-job-all
   SERVICE_JOB-ALL_CONTAINER_MAIN_IMAGE_TAG: "latest"
-  SERVICE_JOB-MIN_NAME: example-application-job-min
+  SERVICE_JOB-MIN_NAME: example-app-job-min
   SERVICE_JOB-MIN_CONTAINER_MAIN_IMAGE_TAG: "latest"
-  SERVICE_STATEFULSET-ALL_NAME: example-application-nginx
+  SERVICE_STATEFULSET-ALL_NAME: example-app-nginx
   SERVICE_STATEFULSET-ALL_CONTAINER_MAIN_IMAGE_TAG: "latest"
-  SERVICE_STATEFULSET-MIN_NAME: example-application-statefulset-min
+  SERVICE_STATEFULSET-MIN_NAME: example-app-statefulset-min
   SERVICE_STATEFULSET-MIN_CONTAINER_MAIN_IMAGE_TAG: "latest"
 ---
 # Source: application/templates/configmap.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: example-application
+  name: example-app-configmaps
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -294,7 +294,7 @@ data:
 apiVersion: v1
 kind: Service
 metadata:
-  name: example-application-with-service-name
+  name: example-app-example1-with-service-name
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -392,7 +392,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: example-application-deployment-all
+  name: example-app-deployment-all
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -423,8 +423,8 @@ spec:
         app.kubernetes.io/component: deployment-all
     spec:
       imagePullSecrets:
-        - name: example-application-docker-registry
-      serviceAccountName: example-application-myserviceaccount
+        - name: example-app-dockerregistry-docker-registry
+      serviceAccountName: example-app-service-account-myserviceaccount
       securityContext:
         {}
       affinity:
@@ -450,7 +450,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: example-application-deployment-min
+  name: example-app-deployment-min
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -475,8 +475,8 @@ spec:
         app.kubernetes.io/component: deployment-min
     spec:
       imagePullSecrets:
-        - name: example-application-docker-registry
-      serviceAccountName: example-application-myserviceaccount
+        - name: example-app-dockerregistry-docker-registry
+      serviceAccountName: example-app-service-account-myserviceaccount
       securityContext:
         {}
       containers:
@@ -492,7 +492,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: example-application-with-service-name
+  name: example-app-example1-with-service-name
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -518,8 +518,8 @@ spec:
         app.kubernetes.io/component: with-service-name
     spec:
       imagePullSecrets:
-        - name: example-application-docker-registry
-      serviceAccountName: example-application-myserviceaccount
+        - name: example-app-dockerregistry-docker-registry
+      serviceAccountName: example-app-service-account-myserviceaccount
       securityContext:
         {}
       affinity:
@@ -684,25 +684,25 @@ spec:
           emptyDir: {}
         - name: self-configmap
           configMap:
-            name: example-application
+            name: example-app-configmaps
             items:
             - key: testYaml
               path: test.yaml
         - name: self-configmap-metadata
           configMap:
-            name: example-application-metadata
+            name: example-app-metadata-metadata
             items:
             - key: testYaml
               path: test.yaml
         - name: self-external-secret
           secret:
-            secretName: example-application-app
+            secretName: example-app-ext-secrets-app
             items:
             - key: hostname
               path: hostname.txt
         - name: self-secret
           secret:
-            secretName: example-application
+            secretName: example-app-secrets
 ---
 # Source: application/templates/deployment.yaml
 apiVersion: apps/v1
@@ -734,8 +734,8 @@ spec:
         app.kubernetes.io/component: example2
     spec:
       imagePullSecrets:
-        - name: example-application-docker-registry
-      serviceAccountName: example-application-myserviceaccount
+        - name: example-app-dockerregistry-docker-registry
+      serviceAccountName: example-app-service-account-myserviceaccount
       securityContext:
         {}
       affinity:
@@ -840,7 +840,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: example-with-name-override-example3
+  name: example-app-example3
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -866,8 +866,8 @@ spec:
         app.kubernetes.io/component: example3
     spec:
       imagePullSecrets:
-        - name: example-application-docker-registry
-      serviceAccountName: example-application-myserviceaccount
+        - name: example-app-dockerregistry-docker-registry
+      serviceAccountName: example-app-service-account-myserviceaccount
       securityContext:
         {}
       affinity:
@@ -972,7 +972,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: example-application-example4
+  name: example-app-example4
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -997,8 +997,8 @@ spec:
         app.kubernetes.io/component: example4
     spec:
       imagePullSecrets:
-        - name: example-application-docker-registry
-      serviceAccountName: example-application-myserviceaccount
+        - name: example-app-dockerregistry-docker-registry
+      serviceAccountName: example-app-service-account-myserviceaccount
       securityContext:
         {}
       affinity:
@@ -1024,7 +1024,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: example-application-example5
+  name: example-app-example5
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -1049,8 +1049,8 @@ spec:
         app.kubernetes.io/component: example5
     spec:
       imagePullSecrets:
-        - name: example-application-docker-registry
-      serviceAccountName: example-application-myserviceaccount
+        - name: example-app-dockerregistry-docker-registry
+      serviceAccountName: example-app-service-account-myserviceaccount
       securityContext:
         {}
       affinity:
@@ -1076,7 +1076,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: example-application-internal
+  name: example-app-internal
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -1101,8 +1101,8 @@ spec:
         app.kubernetes.io/component: internal
     spec:
       imagePullSecrets:
-        - name: example-application-docker-registry
-      serviceAccountName: example-application-myserviceaccount
+        - name: example-app-dockerregistry-docker-registry
+      serviceAccountName: example-app-service-account-myserviceaccount
       securityContext:
         {}
       containers:
@@ -1121,23 +1121,23 @@ spec:
             - name: "SELF_CONFIGMAP"
               valueFrom:
                 configMapKeyRef:
-                  name: example-application
+                  name: example-app-configmaps
                   key: "testSingleLine"
             - name: "SELF_METADATA"
               valueFrom:
                 configMapKeyRef:
-                  name: example-application-metadata
+                  name: example-app-metadata-metadata
                   key: "CHART_NAME"
             - name: "SELF_SECRET"
               valueFrom:
                 secretKeyRef:
-                  name: example-application
+                  name: example-app-secrets
                   key: "test"
             - name: "SELF_VAULT"
               valueFrom:
                 secretKeyRef:
 
-                  name: example-application-app
+                  name: example-app-ext-secrets-app
                   key: "hostname"
           terminationMessagePolicy: FallbackToLogsOnError
 ---
@@ -1145,7 +1145,7 @@ spec:
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: example-application-example5
+  name: example-app-example5
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -1157,7 +1157,7 @@ spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: example-application-example5
+    name: example-app-example5
   minReplicas: 2
   maxReplicas: 5
   metrics:
@@ -1172,7 +1172,7 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: example-application-nginx
+  name: example-app-nginx
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -1217,8 +1217,8 @@ spec:
         app.kubernetes.io/component: nginx
     spec:
       imagePullSecrets:
-        - name: example-application-docker-registry
-      serviceAccountName: example-application-myserviceaccount
+        - name: example-app-dockerregistry-docker-registry
+      serviceAccountName: example-app-service-account-myserviceaccount
       securityContext:
         {}
       containers:
@@ -1234,7 +1234,7 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: example-application-statefulset-min
+  name: example-app-statefulset-min
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -1256,8 +1256,8 @@ spec:
         app.kubernetes.io/component: statefulset-min
     spec:
       imagePullSecrets:
-        - name: example-application-docker-registry
-      serviceAccountName: example-application-myserviceaccount
+        - name: example-app-dockerregistry-docker-registry
+      serviceAccountName: example-app-service-account-myserviceaccount
       securityContext:
         {}
       containers:
@@ -1273,7 +1273,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: example-application-job-all
+  name: example-app-job-all
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -1307,8 +1307,8 @@ spec:
         app.kubernetes.io/component: job-all
     spec:
       imagePullSecrets:
-        - name: example-application-docker-registry
-      serviceAccountName: example-application-myserviceaccount
+        - name: example-app-dockerregistry-docker-registry
+      serviceAccountName: example-app-service-account-myserviceaccount
       securityContext:
         {}
       restartPolicy: Never
@@ -1325,7 +1325,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: example-application-job-min
+  name: example-app-job-min
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -1342,8 +1342,8 @@ spec:
         app.kubernetes.io/component: job-min
     spec:
       imagePullSecrets:
-        - name: example-application-docker-registry
-      serviceAccountName: example-application-myserviceaccount
+        - name: example-app-dockerregistry-docker-registry
+      serviceAccountName: example-app-service-account-myserviceaccount
       securityContext:
         {}
       restartPolicy: Never
@@ -1360,7 +1360,7 @@ spec:
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: example-application-cronjob-all
+  name: example-app-cronjob-all
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -1401,8 +1401,8 @@ spec:
             app.kubernetes.io/component: cronjob-all
         spec:
           imagePullSecrets:
-            - name: example-application-docker-registry
-          serviceAccountName: example-application-myserviceaccount
+            - name: example-app-dockerregistry-docker-registry
+          serviceAccountName: example-app-service-account-myserviceaccount
           securityContext:
             {}
           restartPolicy: Never
@@ -1419,7 +1419,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: example-application-host1
+  name: example-app-ingress-host1
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -1444,7 +1444,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: example-application-with-service-name
+                name: example-app-example1-with-service-name
                 port:
                   number: 8080
           - path: "/two"
@@ -1468,7 +1468,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: example-application-with-service-name
+                name: example-app-example1-with-service-name
                 port:
                   number: 8080
           - path: "/two"
@@ -1490,7 +1490,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: example-application-host2
+  name: example-app-ingress-host2
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -1505,7 +1505,7 @@ spec:
   tls:
     - hosts:
         - "*.example.com"
-      secretName: example-application-host2
+      secretName: example-app-ingress-host2
   rules:
     - host: "*.example.com"
       http:
@@ -1514,7 +1514,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: example-application-with-service-name
+                name: example-app-example1-with-service-name
                 port:
                   number: 8080
           - path: "/two"
@@ -1536,7 +1536,7 @@ spec:
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
-  name: example-application-docker-registry
+  name: example-app-dockerregistry-docker-registry
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -1548,7 +1548,7 @@ metadata:
     testAnnotation: annotation value
 spec:
   target:
-    name: example-application-docker-registry
+    name: example-app-dockerregistry-docker-registry
     template:
       type: kubernetes.io/dockerconfigjson
       data:
@@ -1612,7 +1612,7 @@ spec:
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
-  name: example-application-app
+  name: example-app-ext-secrets-app
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -1626,7 +1626,7 @@ spec:
     kind: SecretStore
     name: my-secret-store
   target:
-    name: example-application-app
+    name: example-app-ext-secrets-app
   data:
     - secretKey: hostname
       remoteRef:
@@ -1636,7 +1636,7 @@ spec:
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
-  name: example-application-global
+  name: example-app-global-ext-secrets-global
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -1650,7 +1650,7 @@ spec:
     kind: SecretStore
     name: my-global-secret-store
   target:
-    name: example-application-global
+    name: example-app-global-ext-secrets-global
   data:
     - secretKey: pass
       remoteRef:
@@ -1660,7 +1660,7 @@ spec:
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
-  name: example-application-with-service-name
+  name: example-app-example1-with-service-name
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -1686,7 +1686,7 @@ spec:
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
-  name: example-application-example4
+  name: example-app-example4
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -1709,7 +1709,7 @@ spec:
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
-  name: example-application-example5
+  name: example-app-example5
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
