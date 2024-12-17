@@ -5,20 +5,29 @@
   "definitions": {
     "nameOverride": {
       "type": "string",
-      "description": "[helm-common] Override the name"
+      "description": "[helm-common] Override the name (can be in the service or values)"
     },
     "fullnameOverride": {
       "type": "string",
-      "description": "[helm-common] Override the fullname"
+      "description": "[helm-common] Override the fullname (can be in the service or values)"
+    },
+    "releaseNameOverride": {
+      "type": "string",
+      "description": "[helm-common] Override the the release name (can be in the service, values or global)"
     },
     "releaseTrunc": {
       "type": "integer",
-      "description": "[helm-common] The release trunk length",
+      "description": "[helm-common] The release name trunk length (can be in the service, values or global)",
+      "default": 20
+    },
+    "nameTrunc": {
+      "type": "integer",
+      "description": "[helm-common] The chart name trunk length (can be in the service, values or global)",
       "default": 20
     },
     "prefixTrunc": {
       "type": "integer",
-      "description": "[helm-common] The prefix trunk length (release and chart name)",
+      "description": "[helm-common] The prefix trunk length (release and chart name) (can be in the service, values or global)",
       "default": 40
     },
     "serviceAccount": {
@@ -40,11 +49,17 @@
         "fullnameOverride": {
           "$ref": "#/definitions/fullnameOverride"
         },
+        "releaseNameOverride": {
+          "$ref": "#/definitions/releaseNameOverride"
+        },
         "serviceName": {
           "$ref": "#/definitions/serviceName"
         },
         "releaseTrunc": {
           "$ref": "#/definitions/releaseTrunc"
+        },
+        "nameTrunc": {
+          "$ref": "#/definitions/nameTrunc"
         },
         "prefixTrunc": {
           "$ref": "#/definitions/prefixTrunc"
@@ -285,6 +300,18 @@
     "global": {
       "type": "object",
       "properties": {
+        "releaseNameOverride": {
+          "$ref": "#/definitions/releaseNameOverride"
+        },
+        "releaseTrunc": {
+          "$ref": "#/definitions/releaseTrunc"
+        },
+        "nameTrunc": {
+          "$ref": "#/definitions/nameTrunc"
+        },
+        "prefixTrunc": {
+          "$ref": "#/definitions/prefixTrunc"
+        },
         "image": {
           "$ref": "#/definitions/globalImage"
         },
@@ -306,6 +333,24 @@
         }
       }
     },
+    "nameOverride": {
+      "$ref": "#/definitions/nameOverride"
+    },
+    "fullnameOverride": {
+      "$ref": "#/definitions/fullnameOverride"
+    },
+    "releaseNameOverride": {
+      "$ref": "#/definitions/releaseNameOverride"
+    },
+    "releaseTrunc": {
+      "$ref": "#/definitions/releaseTrunc"
+    },
+    "nameTrunc": {
+      "$ref": "#/definitions/nameTrunc"
+    },
+    "prefixTrunc": {
+      "$ref": "#/definitions/prefixTrunc"
+    },
     "metadata": {
       "type": "object",
       "description": "Create a ConfigMap to expose some metadata about the chart",
@@ -322,11 +367,17 @@
         "fullnameOverride": {
           "$ref": "#/definitions/fullnameOverride"
         },
+        "releaseNameOverride": {
+          "$ref": "#/definitions/releaseNameOverride"
+        },
         "serviceName": {
           "$ref": "#/definitions/serviceName"
         },
         "releaseTrunc": {
           "$ref": "#/definitions/releaseTrunc"
+        },
+        "nameTrunc": {
+          "$ref": "#/definitions/nameTrunc"
         },
         "prefixTrunc": {
           "$ref": "#/definitions/prefixTrunc"
@@ -353,11 +404,17 @@
         "fullnameOverride": {
           "$ref": "#/definitions/fullnameOverride"
         },
+        "releaseNameOverride": {
+          "$ref": "#/definitions/releaseNameOverride"
+        },
         "serviceName": {
           "$ref": "#/definitions/serviceName"
         },
         "releaseTrunc": {
           "$ref": "#/definitions/releaseTrunc"
+        },
+        "nameTrunc": {
+          "$ref": "#/definitions/nameTrunc"
         },
         "prefixTrunc": {
           "$ref": "#/definitions/prefixTrunc"
@@ -428,11 +485,17 @@
         "fullnameOverride": {
           "$ref": "#/definitions/fullnameOverride"
         },
+        "releaseNameOverride": {
+          "$ref": "#/definitions/releaseNameOverride"
+        },
         "serviceName": {
           "$ref": "#/definitions/serviceName"
         },
         "releaseTrunc": {
           "$ref": "#/definitions/releaseTrunc"
+        },
+        "nameTrunc": {
+          "$ref": "#/definitions/nameTrunc"
         },
         "prefixTrunc": {
           "$ref": "#/definitions/prefixTrunc"
@@ -521,11 +584,17 @@
         "fullnameOverride": {
           "$ref": "#/definitions/fullnameOverride"
         },
+        "releaseNameOverride": {
+          "$ref": "#/definitions/releaseNameOverride"
+        },
         "serviceName": {
           "$ref": "#/definitions/serviceName"
         },
         "releaseTrunc": {
           "$ref": "#/definitions/releaseTrunc"
+        },
+        "nameTrunc": {
+          "$ref": "#/definitions/nameTrunc"
         },
         "prefixTrunc": {
           "$ref": "#/definitions/prefixTrunc"
@@ -600,11 +669,17 @@
           "fullnameOverride": {
             "$ref": "#/definitions/fullnameOverride"
           },
+          "releaseNameOverride": {
+            "$ref": "#/definitions/releaseNameOverride"
+          },
           "serviceName": {
             "$ref": "#/definitions/serviceName"
           },
           "releaseTrunc": {
             "$ref": "#/definitions/releaseTrunc"
+          },
+          "nameTrunc": {
+            "$ref": "#/definitions/nameTrunc"
           },
           "prefixTrunc": {
             "$ref": "#/definitions/prefixTrunc"
@@ -652,11 +727,17 @@
         "fullnameOverride": {
           "$ref": "#/definitions/fullnameOverride"
         },
+        "releaseNameOverride": {
+          "$ref": "#/definitions/releaseNameOverride"
+        },
         "serviceName": {
           "$ref": "#/definitions/serviceName"
         },
         "releaseTrunc": {
           "$ref": "#/definitions/releaseTrunc"
+        },
+        "nameTrunc": {
+          "$ref": "#/definitions/nameTrunc"
         },
         "prefixTrunc": {
           "$ref": "#/definitions/prefixTrunc"
@@ -1035,11 +1116,17 @@
               "fullnameOverride": {
                 "$ref": "#/definitions/fullnameOverride"
               },
+              "releaseNameOverride": {
+                "$ref": "#/definitions/releaseNameOverride"
+              },
               "serviceName": {
                 "$ref": "#/definitions/serviceName"
               },
               "releaseTrunc": {
                 "$ref": "#/definitions/releaseTrunc"
+              },
+              "nameTrunc": {
+                "$ref": "#/definitions/nameTrunc"
               },
               "prefixTrunc": {
                 "$ref": "#/definitions/prefixTrunc"
