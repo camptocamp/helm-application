@@ -23,7 +23,7 @@
     "nameTrunc": {
       "type": "integer",
       "description": "[helm-common] The chart name trunk length (can be in the service, values or global)",
-      "default": 20
+      "default": 63
     },
     "prefixTrunc": {
       "type": "integer",

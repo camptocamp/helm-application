@@ -261,7 +261,7 @@
 - <a id="definitions/fullnameOverride"></a>**`fullnameOverride`** _(string)_: [helm-common] Override the fullname (can be in the service or values).
 - <a id="definitions/releaseNameOverride"></a>**`releaseNameOverride`** _(string)_: [helm-common] Override the the release name (can be in the service, values or global).
 - <a id="definitions/releaseTrunc"></a>**`releaseTrunc`** _(integer)_: [helm-common] The release name trunk length (can be in the service, values or global). Default: `20`.
-- <a id="definitions/nameTrunc"></a>**`nameTrunc`** _(integer)_: [helm-common] The chart name trunk length (can be in the service, values or global). Default: `20`.
+- <a id="definitions/nameTrunc"></a>**`nameTrunc`** _(integer)_: [helm-common] The chart name trunk length (can be in the service, values or global). Default: `63`.
 - <a id="definitions/prefixTrunc"></a>**`prefixTrunc`** _(integer)_: [helm-common] The prefix trunk length (release and chart name) (can be in the service, values or global). Default: `40`.
 - <a id="definitions/serviceAccount"></a>**`serviceAccount`** _(object)_: Service account configuration. Cannot contain additional properties.
   - **`create`** _(boolean)_: Create a service account.
