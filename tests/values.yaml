@@ -4,6 +4,7 @@ global:
 
 metadata:
   enabled: true
+  fullnameOverride: example-app-metadata
 
 securityContext:
   runAsNonRoot: true
@@ -11,6 +12,7 @@ securityContext:
 
 ingress:
   enabled: true
+  fullnameOverride: example-app-ingress
   annotations:
     example-annotation: 'coucou'
   hostGroups:
@@ -29,6 +31,7 @@ ingress:
 
 dockerregistry:
   external: true
+  fullnameOverride: example-app-dockerregistry
   annotations:
     testAnnotation: annotation value
   content:
@@ -60,6 +63,7 @@ dockerregistry:
 
 secrets:
   enabled: true
+  fullnameOverride: example-app-secrets
   annotations:
     testAnnotation: annotation value for secrets
   content:
@@ -75,6 +79,7 @@ secrets:
 externalSecrets:
   app:
     enabled: true
+    fullnameOverride: example-app-ext-secrets
     refreshInterval: 1h
     secretStoreRef:
       name: my-secret-store
@@ -85,6 +90,7 @@ externalSecrets:
           key: hostname
   global:
     enabled: true
+    fullnameOverride: example-app-global-ext-secrets
     refreshInterval: 1h
     secretStoreRef:
       name: my-global-secret-store
@@ -95,6 +101,7 @@ externalSecrets:
           key: pass
 
 configMaps:
+  fullnameOverride: example-app-configmaps
   annotations:
     testAnnotation: annotation value for configmaps
   content:
@@ -122,12 +129,14 @@ serviceAccount:
   create: true
   name: example3-service-account
   serviceName: myserviceaccount
+  fullnameOverride: example-app-service-account
   annotations:
     example-annotation: coucou
 
 services:
   example1:
     enabled: true
+    fullnameOverride: example-app-example1
     pdb:
       enabled: false
     ingress:
@@ -329,6 +338,7 @@ services:
       path: /three
     enabled: true
     replicaCount: 2
+    fullnameOverride: example-app
 
     nameOverride: with-name-override
 
@@ -377,6 +387,7 @@ services:
   # Example with labelSelector in affinity
   example4:
     enabled: true
+    fullnameOverride: example-app
     affinity:
       podAntiAffinity:
         labelSelector:
@@ -398,6 +409,7 @@ services:
   # Example with HPA and labelSelector in affinity
   example5:
     enabled: true
+    fullnameOverride: example-app
     affinity:
       podAntiAffinity:
         labelSelector:
@@ -435,6 +447,7 @@ services:
   # Minimal configuration of a deployment
   deployment-min:
     enabled: true
+    fullnameOverride: example-app
     containers:
       main:
         image:
@@ -443,6 +456,7 @@ services:
   # Deployment with all the possible options
   deployment-all:
     enabled: true
+    fullnameOverride: example-app
     replicas: 3
     strategy:
       type: RollingUpdate
@@ -471,6 +485,7 @@ services:
   # Minimal configuration of a daemonset
   statefulset-min:
     enabled: true
+    fullnameOverride: example-app
     type: StatefulSet
     containers:
       main:
@@ -480,6 +495,7 @@ services:
   # Daemonset with all the possible options
   statefulset-all:
     enabled: true
+    fullnameOverride: example-app
     type: StatefulSet
     serviceName: 'nginx'
     replicas: 3
@@ -511,6 +527,7 @@ services:
   # Minimal configuration of a job
   job-min:
     enabled: true
+    fullnameOverride: example-app
     type: Job
     # not available in k8s <= 1.27
     # podReplacementPolicy: OnFailure
@@ -523,6 +540,7 @@ services:
   # Job with all the possible options
   job-all:
     enabled: true
+    fullnameOverride: example-app
     type: Job
     backoffLimit: 5
     completions: 10
@@ -555,6 +573,7 @@ services:
 
   cronjob-all:
     enabled: true
+    fullnameOverride: example-app
     schedule: '*/1 * * * *'
     concurrencyPolicy: Forbid
     successfulJobsHistoryLimit: 2
@@ -593,6 +612,7 @@ services:
   # Test internal env
   internal:
     enabled: true
+    fullnameOverride: example-app
     containers:
       main:
         image:

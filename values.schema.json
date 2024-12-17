@@ -750,6 +750,9 @@
           "nameOverride": {
             "$ref": "#/definitions/nameOverride"
           },
+          "fullnameOverride": {
+            "$ref": "#/definitions/fullnameOverride"
+          },
           "labels": {
             "$ref": "#/definitions/labels"
           },

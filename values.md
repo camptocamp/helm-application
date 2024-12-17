@@ -123,6 +123,7 @@
     - **`type`** _(string)_: The type of the service. Must be one of: `["Deployment", "StatefulSet", "Job", "CronJob"]`. Default: `"Deployment"`.
     - **`name`** _(string)_: The name of the service.
     - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
+    - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
     - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
     - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
     - **`podLabels`**: Refer to _[#/definitions/podLabels](#definitions/podLabels)_.
