@@ -4,17 +4,29 @@
 
 - **`common`**
 - **`global`** _(object)_
+  - **`releaseNameOverride`**: Refer to _[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)_.
+  - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+  - **`nameTrunc`**: Refer to _[#/definitions/nameTrunc](#definitions/nameTrunc)_.
+  - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
   - **`image`**: Refer to _[#/definitions/globalImage](#definitions/globalImage)_.
   - **`configMapNameOverride`**: Refer to _[#/definitions/configMapNameOverride](#definitions/configMapNameOverride)_.
   - **`revisionHistoryLimit`** _(integer)_: The number of old history to keep to allow rollback.
   - **`ingress`** _(object)_
     - **`noSecretName`** _(boolean)_: Don't add a secret name to the Ingress TLS host, useful when the certification is configured in the Ingress controller.
+- **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
+- **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
+- **`releaseNameOverride`**: Refer to _[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)_.
+- **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+- **`nameTrunc`**: Refer to _[#/definitions/nameTrunc](#definitions/nameTrunc)_.
+- **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
 - **`metadata`** _(object)_: Create a ConfigMap to expose some metadata about the chart. Cannot contain additional properties.
   - **`enabled`** _(boolean)_: Enable the metadata ConfigMap. Default: `true`.
   - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
   - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
+  - **`releaseNameOverride`**: Refer to _[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)_.
   - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
   - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+  - **`nameTrunc`**: Refer to _[#/definitions/nameTrunc](#definitions/nameTrunc)_.
   - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
   - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
   - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
@@ -22,8 +34,10 @@
   - **`enabled`** _(boolean)_: Enable the Ingress.
   - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
   - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
+  - **`releaseNameOverride`**: Refer to _[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)_.
   - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
   - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+  - **`nameTrunc`**: Refer to _[#/definitions/nameTrunc](#definitions/nameTrunc)_.
   - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
   - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
   - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
@@ -43,8 +57,10 @@
 - **`dockerregistry`** _(object)_: Cannot contain additional properties.
   - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
   - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
+  - **`releaseNameOverride`**: Refer to _[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)_.
   - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
   - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+  - **`nameTrunc`**: Refer to _[#/definitions/nameTrunc](#definitions/nameTrunc)_.
   - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
   - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
   - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
@@ -66,8 +82,10 @@
   - **`enabled`** _(boolean)_: Enable the Secret. Default: `true`.
   - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
   - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
+  - **`releaseNameOverride`**: Refer to _[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)_.
   - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
   - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+  - **`nameTrunc`**: Refer to _[#/definitions/nameTrunc](#definitions/nameTrunc)_.
   - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
   - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
   - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
@@ -86,8 +104,10 @@
     - **`enabled`** _(boolean)_: Enable the ExternalSecret. Default: `true`.
     - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
     - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
+    - **`releaseNameOverride`**: Refer to _[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)_.
     - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
     - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+    - **`nameTrunc`**: Refer to _[#/definitions/nameTrunc](#definitions/nameTrunc)_.
     - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
     - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
     - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
@@ -100,8 +120,10 @@
 - **`configMaps`** _(object)_: Cannot contain additional properties.
   - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
   - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
+  - **`releaseNameOverride`**: Refer to _[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)_.
   - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
   - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+  - **`nameTrunc`**: Refer to _[#/definitions/nameTrunc](#definitions/nameTrunc)_.
   - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
   - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
   - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
@@ -198,8 +220,10 @@
       - **`enabled`** _(boolean)_: Enable the ingress for this service.
       - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
       - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
+      - **`releaseNameOverride`**: Refer to _[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)_.
       - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
       - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+      - **`nameTrunc`**: Refer to _[#/definitions/nameTrunc](#definitions/nameTrunc)_.
       - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
       - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
       - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
@@ -233,17 +257,21 @@
 
 ## Definitions
 
-- <a id="definitions/nameOverride"></a>**`nameOverride`** _(string)_: [helm-common] Override the name.
-- <a id="definitions/fullnameOverride"></a>**`fullnameOverride`** _(string)_: [helm-common] Override the fullname.
-- <a id="definitions/releaseTrunc"></a>**`releaseTrunc`** _(integer)_: [helm-common] The release trunk length. Default: `20`.
-- <a id="definitions/prefixTrunc"></a>**`prefixTrunc`** _(integer)_: [helm-common] The prefix trunk length (release and chart name). Default: `40`.
+- <a id="definitions/nameOverride"></a>**`nameOverride`** _(string)_: [helm-common] Override the name (can be in the service or values).
+- <a id="definitions/fullnameOverride"></a>**`fullnameOverride`** _(string)_: [helm-common] Override the fullname (can be in the service or values).
+- <a id="definitions/releaseNameOverride"></a>**`releaseNameOverride`** _(string)_: [helm-common] Override the the release name (can be in the service, values or global).
+- <a id="definitions/releaseTrunc"></a>**`releaseTrunc`** _(integer)_: [helm-common] The release name trunk length (can be in the service, values or global). Default: `20`.
+- <a id="definitions/nameTrunc"></a>**`nameTrunc`** _(integer)_: [helm-common] The chart name trunk length (can be in the service, values or global). Default: `20`.
+- <a id="definitions/prefixTrunc"></a>**`prefixTrunc`** _(integer)_: [helm-common] The prefix trunk length (release and chart name) (can be in the service, values or global). Default: `40`.
 - <a id="definitions/serviceAccount"></a>**`serviceAccount`** _(object)_: Service account configuration. Cannot contain additional properties.
   - **`create`** _(boolean)_: Create a service account.
   - **`name`** _(string)_: Name of the service account.
   - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
   - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
+  - **`releaseNameOverride`**: Refer to _[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)_.
   - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
   - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+  - **`nameTrunc`**: Refer to _[#/definitions/nameTrunc](#definitions/nameTrunc)_.
   - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
   - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
   - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
