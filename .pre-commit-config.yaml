@@ -94,7 +94,7 @@ repos:
     hooks:
       - id: helmlint
   - repo: https://github.com/sbrunner/jsonschema-validator
-    rev: 0.1.0
+    rev: 1.0.0
     hooks:
       - id: jsonschema-validator
         files: ^ci/config\.yaml$
