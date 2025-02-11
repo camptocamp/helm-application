@@ -22,14 +22,14 @@ data:
 {{- end }}
 {{- range $containerName, $containerDefinition := ( default ( dict ) $serviceDefinition.initContainers ) }}
 {{- if $containerDefinition.image.tag }}
-  SERVICE_{{ $serviceName | upper }}_CONTAINER_{{ $containerName | upper }}_IMAGE_TAG: {{ $containerDefinition.image.tag | quote }}
+  SERVICE_{{ $serviceName | upper }}_CONTAINER_{{ $containerName | upper }}_IMAGE_TAG: {{ regexReplaceAll "@sha256:[0-9a-f]+$" $containerDefinition.image.tag "" | quote }}
 {{- else }}
   SERVICE_{{ $serviceName | upper }}_CONTAINER_{{ $containerName | upper }}_IMAGE_TAG: {{ $containerDefinition.image.sha | quote }}
 {{- end }}
 {{- end }}
 {{- range $containerName, $containerDefinition := ( default ( dict ) $serviceDefinition.containers ) }}
 {{- if $containerDefinition.image.tag }}
-  SERVICE_{{ $serviceName | upper }}_CONTAINER_{{ $containerName | upper }}_IMAGE_TAG: {{ $containerDefinition.image.tag | quote }}
+  SERVICE_{{ $serviceName | upper }}_CONTAINER_{{ $containerName | upper }}_IMAGE_TAG: {{ regexReplaceAll "@sha256:[0-9a-f]+$" $containerDefinition.image.tag "" | quote }}
 {{- else }}
   SERVICE_{{ $serviceName | upper }}_CONTAINER_{{ $containerName | upper }}_IMAGE_TAG: {{ $containerDefinition.image.sha | quote }}
 {{- end }}

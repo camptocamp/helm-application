@@ -1068,7 +1068,7 @@ spec:
           securityContext:
             runAsNonRoot: true
             runAsUser: 33
-          image: "camptocamp/image:latest"
+          image: "camptocamp/image:latest@sha256:80692750f8049ff14a8b61e77a758edd5d1f33a82b6792eac1f3d4b0d5ec351d"
           imagePullPolicy: IfNotPresent
           terminationMessagePolicy: FallbackToLogsOnError
 ---
