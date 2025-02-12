@@ -370,6 +370,30 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: example-app-example4
+  labels:
+    helm.sh/chart: application
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
+    app.kubernetes.io/component: example4
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: http
+  selector:
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
+    app.kubernetes.io/component: example4
+---
+# Source: application/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
   name: service-autoscaled
   labels:
     helm.sh/chart: application
@@ -1461,6 +1485,13 @@ spec:
                 name: hardcoded-service-name
                 port:
                   number: 8080
+          - path: "/four"
+            pathType: Prefix
+            backend:
+              service:
+                name: example-app-example4
+                port:
+                  number: 8080
     - host: "test2.example.com"
       http:
         paths:
@@ -1483,6 +1514,13 @@ spec:
             backend:
               service:
                 name: hardcoded-service-name
+                port:
+                  number: 8080
+          - path: "/four"
+            pathType: Prefix
+            backend:
+              service:
+                name: example-app-example4
                 port:
                   number: 8080
 ---
@@ -1529,6 +1567,13 @@ spec:
             backend:
               service:
                 name: hardcoded-service-name
+                port:
+                  number: 8080
+          - path: "/four"
+            pathType: Prefix
+            backend:
+              service:
+                name: example-app-example4
                 port:
                   number: 8080
 ---
