@@ -82,9 +82,6 @@ repos:
         args:
           - --builtin-schema
           - github-workflows-require-timeout
-      - id: check-renovate
-        additional_dependencies:
-          - pyjson5==1.6.8 # pypi
   - repo: https://github.com/sirwart/ripsecrets
     rev: v0.1.8
     hooks:
@@ -97,7 +94,11 @@ repos:
     rev: 1.0.0
     hooks:
       - id: jsonschema-validator
-        files: ^ci/config\.yaml$
+        files: |-
+          (?x)^(
+            \.github/ghci\.yaml
+            |\.github/publish\.yaml
+          )$
   - repo: https://github.com/mheap/json-schema-spell-checker
     rev: main
     hooks:
