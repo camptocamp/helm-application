@@ -370,6 +370,30 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: example-app-example4
+  labels:
+    helm.sh/chart: application
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
+    app.kubernetes.io/component: example4
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: http
+  selector:
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
+    app.kubernetes.io/component: example4
+---
+# Source: application/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
   name: service-autoscaled
   labels:
     helm.sh/chart: application

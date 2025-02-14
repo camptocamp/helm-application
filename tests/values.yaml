@@ -387,6 +387,13 @@ services:
   # Example with labelSelector in affinity
   example4:
     enabled: true
+
+    ingress:
+      enabled: false
+      path: /four
+
+    service: *servicedefinition
+
     fullnameOverride: example-app
     affinity:
       podAntiAffinity:
