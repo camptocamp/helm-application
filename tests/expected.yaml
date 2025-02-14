@@ -1485,13 +1485,6 @@ spec:
                 name: hardcoded-service-name
                 port:
                   number: 8080
-          - path: "/four"
-            pathType: Prefix
-            backend:
-              service:
-                name: example-app-example4
-                port:
-                  number: 8080
     - host: "test2.example.com"
       http:
         paths:
@@ -1514,13 +1507,6 @@ spec:
             backend:
               service:
                 name: hardcoded-service-name
-                port:
-                  number: 8080
-          - path: "/four"
-            pathType: Prefix
-            backend:
-              service:
-                name: example-app-example4
                 port:
                   number: 8080
 ---
@@ -1567,13 +1553,6 @@ spec:
             backend:
               service:
                 name: hardcoded-service-name
-                port:
-                  number: 8080
-          - path: "/four"
-            pathType: Prefix
-            backend:
-              service:
-                name: example-app-example4
                 port:
                   number: 8080
 ---
