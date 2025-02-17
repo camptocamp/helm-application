@@ -204,6 +204,9 @@ services:
           /tmp/my-volume/data:
             name: my-volume
             subPath: data
+      disabled:
+        <<: *aa
+        enabled: false
 
     containers:
       cc:
@@ -237,6 +240,9 @@ services:
           http:
             containerPort: 8080
             protocol: TCP
+      disabled:
+        <<: *aa
+        enabled: false
 
     volumes:
       my-volume:

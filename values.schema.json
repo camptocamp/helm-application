@@ -849,9 +849,6 @@
           "serviceName": {
             "$ref": "#/definitions/serviceName"
           },
-          "resources": {
-            "$ref": "#/definitions/resources"
-          },
           "releaseTrunc": {
             "$ref": "#/definitions/releaseTrunc"
           },
@@ -1025,6 +1022,10 @@
               "type": "object",
               "additionalProperties": false,
               "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "description": "Enable the initialization container"
+                },
                 "image": {
                   "$ref": "#/definitions/image"
                 },
@@ -1060,6 +1061,10 @@
               "type": "object",
               "additionalProperties": false,
               "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "description": "Enable the container"
+                },
                 "image": {
                   "$ref": "#/definitions/image"
                 },

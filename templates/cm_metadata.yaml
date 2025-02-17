@@ -21,17 +21,21 @@ data:
   SERVICE_{{ $serviceName | upper }}_NAME: {{ include "common.fullname" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) }}
 {{- end }}
 {{- range $containerName, $containerDefinition := ( default ( dict ) $serviceDefinition.initContainers ) }}
+{{- if or ( not ( hasKey $containerDefinition "enabled" ) ) $containerDefinition.enabled }}
 {{- if $containerDefinition.image.tag }}
   SERVICE_{{ $serviceName | upper }}_CONTAINER_{{ $containerName | upper }}_IMAGE_TAG: {{ regexReplaceAll "@sha256:[0-9a-f]+$" $containerDefinition.image.tag "" | quote }}
 {{- else }}
   SERVICE_{{ $serviceName | upper }}_CONTAINER_{{ $containerName | upper }}_IMAGE_TAG: {{ $containerDefinition.image.sha | quote }}
+{{- end }}
 {{- end }}
 {{- end }}
 {{- range $containerName, $containerDefinition := ( default ( dict ) $serviceDefinition.containers ) }}
+{{- if or ( not ( hasKey $containerDefinition "enabled" ) ) $containerDefinition.enabled }}
 {{- if $containerDefinition.image.tag }}
   SERVICE_{{ $serviceName | upper }}_CONTAINER_{{ $containerName | upper }}_IMAGE_TAG: {{ regexReplaceAll "@sha256:[0-9a-f]+$" $containerDefinition.image.tag "" | quote }}
 {{- else }}
   SERVICE_{{ $serviceName | upper }}_CONTAINER_{{ $containerName | upper }}_IMAGE_TAG: {{ $containerDefinition.image.sha | quote }}
+{{- end }}
 {{- end }}
 {{- end }}
 {{- end }}
