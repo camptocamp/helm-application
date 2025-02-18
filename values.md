@@ -151,7 +151,6 @@
     - **`podLabels`**: Refer to _[#/definitions/podLabels](#definitions/podLabels)_.
     - **`podAnnotations`**: Refer to _[#/definitions/podAnnotations](#definitions/podAnnotations)_.
     - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
-    - **`resources`**: Refer to _[#/definitions/resources](#definitions/resources)_.
     - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
     - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
     - **`affinity`**: Refer to _[#/definitions/affinity](#definitions/affinity)_.
@@ -193,6 +192,7 @@
       - **`maxUnavailable`** _(integer)_: The maximum number of Pods unavailable.
     - **`initContainers`** _(object)_: The initialization containers configuration. Can contain additional properties.
       - **Additional properties** _(object)_: Cannot contain additional properties.
+        - **`enabled`** _(boolean)_: Enable the initialization container.
         - **`image`**: Refer to _[#/definitions/image](#definitions/image)_.
         - **`env`**: Refer to _[#/definitions/env](#definitions/env)_.
         - **`resources`**: Refer to _[#/definitions/resources](#definitions/resources)_.
@@ -203,6 +203,7 @@
         - **`volumeDevices`**: Refer to _[#/definitions/volumeDevices](#definitions/volumeDevices)_.
     - **`containers`** _(object)_: The containers configuration. Can contain additional properties.
       - **Additional properties** _(object)_: Cannot contain additional properties.
+        - **`enabled`** _(boolean)_: Enable the container.
         - **`image`**: Refer to _[#/definitions/image](#definitions/image)_.
         - **`env`**: Refer to _[#/definitions/env](#definitions/env)_.
         - **`resources`**: Refer to _[#/definitions/resources](#definitions/resources)_.
