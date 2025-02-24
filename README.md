@@ -18,6 +18,13 @@ and production.
 Documentation based on the schema defined in [values.md](./values.md).
 The documentation is on the [Wiki](https://github.com/camptocamp/helm-application/wiki).
 
+## Installation
+
+```bash
+helm repo add application https://camptocamp.github.io/helm-application/
+helm install my-release application/application --values=my-values.yaml
+```
+
 ## Contributing
 
 Install the pre-commit hooks:
