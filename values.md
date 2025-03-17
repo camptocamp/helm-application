@@ -278,7 +278,7 @@
   - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
 - <a id="definitions/podSecurityContext"></a>**`podSecurityContext`** _(object)_: Pod security context.
 - <a id="definitions/securityContext"></a>**`securityContext`** _(object)_: Container security context.
-- <a id="definitions/globalImage"></a>**`globalImage`** _(object)_: [helm-common] global image configuration. Cannot contain additional properties.
+- <a id="definitions/globalImage"></a>**`globalImage`** _(object)_: [helm-common] global image configuration.
   - **`pullPolicy`** _(string)_: Image pull policy.
   - **`pullSecrets`** _(array)_: Image pull secrets.
 - <a id="definitions/configMapNameOverride"></a>**`configMapNameOverride`** _(object)_: [helm-common] global: Used to be able to globally override the name of the ConfigMap. Can contain additional properties.
