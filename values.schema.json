@@ -83,7 +83,6 @@
     "globalImage": {
       "type": "object",
       "description": "[helm-common] global image configuration",
-      "additionalProperties": false,
       "properties": {
         "pullPolicy": {
           "type": "string",
