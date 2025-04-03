@@ -30,6 +30,7 @@ repos:
       - id: copyright
       - id: workflows-require-timeout
       - id: helm-lock
+      - id: canonicalize
   - repo: https://github.com/camptocamp/helm-common
     rev: 2.0.1
     hooks:
