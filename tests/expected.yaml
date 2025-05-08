@@ -1041,7 +1041,7 @@ spec:
             runAsNonRoot: true
             runAsUser: 33
           image: "camptocamp/image:latest"
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           terminationMessagePolicy: FallbackToLogsOnError
 ---
 # Source: application/templates/deployment.yaml

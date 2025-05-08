@@ -54,6 +54,8 @@
 - **`podSecurityContext`**: Refer to _[#/definitions/podSecurityContext](#definitions/podSecurityContext)_.
 - **`affinity`**: Refer to _[#/definitions/affinity](#definitions/affinity)_.
 - **`tolerations`**: Refer to _[#/definitions/tolerations](#definitions/tolerations)_.
+- **`image`** _(object)_: Container: Image configuration.
+  - **`pullPolicy`** _(string)_: Image pull policy. Must be one of: `["Always", "IfNotPresent", "Never"]`.
 - **`dockerregistry`** _(object)_: Cannot contain additional properties.
   - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
   - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
@@ -279,7 +281,7 @@
 - <a id="definitions/podSecurityContext"></a>**`podSecurityContext`** _(object)_: Pod security context.
 - <a id="definitions/securityContext"></a>**`securityContext`** _(object)_: Container security context.
 - <a id="definitions/globalImage"></a>**`globalImage`** _(object)_: [helm-common] global image configuration.
-  - **`pullPolicy`** _(string)_: Image pull policy.
+  - **`pullPolicy`** _(string)_: Image pull policy. Must be one of: `["Always", "IfNotPresent", "Never"]`. Default: `"IfNotPresent"`.
   - **`pullSecrets`** _(array)_: Image pull secrets.
 - <a id="definitions/configMapNameOverride"></a>**`configMapNameOverride`** _(object)_: [helm-common] global: Used to be able to globally override the name of the ConfigMap. Can contain additional properties.
   - **Additional properties** _(string)_
@@ -304,6 +306,7 @@
   - **`repository`** _(string, required)_: Image repository.
   - **`tag`** _(string)_: Image tag, used if the sha is not defined.
   - **`sha`** _(['null', 'string'])_: Image sha.
+  - **`pullPolicy`** _(string)_: Image pull policy. Must be one of: `["Always", "IfNotPresent", "Never"]`.
 - <a id="definitions/env"></a>**`env`** _(object)_: [helm-common] Container: Environment variables. Can contain additional properties.
   - **Additional properties**
     - **One of**

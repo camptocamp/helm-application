@@ -411,6 +411,7 @@ services:
         image:
           repository: camptocamp/image
           tag: latest
+          pullPolicy: Always
 
     podMonitor:
       enabled: true

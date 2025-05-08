@@ -4,6 +4,8 @@ global:
   revisionHistoryLimit: 3
   configMapNameOverride: {}
 
+image: {}
+
 serviceAccount:
   # Specifies whether a service account should be created
   create: false
