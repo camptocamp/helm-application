@@ -86,7 +86,9 @@
       "properties": {
         "pullPolicy": {
           "type": "string",
-          "description": "Image pull policy"
+          "description": "Image pull policy",
+          "default": "IfNotPresent",
+          "enum": ["Always", "IfNotPresent", "Never"]
         },
         "pullSecrets": {
           "type": "array",
@@ -175,6 +177,11 @@
         "sha": {
           "type": ["null", "string"],
           "description": "Image sha"
+        },
+        "pullPolicy": {
+          "type": "string",
+          "description": "Image pull policy",
+          "enum": ["Always", "IfNotPresent", "Never"]
         }
       },
       "required": ["repository"],
@@ -473,6 +480,17 @@
     },
     "tolerations": {
       "$ref": "#/definitions/tolerations"
+    },
+    "image": {
+      "type": "object",
+      "description": "Container: Image configuration",
+      "properties": {
+        "pullPolicy": {
+          "type": "string",
+          "description": "Image pull policy",
+          "enum": ["Always", "IfNotPresent", "Never"]
+        }
+      }
     },
     "dockerregistry": {
       "type": "object",

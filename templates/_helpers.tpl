@@ -124,7 +124,14 @@ image: "{{ .container.image.repository }}@sha256:{{ .container.image.sha }}"
 {{- else }}
 image: "{{ .container.image.repository }}:{{ .container.image.tag }}"
 {{- end }}
+{{- /* The precedence order for pullPolicy is: container-specific > root-level > global-level. */}}
+{{- if .container.image.pullPolicy }}
+imagePullPolicy: {{ .container.image.pullPolicy }}
+{{- else if .root.Values.image.pullPolicy }}
+imagePullPolicy: {{ .root.Values.image.pullPolicy }}
+{{- else }}
 imagePullPolicy: {{ .root.Values.global.image.pullPolicy }}
+{{- end }}
 {{- if not ( empty .container.env ) }}
 env:
   {{- $configMapNameOverride := .root.Values.global.configMapNameOverride }}
