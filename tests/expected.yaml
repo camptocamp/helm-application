@@ -1453,6 +1453,7 @@ metadata:
     app.kubernetes.io/component: host1
   annotations:
     example-annotation: coucou
+    traefik.ingress.kubernetes.io/router.middlewares: default-example-app-ingress@kubernetescrd
 spec:
 # Add tls only if ingress.tls.enabled is set to true and the other fields are complete.
   tls:
@@ -1524,6 +1525,7 @@ metadata:
     app.kubernetes.io/component: host2
   annotations:
     example-annotation: coucou
+    traefik.ingress.kubernetes.io/router.middlewares: default-example-app-ingress@kubernetescrd
 spec:
 # Add tls only if ingress.tls.enabled is set to true and the other fields are complete.
   tls:
@@ -1679,6 +1681,27 @@ spec:
     - secretKey: pass
       remoteRef:
         key: pass
+---
+# Source: application/templates/traefik-middleware.yaml
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: example-app-ingress
+  labels:
+    helm.sh/chart: application
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
+    app.kubernetes.io/component: main
+  annotations:
+    example-annotation: coucou
+spec:
+  headers:
+    customResponseHeaders:
+      Access-Control-Allow-Headers: '*'
+      Access-Control-Allow-Methods: GET, OPTIONS
+      Access-Control-Allow-Origin: '*'
 ---
 # Source: application/templates/podmonitor.yaml
 apiVersion: monitoring.coreos.com/v1

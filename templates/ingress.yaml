@@ -7,6 +7,11 @@ kind: Ingress
 metadata:
   name: {{ include "common.fullname" ( dict "root" $ "service" $.Values.ingress "serviceName" $hostGroupName ) }}
   {{- include "common.metadata" ( dict "root" $ "service" $.Values.ingress "serviceName" $hostGroupName ) | nindent 2 }}
+  {{- if ( default ( dict ) $.Values.ingress.traefikMiddleware ) }}
+  {{- if ( default true $.Values.ingress.traefikMiddleware.enabled ) }}
+    traefik.ingress.kubernetes.io/router.middlewares: {{ $.Release.Namespace }}-{{ include "common.fullname" ( dict "root" $ "service" $.Values.ingress ) }}@kubernetescrd
+  {{- end }}
+  {{- end }}
 spec:
 {{- with $.Values.ingress.ingressClassName }}
   ingressClassName: {{ . }}
