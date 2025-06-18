@@ -435,6 +435,21 @@
           "type": "string",
           "description": "Ingress class name. Will be omitted if not specified."
         },
+        "traefikMiddleware": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Enable Traefik middleware",
+              "default": true
+            },
+            "spec": {
+              "type": "object",
+              "description": "Traefik middleware specification"
+            }
+          }
+        },
         "hostGroups": {
           "type": "object",
           "additionalProperties": {

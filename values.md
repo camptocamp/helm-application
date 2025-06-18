@@ -42,6 +42,9 @@
   - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
   - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
   - **`ingressClassName`** _(string)_: Ingress class name. Will be omitted if not specified.
+  - **`traefikMiddleware`** _(object)_: Cannot contain additional properties.
+    - **`enabled`** _(boolean)_: Enable Traefik middleware. Default: `true`.
+    - **`spec`** _(object)_: Traefik middleware specification.
   - **`hostGroups`** _(object)_: Can contain additional properties.
     - **Additional properties** _(object)_: Cannot contain additional properties.
       - **`hosts`** _(array)_
