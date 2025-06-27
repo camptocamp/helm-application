@@ -140,6 +140,12 @@ serviceAccount:
   annotations:
     example-annotation: coucou
 
+tolerations:
+  - key: telaration-defined-in-global
+    operator: Equal
+    value: example-value
+    effect: NoSchedule
+
 services:
   example1:
     enabled: true
@@ -159,6 +165,11 @@ services:
           interval: 10s
           honorLabels: true
     replicaCount: 1
+    tolerations:
+      - key: telaration-defined-in-service-definition
+        operator: Equal
+        value: example-value
+        effect: NoSchedule
     affinity:
       podAntiAffinity:
         topologyKey: kubernetes.io/hostname

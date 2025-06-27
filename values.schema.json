@@ -890,6 +890,9 @@
           "affinity": {
             "$ref": "#/definitions/affinity"
           },
+          "tolerations": {
+            "$ref": "#/definitions/tolerations"
+          },
           "nodeSelector": {
             "$ref": "#/definitions/nodeSelector"
           },

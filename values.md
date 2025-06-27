@@ -159,6 +159,7 @@
     - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
     - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
     - **`affinity`**: Refer to _[#/definitions/affinity](#definitions/affinity)_.
+    - **`tolerations`**: Refer to _[#/definitions/tolerations](#definitions/tolerations)_.
     - **`nodeSelector`**: Refer to _[#/definitions/nodeSelector](#definitions/nodeSelector)_.
     - **`replicaCount`** _(integer)_: The number of replicas.
     - **`maxFailedIndexes`** _(integer)_: The maximum number of failed indexes.
