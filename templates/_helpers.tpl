@@ -111,11 +111,15 @@ podAntiAffinity: {{ toYaml . | nindent 4 }}
 {{- end }}
 {{- end }}  {{/*  with .service.affinity */}}
 
-{{- with .root.Values.tolerations }}
+{{- $globalTolerations := .root.Values.tolerations | default (list) }}
+{{- $localTolerations := .service.tolerations | default (list) }}
+{{- $combinedTolerations := concat $globalTolerations $localTolerations }}
+{{- if $combinedTolerations }}
 tolerations:
-  {{- toYaml . | nindent 2 }}
+{{ toYaml $combinedTolerations | indent 2 }}
 {{- end }}
-{{- end }}
+{{- end }} {{/* define "application.podConfig" */}}
+
 
 {{- define "application.containerConfig" -}}
 securityContext: {{- toYaml .root.Values.securityContext | nindent 2 }}

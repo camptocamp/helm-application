@@ -461,6 +461,11 @@ spec:
                 values:
                 - ssd
             weight: 1
+      tolerations:
+        - effect: NoSchedule
+          key: telaration-defined-in-global
+          operator: Equal
+          value: example-value
       containers:
         - name: main
           securityContext:
@@ -503,6 +508,11 @@ spec:
       serviceAccountName: example-app-service-account-myserviceaccount
       securityContext:
         {}
+      tolerations:
+        - effect: NoSchedule
+          key: telaration-defined-in-global
+          operator: Equal
+          value: example-value
       containers:
         - name: main
           securityContext:
@@ -564,6 +574,15 @@ spec:
                     values:
                       - with-service-name
               topologyKey: "kubernetes.io/hostname"
+      tolerations:
+        - effect: NoSchedule
+          key: telaration-defined-in-global
+          operator: Equal
+          value: example-value
+        - effect: NoSchedule
+          key: telaration-defined-in-service-definition
+          operator: Equal
+          value: example-value
       initContainers:
         - name: aa
           securityContext:
@@ -780,6 +799,11 @@ spec:
                     values:
                       - example2
               topologyKey: "kubernetes.io/hostname"
+      tolerations:
+        - effect: NoSchedule
+          key: telaration-defined-in-global
+          operator: Equal
+          value: example-value
       containers:
         - name: cc
           securityContext:
@@ -912,6 +936,11 @@ spec:
                     values:
                       - example3
               topologyKey: "kubernetes.io/hostname"
+      tolerations:
+        - effect: NoSchedule
+          key: telaration-defined-in-global
+          operator: Equal
+          value: example-value
       containers:
         - name: cc
           securityContext:
@@ -1035,6 +1064,11 @@ spec:
                     values:
                       - "v1"
               topologyKey: "kubernetes.io/hostname"
+      tolerations:
+        - effect: NoSchedule
+          key: telaration-defined-in-global
+          operator: Equal
+          value: example-value
       containers:
         - name: main
           securityContext:
@@ -1087,6 +1121,11 @@ spec:
                     values:
                       - "v1"
               topologyKey: "kubernetes.io/hostname"
+      tolerations:
+        - effect: NoSchedule
+          key: telaration-defined-in-global
+          operator: Equal
+          value: example-value
       containers:
         - name: main
           securityContext:
@@ -1129,6 +1168,11 @@ spec:
       serviceAccountName: example-app-service-account-myserviceaccount
       securityContext:
         {}
+      tolerations:
+        - effect: NoSchedule
+          key: telaration-defined-in-global
+          operator: Equal
+          value: example-value
       containers:
         - name: main
           securityContext:
@@ -1245,6 +1289,11 @@ spec:
       serviceAccountName: example-app-service-account-myserviceaccount
       securityContext:
         {}
+      tolerations:
+        - effect: NoSchedule
+          key: telaration-defined-in-global
+          operator: Equal
+          value: example-value
       containers:
         - name: main
           securityContext:
@@ -1284,6 +1333,11 @@ spec:
       serviceAccountName: example-app-service-account-myserviceaccount
       securityContext:
         {}
+      tolerations:
+        - effect: NoSchedule
+          key: telaration-defined-in-global
+          operator: Equal
+          value: example-value
       containers:
         - name: main
           securityContext:
@@ -1335,6 +1389,11 @@ spec:
       serviceAccountName: example-app-service-account-myserviceaccount
       securityContext:
         {}
+      tolerations:
+        - effect: NoSchedule
+          key: telaration-defined-in-global
+          operator: Equal
+          value: example-value
       restartPolicy: Never
       containers:
         - name: main
@@ -1370,6 +1429,11 @@ spec:
       serviceAccountName: example-app-service-account-myserviceaccount
       securityContext:
         {}
+      tolerations:
+        - effect: NoSchedule
+          key: telaration-defined-in-global
+          operator: Equal
+          value: example-value
       restartPolicy: Never
       containers:
         - name: main
@@ -1429,6 +1493,11 @@ spec:
           serviceAccountName: example-app-service-account-myserviceaccount
           securityContext:
             {}
+          tolerations:
+            - effect: NoSchedule
+              key: telaration-defined-in-global
+              operator: Equal
+              value: example-value
           restartPolicy: Never
           containers:
             - name: main
