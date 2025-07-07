@@ -15,8 +15,8 @@
   packageRules: [
     /** Auto merge updates on CI files */
     {
-      matchPaths: ['^\\.pre-commit-config\\.yaml$', '^\\.github/.*', '^ci/.*'],
       automerge: true,
+      matchFileNames: ['^\\.pre-commit-config\\.yaml$', '^\\.github/.*', '^ci/.*'],
     },
   ],
   $schema: 'https://docs.renovatebot.com/renovate-schema.json',
