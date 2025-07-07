@@ -1,23 +1,23 @@
 {
-  "extends": [
-    "github>camptocamp/gs-renovate-config-preset:base.json5#1.3.2",
-    "github>camptocamp/gs-renovate-config-preset:group.json5#1.3.2",
-    "github>camptocamp/gs-renovate-config-preset:ci.json5#1.3.2",
-    "github>camptocamp/gs-renovate-config-preset:preset.json5#1.3.2",
-    "github>camptocamp/gs-renovate-config-preset:pre-commit.json5#1.3.2",
-    "github>camptocamp/gs-renovate-config-preset:json-schema.json5#1.3.2",
-    "github>camptocamp/gs-renovate-config-preset:shellcheck.json5#1.3.2",
-    "github>camptocamp/gs-renovate-config-preset:own.json5#1.3.2",
+  extends: [
+    'github>camptocamp/gs-renovate-config-preset:base.json5#1.3.2',
+    'github>camptocamp/gs-renovate-config-preset:group.json5#1.3.2',
+    'github>camptocamp/gs-renovate-config-preset:ci.json5#1.3.2',
+    'github>camptocamp/gs-renovate-config-preset:preset.json5#1.3.2',
+    'github>camptocamp/gs-renovate-config-preset:pre-commit.json5#1.3.2',
+    'github>camptocamp/gs-renovate-config-preset:json-schema.json5#1.3.2',
+    'github>camptocamp/gs-renovate-config-preset:shellcheck.json5#1.3.2',
+    'github>camptocamp/gs-renovate-config-preset:own.json5#1.3.2',
   ],
   kubernetes: {
-    fileMatch: ["templates/.+\\.yaml$", "tests/.*expected\\.yaml$"],
+    fileMatch: ['templates/.+\\.yaml$', 'tests/.*expected\\.yaml$'],
   },
   packageRules: [
     /** Auto merge updates on CI files */
     {
       automerge: true,
-      matchFileNames: ["^\\.pre-commit-config\\.yaml$", "^\\.github/.*", "^ci/.*"],
+      matchFileNames: ['^\\.pre-commit-config\\.yaml$', '^\\.github/.*', '^ci/.*'],
     },
   ],
-  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
 }
