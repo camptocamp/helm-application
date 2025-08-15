@@ -456,6 +456,19 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
+              "enabled": {
+                "type": "boolean",
+                "title": "enabled",
+                "description": "Enable the group, if false the group will not be created",
+                "default": true
+              },
+              "type": {
+                "type": "string",
+                "title": "type",
+                "description": "The type of the group, can be 'ingress', 'traefik-ingress-route'",
+                "enum": ["ingress", "traefik-ingress-route"],
+                "default": "ingress"
+              },
               "hosts": {
                 "type": "array",
                 "items": {
@@ -473,6 +486,49 @@
                   "secretName": {
                     "type": "string",
                     "description": "The name of the Secret"
+                  }
+                }
+              },
+              "traefikEntryPoints": {
+                "type": "array",
+                "title": "Entry Points",
+                "description": "See the Traefik documentation for more information."
+              },
+              "traefikTLS": {
+                "type": "object",
+                "title": "TLS Traefik",
+                "description": "TLS for Traefik IngressRoute"
+              },
+              "traefikHosts": {
+                "type": "array",
+                "title": "Traefik hosts",
+                "description": "The hosts definitions for Traefik IngressRoute",
+                "items": {
+                  "type": "object",
+                  "title": "Traefik host",
+                  "description": "The host definition for Traefik IngressRoute",
+                  "properties": {
+                    "kind": {
+                      "type": "string",
+                      "default": "Rule",
+                      "description": "See the Traefik documentation for more information."
+                    },
+                    "match": {
+                      "type": "string",
+                      "description": "See the Traefik documentation: https://doc.traefik.io/traefik/v3.5/routing/routers/#rule"
+                    },
+                    "observability": {
+                      "type": "object",
+                      "description": "See the Traefik documentation for more information."
+                    },
+                    "priority": {
+                      "type": "integer",
+                      "description": "See the Traefik documentation for more information."
+                    },
+                    "syntax": {
+                      "type": "string",
+                      "description": "See the Traefik documentation for more information."
+                    }
                   }
                 }
               }
@@ -1183,6 +1239,57 @@
               "path": {
                 "type": "string",
                 "description": "The path of the ingress"
+              },
+              "traefikHealthCheck": {
+                "type": "object",
+                "title": "Traefik health check",
+                "description": "See the Traefik documentation for more information."
+              },
+              "traefikNativeLB": {
+                "type": "boolean",
+                "title": "Traefik native load balancer",
+                "description": "See the Traefik documentation for more information."
+              },
+              "traefikNodePortLB": {
+                "type": "boolean",
+                "title": "Traefik node port load balancer",
+                "description": "See the Traefik documentation for more information."
+              },
+              "traefikPassHostHeader": {
+                "type": "boolean",
+                "title": "Pass host header",
+                "description": "See the Traefik documentation for more information.",
+                "default": true
+              },
+              "traefikResponseForwarding": {
+                "type": "object",
+                "title": "Traefik response forwarding",
+                "description": "See the Traefik documentation for more information."
+              },
+              "traefikScheme": {
+                "type": "string",
+                "title": "Traefik scheme",
+                "description": "See the Traefik documentation for more information."
+              },
+              "traefikServersTransport": {
+                "type": "string",
+                "title": "Traefik servers transport",
+                "description": "See the Traefik documentation for more information."
+              },
+              "traefikSticky": {
+                "type": "object",
+                "title": "Traefik sticky",
+                "description": "See the Traefik documentation for more information."
+              },
+              "traefikStrategy": {
+                "type": "string",
+                "title": "Traefik strategy",
+                "description": "See the Traefik documentation for more information."
+              },
+              "traefikWeight": {
+                "type": "integer",
+                "title": "Traefik weight",
+                "description": "See the Traefik documentation for more information."
               }
             }
           },
