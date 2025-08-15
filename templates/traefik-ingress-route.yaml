@@ -1,0 +1,92 @@
+{{- $fullName := include "common.fullname" ( dict "root" . "service" .Values ) -}}
+{{- range $hostGroupName, $hostGroupDefinition := $.Values.ingress.hostGroups }}
+{{- if or ( not ( hasKey $hostGroupDefinition "enabled" ) ) $hostGroupDefinition.enabled }}
+{{- if eq ( $hostGroupDefinition.type | default "ingress" ) "traefik-ingress-route" }}
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ include "common.fullname" ( dict "root" $ "service" $.Values.ingress "serviceName" $hostGroupName ) }}
+  {{- include "common.metadata" ( dict "root" $ "service" $.Values.ingress "serviceName" $hostGroupName ) | nindent 2 }}
+spec:
+  {{- with $hostGroupDefinition.traefikEntryPoints }}
+  entryPoints: {{ . | toYaml | nindent 4 }}
+  {{- end }}
+  {{- with $hostGroupDefinition.traefikTLS }}
+  tls: {{ . | toYaml | nindent 4 }}
+  {{- end }}
+  routes:
+    {{- range $serviceName, $serviceDefinition := $.Values.services }}
+    {{- if and ( eq $serviceDefinition.enabled true ) ( eq ( default false ( default ( dict ) $serviceDefinition.ingress ).enabled ) true ) }}
+    {{- range $hostGroupDefinition.traefikHosts }}
+    - {{- with .kind }}
+      kind: {{ . }}
+      {{- end }}
+      {{- with .match }}
+      {{- if $serviceDefinition.ingress.path }}
+      match: "( {{ . }} ) && PathPrefix(`{{ $serviceDefinition.ingress.path }}`)"
+      {{- else }}
+      match: {{ . | quote }}
+      {{- end }}
+      {{- end }}
+      {{- if ( default ( dict ) $.Values.traefikMiddleware ) }}
+      {{- if or ( not ( hasKey $.Values.traefikMiddleware "enabled" ) ) $.Values.traefikMiddleware.enabled }}
+      middlewares:
+      - name: {{ include "common.fullname" ( dict "root" $ "service" $.Values ) }}
+        namespace: {{ $.Release.Namespace }}
+      {{- end }}
+      {{- end }}
+      {{- with .observability }}
+      observability: {{ . | toYaml | nindent 6 }}
+      {{- end }}
+      {{- with .priority }}
+      priority: {{ . }}
+      {{- end }}
+      {{- with .syntax }}
+      syntax: {{ . }}
+      {{- end }}
+      services:
+      - {{- with $serviceDefinition.ingress.traefikHealthCheck }}
+        healthCheck: {{ . | toYaml | nindent 8 }}
+        {{- end }}
+        kind: Service
+        {{- if hasKey $serviceDefinition.service "name" }}
+        name: {{ $serviceDefinition.service.name }}
+        {{- else }}
+        name: {{ include "common.fullname" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) }}
+        {{- end }}
+        namespace: {{ $.Release.Namespace }}
+        {{- with $serviceDefinition.ingress.traefikNativeLB }}
+        nativeLB: {{ . }}
+        {{- end }}
+        {{- with $serviceDefinition.ingress.traefikNodePortLB }}
+        nodePortLB: {{ . }}
+        {{- end }}
+        {{- with $serviceDefinition.ingress.traefikPassHostHeader }}
+        passHostHeader: {{ . }}
+        {{- end }}
+        port: {{ .servicePort | default 80 }}
+        {{- with $serviceDefinition.ingress.traefikResponseForwarding }}
+        responseForwarding: {{ . | toYaml | nindent 8 }}
+        {{- end }}
+        {{- with $serviceDefinition.ingress.traefikScheme }}
+        scheme: {{ . }}
+        {{- end }}
+        {{- with $serviceDefinition.ingress.traefikServersTransport }}
+        serversTransport: {{ . }}
+        {{- end }}
+        {{- with $serviceDefinition.ingress.traefikSticky }}
+        sticky: {{ . | toYaml | nindent 8 }}
+        {{- end }}
+        {{- with $serviceDefinition.ingress.traefikStrategy }}
+        strategy: {{ . }}
+        {{- end }}
+        {{- with $serviceDefinition.ingress.traefikWeight }}
+        weight: {{ . }}
+        {{- end }}
+    {{- end }}  {{- /* end of ingressHosts */ -}}
+    {{- end }}  {{- /* end of services enabled */ -}}
+    {{- end }}  {{- /* end of services */ -}}
+{{- end }}  {{- /* end of type */ -}}
+{{- end }}  {{- /* end of enabled */ -}}
+{{- end }}  {{- /* end of hostsGroups */ -}}

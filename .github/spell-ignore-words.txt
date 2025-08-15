@@ -27,3 +27,5 @@ HPA
 cpu
 Resource
 Traefik
+traefik-ingress-route
+IngressRoute

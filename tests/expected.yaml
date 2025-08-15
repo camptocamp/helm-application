@@ -1580,53 +1580,6 @@ spec:
                 port:
                   number: 8080
 ---
-# Source: application/templates/ingress.yaml
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: example-app-ingress-host2
-  labels:
-    helm.sh/chart: application
-    app.kubernetes.io/version: "1.0"
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: application
-    app.kubernetes.io/instance: example
-    app.kubernetes.io/component: host2
-  annotations:
-    example-annotation: coucou
-    traefik.ingress.kubernetes.io/router.middlewares: default-example-app-ingress@kubernetescrd
-spec:
-# Add tls only if ingress.tls.enabled is set to true and the other fields are complete.
-  tls:
-    - hosts:
-        - "*.example.com"
-      secretName: example-app-ingress-host2
-  rules:
-    - host: "*.example.com"
-      http:
-        paths:
-          - path: "/one"
-            pathType: Prefix
-            backend:
-              service:
-                name: example-app-example1-with-service-name
-                port:
-                  number: 8080
-          - path: "/two"
-            pathType: Prefix
-            backend:
-              service:
-                name: exa-example2
-                port:
-                  number: 8080
-          - path: "/three"
-            pathType: Prefix
-            backend:
-              service:
-                name: hardcoded-service-name
-                port:
-                  number: 8080
----
 # Source: application/templates/external-secret-docker-registry.yaml
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
@@ -1750,6 +1703,53 @@ spec:
     - secretKey: pass
       remoteRef:
         key: pass
+---
+# Source: application/templates/traefik-ingress-route.yaml
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: example-app-ingress-host2
+  labels:
+    helm.sh/chart: application
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
+    app.kubernetes.io/component: host2
+  annotations:
+    example-annotation: coucou
+spec:
+  entryPoints:
+    - websecure
+  tls:
+    store:
+      name: default
+      namespace: traefik
+  routes:
+    -
+      match: "( Host(`*.example.com`) ) && PathPrefix(`/one`)"
+      services:
+      -
+        kind: Service
+        name: example-app-example1-with-service-name
+        namespace: default
+        port: 80
+    -
+      match: "( Host(`*.example.com`) ) && PathPrefix(`/two`)"
+      services:
+      -
+        kind: Service
+        name: exa-example2
+        namespace: default
+        port: 80
+    -
+      match: "( Host(`*.example.com`) ) && PathPrefix(`/three`)"
+      services:
+      -
+        kind: Service
+        name: hardcoded-service-name
+        namespace: default
+        port: 80
 ---
 # Source: application/templates/traefik-middleware.yaml
 apiVersion: traefik.io/v1alpha1
