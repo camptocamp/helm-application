@@ -1,7 +1,7 @@
 {{- if eq $.Values.ingress.enabled true }}
 {{- $fullName := include "common.fullname" ( dict "root" $ "service" $.Values ) }}
 {{- if ( default ( dict ) $.Values.ingress.traefikMiddleware ) }}
-{{- if ( default true $.Values.ingress.traefikMiddleware.enabled ) }}
+{{- if or ( not ( hasKey $.Values.ingress.traefikMiddleware "enabled" ) ) $.Values.ingress.traefikMiddleware.enabled }}
 ---
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
