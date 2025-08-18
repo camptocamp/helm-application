@@ -47,11 +47,22 @@
     - **`spec`** _(object)_: Traefik middleware specification.
   - **`hostGroups`** _(object)_: Can contain additional properties.
     - **Additional properties** _(object)_: Cannot contain additional properties.
+      - **`enabled`** _(boolean)_: Enable the group, if false the group will not be created. Default: `true`.
+      - **`type`** _(string)_: The type of the group, can be 'ingress', 'traefik-ingress-route'. Must be one of: `["ingress", "traefik-ingress-route"]`. Default: `"ingress"`.
       - **`hosts`** _(array)_
         - **Items** _(string)_
       - **`tls`** _(object)_: Cannot contain additional properties.
         - **`enabled`** _(boolean)_: Enable TLS.
         - **`secretName`** _(string)_: The name of the Secret.
+      - **`traefikEntryPoints`** _(array)_: See the Traefik documentation for more information.
+      - **`traefikTLS`** _(object)_: TLS for Traefik IngressRoute.
+      - **`traefikHosts`** _(array)_: The hosts definitions for Traefik IngressRoute.
+        - **Items** _(object)_: The host definition for Traefik IngressRoute.
+          - **`kind`** _(string)_: See the Traefik documentation for more information. Default: `"Rule"`.
+          - **`match`** _(string)_: See the Traefik documentation: https://doc.traefik.io/traefik/v3.5/routing/routers/#rule.
+          - **`observability`** _(object)_: See the Traefik documentation for more information.
+          - **`priority`** _(integer)_: See the Traefik documentation for more information.
+          - **`syntax`** _(string)_: See the Traefik documentation for more information.
 - **`serviceAccount`**: Refer to _[#/definitions/serviceAccount](#definitions/serviceAccount)_.
 - **`securityContext`**: Refer to _[#/definitions/securityContext](#definitions/securityContext)_.
 - **`podSecurityContext`**: Refer to _[#/definitions/podSecurityContext](#definitions/podSecurityContext)_.
@@ -235,6 +246,16 @@
       - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
       - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
       - **`path`** _(string)_: The path of the ingress.
+      - **`traefikHealthCheck`** _(object)_: See the Traefik documentation for more information.
+      - **`traefikNativeLB`** _(boolean)_: See the Traefik documentation for more information.
+      - **`traefikNodePortLB`** _(boolean)_: See the Traefik documentation for more information.
+      - **`traefikPassHostHeader`** _(boolean)_: See the Traefik documentation for more information. Default: `true`.
+      - **`traefikResponseForwarding`** _(object)_: See the Traefik documentation for more information.
+      - **`traefikScheme`** _(string)_: See the Traefik documentation for more information.
+      - **`traefikServersTransport`** _(string)_: See the Traefik documentation for more information.
+      - **`traefikSticky`** _(object)_: See the Traefik documentation for more information.
+      - **`traefikStrategy`** _(string)_: See the Traefik documentation for more information.
+      - **`traefikWeight`** _(integer)_: See the Traefik documentation for more information.
     - **`service`** _(object)_: The Kubernetes service configuration. Cannot contain additional properties.
       - **`name`** _(string)_: The name of the service.
       - **`type`** _(string)_: The type of the service. Default: `"ClusterIP"`.

@@ -31,10 +31,15 @@ ingress:
         - test1.example.com
         - test2.example.com
     host2:
-      tls:
-        enabled: true
-      hosts:
-        - '*.example.com'
+      type: traefik-ingress-route
+      traefikHosts:
+        - match: Host(`*.example.com`)
+      traefikEntryPoints:
+        - websecure
+      traefikTLS:
+        store:
+          name: default
+          namespace: traefik
 
 dockerregistry:
   external: true

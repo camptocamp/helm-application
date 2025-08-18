@@ -90,8 +90,10 @@ jobs:
           kubectl apply -f /tmp/external-secrets-crd.yaml
       - name: Install Traefik CRD
         run: |
-          curl https://raw.githubusercontent.com/traefik/traefik-helm-chart/v36.1.0/traefik/crds/traefik.io_middlewares.yaml --output /tmp/traefik-crd.yaml
-          kubectl apply -f /tmp/traefik-crd.yaml
+          curl https://raw.githubusercontent.com/traefik/traefik-helm-chart/v36.1.0/traefik/crds/traefik.io_middlewares.yaml --output /tmp/traefik-middlewares-crd.yaml
+          kubectl apply -f /tmp/traefik-middlewares-crd.yaml
+          curl https://raw.githubusercontent.com/traefik/traefik-helm-chart/v36.1.0/traefik/crds/traefik.io_ingressroutes.yaml --output /tmp/traefik-ingressroutes-crd.yaml
+          kubectl apply -f /tmp/traefik-ingressroutes-crd.yaml
 
       - name: Apply
         run: kubectl apply -f tests/expected.yaml
