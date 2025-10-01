@@ -13,12 +13,10 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: default
 
-podSecurityContext:
-  {}
+podSecurityContext: {}
   # fsGroup: 2000
 
-securityContext:
-  {}
+securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 33 # www-data
   # readOnlyRootFilesystem: true
