@@ -2,286 +2,285 @@
 
 ## Properties
 
-- **`common`**
-- **`global`** _(object)_
-  - **`releaseNameOverride`**: Refer to _[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)_.
-  - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
-  - **`nameTrunc`**: Refer to _[#/definitions/nameTrunc](#definitions/nameTrunc)_.
-  - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
-  - **`image`**: Refer to _[#/definitions/globalImage](#definitions/globalImage)_.
-  - **`configMapNameOverride`**: Refer to _[#/definitions/configMapNameOverride](#definitions/configMapNameOverride)_.
-  - **`revisionHistoryLimit`** _(integer)_: The number of old history to keep to allow rollback.
-  - **`ingress`** _(object)_
-    - **`noSecretName`** _(boolean)_: Don't add a secret name to the Ingress TLS host, useful when the certification is configured in the Ingress controller.
-- **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
-- **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
-- **`releaseNameOverride`**: Refer to _[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)_.
-- **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
-- **`nameTrunc`**: Refer to _[#/definitions/nameTrunc](#definitions/nameTrunc)_.
-- **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
-- **`metadata`** _(object)_: Create a ConfigMap to expose some metadata about the chart. Cannot contain additional properties.
-  - **`enabled`** _(boolean)_: Enable the metadata ConfigMap. Default: `true`.
-  - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
-  - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
-  - **`releaseNameOverride`**: Refer to _[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)_.
-  - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
-  - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
-  - **`nameTrunc`**: Refer to _[#/definitions/nameTrunc](#definitions/nameTrunc)_.
-  - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
-  - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
-  - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
-- **`ingress`** _(object)_: Cannot contain additional properties.
-  - **`enabled`** _(boolean)_: Enable the Ingress.
-  - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
-  - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
-  - **`releaseNameOverride`**: Refer to _[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)_.
-  - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
-  - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
-  - **`nameTrunc`**: Refer to _[#/definitions/nameTrunc](#definitions/nameTrunc)_.
-  - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
-  - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
-  - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
-  - **`ingressClassName`** _(string)_: Ingress class name. Will be omitted if not specified.
-  - **`traefikMiddleware`** _(object)_: Cannot contain additional properties.
-    - **`enabled`** _(boolean)_: Enable Traefik middleware. Default: `true`.
-    - **`spec`** _(object)_: Traefik middleware specification.
-  - **`hostGroups`** _(object)_: Can contain additional properties.
-    - **Additional properties** _(object)_: Cannot contain additional properties.
-      - **`enabled`** _(boolean)_: Enable the group, if false the group will not be created. Default: `true`.
-      - **`type`** _(string)_: The type of the group, can be 'ingress', 'traefik-ingress-route'. Must be one of: `["ingress", "traefik-ingress-route"]`. Default: `"ingress"`.
-      - **`hosts`** _(array)_
-        - **Items** _(string)_
-      - **`tls`** _(object)_: Cannot contain additional properties.
-        - **`enabled`** _(boolean)_: Enable TLS.
-        - **`secretName`** _(string)_: The name of the Secret.
-      - **`traefikEntryPoints`** _(array)_: See the Traefik documentation for more information.
-      - **`traefikTLS`** _(object)_: TLS for Traefik IngressRoute.
-      - **`traefikHosts`** _(array)_: The hosts definitions for Traefik IngressRoute.
-        - **Items** _(object)_: The host definition for Traefik IngressRoute.
-          - **`kind`** _(string)_: See the Traefik documentation for more information. Default: `"Rule"`.
-          - **`match`** _(string)_: See the Traefik documentation: https://doc.traefik.io/traefik/v3.5/routing/routers/#rule.
-          - **`observability`** _(object)_: See the Traefik documentation for more information.
-          - **`priority`** _(integer)_: See the Traefik documentation for more information.
-          - **`syntax`** _(string)_: See the Traefik documentation for more information.
-- **`serviceAccount`**: Refer to _[#/definitions/serviceAccount](#definitions/serviceAccount)_.
-- **`securityContext`**: Refer to _[#/definitions/securityContext](#definitions/securityContext)_.
-- **`podSecurityContext`**: Refer to _[#/definitions/podSecurityContext](#definitions/podSecurityContext)_.
-- **`affinity`**: Refer to _[#/definitions/affinity](#definitions/affinity)_.
-- **`tolerations`**: Refer to _[#/definitions/tolerations](#definitions/tolerations)_.
-- **`image`** _(object)_: Container: Image configuration.
-  - **`pullPolicy`** _(string)_: Image pull policy. Must be one of: `["Always", "IfNotPresent", "Never"]`.
-- **`dockerregistry`** _(object)_: Cannot contain additional properties.
-  - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
-  - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
-  - **`releaseNameOverride`**: Refer to _[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)_.
-  - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
-  - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
-  - **`nameTrunc`**: Refer to _[#/definitions/nameTrunc](#definitions/nameTrunc)_.
-  - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
-  - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
-  - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
-  - **`enabled`** _(boolean)_: Enable the Docker registry.
-  - **`external`** _(boolean)_: Use an external secret to the Docker registries username, password and email.
-  - **`refreshInterval`** _(string)_: The refresh interval like 1h, 1m, 1s.
-  - **`secretStoreRef`** _(object)_: defines which SecretStore to fetch the ExternalSecret data.
-  - **`content`** _(object)_: Docker registries authentication. Cannot contain additional properties.
-    - **`^[a-zA-Z0-9_]*$`** _(object)_: Cannot contain additional properties.
-      - **`username`** _(string)_: Username.
-      - **`password`** _(string)_: Password.
-      - **`email`** _(string)_: Email.
-      - **`url`** _(string)_: URL, used only for external secret.
-      - **`externalUsername`** _(string)_: Key of the external secret for the username.
-      - **`externalPassword`** _(string)_: Key of the external secret for the password.
-      - **`externalEmail`** _(string)_: Key of the external secret for the email.
-      - **`externalUrl`** _(string)_: Key of the external secret for the URL.
-- **`secrets`** _(object)_: Cannot contain additional properties.
-  - **`enabled`** _(boolean)_: Enable the Secret. Default: `true`.
-  - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
-  - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
-  - **`releaseNameOverride`**: Refer to _[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)_.
-  - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
-  - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
-  - **`nameTrunc`**: Refer to _[#/definitions/nameTrunc](#definitions/nameTrunc)_.
-  - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
-  - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
-  - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
-  - **`content`** _(object)_: Secrets configuration. Can contain additional properties.
-    - **Additional properties**
+- <a id="properties/global"></a>**`global`** _(object)_
+  - <a id="properties/global/properties/releaseNameOverride"></a>**`releaseNameOverride`**: Refer to _[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)_.
+  - <a id="properties/global/properties/releaseTrunc"></a>**`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+  - <a id="properties/global/properties/nameTrunc"></a>**`nameTrunc`**: Refer to _[#/definitions/nameTrunc](#definitions/nameTrunc)_.
+  - <a id="properties/global/properties/prefixTrunc"></a>**`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
+  - <a id="properties/global/properties/image"></a>**`image`**: Refer to _[#/definitions/globalImage](#definitions/globalImage)_.
+  - <a id="properties/global/properties/configMapNameOverride"></a>**`configMapNameOverride`**: Refer to _[#/definitions/configMapNameOverride](#definitions/configMapNameOverride)_.
+  - <a id="properties/global/properties/revisionHistoryLimit"></a>**`revisionHistoryLimit`** _(integer)_: The number of old history to keep to allow rollback.
+  - <a id="properties/global/properties/ingress"></a>**`ingress`** _(object)_
+    - <a id="properties/global/properties/ingress/properties/noSecretName"></a>**`noSecretName`** _(boolean)_: Don't add a secret name to the Ingress TLS host, useful when the certification is configured in the Ingress controller.
+- <a id="properties/nameOverride"></a>**`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
+- <a id="properties/fullnameOverride"></a>**`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
+- <a id="properties/releaseNameOverride"></a>**`releaseNameOverride`**: Refer to _[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)_.
+- <a id="properties/releaseTrunc"></a>**`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+- <a id="properties/nameTrunc"></a>**`nameTrunc`**: Refer to _[#/definitions/nameTrunc](#definitions/nameTrunc)_.
+- <a id="properties/prefixTrunc"></a>**`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
+- <a id="properties/metadata"></a>**`metadata`** _(object)_: Create a ConfigMap to expose some metadata about the chart. Cannot contain additional properties.
+  - <a id="properties/metadata/properties/enabled"></a>**`enabled`** _(boolean)_: Enable the metadata ConfigMap. Default: `true`.
+  - <a id="properties/metadata/properties/nameOverride"></a>**`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
+  - <a id="properties/metadata/properties/fullnameOverride"></a>**`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
+  - <a id="properties/metadata/properties/releaseNameOverride"></a>**`releaseNameOverride`**: Refer to _[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)_.
+  - <a id="properties/metadata/properties/serviceName"></a>**`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
+  - <a id="properties/metadata/properties/releaseTrunc"></a>**`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+  - <a id="properties/metadata/properties/nameTrunc"></a>**`nameTrunc`**: Refer to _[#/definitions/nameTrunc](#definitions/nameTrunc)_.
+  - <a id="properties/metadata/properties/prefixTrunc"></a>**`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
+  - <a id="properties/metadata/properties/labels"></a>**`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
+  - <a id="properties/metadata/properties/annotations"></a>**`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
+- <a id="properties/ingress"></a>**`ingress`** _(object)_: Cannot contain additional properties.
+  - <a id="properties/ingress/properties/enabled"></a>**`enabled`** _(boolean)_: Enable the Ingress.
+  - <a id="properties/ingress/properties/nameOverride"></a>**`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
+  - <a id="properties/ingress/properties/fullnameOverride"></a>**`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
+  - <a id="properties/ingress/properties/releaseNameOverride"></a>**`releaseNameOverride`**: Refer to _[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)_.
+  - <a id="properties/ingress/properties/serviceName"></a>**`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
+  - <a id="properties/ingress/properties/releaseTrunc"></a>**`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+  - <a id="properties/ingress/properties/nameTrunc"></a>**`nameTrunc`**: Refer to _[#/definitions/nameTrunc](#definitions/nameTrunc)_.
+  - <a id="properties/ingress/properties/prefixTrunc"></a>**`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
+  - <a id="properties/ingress/properties/labels"></a>**`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
+  - <a id="properties/ingress/properties/annotations"></a>**`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
+  - <a id="properties/ingress/properties/ingressClassName"></a>**`ingressClassName`** _(string)_: Ingress class name. Will be omitted if not specified.
+  - <a id="properties/ingress/properties/traefikMiddleware"></a>**`traefikMiddleware`** _(object)_: Cannot contain additional properties.
+    - <a id="properties/ingress/properties/traefikMiddleware/properties/enabled"></a>**`enabled`** _(boolean)_: Enable Traefik middleware. Default: `true`.
+    - <a id="properties/ingress/properties/traefikMiddleware/properties/spec"></a>**`spec`** _(object)_: Traefik middleware specification.
+  - <a id="properties/ingress/properties/hostGroups"></a>**`hostGroups`** _(object)_: Can contain additional properties.
+    - <a id="properties/ingress/properties/hostGroups/additionalProperties"></a>**Additional properties** _(object)_: Cannot contain additional properties.
+      - <a id="properties/ingress/properties/hostGroups/additionalProperties/properties/enabled"></a>**`enabled`** _(boolean)_: Enable the group, if false the group will not be created. Default: `true`.
+      - <a id="properties/ingress/properties/hostGroups/additionalProperties/properties/type"></a>**`type`** _(string)_: The type of the group, can be 'ingress', 'traefik-ingress-route'. Must be one of: "ingress" or "traefik-ingress-route". Default: `"ingress"`.
+      - <a id="properties/ingress/properties/hostGroups/additionalProperties/properties/hosts"></a>**`hosts`** _(array)_
+        - <a id="properties/ingress/properties/hostGroups/additionalProperties/properties/hosts/items"></a>**Items** _(string)_
+      - <a id="properties/ingress/properties/hostGroups/additionalProperties/properties/tls"></a>**`tls`** _(object)_: Cannot contain additional properties.
+        - <a id="properties/ingress/properties/hostGroups/additionalProperties/properties/tls/properties/enabled"></a>**`enabled`** _(boolean)_: Enable TLS.
+        - <a id="properties/ingress/properties/hostGroups/additionalProperties/properties/tls/properties/secretName"></a>**`secretName`** _(string)_: The name of the Secret.
+      - <a id="properties/ingress/properties/hostGroups/additionalProperties/properties/traefikEntryPoints"></a>**`traefikEntryPoints`** _(array)_: See the Traefik documentation for more information.
+      - <a id="properties/ingress/properties/hostGroups/additionalProperties/properties/traefikTLS"></a>**`traefikTLS`** _(object)_: TLS for Traefik IngressRoute.
+      - <a id="properties/ingress/properties/hostGroups/additionalProperties/properties/traefikHosts"></a>**`traefikHosts`** _(array)_: The hosts definitions for Traefik IngressRoute.
+        - <a id="properties/ingress/properties/hostGroups/additionalProperties/properties/traefikHosts/items"></a>**Items** _(object)_: The host definition for Traefik IngressRoute.
+          - <a id="properties/ingress/properties/hostGroups/additionalProperties/properties/traefikHosts/items/properties/kind"></a>**`kind`** _(string)_: See the Traefik documentation for more information. Default: `"Rule"`.
+          - <a id="properties/ingress/properties/hostGroups/additionalProperties/properties/traefikHosts/items/properties/match"></a>**`match`** _(string)_: See the Traefik documentation: https://doc.traefik.io/traefik/v3.5/routing/routers/#rule.
+          - <a id="properties/ingress/properties/hostGroups/additionalProperties/properties/traefikHosts/items/properties/observability"></a>**`observability`** _(object)_: See the Traefik documentation for more information.
+          - <a id="properties/ingress/properties/hostGroups/additionalProperties/properties/traefikHosts/items/properties/priority"></a>**`priority`** _(integer)_: See the Traefik documentation for more information.
+          - <a id="properties/ingress/properties/hostGroups/additionalProperties/properties/traefikHosts/items/properties/syntax"></a>**`syntax`** _(string)_: See the Traefik documentation for more information.
+- <a id="properties/serviceAccount"></a>**`serviceAccount`**: Refer to _[#/definitions/serviceAccount](#definitions/serviceAccount)_.
+- <a id="properties/securityContext"></a>**`securityContext`**: Refer to _[#/definitions/securityContext](#definitions/securityContext)_.
+- <a id="properties/podSecurityContext"></a>**`podSecurityContext`**: Refer to _[#/definitions/podSecurityContext](#definitions/podSecurityContext)_.
+- <a id="properties/affinity"></a>**`affinity`**: Refer to _[#/definitions/affinity](#definitions/affinity)_.
+- <a id="properties/tolerations"></a>**`tolerations`**: Refer to _[#/definitions/tolerations](#definitions/tolerations)_.
+- <a id="properties/image"></a>**`image`** _(object)_: Container: Image configuration.
+  - <a id="properties/image/properties/pullPolicy"></a>**`pullPolicy`** _(string)_: Image pull policy. Must be one of: "Always", "IfNotPresent", or "Never".
+- <a id="properties/dockerregistry"></a>**`dockerregistry`** _(object)_: Cannot contain additional properties.
+  - <a id="properties/dockerregistry/properties/nameOverride"></a>**`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
+  - <a id="properties/dockerregistry/properties/fullnameOverride"></a>**`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
+  - <a id="properties/dockerregistry/properties/releaseNameOverride"></a>**`releaseNameOverride`**: Refer to _[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)_.
+  - <a id="properties/dockerregistry/properties/serviceName"></a>**`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
+  - <a id="properties/dockerregistry/properties/releaseTrunc"></a>**`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+  - <a id="properties/dockerregistry/properties/nameTrunc"></a>**`nameTrunc`**: Refer to _[#/definitions/nameTrunc](#definitions/nameTrunc)_.
+  - <a id="properties/dockerregistry/properties/prefixTrunc"></a>**`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
+  - <a id="properties/dockerregistry/properties/labels"></a>**`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
+  - <a id="properties/dockerregistry/properties/annotations"></a>**`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
+  - <a id="properties/dockerregistry/properties/enabled"></a>**`enabled`** _(boolean)_: Enable the Docker registry.
+  - <a id="properties/dockerregistry/properties/external"></a>**`external`** _(boolean)_: Use an external secret to the Docker registries username, password and email.
+  - <a id="properties/dockerregistry/properties/refreshInterval"></a>**`refreshInterval`** _(string)_: The refresh interval like 1h, 1m, 1s.
+  - <a id="properties/dockerregistry/properties/secretStoreRef"></a>**`secretStoreRef`** _(object)_: defines which SecretStore to fetch the ExternalSecret data.
+  - <a id="properties/dockerregistry/properties/content"></a>**`content`** _(object)_: Docker registries authentication. Cannot contain additional properties.
+    - <a id="properties/dockerregistry/properties/content/patternProperties/%5E%5Ba-zA-Z0-9_%5D%2A%24"></a>**`^[a-zA-Z0-9_]*$`** _(object)_: Cannot contain additional properties.
+      - <a id="properties/dockerregistry/properties/content/patternProperties/%5E%5Ba-zA-Z0-9_%5D%2A%24/properties/username"></a>**`username`** _(string)_: Username.
+      - <a id="properties/dockerregistry/properties/content/patternProperties/%5E%5Ba-zA-Z0-9_%5D%2A%24/properties/password"></a>**`password`** _(string)_: Password.
+      - <a id="properties/dockerregistry/properties/content/patternProperties/%5E%5Ba-zA-Z0-9_%5D%2A%24/properties/email"></a>**`email`** _(string)_: Email.
+      - <a id="properties/dockerregistry/properties/content/patternProperties/%5E%5Ba-zA-Z0-9_%5D%2A%24/properties/url"></a>**`url`** _(string)_: URL, used only for external secret.
+      - <a id="properties/dockerregistry/properties/content/patternProperties/%5E%5Ba-zA-Z0-9_%5D%2A%24/properties/externalUsername"></a>**`externalUsername`** _(string)_: Key of the external secret for the username.
+      - <a id="properties/dockerregistry/properties/content/patternProperties/%5E%5Ba-zA-Z0-9_%5D%2A%24/properties/externalPassword"></a>**`externalPassword`** _(string)_: Key of the external secret for the password.
+      - <a id="properties/dockerregistry/properties/content/patternProperties/%5E%5Ba-zA-Z0-9_%5D%2A%24/properties/externalEmail"></a>**`externalEmail`** _(string)_: Key of the external secret for the email.
+      - <a id="properties/dockerregistry/properties/content/patternProperties/%5E%5Ba-zA-Z0-9_%5D%2A%24/properties/externalUrl"></a>**`externalUrl`** _(string)_: Key of the external secret for the URL.
+- <a id="properties/secrets"></a>**`secrets`** _(object)_: Cannot contain additional properties.
+  - <a id="properties/secrets/properties/enabled"></a>**`enabled`** _(boolean)_: Enable the Secret. Default: `true`.
+  - <a id="properties/secrets/properties/nameOverride"></a>**`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
+  - <a id="properties/secrets/properties/fullnameOverride"></a>**`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
+  - <a id="properties/secrets/properties/releaseNameOverride"></a>**`releaseNameOverride`**: Refer to _[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)_.
+  - <a id="properties/secrets/properties/serviceName"></a>**`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
+  - <a id="properties/secrets/properties/releaseTrunc"></a>**`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+  - <a id="properties/secrets/properties/nameTrunc"></a>**`nameTrunc`**: Refer to _[#/definitions/nameTrunc](#definitions/nameTrunc)_.
+  - <a id="properties/secrets/properties/prefixTrunc"></a>**`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
+  - <a id="properties/secrets/properties/labels"></a>**`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
+  - <a id="properties/secrets/properties/annotations"></a>**`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
+  - <a id="properties/secrets/properties/content"></a>**`content`** _(object)_: Secrets configuration. Can contain additional properties.
+    - <a id="properties/secrets/properties/content/additionalProperties"></a>**Additional properties**
       - **One of**
-        - _object_: Secret from a direct value. Cannot contain additional properties.
-          - **`type`** _(string)_: Type of the secret. Must be one of: `["value"]`. Default: `"value"`.
-          - **`value`** _(string)_: Value of the secret.
-        - _object_: Secret for a basic authentication. Cannot contain additional properties.
-          - **`type`** _(string)_: Type of the secret. Must be one of: `["basicAuth"]`.
-          - **`user`** _(string)_: Username.
-          - **`password`** _(string)_: Password.
-- **`externalSecrets`** _(object)_: Can contain additional properties.
-  - **Additional properties** _(object)_: Cannot contain additional properties.
-    - **`enabled`** _(boolean)_: Enable the ExternalSecret. Default: `true`.
-    - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
-    - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
-    - **`releaseNameOverride`**: Refer to _[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)_.
-    - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
-    - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
-    - **`nameTrunc`**: Refer to _[#/definitions/nameTrunc](#definitions/nameTrunc)_.
-    - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
-    - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
-    - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
-    - **`refreshInterval`** _(string)_: The refresh interval like 1h, 1m, 1s.
-    - **`secretStoreRef`** _(object)_: defines which SecretStore to fetch the ExternalSecret data.
-    - **`target`** _(object)_: defines the Kubernetes Secret to be created.
-    - **`dataFrom`** _(array)_: used to fetch all properties from a specific Provider data.
-    - **`data`** _(object)_: Data defines the connection between the Kubernetes Secret keys and the Provider data. Can contain additional properties.
-      - **Additional properties** _(object)_: defines the connection between the Kubernetes Secret key and the Provider data. The map key became the secretKey.
-- **`configMaps`** _(object)_: Cannot contain additional properties.
-  - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
-  - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
-  - **`releaseNameOverride`**: Refer to _[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)_.
-  - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
-  - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
-  - **`nameTrunc`**: Refer to _[#/definitions/nameTrunc](#definitions/nameTrunc)_.
-  - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
-  - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
-  - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
-  - **`content`** _(object, required)_: ConfigMap configuration. Can contain additional properties.
-    - **Additional properties**
+        - <a id="properties/secrets/properties/content/additionalProperties/oneOf/0"></a>_object_: Secret from a direct value. Cannot contain additional properties.
+          - <a id="properties/secrets/properties/content/additionalProperties/oneOf/0/properties/type"></a>**`type`** _(string)_: Type of the secret. Must be one of: "value". Default: `"value"`.
+          - <a id="properties/secrets/properties/content/additionalProperties/oneOf/0/properties/value"></a>**`value`** _(string)_: Value of the secret.
+        - <a id="properties/secrets/properties/content/additionalProperties/oneOf/1"></a>_object_: Secret for a basic authentication. Cannot contain additional properties.
+          - <a id="properties/secrets/properties/content/additionalProperties/oneOf/1/properties/type"></a>**`type`** _(string)_: Type of the secret. Must be one of: "basicAuth".
+          - <a id="properties/secrets/properties/content/additionalProperties/oneOf/1/properties/user"></a>**`user`** _(string)_: Username.
+          - <a id="properties/secrets/properties/content/additionalProperties/oneOf/1/properties/password"></a>**`password`** _(string)_: Password.
+- <a id="properties/externalSecrets"></a>**`externalSecrets`** _(object)_: Can contain additional properties.
+  - <a id="properties/externalSecrets/additionalProperties"></a>**Additional properties** _(object)_: Cannot contain additional properties.
+    - <a id="properties/externalSecrets/additionalProperties/properties/enabled"></a>**`enabled`** _(boolean)_: Enable the ExternalSecret. Default: `true`.
+    - <a id="properties/externalSecrets/additionalProperties/properties/nameOverride"></a>**`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
+    - <a id="properties/externalSecrets/additionalProperties/properties/fullnameOverride"></a>**`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
+    - <a id="properties/externalSecrets/additionalProperties/properties/releaseNameOverride"></a>**`releaseNameOverride`**: Refer to _[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)_.
+    - <a id="properties/externalSecrets/additionalProperties/properties/serviceName"></a>**`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
+    - <a id="properties/externalSecrets/additionalProperties/properties/releaseTrunc"></a>**`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+    - <a id="properties/externalSecrets/additionalProperties/properties/nameTrunc"></a>**`nameTrunc`**: Refer to _[#/definitions/nameTrunc](#definitions/nameTrunc)_.
+    - <a id="properties/externalSecrets/additionalProperties/properties/prefixTrunc"></a>**`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
+    - <a id="properties/externalSecrets/additionalProperties/properties/labels"></a>**`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
+    - <a id="properties/externalSecrets/additionalProperties/properties/annotations"></a>**`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
+    - <a id="properties/externalSecrets/additionalProperties/properties/refreshInterval"></a>**`refreshInterval`** _(string)_: The refresh interval like 1h, 1m, 1s.
+    - <a id="properties/externalSecrets/additionalProperties/properties/secretStoreRef"></a>**`secretStoreRef`** _(object)_: defines which SecretStore to fetch the ExternalSecret data.
+    - <a id="properties/externalSecrets/additionalProperties/properties/target"></a>**`target`** _(object)_: defines the Kubernetes Secret to be created.
+    - <a id="properties/externalSecrets/additionalProperties/properties/dataFrom"></a>**`dataFrom`** _(array)_: used to fetch all properties from a specific Provider data.
+    - <a id="properties/externalSecrets/additionalProperties/properties/data"></a>**`data`** _(object)_: Data defines the connection between the Kubernetes Secret keys and the Provider data. Can contain additional properties.
+      - <a id="properties/externalSecrets/additionalProperties/properties/data/additionalProperties"></a>**Additional properties** _(object)_: defines the connection between the Kubernetes Secret key and the Provider data. The map key became the secretKey.
+- <a id="properties/configMaps"></a>**`configMaps`** _(object)_: Cannot contain additional properties.
+  - <a id="properties/configMaps/properties/nameOverride"></a>**`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
+  - <a id="properties/configMaps/properties/fullnameOverride"></a>**`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
+  - <a id="properties/configMaps/properties/releaseNameOverride"></a>**`releaseNameOverride`**: Refer to _[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)_.
+  - <a id="properties/configMaps/properties/serviceName"></a>**`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
+  - <a id="properties/configMaps/properties/releaseTrunc"></a>**`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+  - <a id="properties/configMaps/properties/nameTrunc"></a>**`nameTrunc`**: Refer to _[#/definitions/nameTrunc](#definitions/nameTrunc)_.
+  - <a id="properties/configMaps/properties/prefixTrunc"></a>**`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
+  - <a id="properties/configMaps/properties/labels"></a>**`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
+  - <a id="properties/configMaps/properties/annotations"></a>**`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
+  - <a id="properties/configMaps/properties/content"></a>**`content`** _(object, required)_: ConfigMap configuration. Can contain additional properties.
+    - <a id="properties/configMaps/properties/content/additionalProperties"></a>**Additional properties**
       - **One of**
-        - _object_: ConfigMap value. Cannot contain additional properties.
-          - **`type`** _(string)_: Type of the ConfigMap. Must be one of: `["string"]`. Default: `"string"`.
-          - **`value`** _(string)_: Value of the ConfigMap value.
-        - _object_: ConfigMap YAML value. Cannot contain additional properties.
-          - **`type`** _(string)_: Type of the ConfigMap. Must be one of: `["yaml"]`.
-          - **`value`** _(object)_: Value of the ConfigMap value as YAML.
-        - _object_: ConfigMap JSON value. Cannot contain additional properties.
-          - **`type`** _(string)_: Type of the ConfigMap. Must be one of: `["json"]`.
-          - **`value`** _(object)_: Value of the ConfigMap value as JSON.
-- **`services`** _(object)_: Can contain additional properties.
-  - **Additional properties** _(object)_: Cannot contain additional properties.
-    - **`enabled`** _(boolean)_: Enable this service.
-    - **`type`** _(string)_: The type of the service. Must be one of: `["Deployment", "StatefulSet", "Job", "CronJob"]`. Default: `"Deployment"`.
-    - **`name`** _(string)_: The name of the service.
-    - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
-    - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
-    - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
-    - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
-    - **`podLabels`**: Refer to _[#/definitions/podLabels](#definitions/podLabels)_.
-    - **`podAnnotations`**: Refer to _[#/definitions/podAnnotations](#definitions/podAnnotations)_.
-    - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
-    - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
-    - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
-    - **`affinity`**: Refer to _[#/definitions/affinity](#definitions/affinity)_.
-    - **`tolerations`**: Refer to _[#/definitions/tolerations](#definitions/tolerations)_.
-    - **`nodeSelector`**: Refer to _[#/definitions/nodeSelector](#definitions/nodeSelector)_.
-    - **`replicaCount`** _(integer)_: The number of replicas.
-    - **`maxFailedIndexes`** _(integer)_: The maximum number of failed indexes.
-    - **`parallelism`** _(integer)_: The number of parallel jobs.
-    - **`backoffLimitPerIndex`** _(integer)_: The number of backoff limit per index.
-    - **`completionMode`** _(string)_: The completion mode of the job. Must be one of: `["Indexed", "NonIndexed"]`.
-    - **`completions`** _(integer)_: The number of completions.
-    - **`minReadySeconds`** _(integer)_: The minimum number of seconds for the Pod to be ready.
-    - **`persistentVolumeClaimRetentionPolicy`** _(object)_: The persistent volume claim retention policy.
-    - **`replicas`** _(integer)_: The number of replicas.
-    - **`paused`** _(boolean)_: Pause the deployment.
-    - **`progressDeadlineSeconds`** _(integer)_: The number of seconds for the deployment to be ready.
-    - **`strategy`** _(object)_: The deployment strategy. Cannot contain additional properties.
-      - **`type`** _(string)_: The type of the strategy.
-      - **`rollingUpdate`** _(object)_: The rolling update strategy.
-    - **`suspend`** _(boolean)_: Suspend the job.
-    - **`template`** _(boolean)_: Create the service keys in the self ConfigMap even if the service is disabled.
-    - **`ttlSecondsAfterFinished`** _(integer)_: The number of seconds before the job is deleted.
-    - **`backoffLimit`** _(integer)_: The number of backoff limit.
-    - **`podReplacementPolicy`** _(string)_: The Pod replacement policy.
-    - **`restartPolicy`** _(string)_: The Pod restart policy.
-    - **`podFailurePolicy`** _(object)_: The Pod failure policy.
-    - **`activeDeadlineSeconds`** _(integer)_: The number of seconds before the job is deleted.
-    - **`ordinals`** _(object)_: The ordinals of the stateful set.
-    - **`podManagementPolicy`** _(string)_: The Pod management policy. Must be one of: `["OrderedReady", "Parallel"]`.
-    - **`updateStrategy`** _(object)_: The update strategy.
-    - **`schedule`** _(string)_: CronJob - The cron schedule in crontab notation.
-    - **`successfulJobsHistoryLimit`** _(integer)_: CronJob - successfulJobsHistoryLimit.
-    - **`failedJobsHistoryLimit`** _(integer)_: CronJob - failedJobsHistoryLimit.
-    - **`concurrencyPolicy`** _(string)_: CronJob - concurrencyPolicy. Must be one of: `["Allow", "Forbid", "Replace"]`.
-    - **`volumeClaimTemplates`** _(array)_: The volume claim templates, the key is the name of the volume claim template.
-    - **`volumes`** _(object)_: The volumes configuration, the key is the name of the volume, if `secret.secretName` or `configMap.name` is not defined, or defined to 'self' the internal one will be used, use 'self-metadata' for the metadata ConfigMap, 'self-external-secret' for the external secret.
-    - **`pdb`** _(object)_: The Pod disruption budget configuration. Cannot contain additional properties. Default: `{"enabled": true, "maxUnavailable": 1}`.
-      - **`enabled`** _(boolean)_: Enable the Pod disruption budget. Default: `true`.
-      - **`minAvailable`** _(integer)_: The minimum number of Pods available.
-      - **`maxUnavailable`** _(integer)_: The maximum number of Pods unavailable.
-    - **`initContainers`** _(object)_: The initialization containers configuration. Can contain additional properties.
-      - **Additional properties** _(object)_: Cannot contain additional properties.
-        - **`enabled`** _(boolean)_: Enable the initialization container.
-        - **`image`**: Refer to _[#/definitions/image](#definitions/image)_.
-        - **`env`**: Refer to _[#/definitions/env](#definitions/env)_.
-        - **`resources`**: Refer to _[#/definitions/resources](#definitions/resources)_.
-        - **`command`**: Refer to _[#/definitions/command](#definitions/command)_.
-        - **`workingDir`**: Refer to _[#/definitions/workingDir](#definitions/workingDir)_.
-        - **`args`**: Refer to _[#/definitions/args](#definitions/args)_.
-        - **`volumeMounts`**: Refer to _[#/definitions/volumeMounts](#definitions/volumeMounts)_.
-        - **`volumeDevices`**: Refer to _[#/definitions/volumeDevices](#definitions/volumeDevices)_.
-    - **`containers`** _(object)_: The containers configuration. Can contain additional properties.
-      - **Additional properties** _(object)_: Cannot contain additional properties.
-        - **`enabled`** _(boolean)_: Enable the container.
-        - **`image`**: Refer to _[#/definitions/image](#definitions/image)_.
-        - **`env`**: Refer to _[#/definitions/env](#definitions/env)_.
-        - **`resources`**: Refer to _[#/definitions/resources](#definitions/resources)_.
-        - **`command`**: Refer to _[#/definitions/command](#definitions/command)_.
-        - **`workingDir`**: Refer to _[#/definitions/workingDir](#definitions/workingDir)_.
-        - **`args`**: Refer to _[#/definitions/args](#definitions/args)_.
-        - **`volumeMounts`**: Refer to _[#/definitions/volumeMounts](#definitions/volumeMounts)_.
-        - **`volumeDevices`**: Refer to _[#/definitions/volumeDevices](#definitions/volumeDevices)_.
-        - **`ports`** _(object)_: The ports, key is the name of the port.
-        - **`livenessProbe`** _(object)_
-        - **`readinessProbe`** _(object)_
-        - **`startupProbe`** _(object)_
-        - **`lifecycle`** _(object)_: Lifecycle Events configuration - https://kubernetes.io/docs/tasks/configure-pod-container/attach-handler-lifecycle-event/.
-    - **`ingress`** _(object)_: Cannot contain additional properties.
-      - **`enabled`** _(boolean)_: Enable the ingress for this service.
-      - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
-      - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
-      - **`releaseNameOverride`**: Refer to _[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)_.
-      - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
-      - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
-      - **`nameTrunc`**: Refer to _[#/definitions/nameTrunc](#definitions/nameTrunc)_.
-      - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
-      - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
-      - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
-      - **`path`** _(string)_: The path of the ingress.
-      - **`traefikHealthCheck`** _(object)_: See the Traefik documentation for more information.
-      - **`traefikNativeLB`** _(boolean)_: See the Traefik documentation for more information.
-      - **`traefikNodePortLB`** _(boolean)_: See the Traefik documentation for more information.
-      - **`traefikPassHostHeader`** _(boolean)_: See the Traefik documentation for more information. Default: `true`.
-      - **`traefikResponseForwarding`** _(object)_: See the Traefik documentation for more information.
-      - **`traefikScheme`** _(string)_: See the Traefik documentation for more information.
-      - **`traefikServersTransport`** _(string)_: See the Traefik documentation for more information.
-      - **`traefikSticky`** _(object)_: See the Traefik documentation for more information.
-      - **`traefikStrategy`** _(string)_: See the Traefik documentation for more information.
-      - **`traefikWeight`** _(integer)_: See the Traefik documentation for more information.
-    - **`service`** _(object)_: The Kubernetes service configuration. Cannot contain additional properties.
-      - **`name`** _(string)_: The name of the service.
-      - **`type`** _(string)_: The type of the service. Default: `"ClusterIP"`.
-      - **`servicePort`** _(integer)_: The port of the service (used by Ingress). Default: `80`.
-      - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
-      - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
-      - **`ports`** _(array)_
-    - **`hpa`** _(object)_
-      - **`enabled`** _(boolean, required)_: Enable or disable HPA for the service.
-      - **`minReplicas`** _(integer, required)_: Minimal number of replicas. Minimum: `1`. Default: `1`.
-      - **`maxReplicas`** _(integer, required)_: Max number of replicas. Minimum: `1`. Default: `10`.
-      - **`metrics`** _(array)_: Metrics definition.
-        - **Items** _(object)_
-          - **`type`** _(string, required)_: Metric types (Resource, Pods, External). Must be one of: `["Resource", "Pods", "External"]`.
-          - **`resource`** _(object)_
-            - **`name`** _(string, required)_: CPU or memory value. Must be one of: `["cpu", "memory"]`.
-            - **`target`** _(object, required)_
-              - **`type`** _(string, required)_: Metric target. Must be one of: `["Utilization", "Value", "AverageValue"]`.
-              - **`averageUtilization`** _(integer)_: % average use.
-    - **`podMonitor`** _(object)_: The Prometheus Pod monitor configuration. Cannot contain additional properties.
-      - **`enabled`** _(boolean)_: Enable the Pod monitor for this service (Pod).
-      - **`name`** _(string)_: The name of the Pod monitor.
-      - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
-      - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
-      - **`podMetricsEndpoints`** _(object)_: The endpoints of the Pod monitor by port. Can contain additional properties.
-        - **Additional properties** _(object)_: The endpoint of the Pod monitor.
+        - <a id="properties/configMaps/properties/content/additionalProperties/oneOf/0"></a>_object_: ConfigMap value. Cannot contain additional properties.
+          - <a id="properties/configMaps/properties/content/additionalProperties/oneOf/0/properties/type"></a>**`type`** _(string)_: Type of the ConfigMap. Must be one of: "string". Default: `"string"`.
+          - <a id="properties/configMaps/properties/content/additionalProperties/oneOf/0/properties/value"></a>**`value`** _(string)_: Value of the ConfigMap value.
+        - <a id="properties/configMaps/properties/content/additionalProperties/oneOf/1"></a>_object_: ConfigMap YAML value. Cannot contain additional properties.
+          - <a id="properties/configMaps/properties/content/additionalProperties/oneOf/1/properties/type"></a>**`type`** _(string)_: Type of the ConfigMap. Must be one of: "yaml".
+          - <a id="properties/configMaps/properties/content/additionalProperties/oneOf/1/properties/value"></a>**`value`** _(object)_: Value of the ConfigMap value as YAML.
+        - <a id="properties/configMaps/properties/content/additionalProperties/oneOf/2"></a>_object_: ConfigMap JSON value. Cannot contain additional properties.
+          - <a id="properties/configMaps/properties/content/additionalProperties/oneOf/2/properties/type"></a>**`type`** _(string)_: Type of the ConfigMap. Must be one of: "json".
+          - <a id="properties/configMaps/properties/content/additionalProperties/oneOf/2/properties/value"></a>**`value`** _(object)_: Value of the ConfigMap value as JSON.
+- <a id="properties/services"></a>**`services`** _(object)_: Can contain additional properties.
+  - <a id="properties/services/additionalProperties"></a>**Additional properties** _(object)_: Cannot contain additional properties.
+    - <a id="properties/services/additionalProperties/properties/enabled"></a>**`enabled`** _(boolean)_: Enable this service.
+    - <a id="properties/services/additionalProperties/properties/type"></a>**`type`** _(string)_: The type of the service. Must be one of: "Deployment", "StatefulSet", "Job", or "CronJob". Default: `"Deployment"`.
+    - <a id="properties/services/additionalProperties/properties/name"></a>**`name`** _(string)_: The name of the service.
+    - <a id="properties/services/additionalProperties/properties/nameOverride"></a>**`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
+    - <a id="properties/services/additionalProperties/properties/fullnameOverride"></a>**`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
+    - <a id="properties/services/additionalProperties/properties/labels"></a>**`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
+    - <a id="properties/services/additionalProperties/properties/annotations"></a>**`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
+    - <a id="properties/services/additionalProperties/properties/podLabels"></a>**`podLabels`**: Refer to _[#/definitions/podLabels](#definitions/podLabels)_.
+    - <a id="properties/services/additionalProperties/properties/podAnnotations"></a>**`podAnnotations`**: Refer to _[#/definitions/podAnnotations](#definitions/podAnnotations)_.
+    - <a id="properties/services/additionalProperties/properties/serviceName"></a>**`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
+    - <a id="properties/services/additionalProperties/properties/releaseTrunc"></a>**`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+    - <a id="properties/services/additionalProperties/properties/prefixTrunc"></a>**`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
+    - <a id="properties/services/additionalProperties/properties/affinity"></a>**`affinity`**: Refer to _[#/definitions/affinity](#definitions/affinity)_.
+    - <a id="properties/services/additionalProperties/properties/tolerations"></a>**`tolerations`**: Refer to _[#/definitions/tolerations](#definitions/tolerations)_.
+    - <a id="properties/services/additionalProperties/properties/nodeSelector"></a>**`nodeSelector`**: Refer to _[#/definitions/nodeSelector](#definitions/nodeSelector)_.
+    - <a id="properties/services/additionalProperties/properties/replicaCount"></a>**`replicaCount`** _(integer)_: The number of replicas.
+    - <a id="properties/services/additionalProperties/properties/maxFailedIndexes"></a>**`maxFailedIndexes`** _(integer)_: The maximum number of failed indexes.
+    - <a id="properties/services/additionalProperties/properties/parallelism"></a>**`parallelism`** _(integer)_: The number of parallel jobs.
+    - <a id="properties/services/additionalProperties/properties/backoffLimitPerIndex"></a>**`backoffLimitPerIndex`** _(integer)_: The number of backoff limit per index.
+    - <a id="properties/services/additionalProperties/properties/completionMode"></a>**`completionMode`** _(string)_: The completion mode of the job. Must be one of: "Indexed" or "NonIndexed".
+    - <a id="properties/services/additionalProperties/properties/completions"></a>**`completions`** _(integer)_: The number of completions.
+    - <a id="properties/services/additionalProperties/properties/minReadySeconds"></a>**`minReadySeconds`** _(integer)_: The minimum number of seconds for the Pod to be ready.
+    - <a id="properties/services/additionalProperties/properties/persistentVolumeClaimRetentionPolicy"></a>**`persistentVolumeClaimRetentionPolicy`** _(object)_: The persistent volume claim retention policy.
+    - <a id="properties/services/additionalProperties/properties/replicas"></a>**`replicas`** _(integer)_: The number of replicas.
+    - <a id="properties/services/additionalProperties/properties/paused"></a>**`paused`** _(boolean)_: Pause the deployment.
+    - <a id="properties/services/additionalProperties/properties/progressDeadlineSeconds"></a>**`progressDeadlineSeconds`** _(integer)_: The number of seconds for the deployment to be ready.
+    - <a id="properties/services/additionalProperties/properties/strategy"></a>**`strategy`** _(object)_: The deployment strategy. Cannot contain additional properties.
+      - <a id="properties/services/additionalProperties/properties/strategy/properties/type"></a>**`type`** _(string)_: The type of the strategy.
+      - <a id="properties/services/additionalProperties/properties/strategy/properties/rollingUpdate"></a>**`rollingUpdate`** _(object)_: The rolling update strategy.
+    - <a id="properties/services/additionalProperties/properties/suspend"></a>**`suspend`** _(boolean)_: Suspend the job.
+    - <a id="properties/services/additionalProperties/properties/template"></a>**`template`** _(boolean)_: Create the service keys in the self ConfigMap even if the service is disabled.
+    - <a id="properties/services/additionalProperties/properties/ttlSecondsAfterFinished"></a>**`ttlSecondsAfterFinished`** _(integer)_: The number of seconds before the job is deleted.
+    - <a id="properties/services/additionalProperties/properties/backoffLimit"></a>**`backoffLimit`** _(integer)_: The number of backoff limit.
+    - <a id="properties/services/additionalProperties/properties/podReplacementPolicy"></a>**`podReplacementPolicy`** _(string)_: The Pod replacement policy.
+    - <a id="properties/services/additionalProperties/properties/restartPolicy"></a>**`restartPolicy`** _(string)_: The Pod restart policy.
+    - <a id="properties/services/additionalProperties/properties/podFailurePolicy"></a>**`podFailurePolicy`** _(object)_: The Pod failure policy.
+    - <a id="properties/services/additionalProperties/properties/activeDeadlineSeconds"></a>**`activeDeadlineSeconds`** _(integer)_: The number of seconds before the job is deleted.
+    - <a id="properties/services/additionalProperties/properties/ordinals"></a>**`ordinals`** _(object)_: The ordinals of the stateful set.
+    - <a id="properties/services/additionalProperties/properties/podManagementPolicy"></a>**`podManagementPolicy`** _(string)_: The Pod management policy. Must be one of: "OrderedReady" or "Parallel".
+    - <a id="properties/services/additionalProperties/properties/updateStrategy"></a>**`updateStrategy`** _(object)_: The update strategy.
+    - <a id="properties/services/additionalProperties/properties/schedule"></a>**`schedule`** _(string)_: CronJob - The cron schedule in crontab notation.
+    - <a id="properties/services/additionalProperties/properties/successfulJobsHistoryLimit"></a>**`successfulJobsHistoryLimit`** _(integer)_: CronJob - successfulJobsHistoryLimit.
+    - <a id="properties/services/additionalProperties/properties/failedJobsHistoryLimit"></a>**`failedJobsHistoryLimit`** _(integer)_: CronJob - failedJobsHistoryLimit.
+    - <a id="properties/services/additionalProperties/properties/concurrencyPolicy"></a>**`concurrencyPolicy`** _(string)_: CronJob - concurrencyPolicy. Must be one of: "Allow", "Forbid", or "Replace".
+    - <a id="properties/services/additionalProperties/properties/volumeClaimTemplates"></a>**`volumeClaimTemplates`** _(array)_: The volume claim templates, the key is the name of the volume claim template.
+    - <a id="properties/services/additionalProperties/properties/volumes"></a>**`volumes`** _(object)_: The volumes configuration, the key is the name of the volume, if `secret.secretName` or `configMap.name` is not defined, or defined to 'self' the internal one will be used, use 'self-metadata' for the metadata ConfigMap, 'self-external-secret' for the external secret.
+    - <a id="properties/services/additionalProperties/properties/pdb"></a>**`pdb`** _(object)_: The Pod disruption budget configuration. Cannot contain additional properties. Default: `{"enabled": true, "maxUnavailable": 1}`.
+      - <a id="properties/services/additionalProperties/properties/pdb/properties/enabled"></a>**`enabled`** _(boolean)_: Enable the Pod disruption budget. Default: `true`.
+      - <a id="properties/services/additionalProperties/properties/pdb/properties/minAvailable"></a>**`minAvailable`** _(integer)_: The minimum number of Pods available.
+      - <a id="properties/services/additionalProperties/properties/pdb/properties/maxUnavailable"></a>**`maxUnavailable`** _(integer)_: The maximum number of Pods unavailable.
+    - <a id="properties/services/additionalProperties/properties/initContainers"></a>**`initContainers`** _(object)_: The initialization containers configuration. Can contain additional properties.
+      - <a id="properties/services/additionalProperties/properties/initContainers/additionalProperties"></a>**Additional properties** _(object)_: Cannot contain additional properties.
+        - <a id="properties/services/additionalProperties/properties/initContainers/additionalProperties/properties/enabled"></a>**`enabled`** _(boolean)_: Enable the initialization container.
+        - <a id="properties/services/additionalProperties/properties/initContainers/additionalProperties/properties/image"></a>**`image`** _(required)_: Refer to _[#/definitions/image](#definitions/image)_.
+        - <a id="properties/services/additionalProperties/properties/initContainers/additionalProperties/properties/env"></a>**`env`**: Refer to _[#/definitions/env](#definitions/env)_.
+        - <a id="properties/services/additionalProperties/properties/initContainers/additionalProperties/properties/resources"></a>**`resources`**: Refer to _[#/definitions/resources](#definitions/resources)_.
+        - <a id="properties/services/additionalProperties/properties/initContainers/additionalProperties/properties/command"></a>**`command`**: Refer to _[#/definitions/command](#definitions/command)_.
+        - <a id="properties/services/additionalProperties/properties/initContainers/additionalProperties/properties/workingDir"></a>**`workingDir`**: Refer to _[#/definitions/workingDir](#definitions/workingDir)_.
+        - <a id="properties/services/additionalProperties/properties/initContainers/additionalProperties/properties/args"></a>**`args`**: Refer to _[#/definitions/args](#definitions/args)_.
+        - <a id="properties/services/additionalProperties/properties/initContainers/additionalProperties/properties/volumeMounts"></a>**`volumeMounts`**: Refer to _[#/definitions/volumeMounts](#definitions/volumeMounts)_.
+        - <a id="properties/services/additionalProperties/properties/initContainers/additionalProperties/properties/volumeDevices"></a>**`volumeDevices`**: Refer to _[#/definitions/volumeDevices](#definitions/volumeDevices)_.
+    - <a id="properties/services/additionalProperties/properties/containers"></a>**`containers`** _(object)_: The containers configuration. Can contain additional properties.
+      - <a id="properties/services/additionalProperties/properties/containers/additionalProperties"></a>**Additional properties** _(object)_: Cannot contain additional properties.
+        - <a id="properties/services/additionalProperties/properties/containers/additionalProperties/properties/enabled"></a>**`enabled`** _(boolean)_: Enable the container.
+        - <a id="properties/services/additionalProperties/properties/containers/additionalProperties/properties/image"></a>**`image`** _(required)_: Refer to _[#/definitions/image](#definitions/image)_.
+        - <a id="properties/services/additionalProperties/properties/containers/additionalProperties/properties/env"></a>**`env`**: Refer to _[#/definitions/env](#definitions/env)_.
+        - <a id="properties/services/additionalProperties/properties/containers/additionalProperties/properties/resources"></a>**`resources`**: Refer to _[#/definitions/resources](#definitions/resources)_.
+        - <a id="properties/services/additionalProperties/properties/containers/additionalProperties/properties/command"></a>**`command`**: Refer to _[#/definitions/command](#definitions/command)_.
+        - <a id="properties/services/additionalProperties/properties/containers/additionalProperties/properties/workingDir"></a>**`workingDir`**: Refer to _[#/definitions/workingDir](#definitions/workingDir)_.
+        - <a id="properties/services/additionalProperties/properties/containers/additionalProperties/properties/args"></a>**`args`**: Refer to _[#/definitions/args](#definitions/args)_.
+        - <a id="properties/services/additionalProperties/properties/containers/additionalProperties/properties/volumeMounts"></a>**`volumeMounts`**: Refer to _[#/definitions/volumeMounts](#definitions/volumeMounts)_.
+        - <a id="properties/services/additionalProperties/properties/containers/additionalProperties/properties/volumeDevices"></a>**`volumeDevices`**: Refer to _[#/definitions/volumeDevices](#definitions/volumeDevices)_.
+        - <a id="properties/services/additionalProperties/properties/containers/additionalProperties/properties/ports"></a>**`ports`** _(object)_: The ports, key is the name of the port.
+        - <a id="properties/services/additionalProperties/properties/containers/additionalProperties/properties/livenessProbe"></a>**`livenessProbe`** _(object)_
+        - <a id="properties/services/additionalProperties/properties/containers/additionalProperties/properties/readinessProbe"></a>**`readinessProbe`** _(object)_
+        - <a id="properties/services/additionalProperties/properties/containers/additionalProperties/properties/startupProbe"></a>**`startupProbe`** _(object)_
+        - <a id="properties/services/additionalProperties/properties/containers/additionalProperties/properties/lifecycle"></a>**`lifecycle`** _(object)_: Lifecycle Events configuration - https://kubernetes.io/docs/tasks/configure-pod-container/attach-handler-lifecycle-event/.
+    - <a id="properties/services/additionalProperties/properties/ingress"></a>**`ingress`** _(object)_: Cannot contain additional properties.
+      - <a id="properties/services/additionalProperties/properties/ingress/properties/enabled"></a>**`enabled`** _(boolean)_: Enable the ingress for this service.
+      - <a id="properties/services/additionalProperties/properties/ingress/properties/nameOverride"></a>**`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
+      - <a id="properties/services/additionalProperties/properties/ingress/properties/fullnameOverride"></a>**`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
+      - <a id="properties/services/additionalProperties/properties/ingress/properties/releaseNameOverride"></a>**`releaseNameOverride`**: Refer to _[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)_.
+      - <a id="properties/services/additionalProperties/properties/ingress/properties/serviceName"></a>**`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
+      - <a id="properties/services/additionalProperties/properties/ingress/properties/releaseTrunc"></a>**`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+      - <a id="properties/services/additionalProperties/properties/ingress/properties/nameTrunc"></a>**`nameTrunc`**: Refer to _[#/definitions/nameTrunc](#definitions/nameTrunc)_.
+      - <a id="properties/services/additionalProperties/properties/ingress/properties/prefixTrunc"></a>**`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
+      - <a id="properties/services/additionalProperties/properties/ingress/properties/labels"></a>**`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
+      - <a id="properties/services/additionalProperties/properties/ingress/properties/annotations"></a>**`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
+      - <a id="properties/services/additionalProperties/properties/ingress/properties/path"></a>**`path`** _(string)_: The path of the ingress.
+      - <a id="properties/services/additionalProperties/properties/ingress/properties/traefikHealthCheck"></a>**`traefikHealthCheck`** _(object)_: See the Traefik documentation for more information.
+      - <a id="properties/services/additionalProperties/properties/ingress/properties/traefikNativeLB"></a>**`traefikNativeLB`** _(boolean)_: See the Traefik documentation for more information.
+      - <a id="properties/services/additionalProperties/properties/ingress/properties/traefikNodePortLB"></a>**`traefikNodePortLB`** _(boolean)_: See the Traefik documentation for more information.
+      - <a id="properties/services/additionalProperties/properties/ingress/properties/traefikPassHostHeader"></a>**`traefikPassHostHeader`** _(boolean)_: See the Traefik documentation for more information. Default: `true`.
+      - <a id="properties/services/additionalProperties/properties/ingress/properties/traefikResponseForwarding"></a>**`traefikResponseForwarding`** _(object)_: See the Traefik documentation for more information.
+      - <a id="properties/services/additionalProperties/properties/ingress/properties/traefikScheme"></a>**`traefikScheme`** _(string)_: See the Traefik documentation for more information.
+      - <a id="properties/services/additionalProperties/properties/ingress/properties/traefikServersTransport"></a>**`traefikServersTransport`** _(string)_: See the Traefik documentation for more information.
+      - <a id="properties/services/additionalProperties/properties/ingress/properties/traefikSticky"></a>**`traefikSticky`** _(object)_: See the Traefik documentation for more information.
+      - <a id="properties/services/additionalProperties/properties/ingress/properties/traefikStrategy"></a>**`traefikStrategy`** _(string)_: See the Traefik documentation for more information.
+      - <a id="properties/services/additionalProperties/properties/ingress/properties/traefikWeight"></a>**`traefikWeight`** _(integer)_: See the Traefik documentation for more information.
+    - <a id="properties/services/additionalProperties/properties/service"></a>**`service`** _(object)_: The Kubernetes service configuration. Cannot contain additional properties.
+      - <a id="properties/services/additionalProperties/properties/service/properties/name"></a>**`name`** _(string)_: The name of the service.
+      - <a id="properties/services/additionalProperties/properties/service/properties/type"></a>**`type`** _(string)_: The type of the service. Default: `"ClusterIP"`.
+      - <a id="properties/services/additionalProperties/properties/service/properties/servicePort"></a>**`servicePort`** _(integer)_: The port of the service (used by Ingress). Default: `80`.
+      - <a id="properties/services/additionalProperties/properties/service/properties/labels"></a>**`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
+      - <a id="properties/services/additionalProperties/properties/service/properties/annotations"></a>**`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
+      - <a id="properties/services/additionalProperties/properties/service/properties/ports"></a>**`ports`** _(array)_
+    - <a id="properties/services/additionalProperties/properties/hpa"></a>**`hpa`** _(object)_
+      - <a id="properties/services/additionalProperties/properties/hpa/properties/enabled"></a>**`enabled`** _(boolean, required)_: Enable or disable HPA for the service.
+      - <a id="properties/services/additionalProperties/properties/hpa/properties/minReplicas"></a>**`minReplicas`** _(integer, required)_: Minimal number of replicas. Minimum: `1`. Default: `1`.
+      - <a id="properties/services/additionalProperties/properties/hpa/properties/maxReplicas"></a>**`maxReplicas`** _(integer, required)_: Max number of replicas. Minimum: `1`. Default: `10`.
+      - <a id="properties/services/additionalProperties/properties/hpa/properties/metrics"></a>**`metrics`** _(array)_: Metrics definition.
+        - <a id="properties/services/additionalProperties/properties/hpa/properties/metrics/items"></a>**Items** _(object)_
+          - <a id="properties/services/additionalProperties/properties/hpa/properties/metrics/items/properties/type"></a>**`type`** _(string, required)_: Metric types (Resource, Pods, External). Must be one of: "Resource", "Pods", or "External".
+          - <a id="properties/services/additionalProperties/properties/hpa/properties/metrics/items/properties/resource"></a>**`resource`** _(object)_
+            - <a id="properties/services/additionalProperties/properties/hpa/properties/metrics/items/properties/resource/properties/name"></a>**`name`** _(string, required)_: CPU or memory value. Must be one of: "cpu" or "memory".
+            - <a id="properties/services/additionalProperties/properties/hpa/properties/metrics/items/properties/resource/properties/target"></a>**`target`** _(object, required)_
+              - <a id="properties/services/additionalProperties/properties/hpa/properties/metrics/items/properties/resource/properties/target/properties/type"></a>**`type`** _(string, required)_: Metric target. Must be one of: "Utilization", "Value", or "AverageValue".
+              - <a id="properties/services/additionalProperties/properties/hpa/properties/metrics/items/properties/resource/properties/target/properties/averageUtilization"></a>**`averageUtilization`** _(integer)_: % average use.
+    - <a id="properties/services/additionalProperties/properties/podMonitor"></a>**`podMonitor`** _(object)_: The Prometheus Pod monitor configuration. Cannot contain additional properties.
+      - <a id="properties/services/additionalProperties/properties/podMonitor/properties/enabled"></a>**`enabled`** _(boolean)_: Enable the Pod monitor for this service (Pod).
+      - <a id="properties/services/additionalProperties/properties/podMonitor/properties/name"></a>**`name`** _(string)_: The name of the Pod monitor.
+      - <a id="properties/services/additionalProperties/properties/podMonitor/properties/labels"></a>**`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
+      - <a id="properties/services/additionalProperties/properties/podMonitor/properties/annotations"></a>**`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
+      - <a id="properties/services/additionalProperties/properties/podMonitor/properties/podMetricsEndpoints"></a>**`podMetricsEndpoints`** _(object)_: The endpoints of the Pod monitor by port. Can contain additional properties.
+        - <a id="properties/services/additionalProperties/properties/podMonitor/properties/podMetricsEndpoints/additionalProperties"></a>**Additional properties** _(object)_: The endpoint of the Pod monitor.
 
 ## Definitions
 
@@ -292,69 +291,68 @@
 - <a id="definitions/nameTrunc"></a>**`nameTrunc`** _(integer)_: [helm-common] The chart name trunk length (can be in the service, values or global). Default: `63`.
 - <a id="definitions/prefixTrunc"></a>**`prefixTrunc`** _(integer)_: [helm-common] The prefix trunk length (release and chart name) (can be in the service, values or global). Default: `40`.
 - <a id="definitions/serviceAccount"></a>**`serviceAccount`** _(object)_: Service account configuration. Cannot contain additional properties.
-  - **`create`** _(boolean)_: Create a service account.
-  - **`name`** _(string)_: Name of the service account.
-  - **`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
-  - **`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
-  - **`releaseNameOverride`**: Refer to _[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)_.
-  - **`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
-  - **`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
-  - **`nameTrunc`**: Refer to _[#/definitions/nameTrunc](#definitions/nameTrunc)_.
-  - **`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
-  - **`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
-  - **`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
+  - <a id="definitions/serviceAccount/properties/create"></a>**`create`** _(boolean)_: Create a service account.
+  - <a id="definitions/serviceAccount/properties/name"></a>**`name`** _(string)_: Name of the service account.
+  - <a id="definitions/serviceAccount/properties/nameOverride"></a>**`nameOverride`**: Refer to _[#/definitions/nameOverride](#definitions/nameOverride)_.
+  - <a id="definitions/serviceAccount/properties/fullnameOverride"></a>**`fullnameOverride`**: Refer to _[#/definitions/fullnameOverride](#definitions/fullnameOverride)_.
+  - <a id="definitions/serviceAccount/properties/releaseNameOverride"></a>**`releaseNameOverride`**: Refer to _[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)_.
+  - <a id="definitions/serviceAccount/properties/serviceName"></a>**`serviceName`**: Refer to _[#/definitions/serviceName](#definitions/serviceName)_.
+  - <a id="definitions/serviceAccount/properties/releaseTrunc"></a>**`releaseTrunc`**: Refer to _[#/definitions/releaseTrunc](#definitions/releaseTrunc)_.
+  - <a id="definitions/serviceAccount/properties/nameTrunc"></a>**`nameTrunc`**: Refer to _[#/definitions/nameTrunc](#definitions/nameTrunc)_.
+  - <a id="definitions/serviceAccount/properties/prefixTrunc"></a>**`prefixTrunc`**: Refer to _[#/definitions/prefixTrunc](#definitions/prefixTrunc)_.
+  - <a id="definitions/serviceAccount/properties/labels"></a>**`labels`**: Refer to _[#/definitions/labels](#definitions/labels)_.
+  - <a id="definitions/serviceAccount/properties/annotations"></a>**`annotations`**: Refer to _[#/definitions/annotations](#definitions/annotations)_.
 - <a id="definitions/podSecurityContext"></a>**`podSecurityContext`** _(object)_: Pod security context.
 - <a id="definitions/securityContext"></a>**`securityContext`** _(object)_: Container security context.
 - <a id="definitions/globalImage"></a>**`globalImage`** _(object)_: [helm-common] global image configuration.
-  - **`pullPolicy`** _(string)_: Image pull policy. Must be one of: `["Always", "IfNotPresent", "Never"]`. Default: `"IfNotPresent"`.
-  - **`pullSecrets`** _(array)_: Image pull secrets.
+  - <a id="definitions/globalImage/properties/pullPolicy"></a>**`pullPolicy`** _(string)_: Image pull policy. Must be one of: "Always", "IfNotPresent", or "Never". Default: `"IfNotPresent"`.
+  - <a id="definitions/globalImage/properties/pullSecrets"></a>**`pullSecrets`** _(array)_: Image pull secrets.
 - <a id="definitions/configMapNameOverride"></a>**`configMapNameOverride`** _(object)_: [helm-common] global: Used to be able to globally override the name of the ConfigMap. Can contain additional properties.
-  - **Additional properties** _(string)_
+  - <a id="definitions/configMapNameOverride/additionalProperties"></a>**Additional properties** _(string)_
 - <a id="definitions/labels"></a>**`labels`** _(object)_: [helm-common] Pod labels. Can contain additional properties.
-  - **Additional properties** _(string)_
+  - <a id="definitions/labels/additionalProperties"></a>**Additional properties** _(string)_
 - <a id="definitions/annotations"></a>**`annotations`** _(object)_: [helm-common] Pod annotations. Can contain additional properties.
-  - **Additional properties** _(string)_
+  - <a id="definitions/annotations/additionalProperties"></a>**Additional properties** _(string)_
 - <a id="definitions/podLabels"></a>**`podLabels`** _(object)_: Labels used only in the Pod definition. Can contain additional properties.
-  - **Additional properties** _(string)_
+  - <a id="definitions/podLabels/additionalProperties"></a>**Additional properties** _(string)_
 - <a id="definitions/podAnnotations"></a>**`podAnnotations`** _(object)_: Annotations used only in the Pod definition. Can contain additional properties.
-  - **Additional properties** _(string)_
+  - <a id="definitions/podAnnotations/additionalProperties"></a>**Additional properties** _(string)_
 - <a id="definitions/serviceName"></a>**`serviceName`** _(string)_: [helm-common] The name of the service (not Kubernetes service), this will postfix the name.
 - <a id="definitions/affinity"></a>**`affinity`** _(object)_: Pod: The used affinity. Cannot contain additional properties.
-  - **`podAntiAffinity`** _(object)_: The used pod anti-affinity, see: https://github.com/camptocamp/helm-application/wiki/Affinity.
-  - **`podAffinity`** _(object)_: The standard pod affinity.
-  - **`nodeAffinity`** _(object)_: The standard node affinity.
+  - <a id="definitions/affinity/properties/podAntiAffinity"></a>**`podAntiAffinity`** _(object)_: The used pod anti-affinity, see: https://github.com/camptocamp/helm-application/wiki/Affinity.
+  - <a id="definitions/affinity/properties/podAffinity"></a>**`podAffinity`** _(object)_: The standard pod affinity.
+  - <a id="definitions/affinity/properties/nodeAffinity"></a>**`nodeAffinity`** _(object)_: The standard node affinity.
 - <a id="definitions/tolerations"></a>**`tolerations`** _(array)_: Pod: Tolerations.
 - <a id="definitions/nodeSelector"></a>**`nodeSelector`** _(object)_: Pod: Node selector.
 - <a id="definitions/image"></a>**`image`** _(object)_: Container: Image configuration.
-  - ## **Any of**
-    -
-  - **`repository`** _(string, required)_: Image repository.
-  - **`tag`** _(string)_: Image tag, used if the sha is not defined.
-  - **`sha`** _(['null', 'string'])_: Image sha.
-  - **`pullPolicy`** _(string)_: Image pull policy. Must be one of: `["Always", "IfNotPresent", "Never"]`.
+  - **Any of**
+  - <a id="definitions/image/properties/repository"></a>**`repository`** _(string, required)_: Image repository.
+  - <a id="definitions/image/properties/tag"></a>**`tag`** _(string)_: Image tag, used if the sha is not defined.
+  - <a id="definitions/image/properties/sha"></a>**`sha`** _(null or string)_: Image sha.
+  - <a id="definitions/image/properties/pullPolicy"></a>**`pullPolicy`** _(string)_: Image pull policy. Must be one of: "Always", "IfNotPresent", or "Never".
 - <a id="definitions/env"></a>**`env`** _(object)_: [helm-common] Container: Environment variables. Can contain additional properties.
-  - **Additional properties**
+  - <a id="definitions/env/additionalProperties"></a>**Additional properties**
     - **One of**
-      - _object_
-        - **`type`** _(string, required)_: Disable the environment variable. Must be one of: `["none"]`.
-      - _object_
-        - **`type`** _(string)_: Environment variable from a direct value. Must be one of: `["value"]`. Default: `"value"`.
-        - **`order`** _(integer)_: Order of the environment variable. Must be one of: `[0, 1]`. Default: `0`.
-        - **`value`** _(string, required)_: Value of the environment variable.
-      - _object_
-        - **`type`** _(string, required)_: Environment variable from a ConfigMap or a Secret. Must be one of: `["configMap", "secret"]`.
-        - **`order`** _(integer)_: Order of the environment variable. Must be one of: `[0, 1]`. Default: `0`.
-        - **`name`** _(string, required)_: Name of the ConfigMap or Secret, if 'self', same name as the service.
-        - **`key`** _(string, required)_: Key of the ConfigMap or Secret.
-      - _object_
-        - **`type`** _(string, required)_: Free valueFrom for an environment variable. Must be one of: `["valueFrom"]`.
-        - **`order`** _(integer)_: Order of the environment variable. Must be one of: `[0, 1]`. Default: `0`.
-        - **`valueFrom`** _(object, required)_
+      - <a id="definitions/env/additionalProperties/oneOf/0"></a>_object_
+        - <a id="definitions/env/additionalProperties/oneOf/0/properties/type"></a>**`type`** _(string, required)_: Disable the environment variable. Must be one of: "none".
+      - <a id="definitions/env/additionalProperties/oneOf/1"></a>_object_
+        - <a id="definitions/env/additionalProperties/oneOf/1/properties/type"></a>**`type`** _(string)_: Environment variable from a direct value. Must be one of: "value". Default: `"value"`.
+        - <a id="definitions/env/additionalProperties/oneOf/1/properties/order"></a>**`order`** _(integer)_: Order of the environment variable. Must be one of: 0 or 1. Default: `0`.
+        - <a id="definitions/env/additionalProperties/oneOf/1/properties/value"></a>**`value`** _(string, required)_: Value of the environment variable.
+      - <a id="definitions/env/additionalProperties/oneOf/2"></a>_object_
+        - <a id="definitions/env/additionalProperties/oneOf/2/properties/type"></a>**`type`** _(string, required)_: Environment variable from a ConfigMap or a Secret. Must be one of: "configMap" or "secret".
+        - <a id="definitions/env/additionalProperties/oneOf/2/properties/order"></a>**`order`** _(integer)_: Order of the environment variable. Must be one of: 0 or 1. Default: `0`.
+        - <a id="definitions/env/additionalProperties/oneOf/2/properties/name"></a>**`name`** _(string, required)_: Name of the ConfigMap or Secret, if 'self', same name as the service.
+        - <a id="definitions/env/additionalProperties/oneOf/2/properties/key"></a>**`key`** _(string, required)_: Key of the ConfigMap or Secret.
+      - <a id="definitions/env/additionalProperties/oneOf/3"></a>_object_
+        - <a id="definitions/env/additionalProperties/oneOf/3/properties/type"></a>**`type`** _(string, required)_: Free valueFrom for an environment variable. Must be one of: "valueFrom".
+        - <a id="definitions/env/additionalProperties/oneOf/3/properties/order"></a>**`order`** _(integer)_: Order of the environment variable. Must be one of: 0 or 1. Default: `0`.
+        - <a id="definitions/env/additionalProperties/oneOf/3/properties/valueFrom"></a>**`valueFrom`** _(object, required)_
 - <a id="definitions/resources"></a>**`resources`** _(object)_: Container: The container resources.
 - <a id="definitions/command"></a>**`command`** _(array)_: Container: The container command.
-  - **Items** _(string)_
+  - <a id="definitions/command/items"></a>**Items** _(string)_
 - <a id="definitions/workingDir"></a>**`workingDir`** _(string)_: Container: The container working directory.
 - <a id="definitions/args"></a>**`args`** _(array)_: Container: The container arguments.
-  - **Items** _(string)_
+  - <a id="definitions/args/items"></a>**Items** _(string)_
 - <a id="definitions/volumeMounts"></a>**`volumeMounts`** _(object)_: Container: Volume mounts, the key is the mountPath of the volume.
 - <a id="definitions/volumeDevices"></a>**`volumeDevices`** _(object)_: Container: Volume devices, the key is the devicePath of the volume.
