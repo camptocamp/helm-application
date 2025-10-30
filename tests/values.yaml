@@ -263,6 +263,73 @@ services:
           http:
             containerPort: 8080
             protocol: TCP
+        # test order
+        env:
+          A:
+            value: '10'
+            order: 10
+          B:
+            value: '9'
+            order: 9
+          C:
+            value: '8'
+            order: 8
+          D:
+            value: '7'
+            order: 7
+          E:
+            value: '6'
+            order: 6
+          F:
+            value: '5'
+            order: 5
+          G:
+            value: '4'
+            order: 4
+          H:
+            value: '3'
+            order: 3
+          I:
+            value: '2'
+            order: 2
+          J:
+            value: '1'
+            order: 1
+          K:
+            value: '0'
+            order: 0
+          L:
+            value: 'default'
+          M:
+            value: '-1'
+            order: -1
+          'N':
+            value: '-2'
+            order: -2
+          O:
+            value: '-3'
+            order: -3
+          P:
+            value: '-4'
+            order: -4
+          Q:
+            value: '-5'
+            order: -5
+          R:
+            value: '-6'
+            order: -6
+          S:
+            value: '-7'
+            order: -7
+          T:
+            value: '-8'
+            order: -8
+          U:
+            value: '-9'
+            order: -9
+          V:
+            value: '-10'
+            order: -10
       disabled:
         <<: *aa
         enabled: false

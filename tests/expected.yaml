@@ -671,17 +671,50 @@ spec:
           image: "camptocamp/custom-bb:latest"
           imagePullPolicy: IfNotPresent
           env:
-            - name: "APP_KUBERNETES_IO_COMPONENT"
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.labels['app.kubernetes.io/component']
-            - name: "JWT_SECRET_KEY"
-              valueFrom:
-                secretKeyRef:
-                  name: "jwt-key-secret"
-                  key: "JWT_SECRET_KEY"
-            - name: "MY_ENV_VAR"
-              value: some-value
+            - name: "V"
+              value: "-10"
+            - name: "U"
+              value: "-9"
+            - name: "T"
+              value: "-8"
+            - name: "S"
+              value: "-7"
+            - name: "R"
+              value: "-6"
+            - name: "Q"
+              value: "-5"
+            - name: "P"
+              value: "-4"
+            - name: "O"
+              value: "-3"
+            - name: "N"
+              value: "-2"
+            - name: "M"
+              value: "-1"
+            - name: "K"
+              value: "0"
+            - name: "L"
+              value: default
+            - name: "J"
+              value: "1"
+            - name: "I"
+              value: "2"
+            - name: "H"
+              value: "3"
+            - name: "G"
+              value: "4"
+            - name: "F"
+              value: "5"
+            - name: "E"
+              value: "6"
+            - name: "D"
+              value: "7"
+            - name: "C"
+              value: "8"
+            - name: "B"
+              value: "9"
+            - name: "A"
+              value: "10"
           terminationMessagePolicy: FallbackToLogsOnError
           args:
             - sleep

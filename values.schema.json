@@ -214,9 +214,8 @@
               },
               "order": {
                 "type": "integer",
-                "description": "Order of the environment variable",
-                "default": 0,
-                "enum": [0, 1]
+                "description": "Order of the environment variable, works well with values between -10 and 10",
+                "default": 0
               },
               "value": {
                 "type": "string",

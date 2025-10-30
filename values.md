@@ -337,7 +337,7 @@
         - <a id="definitions/env/additionalProperties/oneOf/0/properties/type"></a>**`type`** _(string, required)_: Disable the environment variable. Must be one of: "none".
       - <a id="definitions/env/additionalProperties/oneOf/1"></a>_object_
         - <a id="definitions/env/additionalProperties/oneOf/1/properties/type"></a>**`type`** _(string)_: Environment variable from a direct value. Must be one of: "value". Default: `"value"`.
-        - <a id="definitions/env/additionalProperties/oneOf/1/properties/order"></a>**`order`** _(integer)_: Order of the environment variable. Must be one of: 0 or 1. Default: `0`.
+        - <a id="definitions/env/additionalProperties/oneOf/1/properties/order"></a>**`order`** _(integer)_: Order of the environment variable, works well with values between -10 and 10. Default: `0`.
         - <a id="definitions/env/additionalProperties/oneOf/1/properties/value"></a>**`value`** _(string, required)_: Value of the environment variable.
       - <a id="definitions/env/additionalProperties/oneOf/2"></a>_object_
         - <a id="definitions/env/additionalProperties/oneOf/2/properties/type"></a>**`type`** _(string, required)_: Environment variable from a ConfigMap or a Secret. Must be one of: "configMap" or "secret".

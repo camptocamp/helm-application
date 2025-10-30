@@ -140,15 +140,29 @@ imagePullPolicy: {{ .root.Values.global.image.pullPolicy }}
 env:
   {{- $configMapNameOverride := .root.Values.global.configMapNameOverride }}
   {{- $root := .root }}
-  {{- range $name, $value := .container.env }}
+  {{- $env := .container.env -}}{{/*
+  Three-tier environment variable ordering approach:
+    1. order < -9: Variables that must be set first
+    2. standard order (from -9 to 9): Normal variables in defined order
+    3. order > 9: Variables that should be set last
+    This allows fine-grained control over environment variable precedence */}}
+  {{- range $name, $value := $env }}
     {{- $order := int ( default 0 $value.order ) -}}
-    {{- if ( le $order 0 ) }}
+    {{- if ( lt $order -9 ) }}
       {{- include "application.oneEnv" ( dict "root" $root "name" $name "value" $value "configMapNameOverride" $configMapNameOverride ) | indent 2 -}}
     {{- end }}
   {{- end }}
-  {{- range $name, $value := .container.env }}
+  {{- range $current := untilStep -9 10 1 }}
+    {{- range $name, $value := $env }}
+      {{- $order := int ( default 0 $value.order ) -}}
+      {{- if ( eq $order ( int $current ) ) }}
+        {{- include "application.oneEnv" ( dict "root" $root "name" $name "value" $value "configMapNameOverride" $configMapNameOverride ) | indent 2 -}}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+  {{- range $name, $value := $env }}
     {{- $order := int ( default 0 $value.order ) -}}
-    {{- if ( gt $order 0 ) }}
+    {{- if ( gt $order 9 ) }}
       {{- include "application.oneEnv" ( dict "root" $root "name" $name "value" $value "configMapNameOverride" $configMapNameOverride ) | indent 2 -}}
     {{- end }}
   {{- end }}
