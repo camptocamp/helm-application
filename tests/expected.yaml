@@ -1614,7 +1614,7 @@ spec:
                   number: 8080
 ---
 # Source: application/templates/external-secret-docker-registry.yaml
-apiVersion: external-secrets.io/v1
+apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
   name: example-app-dockerregistry-docker-registry
@@ -1690,7 +1690,7 @@ spec:
         key: ghcr-password
 ---
 # Source: application/templates/external-secret.yaml
-apiVersion: external-secrets.io/v1
+apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
   name: example-app-ext-secrets-app
@@ -1714,7 +1714,7 @@ spec:
         key: hostname
 ---
 # Source: application/templates/external-secret.yaml
-apiVersion: external-secrets.io/v1
+apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
   name: example-app-global-ext-secrets-global
