@@ -17,7 +17,7 @@ spec:
   {{- end }}
   routes:
     {{- range $serviceName, $serviceDefinition := $.Values.services }}
-    {{- if and ( eq $serviceDefinition.enabled true ) ( eq ( default false ( default ( dict ) $serviceDefinition.ingress ).enabled ) true ) }}
+    {{- if and ( eq ( default true $serviceDefinition.enabled ) true ) ( eq ( default false ( default ( dict ) $serviceDefinition.ingress ).enabled ) true ) }}
     {{- range $hostGroupDefinition.traefikHosts }}
     - {{- with .kind }}
       kind: {{ . }}

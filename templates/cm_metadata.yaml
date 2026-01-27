@@ -14,7 +14,7 @@ data:
 {{- end }}
 {{- end }}
 {{- range $serviceName, $serviceDefinition := .Values.services }}
-{{- if or (eq $serviceDefinition.enabled true) ( and (hasKey $serviceDefinition "template") $serviceDefinition.template) }}
+{{- if or (eq ( default true $serviceDefinition.enabled ) true) ( and (hasKey $serviceDefinition "template") $serviceDefinition.template) }}
 {{- if ( default ( dict ) $serviceDefinition.service ).name }}
   SERVICE_{{ $serviceName | upper }}_NAME: {{ $serviceDefinition.service.name }}
 {{- else }}

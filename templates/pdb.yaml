@@ -1,5 +1,5 @@
 {{- range $serviceName, $serviceDefinition := $.Values.services }}
-{{- if eq $serviceDefinition.enabled true }}
+{{- if eq ( default true $serviceDefinition.enabled ) true }}
 {{- if and ( not ( eq ( default "Deployment" $serviceDefinition.type ) "Job" ) ) ( not ( eq ( default "Deployment" $serviceDefinition.type ) "CronJob" ) ) }}
 {{- if or ( not ( hasKey $serviceDefinition "pdb" ) )  ( not ( hasKey $serviceDefinition.pdb "enabled" ) ) ( eq $serviceDefinition.pdb.enabled true ) }}
 ---

@@ -40,7 +40,7 @@ spec:
       http:
         paths:
         {{- range $serviceName, $serviceDefinition := $.Values.services }}
-        {{- if and ( eq $serviceDefinition.enabled true ) ( eq ( default false ( default ( dict ) $serviceDefinition.ingress ).enabled ) true ) }}
+        {{- if and ( eq ( default true $serviceDefinition.enabled ) true ) ( eq ( default false ( default ( dict ) $serviceDefinition.ingress ).enabled ) true ) }}
           - path: "{{ $serviceDefinition.ingress.path }}"
             pathType: Prefix
             backend:
