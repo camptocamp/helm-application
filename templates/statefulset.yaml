@@ -1,5 +1,5 @@
 {{- range $serviceName, $serviceDefinition := .Values.services }}
-{{- if eq $serviceDefinition.enabled true }}
+{{- if eq ( default true $serviceDefinition.enabled ) true }}
 {{- if eq ( default "Deployment" $serviceDefinition.type ) "StatefulSet" }}
 
 ---
