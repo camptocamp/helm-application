@@ -1,5 +1,5 @@
 {{- range $serviceName, $serviceDefinition := .Values.services }}
-{{- if and ( eq ( default true $serviceDefinition.enabled ) true ) $serviceDefinition.service }}
+{{- if and ( or ( not ( hasKey $serviceDefinition "enabled" ) ) $serviceDefinition.enabled ) $serviceDefinition.service }}
 ---
 apiVersion: v1
 kind: Service
@@ -10,7 +10,7 @@ metadata:
   name: {{ include "common.fullname" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) }}
 {{- end }}
 {{- $svcDict := deepCopy $serviceDefinition }}
-{{- $svcDict := merge $svcDict (dict "annotations" $serviceDefinition.service.annotations "labels" $serviceDefinition.service.labels) }}
+{{- $svcDict := merge $svcDict ( dict "annotations" $serviceDefinition.service.annotations "labels" $serviceDefinition.service.labels ) }}
 {{- include "common.metadata" ( dict "root" $ "service" $svcDict "serviceName" $serviceName ) | nindent 2 }}
 spec:
   type: {{ $serviceDefinition.service.type | default "ClusterIP" }}

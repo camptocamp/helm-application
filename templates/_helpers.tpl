@@ -13,7 +13,7 @@ Create the name of the service account to use
 {{- if eq ( default "value" .value.type ) "value" }}
 - name: {{ .name | quote }}
   {{- dict "value" .value.value | toYaml | nindent 2 }}
-{{- else if or (eq ( default "value" .value.type ) "configMap") (eq ( default "value" .value.type ) "secret") }}
+{{- else if or ( eq ( default "value" .value.type ) "configMap" ) ( eq ( default "value" .value.type ) "secret") }}
 - name: {{ .name | quote }}
   valueFrom:
     {{ .value.type }}KeyRef:
@@ -27,7 +27,7 @@ Create the name of the service account to use
       {{- $name := substr 21 -1 .value.name }}
       {{- $definition := get .root.Values.externalSecrets $name }}
       name: {{ include "common.fullname" ( dict "root" .root "service" $definition "serviceName" $name ) }}
-      {{ else if and (hasKey .value "name" ) ( eq .value.name "self-metadata" ) -}}
+      {{ else if and ( hasKey .value "name" ) ( eq .value.name "self-metadata" ) -}}
       name: {{ include "common.fullname" ( dict "root" .root "service" .root.Values.metadata "serviceName" "metadata" ) }}
       {{ else -}}
       name: {{ default .value.name ( get .configMapNameOverride .value.name ) | quote }}
@@ -111,8 +111,8 @@ podAntiAffinity: {{ toYaml . | nindent 4 }}
 {{- end }}
 {{- end }}  {{/*  with .service.affinity */}}
 
-{{- $globalTolerations := .root.Values.tolerations | default (list) }}
-{{- $localTolerations := .service.tolerations | default (list) }}
+{{- $globalTolerations := .root.Values.tolerations | default ( list ) }}
+{{- $localTolerations := .service.tolerations | default ( list ) }}
 {{- $combinedTolerations := concat $globalTolerations $localTolerations }}
 {{- if $combinedTolerations }}
 tolerations:
@@ -192,7 +192,7 @@ annotations:
   "auths": {
     {{- range $registry, $conf := . }}
     {{ $conf.url | quote }}: {
-      "auth": {{ (printf "%s:%s" $conf.username $conf.password) | b64enc | quote}},
+      "auth": {{ ( printf "%s:%s" $conf.username $conf.password ) | b64enc | quote }},
       "username": {{ $conf.username | quote }},
       "password": {{ $conf.password | quote }},
       "email": {{ $conf.email | quote }}

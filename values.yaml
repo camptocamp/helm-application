@@ -27,9 +27,6 @@ securityContext: {}
 metadata:
   enabled: true
 
-ingress:
-  enabled: false
-
 dockerregistry:
   enabled: true
   external: false
