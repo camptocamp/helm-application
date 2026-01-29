@@ -23,7 +23,6 @@ ingress:
   hostGroups:
     host1:
       tls:
-        enabled: true
         secretName: my-tls-secret
       hosts:
         - test1.example.com

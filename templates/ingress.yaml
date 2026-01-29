@@ -19,7 +19,7 @@ spec:
   ingressClassName: {{ . }}
 {{- end }}
 # Add tls only if ingress.tls.enabled is set to true and the other fields are complete.
-{{- if and ( hasKey $hostGroupDefinition "tls" ) ( eq $hostGroupDefinition.tls.enabled true ) }}
+{{- if and ( hasKey $hostGroupDefinition "tls" ) ( or ( not ( hasKey $hostGroupDefinition.tls "enabled" ) ) $hostGroupDefinition.tls.enabled ) }}
   tls:
     - hosts:
         {{- range $hostGroupDefinition.hosts }}
