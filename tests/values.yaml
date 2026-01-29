@@ -373,7 +373,7 @@ services:
 
     ingress:
       path: /two
-    enabled: true
+
     replicaCount: 2
 
     podMonitor:
@@ -424,7 +424,6 @@ services:
   example3:
     ingress:
       path: /three
-    enabled: true
     replicaCount: 2
     fullnameOverride: example-app
 
@@ -474,8 +473,6 @@ services:
 
   # Example with labelSelector in affinity
   example4:
-    enabled: true
-
     ingress:
       enabled: false
       path: /four
@@ -503,7 +500,6 @@ services:
 
   # Example with HPA and labelSelector in affinity
   example5:
-    enabled: true
     fullnameOverride: example-app
     affinity:
       podAntiAffinity:
@@ -539,7 +535,6 @@ services:
 
   # Minimal configuration of a deployment
   deployment-min:
-    enabled: true
     fullnameOverride: example-app
     containers:
       main:
@@ -548,7 +543,6 @@ services:
           tag: latest
   # Deployment with all the possible options
   deployment-all:
-    enabled: true
     fullnameOverride: example-app
     replicas: 3
     strategy:
@@ -577,7 +571,6 @@ services:
           tag: latest
   # Minimal configuration of a daemonset
   statefulset-min:
-    enabled: true
     fullnameOverride: example-app
     type: StatefulSet
     containers:
@@ -587,7 +580,6 @@ services:
           tag: latest
   # Daemonset with all the possible options
   statefulset-all:
-    enabled: true
     fullnameOverride: example-app
     type: StatefulSet
     serviceName: 'nginx'
@@ -619,7 +611,6 @@ services:
               storage: 1Gi
   # Minimal configuration of a job
   job-min:
-    enabled: true
     fullnameOverride: example-app
     type: Job
     # not available in k8s <= 1.27
@@ -632,7 +623,6 @@ services:
           tag: latest
   # Job with all the possible options
   job-all:
-    enabled: true
     fullnameOverride: example-app
     type: Job
     backoffLimit: 5
@@ -665,7 +655,6 @@ services:
           tag: latest
 
   cronjob-all:
-    enabled: true
     fullnameOverride: example-app
     schedule: '*/1 * * * *'
     concurrencyPolicy: Forbid
@@ -704,7 +693,6 @@ services:
 
   # Test internal env
   internal:
-    enabled: true
     fullnameOverride: example-app
     containers:
       main:
@@ -732,3 +720,22 @@ services:
             type: configMap
             name: test-override
             key: testSingleLine
+
+  disabled:
+    enabled: false
+
+  disabled-deployment:
+    enabled: false
+    type: Deployment
+
+  disabled-statefulset:
+    enabled: false
+    type: StatefulSet
+
+  disabled-job:
+    enabled: false
+    type: Job
+
+  disabled-cronjob:
+    enabled: false
+    type: CronJob

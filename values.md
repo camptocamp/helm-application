@@ -29,8 +29,8 @@
   - <a id="properties/metadata/properties/prefixTrunc"></a>**`prefixTrunc`**: Refer to *[#/definitions/prefixTrunc](#definitions/prefixTrunc)*.
   - <a id="properties/metadata/properties/labels"></a>**`labels`**: Refer to *[#/definitions/labels](#definitions/labels)*.
   - <a id="properties/metadata/properties/annotations"></a>**`annotations`**: Refer to *[#/definitions/annotations](#definitions/annotations)*.
-- <a id="properties/ingress"></a>**`ingress`** *(object)*: Cannot contain additional properties.
-  - <a id="properties/ingress/properties/enabled"></a>**`enabled`** *(boolean)*: Enable the Ingress.
+- <a id="properties/ingress"></a>**`ingress`** *(object)*: Cannot contain additional properties. Default: `{"enabled": false}`.
+  - <a id="properties/ingress/properties/enabled"></a>**`enabled`** *(boolean)*: Enable the Ingress. Default: `true`.
   - <a id="properties/ingress/properties/nameOverride"></a>**`nameOverride`**: Refer to *[#/definitions/nameOverride](#definitions/nameOverride)*.
   - <a id="properties/ingress/properties/fullnameOverride"></a>**`fullnameOverride`**: Refer to *[#/definitions/fullnameOverride](#definitions/fullnameOverride)*.
   - <a id="properties/ingress/properties/releaseNameOverride"></a>**`releaseNameOverride`**: Refer to *[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)*.
@@ -41,7 +41,7 @@
   - <a id="properties/ingress/properties/labels"></a>**`labels`**: Refer to *[#/definitions/labels](#definitions/labels)*.
   - <a id="properties/ingress/properties/annotations"></a>**`annotations`**: Refer to *[#/definitions/annotations](#definitions/annotations)*.
   - <a id="properties/ingress/properties/ingressClassName"></a>**`ingressClassName`** *(string)*: Ingress class name. Will be omitted if not specified.
-  - <a id="properties/ingress/properties/traefikMiddleware"></a>**`traefikMiddleware`** *(object)*: Cannot contain additional properties.
+  - <a id="properties/ingress/properties/traefikMiddleware"></a>**`traefikMiddleware`** *(object)*: Cannot contain additional properties. Default: `{"enabled": false}`.
     - <a id="properties/ingress/properties/traefikMiddleware/properties/enabled"></a>**`enabled`** *(boolean)*: Enable Traefik middleware. Default: `true`.
     - <a id="properties/ingress/properties/traefikMiddleware/properties/spec"></a>**`spec`** *(object)*: Traefik middleware specification.
   - <a id="properties/ingress/properties/hostGroups"></a>**`hostGroups`** *(object)*: Can contain additional properties.
@@ -50,8 +50,8 @@
       - <a id="properties/ingress/properties/hostGroups/additionalProperties/properties/type"></a>**`type`** *(string)*: The type of the group, can be 'ingress', 'traefik-ingress-route'. Must be one of: "ingress" or "traefik-ingress-route". Default: `"ingress"`.
       - <a id="properties/ingress/properties/hostGroups/additionalProperties/properties/hosts"></a>**`hosts`** *(array)*
         - <a id="properties/ingress/properties/hostGroups/additionalProperties/properties/hosts/items"></a>**Items** *(string)*
-      - <a id="properties/ingress/properties/hostGroups/additionalProperties/properties/tls"></a>**`tls`** *(object)*: Cannot contain additional properties.
-        - <a id="properties/ingress/properties/hostGroups/additionalProperties/properties/tls/properties/enabled"></a>**`enabled`** *(boolean)*: Enable TLS.
+      - <a id="properties/ingress/properties/hostGroups/additionalProperties/properties/tls"></a>**`tls`** *(object)*: Cannot contain additional properties. Default: `{"enabled": false}`.
+        - <a id="properties/ingress/properties/hostGroups/additionalProperties/properties/tls/properties/enabled"></a>**`enabled`** *(boolean)*: Enable TLS. Default: `true`.
         - <a id="properties/ingress/properties/hostGroups/additionalProperties/properties/tls/properties/secretName"></a>**`secretName`** *(string)*: The name of the Secret.
       - <a id="properties/ingress/properties/hostGroups/additionalProperties/properties/traefikEntryPoints"></a>**`traefikEntryPoints`** *(array)*: See the Traefik documentation for more information.
       - <a id="properties/ingress/properties/hostGroups/additionalProperties/properties/traefikTLS"></a>**`traefikTLS`** *(object)*: TLS for Traefik IngressRoute.
@@ -79,8 +79,8 @@
   - <a id="properties/dockerregistry/properties/prefixTrunc"></a>**`prefixTrunc`**: Refer to *[#/definitions/prefixTrunc](#definitions/prefixTrunc)*.
   - <a id="properties/dockerregistry/properties/labels"></a>**`labels`**: Refer to *[#/definitions/labels](#definitions/labels)*.
   - <a id="properties/dockerregistry/properties/annotations"></a>**`annotations`**: Refer to *[#/definitions/annotations](#definitions/annotations)*.
-  - <a id="properties/dockerregistry/properties/enabled"></a>**`enabled`** *(boolean)*: Enable the Docker registry.
-  - <a id="properties/dockerregistry/properties/external"></a>**`external`** *(boolean)*: Use an external secret to the Docker registries username, password and email.
+  - <a id="properties/dockerregistry/properties/enabled"></a>**`enabled`** *(boolean)*: Enable the Docker registry. Default: `true`.
+  - <a id="properties/dockerregistry/properties/external"></a>**`external`** *(boolean)*: Use an external secret to the Docker registries username, password and email. Default: `false`.
   - <a id="properties/dockerregistry/properties/refreshInterval"></a>**`refreshInterval`** *(string)*: The refresh interval like 1h, 1m, 1s.
   - <a id="properties/dockerregistry/properties/secretStoreRef"></a>**`secretStoreRef`** *(object)*: defines which SecretStore to fetch the ExternalSecret data.
   - <a id="properties/dockerregistry/properties/content"></a>**`content`** *(object)*: Docker registries authentication. Cannot contain additional properties.
@@ -93,7 +93,7 @@
       - <a id="properties/dockerregistry/properties/content/patternProperties/%5E%5Ba-zA-Z0-9_%5D%2A%24/properties/externalPassword"></a>**`externalPassword`** *(string)*: Key of the external secret for the password.
       - <a id="properties/dockerregistry/properties/content/patternProperties/%5E%5Ba-zA-Z0-9_%5D%2A%24/properties/externalEmail"></a>**`externalEmail`** *(string)*: Key of the external secret for the email.
       - <a id="properties/dockerregistry/properties/content/patternProperties/%5E%5Ba-zA-Z0-9_%5D%2A%24/properties/externalUrl"></a>**`externalUrl`** *(string)*: Key of the external secret for the URL.
-- <a id="properties/secrets"></a>**`secrets`** *(object)*: Cannot contain additional properties.
+- <a id="properties/secrets"></a>**`secrets`** *(object)*: Cannot contain additional properties. Default: `{"enabled": false}`.
   - <a id="properties/secrets/properties/enabled"></a>**`enabled`** *(boolean)*: Enable the Secret. Default: `true`.
   - <a id="properties/secrets/properties/nameOverride"></a>**`nameOverride`**: Refer to *[#/definitions/nameOverride](#definitions/nameOverride)*.
   - <a id="properties/secrets/properties/fullnameOverride"></a>**`fullnameOverride`**: Refer to *[#/definitions/fullnameOverride](#definitions/fullnameOverride)*.
@@ -156,7 +156,7 @@
           - <a id="properties/configMaps/properties/content/additionalProperties/oneOf/2/properties/value"></a>**`value`** *(object)*: Value of the ConfigMap value as JSON.
 - <a id="properties/services"></a>**`services`** *(object)*: Can contain additional properties.
   - <a id="properties/services/additionalProperties"></a>**Additional properties** *(object)*: Cannot contain additional properties.
-    - <a id="properties/services/additionalProperties/properties/enabled"></a>**`enabled`** *(boolean)*: Enable this service.
+    - <a id="properties/services/additionalProperties/properties/enabled"></a>**`enabled`** *(boolean)*: Enable this service. Default: `true`.
     - <a id="properties/services/additionalProperties/properties/type"></a>**`type`** *(string)*: The type of the service. Must be one of: "Deployment", "StatefulSet", "Job", or "CronJob". Default: `"Deployment"`.
     - <a id="properties/services/additionalProperties/properties/name"></a>**`name`** *(string)*: The name of the service.
     - <a id="properties/services/additionalProperties/properties/nameOverride"></a>**`nameOverride`**: Refer to *[#/definitions/nameOverride](#definitions/nameOverride)*.
@@ -205,10 +205,10 @@
     - <a id="properties/services/additionalProperties/properties/pdb"></a>**`pdb`** *(object)*: The Pod disruption budget configuration. Cannot contain additional properties. Default: `{"enabled": true, "maxUnavailable": 1}`.
       - <a id="properties/services/additionalProperties/properties/pdb/properties/enabled"></a>**`enabled`** *(boolean)*: Enable the Pod disruption budget. Default: `true`.
       - <a id="properties/services/additionalProperties/properties/pdb/properties/minAvailable"></a>**`minAvailable`** *(integer)*: The minimum number of Pods available.
-      - <a id="properties/services/additionalProperties/properties/pdb/properties/maxUnavailable"></a>**`maxUnavailable`** *(integer)*: The maximum number of Pods unavailable.
+      - <a id="properties/services/additionalProperties/properties/pdb/properties/maxUnavailable"></a>**`maxUnavailable`** *(integer)*: The maximum number of Pods unavailable. Default: `1`.
     - <a id="properties/services/additionalProperties/properties/initContainers"></a>**`initContainers`** *(object)*: The initialization containers configuration. Can contain additional properties.
       - <a id="properties/services/additionalProperties/properties/initContainers/additionalProperties"></a>**Additional properties** *(object)*: Cannot contain additional properties.
-        - <a id="properties/services/additionalProperties/properties/initContainers/additionalProperties/properties/enabled"></a>**`enabled`** *(boolean)*: Enable the initialization container.
+        - <a id="properties/services/additionalProperties/properties/initContainers/additionalProperties/properties/enabled"></a>**`enabled`** *(boolean)*: Enable the initialization container. Default: `true`.
         - <a id="properties/services/additionalProperties/properties/initContainers/additionalProperties/properties/image"></a>**`image`** *(required)*: Refer to *[#/definitions/image](#definitions/image)*.
         - <a id="properties/services/additionalProperties/properties/initContainers/additionalProperties/properties/env"></a>**`env`**: Refer to *[#/definitions/env](#definitions/env)*.
         - <a id="properties/services/additionalProperties/properties/initContainers/additionalProperties/properties/resources"></a>**`resources`**: Refer to *[#/definitions/resources](#definitions/resources)*.
@@ -219,7 +219,7 @@
         - <a id="properties/services/additionalProperties/properties/initContainers/additionalProperties/properties/volumeDevices"></a>**`volumeDevices`**: Refer to *[#/definitions/volumeDevices](#definitions/volumeDevices)*.
     - <a id="properties/services/additionalProperties/properties/containers"></a>**`containers`** *(object)*: The containers configuration. Can contain additional properties.
       - <a id="properties/services/additionalProperties/properties/containers/additionalProperties"></a>**Additional properties** *(object)*: Cannot contain additional properties.
-        - <a id="properties/services/additionalProperties/properties/containers/additionalProperties/properties/enabled"></a>**`enabled`** *(boolean)*: Enable the container.
+        - <a id="properties/services/additionalProperties/properties/containers/additionalProperties/properties/enabled"></a>**`enabled`** *(boolean)*: Enable the container. Default: `true`.
         - <a id="properties/services/additionalProperties/properties/containers/additionalProperties/properties/image"></a>**`image`** *(required)*: Refer to *[#/definitions/image](#definitions/image)*.
         - <a id="properties/services/additionalProperties/properties/containers/additionalProperties/properties/env"></a>**`env`**: Refer to *[#/definitions/env](#definitions/env)*.
         - <a id="properties/services/additionalProperties/properties/containers/additionalProperties/properties/resources"></a>**`resources`**: Refer to *[#/definitions/resources](#definitions/resources)*.
@@ -233,8 +233,8 @@
         - <a id="properties/services/additionalProperties/properties/containers/additionalProperties/properties/readinessProbe"></a>**`readinessProbe`** *(object)*
         - <a id="properties/services/additionalProperties/properties/containers/additionalProperties/properties/startupProbe"></a>**`startupProbe`** *(object)*
         - <a id="properties/services/additionalProperties/properties/containers/additionalProperties/properties/lifecycle"></a>**`lifecycle`** *(object)*: Lifecycle Events configuration - https://kubernetes.io/docs/tasks/configure-pod-container/attach-handler-lifecycle-event/.
-    - <a id="properties/services/additionalProperties/properties/ingress"></a>**`ingress`** *(object)*: Cannot contain additional properties.
-      - <a id="properties/services/additionalProperties/properties/ingress/properties/enabled"></a>**`enabled`** *(boolean)*: Enable the ingress for this service.
+    - <a id="properties/services/additionalProperties/properties/ingress"></a>**`ingress`** *(object)*: Cannot contain additional properties. Default: `{"enabled": false}`.
+      - <a id="properties/services/additionalProperties/properties/ingress/properties/enabled"></a>**`enabled`** *(boolean)*: Enable the ingress for this service. Default: `true`.
       - <a id="properties/services/additionalProperties/properties/ingress/properties/nameOverride"></a>**`nameOverride`**: Refer to *[#/definitions/nameOverride](#definitions/nameOverride)*.
       - <a id="properties/services/additionalProperties/properties/ingress/properties/fullnameOverride"></a>**`fullnameOverride`**: Refer to *[#/definitions/fullnameOverride](#definitions/fullnameOverride)*.
       - <a id="properties/services/additionalProperties/properties/ingress/properties/releaseNameOverride"></a>**`releaseNameOverride`**: Refer to *[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)*.
@@ -274,8 +274,8 @@
             - <a id="properties/services/additionalProperties/properties/hpa/properties/metrics/items/properties/resource/properties/target"></a>**`target`** *(object, required)*
               - <a id="properties/services/additionalProperties/properties/hpa/properties/metrics/items/properties/resource/properties/target/properties/type"></a>**`type`** *(string, required)*: Metric target. Must be one of: "Utilization", "Value", or "AverageValue".
               - <a id="properties/services/additionalProperties/properties/hpa/properties/metrics/items/properties/resource/properties/target/properties/averageUtilization"></a>**`averageUtilization`** *(integer)*: % average use.
-    - <a id="properties/services/additionalProperties/properties/podMonitor"></a>**`podMonitor`** *(object)*: The Prometheus Pod monitor configuration. Cannot contain additional properties.
-      - <a id="properties/services/additionalProperties/properties/podMonitor/properties/enabled"></a>**`enabled`** *(boolean)*: Enable the Pod monitor for this service (Pod).
+    - <a id="properties/services/additionalProperties/properties/podMonitor"></a>**`podMonitor`** *(object)*: The Prometheus Pod monitor configuration. Cannot contain additional properties. Default: `{"enabled": false}`.
+      - <a id="properties/services/additionalProperties/properties/podMonitor/properties/enabled"></a>**`enabled`** *(boolean)*: Enable the Pod monitor for this service (Pod). Default: `true`.
       - <a id="properties/services/additionalProperties/properties/podMonitor/properties/name"></a>**`name`** *(string)*: The name of the Pod monitor.
       - <a id="properties/services/additionalProperties/properties/podMonitor/properties/labels"></a>**`labels`**: Refer to *[#/definitions/labels](#definitions/labels)*.
       - <a id="properties/services/additionalProperties/properties/podMonitor/properties/annotations"></a>**`annotations`**: Refer to *[#/definitions/annotations](#definitions/annotations)*.

@@ -1,7 +1,7 @@
 {{- range $serviceName, $serviceDefinition := $.Values.services }}
 {{- if or ( not ( hasKey $serviceDefinition "enabled" ) ) $serviceDefinition.enabled }}
 {{- if and ( not ( eq ( default "Deployment" $serviceDefinition.type ) "Job" ) ) ( not ( eq ( default "Deployment" $serviceDefinition.type ) "CronJob" ) ) }}
-{{- if or ( not ( hasKey $serviceDefinition "pdb" ) )  ( not ( hasKey $serviceDefinition.pdb "enabled" ) ) ( eq $serviceDefinition.pdb.enabled true ) }}
+{{- if ( or ( not ( hasKey $serviceDefinition "pdb" ) ) ( not ( hasKey $serviceDefinition.pdb "enabled" ) ) ( eq $serviceDefinition.pdb.enabled true ) ) }}
 ---
 {{- if semverCompare ">=1.21.0-0" ( trimPrefix "v" $.Capabilities.KubeVersion.Version ) }}
 apiVersion: policy/v1
