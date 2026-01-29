@@ -151,7 +151,6 @@ services:
     pdb:
       enabled: false
     ingress:
-      enabled: true
       path: /one
     podMonitor:
       enabled: true
@@ -374,7 +373,6 @@ services:
         topologyKey: kubernetes.io/hostname
 
     ingress:
-      enabled: true
       path: /two
     enabled: true
     replicaCount: 2
@@ -423,7 +421,6 @@ services:
 
   example3:
     ingress:
-      enabled: true
       path: /three
     enabled: true
     replicaCount: 2
