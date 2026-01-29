@@ -86,7 +86,6 @@ secrets:
 
 externalSecrets:
   app:
-    enabled: true
     fullnameOverride: example-app-ext-secrets
     refreshInterval: 1h
     secretStoreRef:
@@ -97,7 +96,6 @@ externalSecrets:
         remoteRef:
           key: hostname
   global:
-    enabled: true
     fullnameOverride: example-app-global-ext-secrets
     refreshInterval: 1h
     secretStoreRef:
