@@ -3,7 +3,6 @@ global:
     test-override: test-overridden
 
 metadata:
-  enabled: true
   fullnameOverride: example-app-metadata
 
 securityContext:
@@ -153,7 +152,6 @@ tolerations:
 
 services:
   example1:
-    enabled: true
     fullnameOverride: example-app-example1
     pdb:
       enabled: false
