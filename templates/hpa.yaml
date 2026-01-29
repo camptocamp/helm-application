@@ -1,16 +1,16 @@
 {{- range $serviceName, $serviceDefinition := .Values.services }}
-{{- if and ( eq ( default true $serviceDefinition.enabled ) true ) ( hasKey $serviceDefinition "hpa" ) ( eq $serviceDefinition.hpa.enabled true ) }}
+{{- if and ( or ( not ( hasKey $serviceDefinition "enabled" ) ) $serviceDefinition.enabled ) ( hasKey $serviceDefinition "hpa" ) ( eq $serviceDefinition.hpa.enabled true ) }}
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "common.fullname" (dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) }}
+  name: {{ include "common.fullname" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) }}
   {{- include "common.metadata" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) | nindent 2 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ include "common.fullname" (dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) }}
+    name: {{ include "common.fullname" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) }}
   minReplicas: {{ $serviceDefinition.hpa.minReplicas | default 1 }}
   maxReplicas: {{ $serviceDefinition.hpa.maxReplicas | default 10 }}
   metrics:

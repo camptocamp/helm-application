@@ -1,5 +1,5 @@
 {{- range $serviceName, $serviceDefinition := .Values.services }}
-{{- if eq ( default true $serviceDefinition.enabled ) true }}
+{{- if or ( not ( hasKey $serviceDefinition "enabled" ) ) $serviceDefinition.enabled }}
 {{- if eq ( default "Deployment" $serviceDefinition.type ) "CronJob" }}
 ---
 {{- if semverCompare ">=1.21.0" ( trimPrefix "v" $.Capabilities.KubeVersion.Version ) }}

@@ -10,7 +10,6 @@ securityContext:
   runAsUser: 33 # www-data
 
 ingress:
-  enabled: true
   fullnameOverride: example-app-ingress
   annotations:
     example-annotation: 'coucou'

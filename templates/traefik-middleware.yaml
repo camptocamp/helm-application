@@ -1,4 +1,4 @@
-{{- if eq $.Values.ingress.enabled true }}
+{{- if and ( hasKey $.Values "ingress" ) ( or ( not ( hasKey $.Values.ingress "enabled" ) ) $.Values.ingress.enabled ) }}
 {{- $fullName := include "common.fullname" ( dict "root" $ "service" $.Values ) }}
 {{- if ( default ( dict ) $.Values.ingress.traefikMiddleware ) }}
 {{- if or ( not ( hasKey $.Values.ingress.traefikMiddleware "enabled" ) ) $.Values.ingress.traefikMiddleware.enabled }}
