@@ -1,6 +1,6 @@
 {{- range $serviceName, $serviceDefinition := .Values.services }}
 {{- if hasKey $serviceDefinition "podMonitor" }}
-{{- if eq $serviceDefinition.podMonitor.enabled true }}
+{{- if or ( not ( hasKey $serviceDefinition.podMonitor "enabled" ) ) $serviceDefinition.podMonitor.enabled }}
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor

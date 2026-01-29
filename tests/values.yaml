@@ -153,7 +153,6 @@ services:
     ingress:
       path: /one
     podMonitor:
-      enabled: true
       podMetricsEndpoints:
         prometheus:
           interval: 10s
@@ -377,6 +376,9 @@ services:
     enabled: true
     replicaCount: 2
 
+    podMonitor:
+      enabled: false
+
     pdb:
       minAvailable: 2
 
@@ -494,7 +496,6 @@ services:
           pullPolicy: Always
 
     podMonitor:
-      enabled: true
       podMetricsEndpoints:
         prometheus:
           interval: 10s
@@ -515,7 +516,6 @@ services:
           repository: camptocamp/image
           tag: latest@sha256:80692750f8049ff14a8b61e77a758edd5d1f33a82b6792eac1f3d4b0d5ec351d
     podMonitor:
-      enabled: true
       podMetricsEndpoints:
         prometheus:
           interval: 10s
