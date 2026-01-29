@@ -71,7 +71,6 @@ dockerregistry:
       url: ghcr.io
 
 secrets:
-  enabled: true
   fullnameOverride: example-app-secrets
   annotations:
     testAnnotation: annotation value for secrets
