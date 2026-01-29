@@ -527,7 +527,6 @@ services:
         - port: 80
           targetPort: 80
     hpa:
-      enabled: true
       minReplicas: 2
       maxReplicas: 5
       metrics:

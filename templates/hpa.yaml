@@ -1,5 +1,5 @@
 {{- range $serviceName, $serviceDefinition := .Values.services }}
-{{- if and ( or ( not ( hasKey $serviceDefinition "enabled" ) ) $serviceDefinition.enabled ) ( hasKey $serviceDefinition "hpa" ) ( eq $serviceDefinition.hpa.enabled true ) }}
+{{- if and ( or ( not ( hasKey $serviceDefinition "enabled" ) ) $serviceDefinition.enabled ) ( hasKey $serviceDefinition "hpa" ) ( or ( not ( hasKey $serviceDefinition.hpa "enabled" ) ) $serviceDefinition.hpa.enabled ) }}
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler

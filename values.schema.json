@@ -1324,10 +1324,14 @@
           },
           "hpa": {
             "type": "object",
+            "default": {
+              "enabled": false
+            },
             "properties": {
               "enabled": {
                 "type": "boolean",
-                "description": "Enable or disable HPA for the service."
+                "description": "Enable or disable HPA for the service.",
+                "default": true
               },
               "minReplicas": {
                 "type": "integer",
@@ -1383,7 +1387,7 @@
                 }
               }
             },
-            "required": ["enabled", "minReplicas", "maxReplicas"]
+            "required": ["minReplicas", "maxReplicas"]
           },
           "podMonitor": {
             "type": "object",
