@@ -1,3 +1,4 @@
+{{- if and ( hasKey $.Values "ingress" ) ( or ( not ( hasKey $.Values.ingress "enabled" ) ) $.Values.ingress.enabled ) }}
 {{- $fullName := include "common.fullname" ( dict "root" . "service" .Values ) -}}
 {{- range $hostGroupName, $hostGroupDefinition := $.Values.ingress.hostGroups }}
 {{- if or ( not ( hasKey $hostGroupDefinition "enabled" ) ) $hostGroupDefinition.enabled }}
@@ -17,7 +18,7 @@ spec:
   {{- end }}
   routes:
     {{- range $serviceName, $serviceDefinition := $.Values.services }}
-    {{- if and ( eq ( default true $serviceDefinition.enabled ) true ) ( eq ( default false ( default ( dict ) $serviceDefinition.ingress ).enabled ) true ) }}
+    {{- if and ( or ( not ( hasKey $serviceDefinition "enabled" ) ) $serviceDefinition.enabled ) ( hasKey $serviceDefinition "ingress") ( or ( not ( hasKey $serviceDefinition.ingress "enabled" ) ) $serviceDefinition.ingress.enabled ) }}
     {{- range $hostGroupDefinition.traefikHosts }}
     - {{- with .kind }}
       kind: {{ . }}
@@ -90,3 +91,4 @@ spec:
 {{- end }}  {{- /* end of type */ -}}
 {{- end }}  {{- /* end of enabled */ -}}
 {{- end }}  {{- /* end of hostsGroups */ -}}
+{{- end }}  {{- /* end of ingress enabled */ -}}

@@ -1,4 +1,4 @@
-{{- if eq $.Values.ingress.enabled true }}
+{{- if and ( hasKey $.Values "ingress" ) ( or ( not ( hasKey $.Values.ingress "enabled" ) ) $.Values.ingress.enabled ) }}
 {{- $fullName := include "common.fullname" ( dict "root" $ "service" $.Values ) }}
 {{- range $hostGroupName, $hostGroupDefinition := $.Values.ingress.hostGroups }}
 {{- if or ( not ( hasKey $hostGroupDefinition "enabled" ) ) $hostGroupDefinition.enabled }}
@@ -19,7 +19,7 @@ spec:
   ingressClassName: {{ . }}
 {{- end }}
 # Add tls only if ingress.tls.enabled is set to true and the other fields are complete.
-{{- if and ( hasKey $hostGroupDefinition "tls" ) ( eq $hostGroupDefinition.tls.enabled true ) }}
+{{- if and ( hasKey $hostGroupDefinition "tls" ) ( or ( not ( hasKey $hostGroupDefinition.tls "enabled" ) ) $hostGroupDefinition.tls.enabled ) }}
   tls:
     - hosts:
         {{- range $hostGroupDefinition.hosts }}
@@ -40,7 +40,7 @@ spec:
       http:
         paths:
         {{- range $serviceName, $serviceDefinition := $.Values.services }}
-        {{- if and ( eq ( default true $serviceDefinition.enabled ) true ) ( eq ( default false ( default ( dict ) $serviceDefinition.ingress ).enabled ) true ) }}
+        {{- if and ( or ( not ( hasKey $serviceDefinition "enabled" ) ) $serviceDefinition.enabled ) ( hasKey $serviceDefinition "ingress") ( or ( not ( hasKey $serviceDefinition.ingress "enabled" ) ) $serviceDefinition.ingress.enabled ) }}
           - path: "{{ $serviceDefinition.ingress.path }}"
             pathType: Prefix
             backend:

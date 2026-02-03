@@ -8,13 +8,13 @@ data:
   CHART_NAME: {{ .Chart.Name }}
   RELEASE_NAME: {{ .Release.Name }}
   RELEASE_NAMESPACE: {{ .Release.Namespace }}
-{{- if .Values.ingress.enabled }}
+{{- if and ( hasKey $.Values "ingress" ) ( or ( not ( hasKey $.Values.ingress "enabled" ) ) $.Values.ingress.enabled ) }}
 {{- if .Values.ingress.hostsGroups }}
   WEB_HOST: {{ ( index ( index .Values.ingress.hostsGroups 0 ).hosts 0 ) }}
 {{- end }}
 {{- end }}
 {{- range $serviceName, $serviceDefinition := .Values.services }}
-{{- if or (eq ( default true $serviceDefinition.enabled ) true) ( and (hasKey $serviceDefinition "template") $serviceDefinition.template) }}
+{{- if or ( or ( not ( hasKey $serviceDefinition "enabled" ) ) $serviceDefinition.enabled ) ( and ( hasKey $serviceDefinition "template" ) $serviceDefinition.template ) }}
 {{- if ( default ( dict ) $serviceDefinition.service ).name }}
   SERVICE_{{ $serviceName | upper }}_NAME: {{ $serviceDefinition.service.name }}
 {{- else }}

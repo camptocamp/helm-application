@@ -1,6 +1,6 @@
 {{- range $serviceName, $serviceDefinition := .Values.services }}
 {{- if hasKey $serviceDefinition "podMonitor" }}
-{{- if eq $serviceDefinition.podMonitor.enabled true }}
+{{- if or ( not ( hasKey $serviceDefinition.podMonitor "enabled" ) ) $serviceDefinition.podMonitor.enabled }}
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
@@ -11,7 +11,7 @@ metadata:
   name: {{ include "common.fullname" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) }}
 {{- end }}
 {{- $svcDict := deepCopy $serviceDefinition }}
-{{- $svcDict := merge $svcDict (dict "annotations" $serviceDefinition.podMonitor.annotations "labels" $serviceDefinition.podMonitor.labels) }}
+{{- $svcDict := merge $svcDict ( dict "annotations" $serviceDefinition.podMonitor.annotations "labels" $serviceDefinition.podMonitor.labels ) }}
 {{- include "common.metadata" ( dict "root" $ "service" $svcDict "serviceName" $serviceName ) | nindent 2 }}
 spec:
   selector:

@@ -398,10 +398,14 @@
     "ingress": {
       "type": "object",
       "additionalProperties": false,
+      "default": {
+        "enabled": false
+      },
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "Enable the Ingress"
+          "description": "Enable the Ingress",
+          "default": true
         },
         "nameOverride": {
           "$ref": "#/definitions/nameOverride"
@@ -437,6 +441,9 @@
         "traefikMiddleware": {
           "type": "object",
           "additionalProperties": false,
+          "default": {
+            "enabled": false
+          },
           "properties": {
             "enabled": {
               "type": "boolean",
@@ -477,10 +484,14 @@
               "tls": {
                 "type": "object",
                 "additionalProperties": false,
+                "default": {
+                  "enabled": false
+                },
                 "properties": {
                   "enabled": {
                     "type": "boolean",
-                    "description": "Enable TLS"
+                    "description": "Enable TLS",
+                    "default": true
                   },
                   "secretName": {
                     "type": "string",
@@ -595,11 +606,13 @@
         },
         "enabled": {
           "type": "boolean",
-          "description": "Enable the Docker registry"
+          "description": "Enable the Docker registry",
+          "default": true
         },
         "external": {
           "type": "boolean",
-          "description": "Use an external secret to the Docker registries username, password and email"
+          "description": "Use an external secret to the Docker registries username, password and email",
+          "default": false
         },
         "refreshInterval": {
           "type": "string",
@@ -659,6 +672,9 @@
     "secrets": {
       "type": "object",
       "additionalProperties": false,
+      "default": {
+        "enabled": false
+      },
       "properties": {
         "enabled": {
           "type": "boolean",
@@ -903,7 +919,8 @@
         "properties": {
           "enabled": {
             "type": "boolean",
-            "description": "Enable this service"
+            "description": "Enable this service",
+            "default": true
           },
           "type": {
             "type": "string",
@@ -1101,7 +1118,8 @@
               },
               "maxUnavailable": {
                 "type": "integer",
-                "description": "The maximum number of Pods unavailable"
+                "description": "The maximum number of Pods unavailable",
+                "default": 1
               }
             }
           },
@@ -1114,7 +1132,8 @@
               "properties": {
                 "enabled": {
                   "type": "boolean",
-                  "description": "Enable the initialization container"
+                  "description": "Enable the initialization container",
+                  "default": true
                 },
                 "image": {
                   "$ref": "#/definitions/image"
@@ -1153,7 +1172,8 @@
               "properties": {
                 "enabled": {
                   "type": "boolean",
-                  "description": "Enable the container"
+                  "description": "Enable the container",
+                  "default": true
                 },
                 "image": {
                   "$ref": "#/definitions/image"
@@ -1203,10 +1223,14 @@
           "ingress": {
             "type": "object",
             "additionalProperties": false,
+            "default": {
+              "enabled": false
+            },
             "properties": {
               "enabled": {
                 "type": "boolean",
-                "description": "Enable the ingress for this service"
+                "description": "Enable the ingress for this service",
+                "default": true
               },
               "nameOverride": {
                 "$ref": "#/definitions/nameOverride"
@@ -1324,10 +1348,14 @@
           },
           "hpa": {
             "type": "object",
+            "default": {
+              "enabled": false
+            },
             "properties": {
               "enabled": {
                 "type": "boolean",
-                "description": "Enable or disable HPA for the service."
+                "description": "Enable or disable HPA for the service.",
+                "default": true
               },
               "minReplicas": {
                 "type": "integer",
@@ -1383,16 +1411,20 @@
                 }
               }
             },
-            "required": ["enabled", "minReplicas", "maxReplicas"]
+            "required": ["minReplicas", "maxReplicas"]
           },
           "podMonitor": {
             "type": "object",
             "description": "The Prometheus Pod monitor configuration",
             "additionalProperties": false,
+            "default": {
+              "enabled": false
+            },
             "properties": {
               "enabled": {
                 "type": "boolean",
-                "description": "Enable the Pod monitor for this service (Pod)"
+                "description": "Enable the Pod monitor for this service (Pod)",
+                "default": true
               },
               "name": {
                 "type": "string",
