@@ -30,3 +30,6 @@ Traefik
 traefik-ingress-route
 IngressRoute
 10
+ClusterRole
+PolicyRule
+ClusterRoleBinding

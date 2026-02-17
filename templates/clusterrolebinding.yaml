@@ -1,0 +1,17 @@
+{{- with .Values.clusterRoleBinding }}
+{{- if .create }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ .name | default (printf "%s-binding" (include "common.fullname" ( dict "root" $ "service" . ) )) }}
+  {{- include "common.metadata" ( dict "root" $ "service" . ) | nindent 2 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ .clusterRoleName | default (include "common.fullname" ( dict "root" $ "service" . ) ) }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ .serviceAccountName | default (include "application.serviceAccountName" $ ) }}
+    namespace: {{ .namespace | default $.Release.Namespace }}
+{{- end }}
+{{- end }}
