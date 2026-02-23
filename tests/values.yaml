@@ -10,7 +10,7 @@ securityContext:
   runAsUser: 33 # www-data
 
 clusterRole:
-  create: true
+  enabled: true
   name: k8s-executor
   rules:
     - apiGroups: ['']
@@ -27,7 +27,7 @@ clusterRole:
       verbs: ['get']
 
 clusterRoleBinding:
-  create: true
+  enabled: true
   name: k8s-executor-binding
   clusterRoleName: k8s-executor
   serviceAccountName: job-runner

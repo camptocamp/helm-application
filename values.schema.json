@@ -1456,7 +1456,7 @@
         "name": {
           "type": "string"
         },
-        "create": {
+        "enabled": {
           "type": "boolean",
           "default": false
         },
@@ -1482,7 +1482,7 @@
         "name": {
           "type": "string"
         },
-        "create": {
+        "enabled": {
           "type": "boolean",
           "default": false
         },

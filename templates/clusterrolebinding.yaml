@@ -1,5 +1,6 @@
+{{- if hasKey .Values "clusterRoleBinding" }}
 {{- with .Values.clusterRoleBinding }}
-{{- if .create }}
+{{- if or ( not ( hasKey . "enabled" ) ) .enabled }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
@@ -13,5 +14,6 @@ subjects:
   - kind: ServiceAccount
     name: {{ .serviceAccountName | default (include "application.serviceAccountName" $ ) }}
     namespace: {{ .namespace | default $.Release.Namespace }}
+{{- end }}
 {{- end }}
 {{- end }}
