@@ -281,6 +281,22 @@
       - <a id="properties/services/additionalProperties/properties/podMonitor/properties/annotations"></a>**`annotations`**: Refer to *[#/definitions/annotations](#definitions/annotations)*.
       - <a id="properties/services/additionalProperties/properties/podMonitor/properties/podMetricsEndpoints"></a>**`podMetricsEndpoints`** *(object)*: The endpoints of the Pod monitor by port. Can contain additional properties.
         - <a id="properties/services/additionalProperties/properties/podMonitor/properties/podMetricsEndpoints/additionalProperties"></a>**Additional properties** *(object)*: The endpoint of the Pod monitor.
+- <a id="properties/clusterRole"></a>**`clusterRole`** *(object)*: Cannot contain additional properties.
+  - <a id="properties/clusterRole/properties/name"></a>**`name`** *(string)*
+  - <a id="properties/clusterRole/properties/enabled"></a>**`enabled`** *(boolean)*: Default: `false`.
+  - <a id="properties/clusterRole/properties/rules"></a>**`rules`** *(array)*: Kubernetes ClusterRole rules (PolicyRule objects).
+    - <a id="properties/clusterRole/properties/rules/items"></a>**Items** *(object)*
+  - <a id="properties/clusterRole/properties/labels"></a>**`labels`**: Refer to *[#/definitions/labels](#definitions/labels)*.
+  - <a id="properties/clusterRole/properties/annotations"></a>**`annotations`**: Refer to *[#/definitions/annotations](#definitions/annotations)*.
+- <a id="properties/clusterRoleBinding"></a>**`clusterRoleBinding`** *(object)*: Cannot contain additional properties.
+  - <a id="properties/clusterRoleBinding/properties/name"></a>**`name`** *(string)*
+  - <a id="properties/clusterRoleBinding/properties/enabled"></a>**`enabled`** *(boolean)*: Default: `false`.
+  - <a id="properties/clusterRoleBinding/properties/subjects"></a>**`subjects`** *(array)*: Kubernetes subjects for the ClusterRoleBinding.
+    - <a id="properties/clusterRoleBinding/properties/subjects/items"></a>**Items** *(object)*
+  - <a id="properties/clusterRoleBinding/properties/labels"></a>**`labels`**: Refer to *[#/definitions/labels](#definitions/labels)*.
+  - <a id="properties/clusterRoleBinding/properties/annotations"></a>**`annotations`**: Refer to *[#/definitions/annotations](#definitions/annotations)*.
+  - <a id="properties/clusterRoleBinding/properties/clusterRoleName"></a>**`clusterRoleName`** *(string)*
+  - <a id="properties/clusterRoleBinding/properties/serviceAccountName"></a>**`serviceAccountName`** *(string)*
 ## Definitions
 
 - <a id="definitions/nameOverride"></a>**`nameOverride`** *(string)*: [helm-common] Override the name (can be in the service or values).

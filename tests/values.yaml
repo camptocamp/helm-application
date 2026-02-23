@@ -9,6 +9,29 @@ securityContext:
   runAsNonRoot: true
   runAsUser: 33 # www-data
 
+clusterRole:
+  enabled: true
+  name: k8s-executor
+  rules:
+    - apiGroups: ['']
+      resources: ['pods']
+      verbs: ['create', 'get', 'list', 'watch', 'delete']
+    - apiGroups: ['']
+      resources: ['pods/log']
+      verbs: ['get', 'list']
+    - apiGroups: ['']
+      resources: ['configmaps']
+      verbs: ['create', 'get', 'delete']
+    - apiGroups: ['']
+      resources: ['secrets']
+      verbs: ['get']
+
+clusterRoleBinding:
+  enabled: true
+  name: k8s-executor-binding
+  clusterRoleName: k8s-executor
+  serviceAccountName: job-runner
+
 ingress:
   fullnameOverride: example-app-ingress
   annotations:

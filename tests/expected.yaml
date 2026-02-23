@@ -290,6 +290,72 @@ data:
     toto: toto
     tutu: tutu
 ---
+# Source: application/templates/clusterrole.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: k8s-executor
+  labels:
+    helm.sh/chart: application
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
+    app.kubernetes.io/component: main
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - "pods"
+    verbs:
+      - "create"
+      - "get"
+      - "list"
+      - "watch"
+      - "delete"
+  - apiGroups:
+      - ""
+    resources:
+      - "pods/log"
+    verbs:
+      - "get"
+      - "list"
+  - apiGroups:
+      - ""
+    resources:
+      - "configmaps"
+    verbs:
+      - "create"
+      - "get"
+      - "delete"
+  - apiGroups:
+      - ""
+    resources:
+      - "secrets"
+    verbs:
+      - "get"
+---
+# Source: application/templates/clusterrolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: k8s-executor-binding
+  labels:
+    helm.sh/chart: application
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
+    app.kubernetes.io/component: main
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: k8s-executor
+subjects:
+  - kind: ServiceAccount
+    name: job-runner
+    namespace: default
+---
 # Source: application/templates/service.yaml
 apiVersion: v1
 kind: Service

@@ -1448,6 +1448,64 @@
           }
         }
       }
+    },
+    "clusterRole": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean",
+          "default": false
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "description": "Kubernetes ClusterRole rules (PolicyRule objects)."
+        },
+        "labels": {
+          "$ref": "#/definitions/labels"
+        },
+        "annotations": {
+          "$ref": "#/definitions/annotations"
+        }
+      }
+    },
+    "clusterRoleBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean",
+          "default": false
+        },
+        "subjects": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "description": "Kubernetes subjects for the ClusterRoleBinding."
+        },
+        "labels": {
+          "$ref": "#/definitions/labels"
+        },
+        "annotations": {
+          "$ref": "#/definitions/annotations"
+        },
+        "clusterRoleName": {
+          "type": "string"
+        },
+        "serviceAccountName": {
+          "type": "string"
+        }
+      }
     }
   }
 }

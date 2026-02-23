@@ -51,3 +51,7 @@ services: {}
 #     affinity: {}
 #
 #     tolerations: []
+
+clusterRole: {}
+
+clusterRoleBinding: {}
