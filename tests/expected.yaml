@@ -1560,7 +1560,7 @@ spec:
   successfulJobsHistoryLimit: 2
   failedJobsHistoryLimit: 2
   concurrencyPolicy: Forbid
-  suspend: true
+  suspend: false
   jobTemplate:
     spec:
       backoffLimit: 5

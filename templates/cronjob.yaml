@@ -16,7 +16,7 @@ spec:
   successfulJobsHistoryLimit: {{ default 1 $serviceDefinition.successfulJobsHistoryLimit }}
   failedJobsHistoryLimit: {{ default 3 $serviceDefinition.failedJobsHistoryLimit }}
   concurrencyPolicy: {{ $serviceDefinition.concurrencyPolicy }}
-  {{- if $serviceDefinition.suspend }}
+  {{- if hasKey $serviceDefinition "suspend" }}
   suspend: {{ $serviceDefinition.suspend }}
   {{- end }}
   jobTemplate:

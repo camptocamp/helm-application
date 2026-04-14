@@ -670,7 +670,7 @@ services:
         - action: Ignore # one of: Ignore, FailJob, Count
           onPodConditions:
             - type: DisruptionTarget # indicates Pod disruption
-    suspend: true
+    suspend: false
     containers:
       main:
         image:
