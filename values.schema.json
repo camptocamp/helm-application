@@ -1030,7 +1030,7 @@
           },
           "suspend": {
             "type": "boolean",
-            "description": "Suspend the job or CronJob"
+            "description": "Suspend the job"
           },
           "template": {
             "type": "boolean",

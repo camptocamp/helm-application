@@ -185,7 +185,7 @@
     - <a id="properties/services/additionalProperties/properties/strategy"></a>**`strategy`** *(object)*: The deployment strategy. Cannot contain additional properties.
       - <a id="properties/services/additionalProperties/properties/strategy/properties/type"></a>**`type`** *(string)*: The type of the strategy.
       - <a id="properties/services/additionalProperties/properties/strategy/properties/rollingUpdate"></a>**`rollingUpdate`** *(object)*: The rolling update strategy.
-    - <a id="properties/services/additionalProperties/properties/suspend"></a>**`suspend`** *(boolean)*: Suspend the job or CronJob.
+    - <a id="properties/services/additionalProperties/properties/suspend"></a>**`suspend`** *(boolean)*: Suspend the job.
     - <a id="properties/services/additionalProperties/properties/template"></a>**`template`** *(boolean)*: Create the service keys in the self ConfigMap even if the service is disabled.
     - <a id="properties/services/additionalProperties/properties/ttlSecondsAfterFinished"></a>**`ttlSecondsAfterFinished`** *(integer)*: The number of seconds before the job is deleted.
     - <a id="properties/services/additionalProperties/properties/backoffLimit"></a>**`backoffLimit`** *(integer)*: The number of backoff limit.
