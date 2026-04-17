@@ -707,7 +707,7 @@ services:
           onPodConditions:
             - type: DisruptionTarget # indicates Pod disruption
               status: 'True'
-    suspend: false
+    suspend: true
     containers:
       main:
         image:

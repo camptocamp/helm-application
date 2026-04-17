@@ -16,6 +16,9 @@ spec:
   successfulJobsHistoryLimit: {{ default 1 $serviceDefinition.successfulJobsHistoryLimit }}
   failedJobsHistoryLimit: {{ default 3 $serviceDefinition.failedJobsHistoryLimit }}
   concurrencyPolicy: {{ $serviceDefinition.concurrencyPolicy }}
+  {{- if $serviceDefinition.suspend }}
+  suspend: {{ $serviceDefinition.suspend }}
+  {{- end }}
   jobTemplate:
     spec:
       {{- if $serviceDefinition.backoffLimit }}
@@ -41,9 +44,6 @@ spec:
       {{- end }}
       {{- if $serviceDefinition.ttlSecondsAfterFinished }}
       ttlSecondsAfterFinished: {{ $serviceDefinition.ttlSecondsAfterFinished }}
-      {{- end }}
-      {{- if $serviceDefinition.suspend }}
-      suspend: {{ $serviceDefinition.suspend }}
       {{- end }}
       {{- if $serviceDefinition.podReplacementPolicy }}
       podReplacementPolicy: {{ $serviceDefinition.podReplacementPolicy }}
