@@ -13,6 +13,9 @@ spec:
     name: {{ include "common.fullname" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) }}
   minReplicas: {{ $serviceDefinition.hpa.minReplicas | default 1 }}
   maxReplicas: {{ $serviceDefinition.hpa.maxReplicas | default 10 }}
+  {{- with $serviceDefinition.hpa.behavior }}
+  behavior: {{- toYaml . | nindent 4 }}
+  {{- end }}
   metrics:
   {{- with $serviceDefinition.hpa.metrics }}
   {{- . | toYaml | nindent 4 }}

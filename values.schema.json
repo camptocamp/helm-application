@@ -1369,9 +1369,20 @@
                 "description": "Max number of replicas.",
                 "default": 10
               },
+              "behavior": {
+                "type": "object",
+                "properties": {
+                  "scaleUp": {
+                    "type": "object"
+                  },
+                  "scaleDown": {
+                    "type": "object"
+                  }
+                }
+              },
               "metrics": {
                 "type": "array",
-                "description": "Metrics definition.",
+                "description": "Metric definitions.",
                 "items": {
                   "type": "object",
                   "properties": {

@@ -266,7 +266,10 @@
       - <a id="properties/services/additionalProperties/properties/hpa/properties/enabled"></a>**`enabled`** *(boolean)*: Enable or disable HPA for the service. Default: `true`.
       - <a id="properties/services/additionalProperties/properties/hpa/properties/minReplicas"></a>**`minReplicas`** *(integer, required)*: Minimal number of replicas. Minimum: `1`. Default: `1`.
       - <a id="properties/services/additionalProperties/properties/hpa/properties/maxReplicas"></a>**`maxReplicas`** *(integer, required)*: Max number of replicas. Minimum: `1`. Default: `10`.
-      - <a id="properties/services/additionalProperties/properties/hpa/properties/metrics"></a>**`metrics`** *(array)*: Metrics definition.
+      - <a id="properties/services/additionalProperties/properties/hpa/properties/behavior"></a>**`behavior`** *(object)*
+        - <a id="properties/services/additionalProperties/properties/hpa/properties/behavior/properties/scaleUp"></a>**`scaleUp`** *(object)*
+        - <a id="properties/services/additionalProperties/properties/hpa/properties/behavior/properties/scaleDown"></a>**`scaleDown`** *(object)*
+      - <a id="properties/services/additionalProperties/properties/hpa/properties/metrics"></a>**`metrics`** *(array)*: Metric definitions.
         - <a id="properties/services/additionalProperties/properties/hpa/properties/metrics/items"></a>**Items** *(object)*
           - <a id="properties/services/additionalProperties/properties/hpa/properties/metrics/items/properties/type"></a>**`type`** *(string, required)*: Metric types (Resource, Pods, External). Must be one of: "Resource", "Pods", or "External".
           - <a id="properties/services/additionalProperties/properties/hpa/properties/metrics/items/properties/resource"></a>**`resource`** *(object)*

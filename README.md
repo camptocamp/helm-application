@@ -25,6 +25,53 @@ helm repo add application https://camptocamp.github.io/helm-application/
 helm install my-release application/application --values=my-values.yaml
 ```
 
+## Horizontal Pod Autoscaler (HPA)
+
+The `services.<name>.hpa` block renders an `autoscaling/v2` `HorizontalPodAutoscaler` targeting the Deployment created for that service.
+
+The chart currently maps these HPA spec fields directly:
+
+- `hpa.minReplicas` -> `spec.minReplicas`
+- `hpa.maxReplicas` -> `spec.maxReplicas`
+- `hpa.metrics` -> `spec.metrics`
+- `hpa.behavior` -> `spec.behavior`
+
+That means both `scaleUp` and `scaleDown` can be configured through `hpa.behavior`.
+
+Example:
+
+```yaml
+services:
+  example:
+    containers:
+      main:
+        image:
+          repository: camptocamp/image
+          tag: latest
+    hpa:
+      minReplicas: 2
+      maxReplicas: 5
+      metrics:
+        - type: Resource
+          resource:
+            name: cpu
+            target:
+              type: Utilization
+              averageUtilization: 50
+      behavior:
+        scaleUp:
+          policies:
+            - type: Percent
+              value: 100
+              periodSeconds: 60
+        scaleDown:
+          stabilizationWindowSeconds: 300
+          policies:
+            - type: Percent
+              value: 10
+              periodSeconds: 60
+```
+
 ## Contributing
 
 Install the pre-commit hooks:
