@@ -24,12 +24,6 @@ secretKey
 1s
 NotIn
 HPA
-HorizontalPodAutoscaler
-autoscaling
-minReplicas
-maxReplicas
-scaleUp
-scaleDown
 cpu
 Resource
 Traefik
