@@ -1369,9 +1369,13 @@
                 "description": "Max number of replicas.",
                 "default": 10
               },
+              "behavior": {
+                "type": "object",
+                "description": "Scaling rules passed to the generated HPA."
+              },
               "metrics": {
                 "type": "array",
-                "description": "Metrics definition.",
+                "description": "Metric definitions.",
                 "items": {
                   "type": "object",
                   "properties": {

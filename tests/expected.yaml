@@ -1327,6 +1327,18 @@ spec:
     name: example-app-example5
   minReplicas: 2
   maxReplicas: 5
+  behavior:
+    scaleDown:
+      policies:
+      - periodSeconds: 60
+        type: Percent
+        value: 10
+      stabilizationWindowSeconds: 300
+    scaleUp:
+      policies:
+      - periodSeconds: 60
+        type: Percent
+        value: 100
   metrics:
     - resource:
         name: cpu
