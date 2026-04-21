@@ -1371,7 +1371,7 @@
               },
               "behavior": {
                 "type": "object",
-                "description": "Forwarded as-is to HorizontalPodAutoscaler.spec.behavior."
+                "description": "Scaling rules passed to the generated HPA."
               },
               "metrics": {
                 "type": "array",
