@@ -15,3 +15,8 @@
 ## Review consistency
 
 - Keep `.github/copilot-instructions.md` aligned with these review/documentation rules so Copilot review guidance always matches `AGENTS.md`.
+
+## Commit messages
+
+The commit messages should be clear and descriptive, we don't use the conventional commits format,
+the commit message should start with a capital letter.
