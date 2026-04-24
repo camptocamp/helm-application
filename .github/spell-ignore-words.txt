@@ -33,7 +33,6 @@ IngressRoute
 ClusterRole
 PolicyRule
 ClusterRoleBinding
-HorizontalPodAutoscaler
 PersistentVolumeClaim
 PersistentVolumeClaims
 claimName
