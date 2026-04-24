@@ -267,14 +267,8 @@
       - <a id="properties/services/additionalProperties/properties/hpa/properties/minReplicas"></a>**`minReplicas`** *(integer, required)*: Minimal number of replicas. Minimum: `1`. Default: `1`.
       - <a id="properties/services/additionalProperties/properties/hpa/properties/maxReplicas"></a>**`maxReplicas`** *(integer, required)*: Max number of replicas. Minimum: `1`. Default: `10`.
       - <a id="properties/services/additionalProperties/properties/hpa/properties/behavior"></a>**`behavior`** *(object)*: Scaling rules passed to the generated HPA.
-      - <a id="properties/services/additionalProperties/properties/hpa/properties/metrics"></a>**`metrics`** *(array)*: Metric definitions.
+      - <a id="properties/services/additionalProperties/properties/hpa/properties/metrics"></a>**`metrics`** *(array)*: Metric definitions passed through unchanged to the HorizontalPodAutoscaler metrics.
         - <a id="properties/services/additionalProperties/properties/hpa/properties/metrics/items"></a>**Items** *(object)*
-          - <a id="properties/services/additionalProperties/properties/hpa/properties/metrics/items/properties/type"></a>**`type`** *(string, required)*: Metric types (Resource, Pods, External). Must be one of: "Resource", "Pods", or "External".
-          - <a id="properties/services/additionalProperties/properties/hpa/properties/metrics/items/properties/resource"></a>**`resource`** *(object)*
-            - <a id="properties/services/additionalProperties/properties/hpa/properties/metrics/items/properties/resource/properties/name"></a>**`name`** *(string, required)*: CPU or memory value. Must be one of: "cpu" or "memory".
-            - <a id="properties/services/additionalProperties/properties/hpa/properties/metrics/items/properties/resource/properties/target"></a>**`target`** *(object, required)*
-              - <a id="properties/services/additionalProperties/properties/hpa/properties/metrics/items/properties/resource/properties/target/properties/type"></a>**`type`** *(string, required)*: Metric target. Must be one of: "Utilization", "Value", or "AverageValue".
-              - <a id="properties/services/additionalProperties/properties/hpa/properties/metrics/items/properties/resource/properties/target/properties/averageUtilization"></a>**`averageUtilization`** *(integer)*: % average use.
     - <a id="properties/services/additionalProperties/properties/podMonitor"></a>**`podMonitor`** *(object)*: The Prometheus Pod monitor configuration. Cannot contain additional properties. Default: `{"enabled": false}`.
       - <a id="properties/services/additionalProperties/properties/podMonitor/properties/enabled"></a>**`enabled`** *(boolean)*: Enable the Pod monitor for this service (Pod). Default: `true`.
       - <a id="properties/services/additionalProperties/properties/podMonitor/properties/name"></a>**`name`** *(string)*: The name of the Pod monitor.

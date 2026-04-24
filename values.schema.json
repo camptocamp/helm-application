@@ -1375,43 +1375,9 @@
               },
               "metrics": {
                 "type": "array",
-                "description": "Metric definitions.",
+                "description": "Metric definitions passed through unchanged to the HorizontalPodAutoscaler metrics.",
                 "items": {
-                  "type": "object",
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": ["Resource", "Pods", "External"],
-                      "description": "Metric types (Resource, Pods, External)."
-                    },
-                    "resource": {
-                      "type": "object",
-                      "properties": {
-                        "name": {
-                          "type": "string",
-                          "enum": ["cpu", "memory"],
-                          "description": "CPU or memory value."
-                        },
-                        "target": {
-                          "type": "object",
-                          "properties": {
-                            "type": {
-                              "type": "string",
-                              "enum": ["Utilization", "Value", "AverageValue"],
-                              "description": "Metric target."
-                            },
-                            "averageUtilization": {
-                              "type": "integer",
-                              "description": "% average use."
-                            }
-                          },
-                          "required": ["type"]
-                        }
-                      },
-                      "required": ["name", "target"]
-                    }
-                  },
-                  "required": ["type"]
+                  "type": "object"
                 }
               }
             },
