@@ -24,7 +24,6 @@ secretKey
 1s
 NotIn
 HPA
-cpu
 Resource
 Traefik
 traefik-ingress-route
@@ -33,3 +32,4 @@ IngressRoute
 ClusterRole
 PolicyRule
 ClusterRoleBinding
+HorizontalPodAutoscaler
