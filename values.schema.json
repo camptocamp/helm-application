@@ -999,7 +999,7 @@
           },
           "persistentVolumeClaimRetentionPolicy": {
             "type": "object",
-            "description": "Passed through unchanged to the generated stateful set retention policy."
+            "description": "Passed through unchanged to the generated stateful set retention policy. See: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#persistentvolumeclaim-retention"
           },
           "replicas": {
             "type": "integer",
@@ -1024,7 +1024,7 @@
               },
               "rollingUpdate": {
                 "type": "object",
-                "description": "Passed through unchanged to the generated deployment rolling update strategy."
+                "description": "Passed through unchanged to the generated deployment rolling update strategy. See: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy"
               }
             }
           },
@@ -1054,7 +1054,7 @@
           },
           "podFailurePolicy": {
             "type": "object",
-            "description": "Passed through unchanged to the generated job and cron job pod failure policy."
+            "description": "Passed through unchanged to the generated job and cron job pod failure policy. See: https://kubernetes.io/docs/concepts/workloads/controllers/job/#pod-failure-policy"
           },
           "activeDeadlineSeconds": {
             "type": "integer",
@@ -1062,7 +1062,7 @@
           },
           "ordinals": {
             "type": "object",
-            "description": "Passed through unchanged to the generated stateful set ordinals."
+            "description": "Passed through unchanged to the generated stateful set ordinals. See: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#start-ordinal"
           },
           "podManagementPolicy": {
             "type": "string",
@@ -1071,7 +1071,7 @@
           },
           "updateStrategy": {
             "type": "object",
-            "description": "Passed through unchanged to the generated stateful set update strategy."
+            "description": "Passed through unchanged to the generated stateful set update strategy. See: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#update-strategies"
           },
           "schedule": {
             "type": "string",
@@ -1371,11 +1371,11 @@
               },
               "behavior": {
                 "type": "object",
-                "description": "Scaling rules for HPA."
+                "description": "Scaling rules for HPA. See: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#configurable-scaling-behavior"
               },
               "metrics": {
                 "type": "array",
-                "description": "Passed through unchanged to the generated HPA metrics.",
+                "description": "Passed through unchanged to the generated HPA metrics. See: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/",
                 "items": {
                   "type": "object"
                 }
