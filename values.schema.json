@@ -452,7 +452,7 @@
             },
             "spec": {
               "type": "object",
-              "description": "Traefik middleware specification"
+              "description": "Passed through unchanged to the Traefik middleware resource."
             }
           }
         },
@@ -502,12 +502,12 @@
               "traefikEntryPoints": {
                 "type": "array",
                 "title": "Entry Points",
-                "description": "See the Traefik documentation for more information."
+                "description": "Passed through unchanged to the Traefik ingress route resource."
               },
               "traefikTLS": {
                 "type": "object",
                 "title": "TLS Traefik",
-                "description": "TLS for Traefik IngressRoute"
+                "description": "Passed through unchanged to the Traefik ingress route resource."
               },
               "traefikHosts": {
                 "type": "array",
@@ -521,7 +521,7 @@
                     "kind": {
                       "type": "string",
                       "default": "Rule",
-                      "description": "See the Traefik documentation for more information."
+                      "description": "Passed through unchanged to the Traefik ingress route definition."
                     },
                     "match": {
                       "type": "string",
@@ -529,15 +529,15 @@
                     },
                     "observability": {
                       "type": "object",
-                      "description": "See the Traefik documentation for more information."
+                      "description": "Passed through unchanged to the Traefik ingress route definition."
                     },
                     "priority": {
                       "type": "integer",
-                      "description": "See the Traefik documentation for more information."
+                      "description": "Passed through unchanged to the Traefik ingress route definition."
                     },
                     "syntax": {
                       "type": "string",
-                      "description": "See the Traefik documentation for more information."
+                      "description": "Passed through unchanged to the Traefik ingress route definition."
                     }
                   }
                 }
@@ -620,7 +620,7 @@
         },
         "secretStoreRef": {
           "type": "object",
-          "description": "defines which SecretStore to fetch the ExternalSecret data."
+          "description": "Passed through unchanged to the generated external secret for docker registry credentials."
         },
         "content": {
           "type": "object",
@@ -799,15 +799,15 @@
           },
           "secretStoreRef": {
             "type": "object",
-            "description": "defines which SecretStore to fetch the ExternalSecret data."
+            "description": "Passed through unchanged to the generated external secret resource."
           },
           "target": {
             "type": "object",
-            "description": "defines the Kubernetes Secret to be created."
+            "description": "Passed through to the generated external secret target. The chart sets a default name when omitted."
           },
           "dataFrom": {
             "type": "array",
-            "description": "used to fetch all properties from a specific Provider data."
+            "description": "Passed through unchanged to the generated external secret data source selectors."
           },
           "data": {
             "type": "object",
@@ -999,7 +999,7 @@
           },
           "persistentVolumeClaimRetentionPolicy": {
             "type": "object",
-            "description": "The persistent volume claim retention policy"
+            "description": "Passed through unchanged to the generated stateful set retention policy."
           },
           "replicas": {
             "type": "integer",
@@ -1024,7 +1024,7 @@
               },
               "rollingUpdate": {
                 "type": "object",
-                "description": "The rolling update strategy"
+                "description": "Passed through unchanged to the generated deployment rolling update strategy."
               }
             }
           },
@@ -1054,7 +1054,7 @@
           },
           "podFailurePolicy": {
             "type": "object",
-            "description": "The Pod failure policy"
+            "description": "Passed through unchanged to the generated job and cron job pod failure policy."
           },
           "activeDeadlineSeconds": {
             "type": "integer",
@@ -1062,7 +1062,7 @@
           },
           "ordinals": {
             "type": "object",
-            "description": "The ordinals of the stateful set"
+            "description": "Passed through unchanged to the generated stateful set ordinals."
           },
           "podManagementPolicy": {
             "type": "string",
@@ -1071,7 +1071,7 @@
           },
           "updateStrategy": {
             "type": "object",
-            "description": "The update strategy"
+            "description": "Passed through unchanged to the generated stateful set update strategy."
           },
           "schedule": {
             "type": "string",
@@ -1266,53 +1266,53 @@
               "traefikHealthCheck": {
                 "type": "object",
                 "title": "Traefik health check",
-                "description": "See the Traefik documentation for more information."
+                "description": "Passed through unchanged to the Traefik ingress route service settings."
               },
               "traefikNativeLB": {
                 "type": "boolean",
                 "title": "Traefik native load balancer",
-                "description": "See the Traefik documentation for more information."
+                "description": "Passed through unchanged to the Traefik ingress route service settings."
               },
               "traefikNodePortLB": {
                 "type": "boolean",
                 "title": "Traefik node port load balancer",
-                "description": "See the Traefik documentation for more information."
+                "description": "Passed through unchanged to the Traefik ingress route service settings."
               },
               "traefikPassHostHeader": {
                 "type": "boolean",
                 "title": "Pass host header",
-                "description": "See the Traefik documentation for more information.",
+                "description": "Passed through unchanged to the Traefik ingress route service settings.",
                 "default": true
               },
               "traefikResponseForwarding": {
                 "type": "object",
                 "title": "Traefik response forwarding",
-                "description": "See the Traefik documentation for more information."
+                "description": "Passed through unchanged to the Traefik ingress route service settings."
               },
               "traefikScheme": {
                 "type": "string",
                 "title": "Traefik scheme",
-                "description": "See the Traefik documentation for more information."
+                "description": "Passed through unchanged to the Traefik ingress route service settings."
               },
               "traefikServersTransport": {
                 "type": "string",
                 "title": "Traefik servers transport",
-                "description": "See the Traefik documentation for more information."
+                "description": "Passed through unchanged to the Traefik ingress route service settings."
               },
               "traefikSticky": {
                 "type": "object",
                 "title": "Traefik sticky",
-                "description": "See the Traefik documentation for more information."
+                "description": "Passed through unchanged to the Traefik ingress route service settings."
               },
               "traefikStrategy": {
                 "type": "string",
                 "title": "Traefik strategy",
-                "description": "See the Traefik documentation for more information."
+                "description": "Passed through unchanged to the Traefik ingress route service settings."
               },
               "traefikWeight": {
                 "type": "integer",
                 "title": "Traefik weight",
-                "description": "See the Traefik documentation for more information."
+                "description": "Passed through unchanged to the Traefik ingress route service settings."
               }
             }
           },
@@ -1371,11 +1371,11 @@
               },
               "behavior": {
                 "type": "object",
-                "description": "Scaling rules passed to the generated HPA."
+                "description": "Scaling rules for HPA."
               },
               "metrics": {
                 "type": "array",
-                "description": "Metric definitions passed through unchanged to the HorizontalPodAutoscaler metrics.",
+                "description": "Passed through unchanged to the generated HPA metrics.",
                 "items": {
                   "type": "object"
                 }

@@ -32,4 +32,3 @@ IngressRoute
 ClusterRole
 PolicyRule
 ClusterRoleBinding
-HorizontalPodAutoscaler
