@@ -63,9 +63,13 @@ nodeSelector:
   {{- toYaml . | nindent 2 }}
 {{- end }}
 
-{{- with .service.affinity }}
+{{- $globalAffinity := .root.Values.global.affinity | default ( dict ) }}
+{{- $rootAffinity := .root.Values.affinity | default ( dict ) }}
+{{- $localAffinity := .service.affinity | default ( dict ) }}
+{{- $affinity := merge $localAffinity $rootAffinity $globalAffinity }}
+{{- if gt (len (keys $affinity)) 0 }}
 affinity:
-{{- with .podAntiAffinity }}
+{{- with $affinity.podAntiAffinity }}
 {{- if hasKey . "topologyKey" }}
   podAntiAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
@@ -103,13 +107,13 @@ affinity:
 podAntiAffinity: {{ toYaml . | nindent 4 }}
 {{- end }}  {{/*  if hasKey . "topologyKey" */}}
 {{- end }}  {{/*  with .podAntiAffinity */}}
-{{- with .podAffinity }}
+{{- with $affinity.podAffinity }}
   podAffinity: {{ toYaml . | nindent 4 }}
 {{- end }}
-{{- with .nodeAffinity }}
+{{- with $affinity.nodeAffinity }}
   nodeAffinity: {{ toYaml . | nindent 4 }}
 {{- end }}
-{{- end }}  {{/*  with .service.affinity */}}
+{{- end }}  {{/*  if $affinity */}}
 
 {{- $globalTolerations := .root.Values.tolerations | default ( list ) }}
 {{- $localTolerations := .service.tolerations | default ( list ) }}
@@ -117,6 +121,15 @@ podAntiAffinity: {{ toYaml . | nindent 4 }}
 {{- if $combinedTolerations }}
 tolerations:
 {{ toYaml $combinedTolerations | indent 2 }}
+{{- end }}
+
+{{- $globalTopology := .root.Values.global.topologySpreadConstraints | default ( list ) }}
+{{- $rootTopology := .root.Values.topologySpreadConstraints | default ( list ) }}
+{{- $localTopology := .service.topologySpreadConstraints | default ( list ) }}
+{{- $combinedTopology := concat $globalTopology $rootTopology $localTopology }}
+{{- if $combinedTopology }}
+topologySpreadConstraints:
+{{ toYaml $combinedTopology | indent 2 }}
 {{- end }}
 {{- end }} {{/* define "application.podConfig" */}}
 
