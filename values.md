@@ -12,6 +12,8 @@
   - <a id="properties/global/properties/revisionHistoryLimit"></a>**`revisionHistoryLimit`** *(integer)*: The number of old history to keep to allow rollback.
   - <a id="properties/global/properties/ingress"></a>**`ingress`** *(object)*
     - <a id="properties/global/properties/ingress/properties/noSecretName"></a>**`noSecretName`** *(boolean)*: Don't add a secret name to the Ingress TLS host, useful when the certification is configured in the Ingress controller.
+  - <a id="properties/global/properties/affinity"></a>**`affinity`**: Refer to *[#/definitions/affinity](#definitions/affinity)*.
+  - <a id="properties/global/properties/topologySpreadConstraints"></a>**`topologySpreadConstraints`**: Refer to *[#/definitions/topologySpreadConstraints](#definitions/topologySpreadConstraints)*.
 - <a id="properties/nameOverride"></a>**`nameOverride`**: Refer to *[#/definitions/nameOverride](#definitions/nameOverride)*.
 - <a id="properties/fullnameOverride"></a>**`fullnameOverride`**: Refer to *[#/definitions/fullnameOverride](#definitions/fullnameOverride)*.
 - <a id="properties/releaseNameOverride"></a>**`releaseNameOverride`**: Refer to *[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)*.
@@ -67,6 +69,7 @@
 - <a id="properties/podSecurityContext"></a>**`podSecurityContext`**: Refer to *[#/definitions/podSecurityContext](#definitions/podSecurityContext)*.
 - <a id="properties/affinity"></a>**`affinity`**: Refer to *[#/definitions/affinity](#definitions/affinity)*.
 - <a id="properties/tolerations"></a>**`tolerations`**: Refer to *[#/definitions/tolerations](#definitions/tolerations)*.
+- <a id="properties/topologySpreadConstraints"></a>**`topologySpreadConstraints`**: Refer to *[#/definitions/topologySpreadConstraints](#definitions/topologySpreadConstraints)*.
 - <a id="properties/image"></a>**`image`** *(object)*: Container: Image configuration.
   - <a id="properties/image/properties/pullPolicy"></a>**`pullPolicy`** *(string)*: Image pull policy. Must be one of: "Always", "IfNotPresent", or "Never".
 - <a id="properties/dockerregistry"></a>**`dockerregistry`** *(object)*: Cannot contain additional properties.
@@ -171,6 +174,7 @@
     - <a id="properties/services/additionalProperties/properties/affinity"></a>**`affinity`**: Refer to *[#/definitions/affinity](#definitions/affinity)*.
     - <a id="properties/services/additionalProperties/properties/tolerations"></a>**`tolerations`**: Refer to *[#/definitions/tolerations](#definitions/tolerations)*.
     - <a id="properties/services/additionalProperties/properties/nodeSelector"></a>**`nodeSelector`**: Refer to *[#/definitions/nodeSelector](#definitions/nodeSelector)*.
+    - <a id="properties/services/additionalProperties/properties/topologySpreadConstraints"></a>**`topologySpreadConstraints`**: Refer to *[#/definitions/topologySpreadConstraints](#definitions/topologySpreadConstraints)*.
     - <a id="properties/services/additionalProperties/properties/replicaCount"></a>**`replicaCount`** *(integer)*: The number of replicas.
     - <a id="properties/services/additionalProperties/properties/maxFailedIndexes"></a>**`maxFailedIndexes`** *(integer)*: The maximum number of failed indexes.
     - <a id="properties/services/additionalProperties/properties/parallelism"></a>**`parallelism`** *(integer)*: The number of parallel jobs.
@@ -333,6 +337,8 @@
   - <a id="definitions/affinity/properties/podAffinity"></a>**`podAffinity`** *(object)*: The standard pod affinity.
   - <a id="definitions/affinity/properties/nodeAffinity"></a>**`nodeAffinity`** *(object)*: The standard node affinity.
 - <a id="definitions/tolerations"></a>**`tolerations`** *(array)*: Pod: Tolerations.
+- <a id="definitions/topologySpreadConstraints"></a>**`topologySpreadConstraints`** *(array)*: Pod: Topology spread constraints, passed through unchanged to Kubernetes.
+  - <a id="definitions/topologySpreadConstraints/items"></a>**Items** *(object)*
 - <a id="definitions/nodeSelector"></a>**`nodeSelector`** *(object)*: Pod: Node selector.
 - <a id="definitions/image"></a>**`image`** *(object)*: Container: Image configuration.
   - **Any of**

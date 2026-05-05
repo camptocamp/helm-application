@@ -1,6 +1,13 @@
 global:
   configMapNameOverride:
     test-override: test-overridden
+  topologySpreadConstraints:
+    - maxSkew: 1
+      topologyKey: topology.kubernetes.io/zone
+      whenUnsatisfiable: DoNotSchedule
+      labelSelector:
+        matchLabels:
+          app: global-spread
 
 metadata:
   fullnameOverride: example-app-metadata
@@ -167,6 +174,24 @@ tolerations:
     operator: Equal
     value: example-value
     effect: NoSchedule
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/os
+              operator: In
+              values:
+                - linux
+
+topologySpreadConstraints:
+  - maxSkew: 1
+    topologyKey: kubernetes.io/hostname
+    whenUnsatisfiable: ScheduleAnyway
+    labelSelector:
+      matchLabels:
+        app: root-spread
 
 services:
   example1:
@@ -774,3 +799,19 @@ services:
   disabled-cronjob:
     enabled: false
     type: CronJob
+
+  # Service with topologySpreadConstraints at pod level (merged with global and root)
+  topology-spread:
+    fullnameOverride: example-app
+    topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app: pod-spread
+    containers:
+      main:
+        image:
+          repository: camptocamp/image
+          tag: latest

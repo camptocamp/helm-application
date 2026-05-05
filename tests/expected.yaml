@@ -179,6 +179,26 @@ spec:
       app.kubernetes.io/instance: example
       app.kubernetes.io/component: statefulset-min
 ---
+# Source: application/templates/pdb.yaml
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: example-app-topology-spread
+  labels:
+    helm.sh/chart: application
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
+    app.kubernetes.io/component: topology-spread
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: application
+      app.kubernetes.io/instance: example
+      app.kubernetes.io/component: topology-spread
+---
 # Source: application/templates/serviceaccount.yaml
 apiVersion: v1
 kind: ServiceAccount
@@ -261,6 +281,8 @@ data:
   SERVICE_STATEFULSET-ALL_CONTAINER_MAIN_IMAGE_TAG: "latest"
   SERVICE_STATEFULSET-MIN_NAME: example-app-statefulset-min
   SERVICE_STATEFULSET-MIN_CONTAINER_MAIN_IMAGE_TAG: "latest"
+  SERVICE_TOPOLOGY-SPREAD_NAME: example-app-topology-spread
+  SERVICE_TOPOLOGY-SPREAD_CONTAINER_MAIN_IMAGE_TAG: "latest"
 ---
 # Source: application/templates/configmap.yaml
 apiVersion: v1
@@ -527,11 +549,31 @@ spec:
                 values:
                 - ssd
             weight: 1
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/os
+                operator: In
+                values:
+                - linux
       tolerations:
         - effect: NoSchedule
           key: telaration-defined-in-global
           operator: Equal
           value: example-value
+      topologySpreadConstraints:
+        - labelSelector:
+            matchLabels:
+              app: global-spread
+          maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+        - labelSelector:
+            matchLabels:
+              app: root-spread
+          maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
       containers:
         - name: main
           securityContext:
@@ -574,11 +616,33 @@ spec:
       serviceAccountName: example-app-service-account-myserviceaccount
       securityContext:
         {}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/os
+                operator: In
+                values:
+                - linux
       tolerations:
         - effect: NoSchedule
           key: telaration-defined-in-global
           operator: Equal
           value: example-value
+      topologySpreadConstraints:
+        - labelSelector:
+            matchLabels:
+              app: global-spread
+          maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+        - labelSelector:
+            matchLabels:
+              app: root-spread
+          maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
       containers:
         - name: main
           securityContext:
@@ -640,6 +704,14 @@ spec:
                     values:
                       - with-service-name
               topologyKey: "kubernetes.io/hostname"
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/os
+                operator: In
+                values:
+                - linux
       tolerations:
         - effect: NoSchedule
           key: telaration-defined-in-global
@@ -649,6 +721,19 @@ spec:
           key: telaration-defined-in-service-definition
           operator: Equal
           value: example-value
+      topologySpreadConstraints:
+        - labelSelector:
+            matchLabels:
+              app: global-spread
+          maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+        - labelSelector:
+            matchLabels:
+              app: root-spread
+          maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
       initContainers:
         - name: aa
           securityContext:
@@ -898,11 +983,32 @@ spec:
                     values:
                       - example2
               topologyKey: "kubernetes.io/hostname"
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/os
+                operator: In
+                values:
+                - linux
       tolerations:
         - effect: NoSchedule
           key: telaration-defined-in-global
           operator: Equal
           value: example-value
+      topologySpreadConstraints:
+        - labelSelector:
+            matchLabels:
+              app: global-spread
+          maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+        - labelSelector:
+            matchLabels:
+              app: root-spread
+          maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
       containers:
         - name: cc
           securityContext:
@@ -1035,11 +1141,32 @@ spec:
                     values:
                       - example3
               topologyKey: "kubernetes.io/hostname"
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/os
+                operator: In
+                values:
+                - linux
       tolerations:
         - effect: NoSchedule
           key: telaration-defined-in-global
           operator: Equal
           value: example-value
+      topologySpreadConstraints:
+        - labelSelector:
+            matchLabels:
+              app: global-spread
+          maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+        - labelSelector:
+            matchLabels:
+              app: root-spread
+          maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
       containers:
         - name: cc
           securityContext:
@@ -1163,11 +1290,32 @@ spec:
                     values:
                       - "v1"
               topologyKey: "kubernetes.io/hostname"
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/os
+                operator: In
+                values:
+                - linux
       tolerations:
         - effect: NoSchedule
           key: telaration-defined-in-global
           operator: Equal
           value: example-value
+      topologySpreadConstraints:
+        - labelSelector:
+            matchLabels:
+              app: global-spread
+          maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+        - labelSelector:
+            matchLabels:
+              app: root-spread
+          maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
       containers:
         - name: main
           securityContext:
@@ -1220,11 +1368,32 @@ spec:
                     values:
                       - "v1"
               topologyKey: "kubernetes.io/hostname"
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/os
+                operator: In
+                values:
+                - linux
       tolerations:
         - effect: NoSchedule
           key: telaration-defined-in-global
           operator: Equal
           value: example-value
+      topologySpreadConstraints:
+        - labelSelector:
+            matchLabels:
+              app: global-spread
+          maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+        - labelSelector:
+            matchLabels:
+              app: root-spread
+          maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
       containers:
         - name: main
           securityContext:
@@ -1267,11 +1436,33 @@ spec:
       serviceAccountName: example-app-service-account-myserviceaccount
       securityContext:
         {}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/os
+                operator: In
+                values:
+                - linux
       tolerations:
         - effect: NoSchedule
           key: telaration-defined-in-global
           operator: Equal
           value: example-value
+      topologySpreadConstraints:
+        - labelSelector:
+            matchLabels:
+              app: global-spread
+          maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+        - labelSelector:
+            matchLabels:
+              app: root-spread
+          maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
       containers:
         - name: main
           securityContext:
@@ -1306,6 +1497,81 @@ spec:
 
                   name: example-app-ext-secrets-app
                   key: "hostname"
+          terminationMessagePolicy: FallbackToLogsOnError
+---
+# Source: application/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-app-topology-spread
+  labels:
+    helm.sh/chart: application
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: application
+    app.kubernetes.io/instance: example
+    app.kubernetes.io/component: topology-spread
+spec:
+  revisionHistoryLimit: 3
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: application
+      app.kubernetes.io/instance: example
+      app.kubernetes.io/component: topology-spread
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: application
+        app.kubernetes.io/instance: example
+        app.kubernetes.io/component: topology-spread
+    spec:
+      imagePullSecrets:
+        - name: example-app-dockerregistry-docker-registry
+      serviceAccountName: example-app-service-account-myserviceaccount
+      securityContext:
+        {}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/os
+                operator: In
+                values:
+                - linux
+      tolerations:
+        - effect: NoSchedule
+          key: telaration-defined-in-global
+          operator: Equal
+          value: example-value
+      topologySpreadConstraints:
+        - labelSelector:
+            matchLabels:
+              app: global-spread
+          maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+        - labelSelector:
+            matchLabels:
+              app: root-spread
+          maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+        - labelSelector:
+            matchLabels:
+              app: pod-spread
+          maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+      containers:
+        - name: main
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 33
+          image: "camptocamp/image:latest"
+          imagePullPolicy: IfNotPresent
           terminationMessagePolicy: FallbackToLogsOnError
 ---
 # Source: application/templates/hpa.yaml
@@ -1400,11 +1666,33 @@ spec:
       serviceAccountName: example-app-service-account-myserviceaccount
       securityContext:
         {}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/os
+                operator: In
+                values:
+                - linux
       tolerations:
         - effect: NoSchedule
           key: telaration-defined-in-global
           operator: Equal
           value: example-value
+      topologySpreadConstraints:
+        - labelSelector:
+            matchLabels:
+              app: global-spread
+          maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+        - labelSelector:
+            matchLabels:
+              app: root-spread
+          maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
       containers:
         - name: main
           securityContext:
@@ -1444,11 +1732,33 @@ spec:
       serviceAccountName: example-app-service-account-myserviceaccount
       securityContext:
         {}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/os
+                operator: In
+                values:
+                - linux
       tolerations:
         - effect: NoSchedule
           key: telaration-defined-in-global
           operator: Equal
           value: example-value
+      topologySpreadConstraints:
+        - labelSelector:
+            matchLabels:
+              app: global-spread
+          maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+        - labelSelector:
+            matchLabels:
+              app: root-spread
+          maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
       containers:
         - name: main
           securityContext:
@@ -1500,11 +1810,33 @@ spec:
       serviceAccountName: example-app-service-account-myserviceaccount
       securityContext:
         {}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/os
+                operator: In
+                values:
+                - linux
       tolerations:
         - effect: NoSchedule
           key: telaration-defined-in-global
           operator: Equal
           value: example-value
+      topologySpreadConstraints:
+        - labelSelector:
+            matchLabels:
+              app: global-spread
+          maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+        - labelSelector:
+            matchLabels:
+              app: root-spread
+          maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
       restartPolicy: Never
       containers:
         - name: main
@@ -1540,11 +1872,33 @@ spec:
       serviceAccountName: example-app-service-account-myserviceaccount
       securityContext:
         {}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/os
+                operator: In
+                values:
+                - linux
       tolerations:
         - effect: NoSchedule
           key: telaration-defined-in-global
           operator: Equal
           value: example-value
+      topologySpreadConstraints:
+        - labelSelector:
+            matchLabels:
+              app: global-spread
+          maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+        - labelSelector:
+            matchLabels:
+              app: root-spread
+          maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
       restartPolicy: Never
       containers:
         - name: main
@@ -1605,11 +1959,33 @@ spec:
           serviceAccountName: example-app-service-account-myserviceaccount
           securityContext:
             {}
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                - matchExpressions:
+                  - key: kubernetes.io/os
+                    operator: In
+                    values:
+                    - linux
           tolerations:
             - effect: NoSchedule
               key: telaration-defined-in-global
               operator: Equal
               value: example-value
+          topologySpreadConstraints:
+            - labelSelector:
+                matchLabels:
+                  app: global-spread
+              maxSkew: 1
+              topologyKey: topology.kubernetes.io/zone
+              whenUnsatisfiable: DoNotSchedule
+            - labelSelector:
+                matchLabels:
+                  app: root-spread
+              maxSkew: 1
+              topologyKey: kubernetes.io/hostname
+              whenUnsatisfiable: ScheduleAnyway
           restartPolicy: Never
           containers:
             - name: main

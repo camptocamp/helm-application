@@ -158,6 +158,13 @@
       "type": "array",
       "description": "Pod: Tolerations"
     },
+    "topologySpreadConstraints": {
+      "type": "array",
+      "description": "Pod: Topology spread constraints, passed through unchanged to Kubernetes",
+      "items": {
+        "type": "object"
+      }
+    },
     "nodeSelector": {
       "type": "object",
       "description": "Pod: Node selector"
@@ -335,6 +342,12 @@
               "description": "Don't add a secret name to the Ingress TLS host, useful when the certification is configured in the Ingress controller."
             }
           }
+        },
+        "affinity": {
+          "$ref": "#/definitions/affinity"
+        },
+        "topologySpreadConstraints": {
+          "$ref": "#/definitions/topologySpreadConstraints"
         }
       }
     },
@@ -561,6 +574,9 @@
     },
     "tolerations": {
       "$ref": "#/definitions/tolerations"
+    },
+    "topologySpreadConstraints": {
+      "$ref": "#/definitions/topologySpreadConstraints"
     },
     "image": {
       "type": "object",
@@ -967,6 +983,9 @@
           },
           "nodeSelector": {
             "$ref": "#/definitions/nodeSelector"
+          },
+          "topologySpreadConstraints": {
+            "$ref": "#/definitions/topologySpreadConstraints"
           },
           "replicaCount": {
             "type": "integer",
