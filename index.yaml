@@ -3,6 +3,19 @@ entries:
   application:
   - apiVersion: v2
     appVersion: "1.0"
+    created: "2026-06-19T14:25:29.514597373Z"
+    dependencies:
+    - name: common
+      repository: https://camptocamp.github.io/helm-common
+      version: 2.1.2
+    description: HELM chart that provide everything needed to create a multi pod application.
+    digest: c7987f6824bab3d5f6a0bef22c2d819dcda5e748484d01617b89bf757bc9b4ae
+    name: application
+    urls:
+    - https://github.com/camptocamp/helm-application/releases/download/2.20.1/application-2.20.1.tgz
+    version: 2.20.1
+  - apiVersion: v2
+    appVersion: "1.0"
     created: "2026-05-05T10:54:02.603027444Z"
     dependencies:
     - name: common
@@ -730,4 +743,4 @@ entries:
     urls:
     - https://github.com/camptocamp/helm-application/releases/download/0.1.0/custom-pod-0.1.0.tgz
     version: 0.1.0
-generated: "2026-05-05T10:54:02.603192011Z"
+generated: "2026-06-19T14:25:29.5147677Z"
