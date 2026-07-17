@@ -1628,6 +1628,7 @@ metadata:
 spec:
   serviceName: nginx
   replicas: 3
+  revisionHistoryLimit: 3
   minReadySeconds: 10
   podManagementPolicy: Parallel
   ordinals:
@@ -1715,6 +1716,7 @@ metadata:
     app.kubernetes.io/instance: example
     app.kubernetes.io/component: statefulset-min
 spec:
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
       app.kubernetes.io/name: application
