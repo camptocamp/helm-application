@@ -18,6 +18,7 @@ spec:
   {{- if $serviceDefinition.replicas }}
   replicas: {{ $serviceDefinition.replicas }}
   {{- end }}
+  revisionHistoryLimit: {{ $.Values.global.revisionHistoryLimit | default 0 }}
   {{- if $serviceDefinition.minReadySeconds }}
   minReadySeconds: {{ $serviceDefinition.minReadySeconds }}
   {{- end }}
