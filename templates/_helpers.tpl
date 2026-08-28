@@ -277,6 +277,12 @@ volumes:
       {{- with $value.configMap.items }}
       items: {{- . | toYaml | nindent 6 }}
       {{- end }}
+      {{- with $value.configMap.defaultMode }}
+      defaultMode: {{- . | toYaml | nindent 6 }}
+      {{- end }}
+      {{- with $value.configMap.optional }}
+      optional: {{- . | toYaml | nindent 6 }}
+      {{- end }}
     {{- else }}
     {{- $value | toYaml | nindent 4 }}
     {{- end }}

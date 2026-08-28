@@ -163,6 +163,12 @@
       "description": "Pod: Topology spread constraints, passed through unchanged to Kubernetes",
       "items": {
         "type": "object"
+      },
+      "defaultMode": {
+        "type": "int"
+      },
+      "optional": {
+        "type": "boolean"
       }
     },
     "nodeSelector": {
