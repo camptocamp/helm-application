@@ -278,10 +278,10 @@ volumes:
       items: {{- . | toYaml | nindent 6 }}
       {{- end }}
       {{- with $value.configMap.defaultMode }}
-      defaultMode: {{- . | toYaml | nindent 6 }}
+      defaultMode: {{ . }}
       {{- end }}
       {{- with $value.configMap.optional }}
-      optional: {{- . | toYaml | nindent 6 }}
+      optional: {{ . }}
       {{- end }}
     {{- else }}
     {{- $value | toYaml | nindent 4 }}
