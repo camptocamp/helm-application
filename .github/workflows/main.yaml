@@ -48,14 +48,25 @@ jobs:
           python-version: '3.14'
       - run: python3 -m pip install --requirement=ci/requirements.txt
 
+      # Pre-commit regenerates the checked-in fixtures, so keep it on one
+      # stable Helm version instead of the runner's preinstalled one, and
+      # run it on a single matrix leg only.
+      - name: Install helm (early, for pre-commit hooks)
+        uses: azure/setup-helm@9bc31f4ebc9c6b171d7bfbaa5d006ae7abdb4310 # v5.0.1
+        with:
+          version: 3.21.4
+        if: matrix.helm == 'latest'
+
       - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ~/.cache/pre-commit
           key: pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}
           restore-keys: "pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}\npre-commit-"
+        if: matrix.helm == 'latest'
       - run: pre-commit run --all-files --color=always
         env:
           SKIP: helm-lock
+        if: matrix.helm == 'latest'
       - run: git diff --exit-code --patch > /tmp/pre-commit.patch; git diff --color; git reset --hard || true
         if: failure()
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
