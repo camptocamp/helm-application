@@ -48,7 +48,7 @@ jobs:
       - name: Install helm (early, for pre-commit hooks)
         uses: azure/setup-helm@9bc31f4ebc9c6b171d7bfbaa5d006ae7abdb4310 # v5.0.1
         with:
-          version: 3.21.4
+          version: 3.22.0
         if: matrix.helm == 'latest'
 
       - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
