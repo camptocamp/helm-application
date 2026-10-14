@@ -18,6 +18,7 @@ spec:
       app.kubernetes.io/name: application
       app.kubernetes.io/instance: example
       app.kubernetes.io/component: deployment-all
+
 ---
 # Source: application/templates/pdb.yaml
 apiVersion: policy/v1
@@ -38,6 +39,7 @@ spec:
       app.kubernetes.io/name: application
       app.kubernetes.io/instance: example
       app.kubernetes.io/component: deployment-min
+
 ---
 # Source: application/templates/pdb.yaml
 apiVersion: policy/v1
@@ -58,6 +60,7 @@ spec:
       app.kubernetes.io/name: application
       app.kubernetes.io/instance: example
       app.kubernetes.io/component: example2
+
 ---
 # Source: application/templates/pdb.yaml
 apiVersion: policy/v1
@@ -78,6 +81,7 @@ spec:
       app.kubernetes.io/name: with-name-override
       app.kubernetes.io/instance: example
       app.kubernetes.io/component: example3
+
 ---
 # Source: application/templates/pdb.yaml
 apiVersion: policy/v1
@@ -98,6 +102,7 @@ spec:
       app.kubernetes.io/name: application
       app.kubernetes.io/instance: example
       app.kubernetes.io/component: example4
+
 ---
 # Source: application/templates/pdb.yaml
 apiVersion: policy/v1
@@ -118,6 +123,7 @@ spec:
       app.kubernetes.io/name: application
       app.kubernetes.io/instance: example
       app.kubernetes.io/component: example5
+
 ---
 # Source: application/templates/pdb.yaml
 apiVersion: policy/v1
@@ -138,6 +144,7 @@ spec:
       app.kubernetes.io/name: application
       app.kubernetes.io/instance: example
       app.kubernetes.io/component: internal
+
 ---
 # Source: application/templates/pdb.yaml
 apiVersion: policy/v1
@@ -158,6 +165,7 @@ spec:
       app.kubernetes.io/name: application
       app.kubernetes.io/instance: example
       app.kubernetes.io/component: nginx
+
 ---
 # Source: application/templates/pdb.yaml
 apiVersion: policy/v1
@@ -178,6 +186,7 @@ spec:
       app.kubernetes.io/name: application
       app.kubernetes.io/instance: example
       app.kubernetes.io/component: statefulset-min
+
 ---
 # Source: application/templates/pdb.yaml
 apiVersion: policy/v1
@@ -198,6 +207,7 @@ spec:
       app.kubernetes.io/name: application
       app.kubernetes.io/instance: example
       app.kubernetes.io/component: topology-spread
+
 ---
 # Source: application/templates/serviceaccount.yaml
 apiVersion: v1
@@ -213,6 +223,7 @@ metadata:
     app.kubernetes.io/component: myserviceaccount
   annotations:
     example-annotation: coucou
+
 ---
 # Source: application/templates/secret.yaml
 apiVersion: v1
@@ -233,6 +244,7 @@ data:
   test: dG90bw==
   test2: dG90bzI=
   test3: "UW1GemFXTWdkRzkwYnpwMGIzUnY="
+
 ---
 # Source: application/templates/cm_metadata.yaml
 apiVersion: v1
@@ -283,6 +295,7 @@ data:
   SERVICE_STATEFULSET-MIN_CONTAINER_MAIN_IMAGE_TAG: "latest"
   SERVICE_TOPOLOGY-SPREAD_NAME: example-app-topology-spread
   SERVICE_TOPOLOGY-SPREAD_CONTAINER_MAIN_IMAGE_TAG: "latest"
+
 ---
 # Source: application/templates/configmap.yaml
 apiVersion: v1
@@ -311,6 +324,7 @@ data:
     titi: titi
     toto: toto
     tutu: tutu
+
 ---
 # Source: application/templates/clusterrole.yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -356,6 +370,7 @@ rules:
       - "secrets"
     verbs:
       - "get"
+
 ---
 # Source: application/templates/clusterrolebinding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -377,6 +392,7 @@ subjects:
   - kind: ServiceAccount
     name: job-runner
     namespace: default
+
 ---
 # Source: application/templates/service.yaml
 apiVersion: v1
@@ -401,6 +417,7 @@ spec:
     app.kubernetes.io/name: application
     app.kubernetes.io/instance: example
     app.kubernetes.io/component: with-service-name
+
 ---
 # Source: application/templates/service.yaml
 apiVersion: v1
@@ -429,6 +446,7 @@ spec:
     app.kubernetes.io/name: application
     app.kubernetes.io/instance: example
     app.kubernetes.io/component: example2
+
 ---
 # Source: application/templates/service.yaml
 apiVersion: v1
@@ -453,6 +471,7 @@ spec:
     app.kubernetes.io/name: with-name-override
     app.kubernetes.io/instance: example
     app.kubernetes.io/component: example3
+
 ---
 # Source: application/templates/service.yaml
 apiVersion: v1
@@ -477,6 +496,7 @@ spec:
     app.kubernetes.io/name: application
     app.kubernetes.io/instance: example
     app.kubernetes.io/component: example4
+
 ---
 # Source: application/templates/service.yaml
 apiVersion: v1
@@ -499,6 +519,7 @@ spec:
     app.kubernetes.io/name: application
     app.kubernetes.io/instance: example
     app.kubernetes.io/component: example5
+
 ---
 # Source: application/templates/deployment.yaml
 apiVersion: apps/v1
@@ -582,6 +603,8 @@ spec:
           image: "camptocamp/image:latest"
           imagePullPolicy: IfNotPresent
           terminationMessagePolicy: FallbackToLogsOnError
+
+
 ---
 # Source: application/templates/deployment.yaml
 apiVersion: apps/v1
@@ -651,6 +674,8 @@ spec:
           image: "camptocamp/image:latest"
           imagePullPolicy: IfNotPresent
           terminationMessagePolicy: FallbackToLogsOnError
+
+
 ---
 # Source: application/templates/deployment.yaml
 apiVersion: apps/v1
@@ -930,6 +955,7 @@ spec:
         - name: self-secret
           secret:
             secretName: example-app-secrets
+
 ---
 # Source: application/templates/deployment.yaml
 apiVersion: apps/v1
@@ -1088,6 +1114,7 @@ spec:
           emptyDir: {}
         - name: my-volume-2
           emptyDir: {}
+
 ---
 # Source: application/templates/deployment.yaml
 apiVersion: apps/v1
@@ -1246,6 +1273,7 @@ spec:
           emptyDir: {}
         - name: my-volume-2
           emptyDir: {}
+
 ---
 # Source: application/templates/deployment.yaml
 apiVersion: apps/v1
@@ -1324,6 +1352,8 @@ spec:
           image: "camptocamp/image:latest"
           imagePullPolicy: Always
           terminationMessagePolicy: FallbackToLogsOnError
+
+
 ---
 # Source: application/templates/deployment.yaml
 apiVersion: apps/v1
@@ -1402,6 +1432,8 @@ spec:
           image: "camptocamp/image:latest@sha256:80692750f8049ff14a8b61e77a758edd5d1f33a82b6792eac1f3d4b0d5ec351d"
           imagePullPolicy: IfNotPresent
           terminationMessagePolicy: FallbackToLogsOnError
+
+
 ---
 # Source: application/templates/deployment.yaml
 apiVersion: apps/v1
@@ -1498,6 +1530,8 @@ spec:
                   name: example-app-ext-secrets-app
                   key: "hostname"
           terminationMessagePolicy: FallbackToLogsOnError
+
+
 ---
 # Source: application/templates/deployment.yaml
 apiVersion: apps/v1
@@ -1573,6 +1607,8 @@ spec:
           image: "camptocamp/image:latest"
           imagePullPolicy: IfNotPresent
           terminationMessagePolicy: FallbackToLogsOnError
+
+
 ---
 # Source: application/templates/hpa.yaml
 apiVersion: autoscaling/v2
@@ -1612,6 +1648,7 @@ spec:
           averageUtilization: 50
           type: Utilization
       type: Resource
+
 ---
 # Source: application/templates/statefulset.yaml
 apiVersion: apps/v1
@@ -1702,6 +1739,9 @@ spec:
           image: "camptocamp/image:latest"
           imagePullPolicy: IfNotPresent
           terminationMessagePolicy: FallbackToLogsOnError
+
+
+
 ---
 # Source: application/templates/statefulset.yaml
 apiVersion: apps/v1
@@ -1769,6 +1809,8 @@ spec:
           image: "camptocamp/image:latest"
           imagePullPolicy: IfNotPresent
           terminationMessagePolicy: FallbackToLogsOnError
+
+
 ---
 # Source: application/templates/job.yaml
 apiVersion: batch/v1
@@ -1848,6 +1890,8 @@ spec:
           image: "camptocamp/image:latest"
           imagePullPolicy: IfNotPresent
           terminationMessagePolicy: FallbackToLogsOnError
+
+
 ---
 # Source: application/templates/job.yaml
 apiVersion: batch/v1
@@ -1910,6 +1954,8 @@ spec:
           image: "camptocamp/image:latest"
           imagePullPolicy: IfNotPresent
           terminationMessagePolicy: FallbackToLogsOnError
+
+
 ---
 # Source: application/templates/cronjob.yaml
 apiVersion: batch/v1
@@ -1997,6 +2043,8 @@ spec:
               image: "camptocamp/image:latest"
               imagePullPolicy: IfNotPresent
               terminationMessagePolicy: FallbackToLogsOnError
+
+
 ---
 # Source: application/templates/ingress.yaml
 apiVersion: networking.k8s.io/v1
@@ -2069,6 +2117,7 @@ spec:
                 name: hardcoded-service-name
                 port:
                   number: 8080
+
 ---
 # Source: application/templates/external-secret-docker-registry.yaml
 apiVersion: external-secrets.io/v1beta1
@@ -2145,6 +2194,7 @@ spec:
     - secretKey: user_password
       remoteRef:
         key: ghcr-password
+
 ---
 # Source: application/templates/external-secret.yaml
 apiVersion: external-secrets.io/v1beta1
@@ -2169,6 +2219,8 @@ spec:
     - secretKey: hostname
       remoteRef:
         key: hostname
+
+
 ---
 # Source: application/templates/external-secret.yaml
 apiVersion: external-secrets.io/v1beta1
@@ -2193,6 +2245,8 @@ spec:
     - secretKey: pass
       remoteRef:
         key: pass
+
+
 ---
 # Source: application/templates/traefik-ingress-route.yaml
 apiVersion: traefik.io/v1alpha1
@@ -2261,6 +2315,7 @@ spec:
       Access-Control-Allow-Headers: '*'
       Access-Control-Allow-Methods: GET, OPTIONS
       Access-Control-Allow-Origin: '*'
+
 ---
 # Source: application/templates/podmonitor.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -2287,6 +2342,8 @@ spec:
     - port: prometheus
       honorLabels: true
       interval: 10s
+
+
 ---
 # Source: application/templates/podmonitor.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -2310,6 +2367,8 @@ spec:
     - port: prometheus
       honorLabels: true
       interval: 10s
+
+
 ---
 # Source: application/templates/podmonitor.yaml
 apiVersion: monitoring.coreos.com/v1
