@@ -1355,6 +1355,10 @@
                 "description": "The type of the service",
                 "default": "ClusterIP"
               },
+              "clusterIP": {
+                "type": "string",
+                "description": "The clusterIP of the service, set it to 'None' to create a headless service"
+              },
               "servicePort": {
                 "type": "integer",
                 "description": "The port of the service (used by Ingress)",

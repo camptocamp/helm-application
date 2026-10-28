@@ -262,6 +262,7 @@
     - <a id="properties/services/additionalProperties/properties/service"></a>**`service`** *(object)*: The Kubernetes service configuration. Cannot contain additional properties.
       - <a id="properties/services/additionalProperties/properties/service/properties/name"></a>**`name`** *(string)*: The name of the service.
       - <a id="properties/services/additionalProperties/properties/service/properties/type"></a>**`type`** *(string)*: The type of the service. Default: `"ClusterIP"`.
+      - <a id="properties/services/additionalProperties/properties/service/properties/clusterIP"></a>**`clusterIP`** *(string)*: The clusterIP of the service, set it to 'None' to create a headless service.
       - <a id="properties/services/additionalProperties/properties/service/properties/servicePort"></a>**`servicePort`** *(integer)*: The port of the service (used by Ingress). Default: `80`.
       - <a id="properties/services/additionalProperties/properties/service/properties/labels"></a>**`labels`**: Refer to *[#/definitions/labels](#definitions/labels)*.
       - <a id="properties/services/additionalProperties/properties/service/properties/annotations"></a>**`annotations`**: Refer to *[#/definitions/annotations](#definitions/annotations)*.

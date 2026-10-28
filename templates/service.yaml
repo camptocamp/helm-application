@@ -14,6 +14,9 @@ metadata:
 {{- include "common.metadata" ( dict "root" $ "service" $svcDict "serviceName" $serviceName ) | nindent 2 }}
 spec:
   type: {{ $serviceDefinition.service.type | default "ClusterIP" }}
+  {{- if hasKey $serviceDefinition.service "clusterIP" }}
+  clusterIP: {{ $serviceDefinition.service.clusterIP }}
+  {{- end }}
   {{- with $serviceDefinition.service.ports }}
   ports:
     {{- . | toYaml | nindent 4 }}

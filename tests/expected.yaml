@@ -420,6 +420,7 @@ metadata:
     two-custom-annotations: xyz
 spec:
   type: ClusterIP
+  clusterIP: None
   ports:
     - name: http
       port: 8080
