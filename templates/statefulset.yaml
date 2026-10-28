@@ -11,6 +11,8 @@ metadata:
 spec:
   {{- if $serviceDefinition.serviceName }}
   serviceName: {{ $serviceDefinition.serviceName }}
+  {{- else }}
+  serviceName: {{ include "common.fullname" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) }}
   {{- end }}
   {{- if $serviceDefinition.replicaCount }}
   replicas: {{ $serviceDefinition.replicaCount }}

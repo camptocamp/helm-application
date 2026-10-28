@@ -420,6 +420,7 @@ metadata:
     two-custom-annotations: xyz
 spec:
   type: ClusterIP
+  clusterIP: None
   ports:
     - name: http
       port: 8080
@@ -1716,6 +1717,7 @@ metadata:
     app.kubernetes.io/instance: example
     app.kubernetes.io/component: statefulset-min
 spec:
+  serviceName: example-app-statefulset-min
   revisionHistoryLimit: 3
   selector:
     matchLabels:
