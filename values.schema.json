@@ -1022,6 +1022,10 @@
             "type": "integer",
             "description": "The minimum number of seconds for the Pod to be ready"
           },
+          "terminationGracePeriodSeconds": {
+            "type": "integer",
+            "description": "The duration in seconds the Pod needs to terminate gracefully, passed through unchanged to Kubernetes"
+          },
           "persistentVolumeClaimRetentionPolicy": {
             "type": "object",
             "description": "The persistent volume claim retention policy"
@@ -1440,6 +1444,49 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "persistentVolumeClaims": {
+      "type": "object",
+      "description": "The PersistentVolumeClaims to create, the key is used as the name suffix, the volumes can refer to them with a claimName like self-pvc-<key>",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "description": "Enable this PersistentVolumeClaim",
+            "default": true
+          },
+          "nameOverride": {
+            "$ref": "#/definitions/nameOverride"
+          },
+          "fullnameOverride": {
+            "$ref": "#/definitions/fullnameOverride"
+          },
+          "releaseNameOverride": {
+            "$ref": "#/definitions/releaseNameOverride"
+          },
+          "releaseTrunc": {
+            "$ref": "#/definitions/releaseTrunc"
+          },
+          "nameTrunc": {
+            "$ref": "#/definitions/nameTrunc"
+          },
+          "prefixTrunc": {
+            "$ref": "#/definitions/prefixTrunc"
+          },
+          "labels": {
+            "$ref": "#/definitions/labels"
+          },
+          "annotations": {
+            "$ref": "#/definitions/annotations"
+          },
+          "spec": {
+            "type": "object",
+            "description": "The PersistentVolumeClaim specification, passed through unchanged to Kubernetes"
           }
         }
       }

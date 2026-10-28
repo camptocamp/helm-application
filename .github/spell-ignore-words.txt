@@ -33,3 +33,7 @@ ClusterRole
 PolicyRule
 ClusterRoleBinding
 HorizontalPodAutoscaler
+PersistentVolumeClaim
+PersistentVolumeClaims
+claimName
+pvc
