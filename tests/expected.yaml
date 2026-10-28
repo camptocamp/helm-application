@@ -1717,6 +1717,7 @@ metadata:
     app.kubernetes.io/instance: example
     app.kubernetes.io/component: statefulset-min
 spec:
+  serviceName: example-app-statefulset-min
   revisionHistoryLimit: 3
   selector:
     matchLabels:
