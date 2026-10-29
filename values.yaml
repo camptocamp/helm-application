@@ -54,6 +54,16 @@ services: {}
 #
 #     tolerations: []
 
+persistentVolumeClaims: {}
+#   example:
+#     enabled: true
+#     spec:
+#       accessModes:
+#         - ReadWriteOnce
+#       resources:
+#         requests:
+#           storage: 1Gi
+
 clusterRole: {}
 
 clusterRoleBinding: {}

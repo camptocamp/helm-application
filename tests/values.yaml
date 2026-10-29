@@ -193,6 +193,15 @@ topologySpreadConstraints:
       matchLabels:
         app: root-spread
 
+persistentVolumeClaims:
+  data:
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1Gi
+
 services:
   example1:
     fullnameOverride: example-app-example1
@@ -424,6 +433,8 @@ services:
 
     replicaCount: 2
 
+    terminationGracePeriodSeconds: 300
+
     podMonitor:
       enabled: false
 
@@ -433,6 +444,9 @@ services:
     containers:
       cc:
         <<: *aa
+        volumeMounts:
+          /data:
+            name: my-pvc-volume
       dd:
         <<: *bb
         livenessProbe:
@@ -460,6 +474,9 @@ services:
         emptyDir: {}
       my-volume-2:
         emptyDir: {}
+      my-pvc-volume:
+        persistentVolumeClaim:
+          claimName: self-pvc-data
 
     service:
       <<: *servicedefinition

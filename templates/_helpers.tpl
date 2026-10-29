@@ -131,6 +131,10 @@ tolerations:
 topologySpreadConstraints:
 {{ toYaml $combinedTopology | indent 2 }}
 {{- end }}
+
+{{- with .service.terminationGracePeriodSeconds }}
+terminationGracePeriodSeconds: {{ . }}
+{{- end }}
 {{- end }} {{/* define "application.podConfig" */}}
 
 
@@ -284,7 +288,17 @@ volumes:
       optional: {{ . }}
       {{- end }}
     {{- else }}
+    {{- if and ( hasKey $value "persistentVolumeClaim" ) ( hasKey $value.persistentVolumeClaim "claimName" ) ( hasPrefix "self-pvc-" $value.persistentVolumeClaim.claimName ) }}
+    {{- $pvcName := substr 9 -1 $value.persistentVolumeClaim.claimName }}
+    {{- $pvcDefinition := get ( default ( dict ) $root.Values.persistentVolumeClaims ) $pvcName }}
+    persistentVolumeClaim:
+      claimName: {{ include "common.fullname" ( dict "root" $root "service" $pvcDefinition "serviceName" $pvcName ) }}
+      {{- with $value.persistentVolumeClaim.readOnly }}
+      readOnly: {{ . }}
+      {{- end }}
+    {{- else }}
     {{- $value | toYaml | nindent 4 }}
+    {{- end }}
     {{- end }}
     {{- end }}
 {{- end }}

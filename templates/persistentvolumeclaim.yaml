@@ -1,0 +1,14 @@
+{{- range $pvcName, $pvcDefinition := .Values.persistentVolumeClaims }}
+{{- if or ( not ( hasKey $pvcDefinition "enabled" ) ) $pvcDefinition.enabled }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "common.fullname" ( dict "root" $ "service" $pvcDefinition "serviceName" $pvcName ) }}
+  {{- include "common.metadata" ( dict "root" $ "service" $pvcDefinition "serviceName" $pvcName ) | nindent 2 }}
+{{- with $pvcDefinition.spec }}
+spec:
+  {{- toYaml . | nindent 2 }}
+{{- end }}
+{{- end }}
+{{- end }}

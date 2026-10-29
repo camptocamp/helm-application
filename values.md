@@ -182,6 +182,7 @@
     - <a id="properties/services/additionalProperties/properties/completionMode"></a>**`completionMode`** *(string)*: The completion mode of the job. Must be one of: "Indexed" or "NonIndexed".
     - <a id="properties/services/additionalProperties/properties/completions"></a>**`completions`** *(integer)*: The number of completions.
     - <a id="properties/services/additionalProperties/properties/minReadySeconds"></a>**`minReadySeconds`** *(integer)*: The minimum number of seconds for the Pod to be ready.
+    - <a id="properties/services/additionalProperties/properties/terminationGracePeriodSeconds"></a>**`terminationGracePeriodSeconds`** *(integer)*: The duration in seconds the Pod needs to terminate gracefully, passed through unchanged to Kubernetes.
     - <a id="properties/services/additionalProperties/properties/persistentVolumeClaimRetentionPolicy"></a>**`persistentVolumeClaimRetentionPolicy`** *(object)*: The persistent volume claim retention policy.
     - <a id="properties/services/additionalProperties/properties/replicas"></a>**`replicas`** *(integer)*: The number of replicas.
     - <a id="properties/services/additionalProperties/properties/paused"></a>**`paused`** *(boolean)*: Pause the deployment.
@@ -281,6 +282,18 @@
       - <a id="properties/services/additionalProperties/properties/podMonitor/properties/annotations"></a>**`annotations`**: Refer to *[#/definitions/annotations](#definitions/annotations)*.
       - <a id="properties/services/additionalProperties/properties/podMonitor/properties/podMetricsEndpoints"></a>**`podMetricsEndpoints`** *(object)*: The endpoints of the Pod monitor by port. Can contain additional properties.
         - <a id="properties/services/additionalProperties/properties/podMonitor/properties/podMetricsEndpoints/additionalProperties"></a>**Additional properties** *(object)*: The endpoint of the Pod monitor.
+- <a id="properties/persistentVolumeClaims"></a>**`persistentVolumeClaims`** *(object)*: The PersistentVolumeClaims to create, the key is used as the name suffix, the volumes can refer to them with a claimName like self-pvc-<key>. Can contain additional properties.
+  - <a id="properties/persistentVolumeClaims/additionalProperties"></a>**Additional properties** *(object)*: Cannot contain additional properties.
+    - <a id="properties/persistentVolumeClaims/additionalProperties/properties/enabled"></a>**`enabled`** *(boolean)*: Enable this PersistentVolumeClaim. Default: `true`.
+    - <a id="properties/persistentVolumeClaims/additionalProperties/properties/nameOverride"></a>**`nameOverride`**: Refer to *[#/definitions/nameOverride](#definitions/nameOverride)*.
+    - <a id="properties/persistentVolumeClaims/additionalProperties/properties/fullnameOverride"></a>**`fullnameOverride`**: Refer to *[#/definitions/fullnameOverride](#definitions/fullnameOverride)*.
+    - <a id="properties/persistentVolumeClaims/additionalProperties/properties/releaseNameOverride"></a>**`releaseNameOverride`**: Refer to *[#/definitions/releaseNameOverride](#definitions/releaseNameOverride)*.
+    - <a id="properties/persistentVolumeClaims/additionalProperties/properties/releaseTrunc"></a>**`releaseTrunc`**: Refer to *[#/definitions/releaseTrunc](#definitions/releaseTrunc)*.
+    - <a id="properties/persistentVolumeClaims/additionalProperties/properties/nameTrunc"></a>**`nameTrunc`**: Refer to *[#/definitions/nameTrunc](#definitions/nameTrunc)*.
+    - <a id="properties/persistentVolumeClaims/additionalProperties/properties/prefixTrunc"></a>**`prefixTrunc`**: Refer to *[#/definitions/prefixTrunc](#definitions/prefixTrunc)*.
+    - <a id="properties/persistentVolumeClaims/additionalProperties/properties/labels"></a>**`labels`**: Refer to *[#/definitions/labels](#definitions/labels)*.
+    - <a id="properties/persistentVolumeClaims/additionalProperties/properties/annotations"></a>**`annotations`**: Refer to *[#/definitions/annotations](#definitions/annotations)*.
+    - <a id="properties/persistentVolumeClaims/additionalProperties/properties/spec"></a>**`spec`** *(object)*: The PersistentVolumeClaim specification, passed through unchanged to Kubernetes.
 - <a id="properties/clusterRole"></a>**`clusterRole`** *(object)*: Cannot contain additional properties.
   - <a id="properties/clusterRole/properties/name"></a>**`name`** *(string)*
   - <a id="properties/clusterRole/properties/enabled"></a>**`enabled`** *(boolean)*: Default: `false`.
