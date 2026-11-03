@@ -25,11 +25,15 @@ repos:
       - id: trailing-whitespace
       - id: mixed-line-ending
   - repo: https://github.com/sbrunner/hooks
-    rev: 1.8.0
+    rev: 1.9.0
     hooks:
       - id: copyright
       - id: workflows-require-timeout
       - id: helm-lock
+      - id: uv-lock
+        additional_dependencies:
+          - uv==0.13.4 # pypi
+        files: ^\.github/publish/pyproject\.toml$
       - id: canonicalize
   - repo: https://github.com/camptocamp/helm-common
     rev: 2.1.2
