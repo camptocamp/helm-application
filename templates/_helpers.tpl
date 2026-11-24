@@ -132,6 +132,18 @@ topologySpreadConstraints:
 {{ toYaml $combinedTopology | indent 2 }}
 {{- end }}
 
+{{- with .service.hostAliases }}
+hostAliases: {{ toYaml . | nindent 2 }}
+{{- end }}
+{{- with .service.hostname }}
+hostname: {{ . }}
+{{- end }}
+{{- if .service.subdomain }}
+subdomain: {{ .service.subdomain }}
+{{- else if .service.hostname }}
+subdomain: {{ include "common.fullname" ( dict "root" .root "service" .service "serviceName" .serviceName ) }}
+{{- end }}
+
 {{- with .service.terminationGracePeriodSeconds }}
 terminationGracePeriodSeconds: {{ . }}
 {{- end }}

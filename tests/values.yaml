@@ -651,6 +651,7 @@ services:
   statefulset-min:
     fullnameOverride: example-app
     workloadNameOverride: example-app-sts
+    hostname: example-sts-host
     type: StatefulSet
     containers:
       main:
@@ -662,6 +663,11 @@ services:
     fullnameOverride: example-app
     type: StatefulSet
     serviceName: 'nginx'
+    subdomain: example-subdomain
+    hostAliases:
+      - ip: 10.0.0.10
+        hostnames:
+          - alias.example.com
     replicas: 3
     minReadySeconds: 10
     podManagementPolicy: Parallel

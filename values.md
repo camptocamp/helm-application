@@ -165,6 +165,13 @@
     - <a id="properties/services/additionalProperties/properties/nameOverride"></a>**`nameOverride`**: Refer to *[#/definitions/nameOverride](#definitions/nameOverride)*.
     - <a id="properties/services/additionalProperties/properties/fullnameOverride"></a>**`fullnameOverride`**: Refer to *[#/definitions/fullnameOverride](#definitions/fullnameOverride)*.
     - <a id="properties/services/additionalProperties/properties/workloadNameOverride"></a>**`workloadNameOverride`**: Refer to *[#/definitions/workloadNameOverride](#definitions/workloadNameOverride)*.
+    - <a id="properties/services/additionalProperties/properties/hostname"></a>**`hostname`** *(string)*: The hostname of the pods of the service, combined with the subdomain it creates a dedicated DNS entry, the subdomain then defaulting to the service name.
+    - <a id="properties/services/additionalProperties/properties/subdomain"></a>**`subdomain`** *(string)*: The subdomain of the pods of the service, must be the name of a headless service of the namespace.
+    - <a id="properties/services/additionalProperties/properties/hostAliases"></a>**`hostAliases`** *(array)*: Additional entries of the hosts file of the pods, passed through unchanged to Kubernetes.
+      - <a id="properties/services/additionalProperties/properties/hostAliases/items"></a>**Items** *(object)*: Cannot contain additional properties.
+        - <a id="properties/services/additionalProperties/properties/hostAliases/items/properties/ip"></a>**`ip`** *(string)*: The IP address of the hosts file entry.
+        - <a id="properties/services/additionalProperties/properties/hostAliases/items/properties/hostnames"></a>**`hostnames`** *(array)*: The hostnames resolved to the IP address.
+          - <a id="properties/services/additionalProperties/properties/hostAliases/items/properties/hostnames/items"></a>**Items** *(string)*
     - <a id="properties/services/additionalProperties/properties/labels"></a>**`labels`**: Refer to *[#/definitions/labels](#definitions/labels)*.
     - <a id="properties/services/additionalProperties/properties/annotations"></a>**`annotations`**: Refer to *[#/definitions/annotations](#definitions/annotations)*.
     - <a id="properties/services/additionalProperties/properties/podLabels"></a>**`podLabels`**: Refer to *[#/definitions/podLabels](#definitions/podLabels)*.

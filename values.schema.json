@@ -967,6 +967,35 @@
           "workloadNameOverride": {
             "$ref": "#/definitions/workloadNameOverride"
           },
+          "hostname": {
+            "type": "string",
+            "description": "The hostname of the pods of the service, combined with the subdomain it creates a dedicated DNS entry, the subdomain then defaulting to the service name"
+          },
+          "subdomain": {
+            "type": "string",
+            "description": "The subdomain of the pods of the service, must be the name of a headless service of the namespace"
+          },
+          "hostAliases": {
+            "type": "array",
+            "description": "Additional entries of the hosts file of the pods, passed through unchanged to Kubernetes",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "ip": {
+                  "type": "string",
+                  "description": "The IP address of the hosts file entry"
+                },
+                "hostnames": {
+                  "type": "array",
+                  "description": "The hostnames resolved to the IP address",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
           "labels": {
             "$ref": "#/definitions/labels"
           },

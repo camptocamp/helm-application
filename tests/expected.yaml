@@ -1722,6 +1722,11 @@ spec:
           maxSkew: 1
           topologyKey: kubernetes.io/hostname
           whenUnsatisfiable: ScheduleAnyway
+      hostAliases:
+        - hostnames:
+          - alias.example.com
+          ip: 10.0.0.10
+      subdomain: example-subdomain
       containers:
         - name: main
           securityContext:
@@ -1790,6 +1795,8 @@ spec:
           maxSkew: 1
           topologyKey: kubernetes.io/hostname
           whenUnsatisfiable: ScheduleAnyway
+      hostname: example-sts-host
+      subdomain: example-app-statefulset-min
       containers:
         - name: main
           securityContext:
