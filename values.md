@@ -164,6 +164,7 @@
     - <a id="properties/services/additionalProperties/properties/name"></a>**`name`** *(string)*: The name of the service.
     - <a id="properties/services/additionalProperties/properties/nameOverride"></a>**`nameOverride`**: Refer to *[#/definitions/nameOverride](#definitions/nameOverride)*.
     - <a id="properties/services/additionalProperties/properties/fullnameOverride"></a>**`fullnameOverride`**: Refer to *[#/definitions/fullnameOverride](#definitions/fullnameOverride)*.
+    - <a id="properties/services/additionalProperties/properties/workloadNameOverride"></a>**`workloadNameOverride`**: Refer to *[#/definitions/workloadNameOverride](#definitions/workloadNameOverride)*.
     - <a id="properties/services/additionalProperties/properties/labels"></a>**`labels`**: Refer to *[#/definitions/labels](#definitions/labels)*.
     - <a id="properties/services/additionalProperties/properties/annotations"></a>**`annotations`**: Refer to *[#/definitions/annotations](#definitions/annotations)*.
     - <a id="properties/services/additionalProperties/properties/podLabels"></a>**`podLabels`**: Refer to *[#/definitions/podLabels](#definitions/podLabels)*.
@@ -314,6 +315,7 @@
 
 - <a id="definitions/nameOverride"></a>**`nameOverride`** *(string)*: [helm-common] Override the name (can be in the service or values).
 - <a id="definitions/fullnameOverride"></a>**`fullnameOverride`** *(string)*: [helm-common] Override the fullname (can be in the service or values).
+- <a id="definitions/workloadNameOverride"></a>**`workloadNameOverride`** *(string)*: Override only the name of the generated StatefulSet or Deployment, the service names and the labels stay derived from the fullname.
 - <a id="definitions/releaseNameOverride"></a>**`releaseNameOverride`** *(string)*: [helm-common] Override the the release name (can be in the service, values or global).
 - <a id="definitions/releaseTrunc"></a>**`releaseTrunc`** *(integer)*: [helm-common] The release name trunk length (can be in the service, values or global). Default: `20`.
 - <a id="definitions/nameTrunc"></a>**`nameTrunc`** *(integer)*: [helm-common] The chart name trunk length (can be in the service, values or global). Default: `63`.

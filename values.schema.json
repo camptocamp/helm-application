@@ -11,6 +11,10 @@
       "type": "string",
       "description": "[helm-common] Override the fullname (can be in the service or values)"
     },
+    "workloadNameOverride": {
+      "type": "string",
+      "description": "Override only the name of the generated StatefulSet or Deployment, the service names and the labels stay derived from the fullname"
+    },
     "releaseNameOverride": {
       "type": "string",
       "description": "[helm-common] Override the the release name (can be in the service, values or global)"
@@ -959,6 +963,9 @@
           },
           "fullnameOverride": {
             "$ref": "#/definitions/fullnameOverride"
+          },
+          "workloadNameOverride": {
+            "$ref": "#/definitions/workloadNameOverride"
           },
           "labels": {
             "$ref": "#/definitions/labels"

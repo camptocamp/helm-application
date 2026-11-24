@@ -1735,7 +1735,7 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: example-app-statefulset-min
+  name: example-app-sts
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"

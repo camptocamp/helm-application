@@ -37,3 +37,4 @@ PersistentVolumeClaim
 PersistentVolumeClaims
 claimName
 pvc
+StatefulSet

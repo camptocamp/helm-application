@@ -10,7 +10,7 @@ spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ include "common.fullname" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) }}
+    name: {{ default (include "common.fullname" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName )) $serviceDefinition.workloadNameOverride }}
   minReplicas: {{ $serviceDefinition.hpa.minReplicas | default 1 }}
   maxReplicas: {{ $serviceDefinition.hpa.maxReplicas | default 10 }}
   {{- with $serviceDefinition.hpa.behavior }}

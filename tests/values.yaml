@@ -650,6 +650,7 @@ services:
   # Minimal configuration of a daemonset
   statefulset-min:
     fullnameOverride: example-app
+    workloadNameOverride: example-app-sts
     type: StatefulSet
     containers:
       main:
