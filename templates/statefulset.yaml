@@ -6,7 +6,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ include "common.fullname" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) }}
+  name: {{ default (include "common.fullname" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName )) $serviceDefinition.workloadNameOverride }}
   {{- include "common.metadata" ( dict "root" $ "service" $serviceDefinition "serviceName" $serviceName ) | nindent 2 }}
 spec:
   {{- if $serviceDefinition.serviceName }}

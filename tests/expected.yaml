@@ -1722,6 +1722,11 @@ spec:
           maxSkew: 1
           topologyKey: kubernetes.io/hostname
           whenUnsatisfiable: ScheduleAnyway
+      hostAliases:
+        - hostnames:
+          - alias.example.com
+          ip: 10.0.0.10
+      subdomain: example-subdomain
       containers:
         - name: main
           securityContext:
@@ -1735,7 +1740,7 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: example-app-statefulset-min
+  name: example-app-sts
   labels:
     helm.sh/chart: application
     app.kubernetes.io/version: "1.0"
@@ -1790,6 +1795,8 @@ spec:
           maxSkew: 1
           topologyKey: kubernetes.io/hostname
           whenUnsatisfiable: ScheduleAnyway
+      hostname: example-sts-host
+      subdomain: example-app-statefulset-min
       containers:
         - name: main
           securityContext:

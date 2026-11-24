@@ -37,3 +37,7 @@ PersistentVolumeClaim
 PersistentVolumeClaims
 claimName
 pvc
+StatefulSet
+subdomain
+hostnames
+hostname
