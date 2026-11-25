@@ -17,7 +17,7 @@ env:
 jobs:
   main:
     name: Continuous integration
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 20
     if: "!startsWith(github.event.head_commit.message, '[skip ci] ')"
 
@@ -49,7 +49,7 @@ jobs:
       - name: Install helm (early, for pre-commit hooks)
         uses: azure/setup-helm@9bc31f4ebc9c6b171d7bfbaa5d006ae7abdb4310 # v5.0.1
         with:
-          version: 3.22.1
+          version: 4.3.2
         if: matrix.helm == 'latest'
 
       - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
@@ -114,7 +114,7 @@ jobs:
 
   publish:
     name: Publish
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 20
     needs: main
     if: always()
